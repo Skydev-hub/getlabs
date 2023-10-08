@@ -1,0 +1,39 @@
+<div class="l-wrapper l-wrapper--col l-wrapper--sm">
+  <h1 class="h-dark-c-h4 h-h1 h-mb-30">Appointments</h1>
+</div>
+<div class="l-wrapper l-wrapper--col">
+  <ng-container *ngIf="dateSelectionMode === DateSelectionMode.CyclicalNavigator; else dateRangeTpl">
+    <app-cyclical-navigator previousLabel="Previous Day" nextLabel="Next Day" (previous)="previousDay()" (next)="nextDay()" class="h-block h-mb-20">
+      <div class="h-text-center h-mb-10">
+        <span class="h-dark-c-h6" [ngSwitch]="true">
+          <ng-container *ngSwitchCase="isYesterday()">Yesterday</ng-container>
+          <ng-container *ngSwitchCase="isToday()">Today</ng-container>
+          <ng-container *ngSwitchCase="isTomorrow()">Tomorrow</ng-container>
+          <ng-container *ngSwitchDefault>{{ dateRangeControl.value.start | date: 'fullDate' }}</ng-container>
+        </span>
+      </div>
+      <div class="h-text-center">
+        <button class="ui-text-button h-primary-d1-c-uil2" (click)="setDateSelectionMode(DateSelectionMode.Range)">Switch to Date Range</button>
+      </div>
+    </app-cyclical-navigator>
+  </ng-container>
+
+  <app-appointments-table
+    [day]="dateRange"
+    (dayChange)="navigateToDate($event.start)"
+    [filterCriteria]="tableFilters"
+    [columns]="[Column.Date, Column.Identifier, Column.Status, Column.Market, Column.Time, Column.Patient, Column.Specialist]"
+    [options]="appointmentTableOptions"
+    [class]="'date-selection-mode-' + dateSelectionMode"
+  ></app-appointments-table>
+</div>
+
+<ng-template #dateRangeTpl>
+  <div class="h-flex h-flex-col h-flex-y-center">
+    <div class="h-dark-l-uil2 h-mb-10">Displaying appointments for the below range</div>
+    <app-date-range-input [formControl]="dateRangeControl" class="h-mb-10"></app-date-range-input>
+    <div class="h-mb-20">
+      <button class="ui-text-button h-primary-d1-c-uil2" (click)="setDateSelectionMode(DateSelectionMode.CyclicalNavigator)">Switch to Single Date</button>
+    </div>
+  </div>
+</ng-template>

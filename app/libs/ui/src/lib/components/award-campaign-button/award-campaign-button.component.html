@@ -1,0 +1,8 @@
+<ng-container *ngIf="!isExcludedRoute() && (awardCampaign$ | async) as awardCampaign">
+  <a [app-button]="type" [size]="size" routerLink="/refer" *ngIf="awardCampaign.award"
+     class="h-flex-y-center">
+    <ng-container *ngIf="awardCampaign">
+      <ng-container *ngTemplateOutlet="templateRef; context: { awardCampaign: awardCampaign }"></ng-container>
+    </ng-container>
+  </a>
+</ng-container>

@@ -1,0 +1,30 @@
+@import "variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  //background-color: $white;
+  border: 1px solid $gl-light-l2;
+
+  header {
+
+    display: flex;
+    align-items: center;
+    height: 55px;
+    padding-left: 20px;
+    background-color: $gl-light-l3;
+
+    .label {
+      flex-grow: 1;
+    }
+
+    button {
+      margin-right: 20px;
+    }
+
+  }
+
+  form {
+    padding: 20px;
+  }
+}

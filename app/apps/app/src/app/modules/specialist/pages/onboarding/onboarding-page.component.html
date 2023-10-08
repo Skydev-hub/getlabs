@@ -1,0 +1,165 @@
+<app-stepper>
+
+  <cdk-step label="welcome">
+    <main class="l-wrapper l-main-container">
+      <div class="h-flex-col h-flex-y-center">
+        <svg-icon-sprite class="h-mb-20" src="/assets/icons.svg#getlabs-small-primary-icon"
+                         width="54" height="54"></svg-icon-sprite>
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-text-center h-mb-20">
+          Welcome to Getlabs Care
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          Before you get started, we need you to complete a few steps, including HIPAA Compliance training and Bloodborne Pathogens training.
+        </p>
+        <button app-button type="button" (click)="goToFirstIncompleteStep()">Get Started</button>
+      </div>
+    </main>
+  </cdk-step>
+
+
+  <cdk-step label="profile">
+    <main class="l-wrapper l-main-container">
+      <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-20">
+        Personal Information
+      </h1>
+      <p class="h-medium-c-b1 h-mb-40">
+        We need to collect some additional information about you. Location information is used to determine your proximity to users to ensure
+        you receive appointments that are geographically close to you. Please ensure you update your profile if any of this information changes.
+      </p>
+      <app-specialist-profile-form [user]="user" (save)="onProfileSaved($event)" btnLabel="Continue"></app-specialist-profile-form>
+    </main>
+  </cdk-step>
+
+
+  <!--
+  <cdk-step label="eea-document" #eea>
+    <main class="l-wrapper l-wrapper--large l-main-container" *ngIf="stepper.selected === eea && !isStepCompleted('eea-document')">
+      <app-document-signing-request [user]="user" [type]="DocumentType.EEA" (signed)="onDocumentCompleted(DocumentType.EEA, $event)" (finished)="onDocumentFinished()"></app-document-signing-request>
+    </main>
+  </cdk-step>
+
+
+  <cdk-step label="w4-document" #w4>
+    <main class="l-wrapper l-wrapper--large l-main-container" *ngIf="stepper.selected === w4 && !isStepCompleted('w4-document')">
+      <app-document-signing-request [user]="user" [type]="DocumentType.W4" (signed)="onDocumentCompleted(DocumentType.W4, $event)" (finished)="onDocumentFinished()"></app-document-signing-request>
+    </main>
+  </cdk-step>
+  -->
+
+  <!-- START HIPAA -->
+
+  <cdk-step label="hipaa">
+    <main class="l-wrapper l-wrapper--sm l-main-container">
+      <div class="h-flex-col h-flex-y-center">
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+          HIPAA Compliance Training
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          Please review this presentation before taking the comprehension exam.
+        </p>
+
+        <app-pdf-viewer [url]="hipaaUrl" class="h-mb-30"></app-pdf-viewer>
+        <button app-button type="button" (click)="stepper.next()">Continue to Exam</button>
+      </div>
+    </main>
+  </cdk-step>
+
+  <cdk-step label="hipaa">
+    <main class="l-wrapper l-wrapper--sm l-main-container">
+      <div class="h-flex-col h-flex-y-center">
+
+        <ng-container *ngIf="!documentsCompleted.includes(DocumentType.HIPAA); else hipaaCompleted">
+          <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+            HIPAA Compliance Comprehension Exam
+          </h1>
+          <p class="h-medium-c-b1 h-text-center h-mb-30">
+            To complete your HIPAA Compliance Training, please answer the following questions. Choose the most correct answer for each question.
+          </p>
+          <app-hipaa-exam #hipaaExam (completed)="onDocumentCompleted(DocumentType.HIPAA)"></app-hipaa-exam>
+          <button app-button type="button" (click)="hipaaExam.quiz.verifyQuizAnswers()" [appLoading]="req$">Submit Exam</button>
+        </ng-container>
+
+        <ng-template #hipaaCompleted>
+          <svg-icon-sprite src="large-circle-check-icon" class="h-mb-30" height="92" width="92"></svg-icon-sprite>
+          <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+            HIPAA Compliance Passed
+          </h1>
+          <p class="h-medium-c-b1 h-text-center h-mb-30">
+            Congratulations! You passed the HIPAA Compliance Comprehension Exam.
+          </p>
+          <button app-button type="button" (click)="goToFirstIncompleteStep()">Continue</button>
+        </ng-template>
+
+      </div>
+    </main>
+  </cdk-step>
+
+  <!-- END HIPAA -->
+
+  <!-- START BBP -->
+
+  <cdk-step label="bbp">
+    <main class="l-wrapper l-wrapper--sm l-main-container">
+      <div class="h-flex-col h-flex-y-center">
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+          Bloodborne Pathogens
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          Please review this presentation before taking the comprehension exam.
+        </p>
+
+        <app-pdf-viewer [url]="bbpUrl" class="h-mb-30"></app-pdf-viewer>
+        <button app-button type="button" (click)="stepper.next()">Continue to Exam</button>
+      </div>
+    </main>
+  </cdk-step>
+
+  <cdk-step label="bbp">
+    <main class="l-wrapper l-wrapper--sm l-main-container">
+      <div class="h-flex-col h-flex-y-center">
+
+        <ng-container *ngIf="!documentsCompleted.includes(DocumentType.BBP); else bbpCompleted">
+          <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+            Bloodborne Pathogens Comprehension Exam
+          </h1>
+          <p class="h-medium-c-b1 h-mb-30">
+            To complete your Bloodborne Pathogens Training, please answer the following questions. Choose the most correct answer for each question.
+          </p>
+          <app-bbp-exam #bbpExam (completed)="onDocumentCompleted(DocumentType.BBP)"></app-bbp-exam>
+          <button app-button type="button" (click)="bbpExam.quiz.verifyQuizAnswers()" [appLoading]="req$">Submit Answers</button>
+        </ng-container>
+
+        <ng-template #bbpCompleted>
+          <svg-icon-sprite src="large-circle-check-icon" class="h-mb-30" width="92" height="92"></svg-icon-sprite>
+          <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+            Bloodborne Pathogens Training Passed
+          </h1>
+          <p class="h-medium-c-b1 h-text-center h-mb-30">
+            Congratulations! You passed the Bloodborne Pathogens Comprehension Exam.
+          </p>
+          <button app-button type="button" (click)="goToFirstIncompleteStep()">Continue</button>
+        </ng-template>
+
+      </div>
+    </main>
+  </cdk-step>
+
+
+  <!-- END BBP -->
+
+
+  <cdk-step label="complete">
+    <main class="l-wrapper l-wrapper--sm l-main-container">
+      <div class="h-flex-col h-flex-y-center">
+        <svg-icon-sprite src="large-circle-check-icon" class="h-mb-30" width="92" height="92"></svg-icon-sprite>
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+          {{ user.firstName }}, you're all set. We'll let you know when you get booked.
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          In the meantime, tap below to start familiarizing yourself with the portal.
+        </p>
+        <button app-button type="button" (click)="goToDashboard()" [appLoading]="req$">Get Started</button>
+      </div>
+    </main>
+  </cdk-step>
+</app-stepper>

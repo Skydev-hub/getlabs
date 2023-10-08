@@ -1,0 +1,60 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Inputs
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+
+@mixin input-reset() {
+  appearance: none;
+  outline: none;
+  border: none;
+  width: 100%;
+  caret-color: $gl-primary-d1;
+  font-family: $gl-body-font-family;
+
+  &::placeholder {
+    opacity: 1; // FF Fix
+    color: $gl-medium-text-color;
+  }
+
+} // input-reset()
+
+
+
+//
+// Base Styling
+//
+@mixin base-input() {
+  @include input-reset();
+  color: $gl-dark-text-color;
+  background-color: $white;
+  border: 1px solid $gl-primary-border-color;
+  border-radius: 0;
+
+  transition:
+    background-color $transition-duration ease-in-out,
+    border-color $transition-duration ease-in-out;
+
+  &:focus {
+    border-color: $gl-primary-d1;
+    outline: 2px solid $gl-primary-d1;
+  }
+
+  &[disabled] {
+    background-color: $gl-light-l2;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover:not([disabled]) {
+      border-color: $gl-primary-d1;
+    }
+  }
+
+} // base-input()

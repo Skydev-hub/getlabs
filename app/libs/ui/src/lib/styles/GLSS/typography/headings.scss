@@ -1,0 +1,475 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Typography > Headings
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Responsive Headings
+//  --------------------------------------
+//  H1 - H4  2 steps down
+//  H5       1 step down
+//  H6       Not responsive
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+
+
+//
+// Dark
+//
+
+// Dark - Left
+.h-dark-l-h1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h1-fs;
+  line-height: $h1-lh;
+  text-align: left;
+  letter-spacing: $h1-ls;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h3-fs;
+  //    line-height: $h3-lh;
+  //    letter-spacing: $h3-ls;
+  //  }
+  //}
+
+} // .h-dark-l-h1
+
+.h-dark-l-h2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h2-fs;
+  line-height: $h2-lh;
+  text-align: left;
+  letter-spacing: $h2-ls;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h4-fs;
+  //    line-height: $h4-lh;
+  //  }
+  //}
+
+} // .h-dark-l-h2
+
+.h-dark-l-h3 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h3-fs;
+  line-height: $h3-lh;
+  text-align: left;
+  letter-spacing: $h3-ls;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h5-fs;
+  //    line-height: $h5-lh;
+  //  }
+  //}
+
+} // .h-dark-l-h3
+
+.h-dark-l-h4 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h4-fs;
+  line-height: $h4-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-dark-l-h4
+
+.h-dark-l-h5 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h5-fs;
+  line-height: $h5-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-dark-l-h5
+
+.h-dark-l-h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h6-fs;
+  line-height: $h6-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+
+// Dark - Center
+.h-dark-c-h1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h1-fs;
+  line-height: $h1-lh;
+  text-align: center;
+  letter-spacing: $h1-ls;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h3-fs;
+  //    line-height: $h3-lh;
+  //    letter-spacing: $h3-ls;
+  //  }
+  //}
+
+} // .h-dark-c-h1
+
+.h-dark-c-h2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h2-fs;
+  line-height: $h2-lh;
+  text-align: center;
+  letter-spacing: $h2-ls;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h4-fs;
+  //    line-height: $h4-lh;
+  //  }
+  //}
+
+} // .h-dark-c-h2
+
+.h-dark-c-h3 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h3-fs;
+  line-height: $h3-lh;
+  text-align: center;
+  letter-spacing: $h3-ls;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h5-fs;
+  //    line-height: $h5-lh;
+  //  }
+  //}
+
+} // .h-dark-c-h3
+
+.h-dark-c-h4 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h4-fs;
+  line-height: $h4-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-dark-c-h4
+
+.h-dark-c-h5 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h5-fs;
+  line-height: $h5-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-dark-c-h5
+
+.h-dark-c-h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h6-fs;
+  line-height: $h6-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+
+
+//
+// White
+//
+
+// White - Left
+.h-white-l-h1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h1-fs;
+  line-height: $h1-lh;
+  text-align: left;
+  letter-spacing: $h1-ls;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h3-fs;
+  //    line-height: $h3-lh;
+  //    letter-spacing: $h3-ls;
+  //  }
+  //}
+
+} // .h-white-l-h1
+
+.h-white-l-h2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h2-fs;
+  line-height: $h2-lh;
+  text-align: left;
+  letter-spacing: $h2-ls;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h4-fs;
+  //    line-height: $h4-lh;
+  //  }
+  //}
+
+} // .h-white-l-h2
+
+.h-white-l-h3 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h3-fs;
+  line-height: $h3-lh;
+  text-align: left;
+  letter-spacing: $h3-ls;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h5-fs;
+  //    line-height: $h5-lh;
+  //  }
+  //}
+
+} // .h-white-l-h3
+
+.h-white-l-h4 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h4-fs;
+  line-height: $h4-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-white-l-h4
+
+.h-white-l-h5 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h5-fs;
+  line-height: $h5-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-white-l-h5
+
+.h-white-l-h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h6-fs;
+  line-height: $h6-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+}
+
+
+// White - Center
+.h-white-c-h1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h1-fs;
+  line-height: $h1-lh;
+  text-align: center;
+  letter-spacing: $h1-ls;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h3-fs;
+  //    line-height: $h3-lh;
+  //    letter-spacing: $h3-ls;
+  //  }
+  //}
+
+} // .h-white-c-h1
+
+.h-white-c-h2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h2-fs;
+  line-height: $h2-lh;
+  text-align: center;
+  letter-spacing: $h2-ls;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h4-fs;
+  //    line-height: $h4-lh;
+  //  }
+  //}
+
+} // .h-white-c-h2
+
+.h-white-c-h3 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h3-fs;
+  line-height: $h3-lh;
+  text-align: center;
+  letter-spacing: $h3-ls;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h5-fs;
+  //    line-height: $h5-lh;
+  //  }
+  //}
+
+} // .h-white-c-h3
+
+.h-white-c-h4 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h4-fs;
+  line-height: $h4-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-white-c-h4
+
+.h-white-c-h5 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h5-fs;
+  line-height: $h5-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+
+  //&--responsive {
+  //  @include bp(s) {
+  //    font-size: $h6-fs;
+  //    line-height: $h6-lh;
+  //  }
+  //}
+
+} // .h-white-c-h5
+
+.h-white-c-h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: $gl-heading-font-family;
+  font-size: $h6-fs;
+  line-height: $h6-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+}
+
+@mixin h-responsive-heading($hLevel, $fontSize, $lineHeight, $orientation, $colorType) {
+  .h-#{$colorType}-#{$orientation}-#{$hLevel}--responsive {
+    @include bp(s) {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+    }
+  }
+}
+
+@mixin h-responsive-heading-set($hLevel, $fontSize, $lineHeight) {
+  @include h-responsive-heading($hLevel, $fontSize, $lineHeight, 'c', 'dark');
+  @include h-responsive-heading($hLevel, $fontSize, $lineHeight, 'l', 'dark');
+  @include h-responsive-heading($hLevel, $fontSize, $lineHeight, 'c', 'white');
+  @include h-responsive-heading($hLevel, $fontSize, $lineHeight, 'l', 'white');
+}
+
+@include h-responsive-heading-set('h1', $h3-fs, $h3-lh);
+@include h-responsive-heading-set('h2', $h4-fs, $h4-lh);
+@include h-responsive-heading-set('h3', $h5-fs, $h5-lh);
+@include h-responsive-heading-set('h4', $h6-fs, $h6-lh);
+@include h-responsive-heading-set('h5', $h6-fs, $h6-lh);

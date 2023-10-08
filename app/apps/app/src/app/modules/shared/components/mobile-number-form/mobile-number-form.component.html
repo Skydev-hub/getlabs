@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="submit($event)">
+  <div class="h-flex-col h-flex-y-center">
+    <app-form-element [error]="getError('phoneNumber')">
+      <input class="ui-input ui-input--large" type="tel" autocomplete="tel" placeholder="(###) ###-####" [mask]="phoneNumberMask.getMaskPattern()" formControlName="phoneNumber" appAutoFocus>
+    </app-form-element>
+    <ng-content></ng-content>
+  </div>
+</form>

@@ -1,0 +1,11 @@
+@import 'variables';
+
+app-date-input,
+app-time-selector {
+  padding: 0 5px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: $gl-light-l3;
+  }
+}

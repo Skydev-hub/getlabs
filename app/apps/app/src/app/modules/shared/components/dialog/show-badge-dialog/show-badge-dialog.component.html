@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <div>
+    <div class="h-flex-col h-flex-y-center">
+      <app-avatar [user]="data.user" size="large" class="h-mb-20"></app-avatar>
+      <h1 class="h-primary-d1-c-uil1 h-mb-10">{{ data.user.name }}</h1>
+      <h2 class="h-dark-c-b1 h-mb-10">Certified Phlebotomist</h2>
+      <div class="h-dark-c-b1 h-mb-30 h-mb-xs-25">Authentication Badge</div>
+      <svg-icon-sprite src="/assets/icons.svg#getlabs-logo-dark" class="logo"></svg-icon-sprite>
+    </div>
+    <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+      <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+    </button>
+  </div>
+</mat-dialog-content>

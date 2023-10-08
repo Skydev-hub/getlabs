@@ -1,0 +1,23 @@
+@import "variables";
+@import "mixins";
+
+:host, ::ng-deep router-outlet + ng-component {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+:host {
+  ::ng-deep .sticky-placeholder {
+    background-color: $gl-primary;
+  }
+
+  .app-main-content {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+

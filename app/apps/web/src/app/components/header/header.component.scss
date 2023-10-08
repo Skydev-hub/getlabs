@@ -1,0 +1,180 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Header
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "GLSS/user-interface/buttons/buttons";
+
+:host {
+  display: block;
+  width: 100%;
+  height: $desktop-header-height;
+  pointer-events: none;
+
+  .navbar-container {
+    pointer-events: auto;
+    background-color: $gl-primary;
+    height: $desktop-header-height;
+  }
+
+  .wrapper {
+    align-items: center;
+    height: 100%;
+  }
+
+  .sticky-spacer {
+    height: 0;
+    background-color: transparent;
+  }
+
+  &.sticky-block {
+    .navbar-container {
+      height: 65px;
+    }
+
+    .sticky-spacer {
+      height: calc(#{ $desktop-header-height } - 65px);
+      transition: all 0.1s ease;
+    }
+  }
+
+  .button, app-auth-state-btn ::ng-deep .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $gl-xs-ui-height;
+    padding: 0 20px;
+    border: 2px solid $gl-dark;
+    transition: border-color 200ms;
+    background-color: transparent;
+
+    &:focus {
+      outline: 2px solid darken($gl-primary, 15%);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: $gl-primary-d1;
+      }
+    }
+
+    @include bp(m) {
+      padding: 0;
+    }
+
+  } // .button
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    .phone-button {
+      @include base-button();
+
+      height: 34px;
+      width: 34px;
+
+      border: 2px solid $gl-dark;
+
+      &:hover {
+        border-color: $gl-primary-d1;
+      }
+      &:focus {
+        outline: 2px solid darken($gl-primary, 15%);
+      }
+    }
+    .phone-link {
+      display: none;
+    }
+  }
+
+  @include bp(s) {
+    height: $mobile-header-height;
+
+    .navbar-container {
+      background-color: $gl-primary;
+      height: $mobile-header-height;
+
+      .dark {
+        background-color: $gl-dark;
+      }
+    }
+
+    &.sticky-block .navbar-container {
+      height: $mobile-header-height;
+    }
+
+  } // xs
+
+
+  nav {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+
+    .list-container {
+      display: flex;
+
+      a {
+        margin: 0 15px;
+      }
+    }
+
+    .logo {
+      display: block;
+      width: 89px;
+      height: 20px;
+      margin-right: 35px;
+
+      svg-icon-sprite {
+        @include size(100%);
+        color: $gl-dark;
+      }
+
+    } // .logo
+
+    //
+    // Responsive
+    //
+    @include bp(s) {
+      .logo {
+        margin-right: 20px;
+      }
+    }
+
+    @include bp(xs) {
+      .list-container {
+        display: none;
+      }
+    }
+
+  } // nav
+
+
+  .c-mobile-nav-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    @include size($gl-xs-ui-height);
+    margin-left: 10px;
+    border: 1px solid $gl-dark;
+    background-color: $gl-primary;
+    padding: 0;
+    appearance: none;
+
+    &:focus {
+      outline: 2px solid darken($gl-primary, 15%);
+    }
+
+    @include bp(xs) {
+      display: flex;
+    }
+
+  } // .c-mobile-nav-button
+
+} // :host

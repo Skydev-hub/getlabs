@@ -1,0 +1,39 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <h1 class="h-dark-c-h4 h-mb-15">
+    Account Settings
+  </h1>
+  <p class="h-medium-text-color h-text-center h-mb-30">
+    To view or edit your information, just tap on a section below.
+  </p>
+
+  <nav class="c-list-nav h-mb-30">
+
+    <a routerLink="/team/settings/profile" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Team Profile
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/team/settings/phone-number" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Phone Number
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/team/settings/documents" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Getlabs Documents
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </a>
+
+  </nav>
+
+  <button app-button="border" (click)="signOut()" class="h-margin-center">
+    Sign Out
+  </button>
+
+</main>

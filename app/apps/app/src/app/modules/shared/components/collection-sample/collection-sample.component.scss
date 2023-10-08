@@ -1,0 +1,30 @@
+@import "variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  border: 1px solid $gl-light-l2;
+
+  header {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    padding-left: 20px;
+    background-color: $white;
+  }
+
+  .inner {
+    height: 100%;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    > :first-child {
+      flex: 1;
+    }
+  }
+
+}

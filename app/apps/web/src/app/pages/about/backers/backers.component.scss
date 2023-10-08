@@ -1,0 +1,72 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > About > Backers Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-backers-block {
+  margin-bottom: $desktop-section-spacing;
+
+  &__wrapper {
+    padding: 60px 0 30px;
+    border-bottom: 2px solid $gl-primary;
+    display: block;
+  }
+
+  &__item-anchor {
+    padding: 0 30px 30px;
+    width: 33%;
+    text-align: center;
+  }
+
+  &__item {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__logo-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__logo-container {
+      flex-direction: column;
+    }
+
+    &__item-anchor {
+      margin: 15px 0;
+      padding: 0;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+
+  @include bp(xs) {
+    &__wrapper {
+      flex-direction: column;
+      padding: 40px 0;
+    }
+
+  } // xs
+} // .c-backers-block

@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  app-form-element {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+  }
+
+  app-date-input {
+    flex: 1;
+    min-width: 150px;
+
+    ::ng-deep input {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .divider {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    display: block;
+    padding-right: 5px;
+    align-self: center;
+  }
+}

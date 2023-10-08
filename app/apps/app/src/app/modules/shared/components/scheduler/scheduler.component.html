@@ -1,0 +1,47 @@
+<div class="date-bar">
+  <div class="h-dark-c-uil2">
+    {{ dates | dates:'MMMM y' }}
+  </div>
+<!--  <div class="date-bar__buttons">-->
+<!--    <ng-container *ngTemplateOutlet="previousBtn"></ng-container>-->
+<!--    <ng-container *ngTemplateOutlet="nextBtn"></ng-container>-->
+<!--  </div>-->
+</div>
+<div class="slot-selector">
+  <div class="slot-selector__edge slot-selector__edge--start">
+    <ng-container *ngTemplateOutlet="previousBtn"></ng-container>
+  </div>
+
+  <div class="slot-selector__slots">
+    <app-scheduler-slots [type]="type" [date]="date" [timezone]="timezone" [restrictions]="restrictions" [specialist]="specialist"
+                         *ngFor="let date of dates; let last = last; let first = first">
+      <div class="slot-selector__slots__controls h-mb-5" [ngClass]="{
+          'previous-button': first,
+          'next-button': last
+        }">
+        <ng-container *ngIf="last">
+          <ng-container *ngTemplateOutlet="nextBtn"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="first">
+          <ng-container *ngTemplateOutlet="previousBtn"></ng-container>
+        </ng-container>
+      </div>
+    </app-scheduler-slots>
+  </div>
+
+  <div class="slot-selector__edge slot-selector__edge--end">
+    <ng-container *ngTemplateOutlet="nextBtn"></ng-container>
+  </div>
+</div>
+
+<ng-template #previousBtn>
+  <button class="ui-circle-arrow-button" (click)="moveDateRange(-1)" *ngIf="hasPreviousDay()">
+    <svg-icon-sprite src="/assets/icons.svg#left-chevron-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+  </button>
+</ng-template>
+
+<ng-template #nextBtn>
+  <button class="ui-circle-arrow-button" (click)="moveDateRange(1)" *ngIf="hasNextDay()">
+    <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+  </button>
+</ng-template>

@@ -1,0 +1,93 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > Divider
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+
+.c-divider {
+  width: 66px;
+  height: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: $gl-primary-d1;
+
+  &--vertical {
+    display: inline-block;
+    width: 2px;
+    height: 18px;
+    margin: 0 15px;
+  }
+
+  &--light {
+    background-color: $gl-light-l2;
+  }
+
+  &--medium {
+    background-color: $gl-medium;
+  }
+
+  &--dark {
+    background-color: $gl-dark;
+  }
+
+  &--large {
+    width: 150px;
+  }
+
+  &--small {
+    width: 50px;
+  }
+
+  &--thin {
+    height: 1px;
+  }
+
+  &--full {
+    width:  100%;
+  }
+
+  &--x-space {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+} // c-divider
+
+@mixin separator-dot($size) {
+  display: inline-block;
+  height: $size;
+  width: $size;
+  margin: auto 10px;
+  background-color: $gl-medium;
+  border-radius: calc(#{$size} / 2);
+}
+
+.separator-dot {
+  @include separator-dot(4px);
+}
+
+.c-inline-divider {
+  &::after {
+    content: '';
+    display: block;
+
+    flex-shrink: 1;
+    flex-grow: 0;
+
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
+    height: 1px;
+    border-bottom: 1px solid $gl-primary-d1;
+  }
+
+  &--light {
+    &::after {
+      border-bottom-color: $gl-light-l2;
+    }
+  }
+}

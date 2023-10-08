@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <main class="l-wrapper l-wrapper--sm l-main-container">
+    <section class="h-mb-40">
+      <app-form-group label="Basic Information">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('name')" label="Name">
+            <input class="ui-input ui-input--large" type="text" placeholder="Name" formControlName="name">
+          </app-form-element>
+          <app-form-element [error]="getError('code')" label="Short Code">
+            <input class="ui-input ui-input--large" type="text" placeholder="Short Code" formControlName="code" uppercase>
+          </app-form-element>
+        </div>
+      </app-form-group>
+    </section>
+    <section class="h-mb-40">
+      <app-form-group label="Details">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('price')" label="Base Price">
+            <app-price-input formControlName="price"></app-price-input>
+          </app-form-element>
+          <app-form-element [error]="getError('isActive')" label="Active">
+            <select class="ui-select ui-select--large" formControlName="isActive">
+              <option [ngValue]="true" selected>Yes</option>
+              <option [ngValue]="false">No</option>
+            </select>
+          </app-form-element>
+        </div>
+      </app-form-group>
+    </section>
+    <button app-button type="submit" class="h-margin-center h-mt-40" [loading]="req$">
+      {{ market ? 'Save Changes' : 'Create Market' }}
+    </button>
+  </main>
+</form>

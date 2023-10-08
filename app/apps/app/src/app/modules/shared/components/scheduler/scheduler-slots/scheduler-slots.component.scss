@@ -1,0 +1,132 @@
+@import "variables";
+@import "mixins";
+@import "components/selectable-slots";
+@import "GLSS/library/mixins";
+@import "GLSS/typography/typography";
+@import "GLSS/user-interface/buttons/buttons";
+@import "components/scheduler-message-box";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+
+  @include scheduler-message-box;
+  .scheduler-message-box {
+    grid-column: 1 / -1;
+    padding: 20px 30px;
+  }
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 10px;
+
+  @include bp(xs) {
+    width: 100%;
+    //border-bottom: 1px solid $gl-light-l2;
+    //padding-bottom: 15px;
+
+    &::after {
+      content: '';
+      border-bottom: 1px solid $gl-light-l2;
+      padding-bottom: 15px;
+      width: 100%;
+      //padding-right: 50%;
+      //padding-left: 50%;
+
+    }
+  }
+}
+
+.available-slots {
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 12px;
+    margin: 10px 0;
+  }
+}
+
+:host-context(.app-scheduler-slots--inline) {
+  .date { display: none; }
+
+  .available-slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+
+    .available-slots__slot {
+      display: flex;
+      flex-direction: column;
+
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1.2px;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+    }
+  }
+
+  @include bp(xs) {
+    .available-slots {
+      grid-template-columns: 1fr 1fr;
+
+      .available-slots__slot {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+:host-context(.app-scheduler-slots--button) {
+  .available-slots {
+    &__slot {
+      @extend .ui-primary-button;
+      @extend .ui-primary-button--medium;
+
+      position: relative;
+      padding-left: 0;
+      padding-right: 0;
+      text-transform: none;
+
+      .priority-icon {
+        margin-right: 10px;
+      }
+
+      &--booked:not(.disabled):after {
+        position: absolute;
+        content: "🩸";
+        top: 2px;
+        right: 2px;
+        left: auto;
+        width: 16px;
+        height: 16px;
+      }
+
+      &--selected {
+        background-color: $white;
+        color: $gl-dark-text-color;
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+        background-color: transparent;
+        border-color: $gl-light-l1;
+        color: $gl-light-l1;
+      }
+
+      @include bp(xxs) {
+        .priority-icon {
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+}

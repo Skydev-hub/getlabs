@@ -1,0 +1,161 @@
+<app-small-hero [heroClass]="'c-small-hero c-small-hero--no-margin'">
+  FAQ
+</app-small-hero>
+
+<section class="l-wrapper">
+  <app-accordian class="c-faq-container">
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">How much does Getlabs cost?</ng-container>
+
+      Getlabs charges a fee starting at <app-price></app-price> for drawing your lab samples and delivering the samples to your selected laboratory for testing.
+      This fee varies depending on availability and the time of day of your appointment. The cost of laboratory testing is separate and charged by the laboratory (e.g. Labcorp
+      or Quest Diagnostics). For the exact price of your laboratory testing bill, we recommend calling the laboratory ahead of time.
+      <br />
+      <br />
+      Please note: We offer the ability to upload your insurance information. If you choose to upload it, we will provide that to the laboratory so they can
+      process your bill using insurance.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Does insurance cover Getlabs?</ng-container>
+
+      Getlabs charges a fee starting at <app-price></app-price>. However, you can submit Getlabs' receipt to your insurance and ask that they provide
+      reimbursement. The lab testing itself (what is handled by the laboratory) can be covered under insurance and so we recommend uploading your insurance
+      information at the time of booking so the laboratory can run your tests under insurance. For exact pricing, call your laboratory ahead of time.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Is Getlabs a laboratory?</ng-container>
+
+      Getlabs is not a laboratory. Our technology platform facilitates our service for mobile phlebotomy. We send certified, employed phlebotomists to your home
+      to collect your samples, and drop off those samples at the laboratory you or your doctor selected for testing. 100% of the testing is handled by the
+      laboratory.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Is Getlabs HIPAA compliant?</ng-container>
+
+      Yes, absolutely. Likewise, we routinely undergo internal compliance testing to ensure we uphold the highest standards.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Does Getlabs provide Coronavirus COVID-19 tests?</ng-container>
+
+      Getlabs can collect COVID-19 antibody tests if you have a lab order issued by a doctor. Please note: we do not test for active cases to reduce exposure risk.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">What precautions is Getlabs taking for COVID-19?</ng-container>
+
+      Here's what we’re doing to keep you safe:
+
+      <ul class="c-bulleted-list c-bulleted-list--condensed h-mt-10">
+        <li>Our phlebotomists wear medical-grade personal protective equipment (PPE)</li>
+        <li>This includes masks, gloves, medical scrubs, and optional foot coverings</li>
+        <li>Phlebotomists change into new PPE for each visit</li>
+        <li>Phlebotomists carry disinfectants and sanitizers</li>
+        <li>We screen our phlebotomists and patients before each visit and again upon arrival</li>
+      </ul>
+
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">What do I do if something goes wrong?</ng-container>
+
+      In the rare case that something occurs, please contact us right away at <a href="{{ globals.PHONE }}">{{ globals.PHONE }}</a
+      >.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">What forms of payment do you accept?</ng-container>
+
+      We accept all major credit cards.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Can I schedule same day appointments?</ng-container>
+
+      We may offer this in the future, but currently we only offer priority appointments next day or later. This gives you the opportunity to make sure you're
+      fasted and gives us time to get the necessary supplies for each appointment.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Do you do draws outside your service area?</ng-container>
+
+      We can offer service on a case-by-case basis. For special requests, please contact us at
+      <a href="tel:{{ globals.PHONE }}">{{ globals.PHONE }}</a> or <a href="mailto:hello@getlabs.com">hello@getlabs.com</a>. Getlabs is expanding rapidly and we
+      plan to provide coverage across the United States and Canada.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Does Getlabs provide pediatric draws for children?</ng-container>
+
+      With parental consent, we do pediatric draws on a case by case basis. In the event where we will draw a pediatric patient, they must be over 5 years of age.
+      Please contact us directly if you need a pediatric draw collected.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Can you come to my office or place of work?</ng-container>
+
+      Yes, as long as it's permitted by your employer and it is indoors, clean, and a sterile environment.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Do you offer corporate or group bookings?</ng-container>
+
+      Yes, we'd be happy to accommodate you. To arrange corporate or group bookings, please contact us at
+      <a href="tel:{{ globals.PHONE }}">{{ globals.PHONE }}</a> or <a href="mailto:hello@getlabs.com">hello@getlabs.com</a>.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Can I schedule a late night or early morning appointment?</ng-container>
+
+      Yes, absolutely. To request service outside our normal business hours, please contact us at
+      <a href="tel:{{ globals.PHONE }}">{{ globals.PHONE }}</a> or <a href="mailto:hello@getlabs.com">hello@getlabs.com</a>.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Can I schedule a weekend appointment?</ng-container>
+
+      Yes, absolutely. To request service weekend service, please contact us at <a href="tel:{{ globals.PHONE }}">{{ globals.PHONE }}</a> or
+      <a href="mailto:hello@getlabs.com">hello@getlabs.com</a>.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Are your phlebotomists certified to collect blood?</ng-container>
+
+      Yes, absolutely. Getlabs exclusively employs trained phlebotomists who are certified to practice phlebotomy. In addition, we have a robust vetting process
+      before hiring candidates and they are continually assessed during their employment.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">Is fasting required?</ng-container>
+
+      It depends on the lab test being requested. If we see that your specific labs require fasting, we will let you know ahead of time.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">How do you keep my information confidential?</ng-container>
+
+      Your healthcare information is strictly confidential and only used for scheduling and coordination purposes.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">I'm having an issue booking</ng-container>
+
+      We're sorry to hear that, but we'd be happy to help. Please contact us at <a href="tel:{{ globals.PHONE }}">{{ globals.PHONE }}</a> or email us at
+      <a href="mailto:hello@getlabs.com">hello@getlabs.com</a>.
+    </app-expansion-panel>
+
+    <app-expansion-panel class="app-expansion-panel__chevron-primary-d1">
+      <ng-container ngProjectAs=".title">I don't have a lab order</ng-container>
+
+      No problem! We have two easy options for providing your lab order to Getlabs when booking a visit. You can provide us your doctor’s contact information
+      and we can collect your lab order for you, or you can ask your doctor for a copy of your lab order and upload it. Either way works for us.
+    </app-expansion-panel>
+  </app-accordian>
+</section>
+
+<app-price-transparency-block></app-price-transparency-block>
+<app-cta-block></app-cta-block>
+<app-note-block></app-note-block>

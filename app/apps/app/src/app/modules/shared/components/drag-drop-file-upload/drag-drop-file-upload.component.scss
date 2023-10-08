@@ -1,0 +1,58 @@
+@import "variables";
+@import "GLSS/user-interface/buttons/buttons";
+@import "../form/input/file-input/file-input.component";
+
+[appDragDropUpload] {
+  //padding: 20px;
+  //border: 1px dashed $darker-border-color;
+  //background-color: $white;
+  text-align: center;
+  color: $gl-medium-text-color;
+
+  svg-icon {
+    ::ng-deep svg {
+      height: auto;
+      width: 32px;
+    }
+  }
+}
+
+app-multiple-file-input {
+  & ::ng-deep {
+    .input-anchor {
+      width: 100%;
+    }
+
+    //.controls-container {
+    //  display: grid;
+    //  grid-gap: 20px;
+    //  grid-template-columns: max-content max-content max-content;
+    //
+    //  @include bp(xs) {
+    //    grid-gap: 20px;
+    //    grid-template-columns: max-content;
+    //  }
+    //}
+  }
+}
+
+.drag-drop-container {
+  display: flex;
+  flex-direction: column;
+
+  &.multi-files {
+    flex-direction: column-reverse;
+  }
+}
+
+.add-new-files {
+  background-color: $gl-light-l5;
+  border: 1px dashed $gl-primary-d1;
+
+  width: $upload-control-width;
+  height: $upload-control-height;
+
+  &.drag-drop-hover {
+    background-color: $gl-light-l4;
+  }
+}

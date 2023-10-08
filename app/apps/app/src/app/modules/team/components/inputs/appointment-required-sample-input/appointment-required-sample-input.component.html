@@ -1,0 +1,47 @@
+<header>
+  <span class="h-dark-l-uil1 label">
+    {{ label }}
+  </span>
+  <button class="ui-icon-button-inline ui-icon-button-inline--icon-hover" (click)="remove.emit()">
+    <svg-icon-sprite src="small-close-icon" class="ui-icon-button__icon c-small-icon"></svg-icon-sprite>
+  </button>
+</header>
+<form [formGroup]="form" class="l-form-grid l-form-grid--single">
+
+  <app-form-element class="h-mb-25 app-form-element__label-sm"
+                    [error]="getError('type')" label="Stopper color (Additive)">
+    <select class="ui-select ui-select--medium" formControlName="type">
+      <option [value]="null" selected disabled>Stopper color (Additive)</option>
+      <!-- TODO readonly map -->
+      <option *ngFor="let type of TypeLabels | keyvalue" [value]="type.key">{{ type.value }}</option>
+    </select>
+  </app-form-element>
+
+  <app-form-element class="app-form-element__horizontal app-form-element__label-sm h-mb-25" [error]="getError('quantity')"
+                    label="Quantity">
+    <select class="ui-select ui-select--medium" formControlName="quantity">
+      <option [value]="null" selected disabled>Quantity</option>
+      <!--[ngValue] used here to preserve quantity as number, [value] converts to string -->
+      <option *ngFor="let quantity of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="quantity">{{ quantity }}</option>
+    </select>
+  </app-form-element>
+
+  <app-form-element class="app-form-element__horizontal app-form-element__label-sm h-mb-25"
+                    [error]="getError('temperature')" label="Temperature">
+    <select class="ui-select ui-select--medium" formControlName="temperature">
+      <option [value]="null" selected disabled>Temperature</option>
+      <!-- TODO readonly map -->
+      <option *ngFor="let type of TemperatureLabels | keyvalue" [value]="type.key">{{ type.value }}</option>
+    </select>
+  </app-form-element>
+
+  <app-form-element class="app-form-element__horizontal app-form-element__label-sm"
+                    [error]="getError('processing')" label="Processing">
+    <select class="ui-select ui-select--medium" formControlName="processing">
+      <option [value]="null" selected disabled>Processing</option>
+      <!-- TODO readonly map -->
+      <option *ngFor="let type of ProcessingLabels | keyvalue" [value]="type.key">{{ type.value }}</option>
+    </select>
+  </app-form-element>
+
+</form>

@@ -1,0 +1,52 @@
+@import "variables";
+@import "GLSS/library/mixins";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  // TODO - check to ensure changes here don't clash with anything anywhere else in the appObook
+  //margin-bottom: $desktop-section-spacing;
+
+
+  //&__title {
+  //  padding: 0 $mobile-edge;
+  //  margin-bottom: 40px;
+  //}
+  //
+  //&__wrapper {
+  //  display: flex;
+  //  flex-direction: column;
+  //}
+  //
+  //
+  ////
+  //// Responsive
+  ////
+  //@include bp(s) {
+  //  margin-bottom: $mobile-section-spacing;
+  //
+  //  &__title {
+  //    margin-bottom: 20px;
+  //  }
+  //
+  //  &--mobile-pull-up {
+  //    margin-top: -30px;
+  //  }
+  //
+  //}
+}
+
+:host(.app-accordian-row) {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  /* With the desktop-first strategy, we have to override the flex-direction property such that it resembles the same
+   * design as the natural vertical accordian. */
+  @include bp(xs) {
+    flex-direction: column;
+  }
+}

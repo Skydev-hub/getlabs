@@ -1,0 +1,16 @@
+{
+  "language": "ts",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "assets": [
+      { "include":  "views/**/*", "outDir": "dist/src" }
+    ]
+  },
+  "projects": {
+    "worker": {
+      "entryFile": "worker"
+    }
+  }
+}

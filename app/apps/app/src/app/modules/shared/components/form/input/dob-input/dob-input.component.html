@@ -1,0 +1,4 @@
+<input class="ui-input ui-input--large" type="text" autocomplete="bday" placeholder="Date of birth" [formControl]="input" [matDatepicker]="dp"
+       [min]="min" [max]="max" (focus)="!dp.opened && interceptAutofill($event) && dp.open()" (click)="!dp.opened && dp.open()"
+        (input)="doAutofill($event)">
+<mat-datepicker #dp startView="multi-year" [startAt]="start"></mat-datepicker>

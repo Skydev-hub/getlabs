@@ -1,0 +1,70 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <div class="h-flex-col h-flex-y-center">
+    <div class="h-mb-20">
+      <app-avatar [user]="user" size="xlarge"></app-avatar>
+    </div>
+
+    <!--    <div class="h-flex h-full-width h-mt-15 h-mb-15">-->
+    <!--      <div class="h-flex-one h-text-center h-bold-font-weight">-->
+    <!--        {{ user.name }}-->
+    <!--      </div>-->
+    <!--    </div>-->
+  </div>
+  <app-tabs>
+    <app-tabs-tab title="Personal Info">
+      <app-panel class="h-flex-col h-full-width h-mb-40">
+        <dl>
+          <dt>Name</dt>
+          <dd>{{ user.name }}</dd>
+
+          <dt>Phone</dt>
+          <dd>
+            <a href="tel:{{ user.phoneNumber }}">{{ user.phoneNumber | phone }}</a>
+          </dd>
+
+          <dt>Email</dt>
+          <dd>
+            <a href="mailto:{{ user.email }}">{{ user.email || 'N/A' }}</a>
+          </dd>
+
+          <dt>City</dt>
+          <dd>{{ (user.address.city || '') + (user.address.city && user.address.state ? ', ' : '') + (user.address.state || '') || 'N/A' }}</dd>
+
+          <dt>ZIP</dt>
+          <dd>{{ user.address.zipCode || 'N/A' }}</dd>
+
+          <dt>Role</dt>
+          <dd><app-team-access-level [user]="user"></app-team-access-level></dd>
+
+          <dt>Status</dt>
+          <dd><app-account-status [(user)]="user" [showAction]="true"></app-account-status></dd>
+
+          <dt>HIPAA Compliance</dt>
+          <dd><app-compliance-status [user]="user"></app-compliance-status></dd>
+
+          <dt>Getlabs Documents</dt>
+          <dd>
+            <app-documents-status [user]="user"></app-documents-status>
+          </dd>
+
+          <ng-container *ngIf="!user.isActive">
+            <dt>Deactivation Date</dt>
+            <dd>{{ user.deactivationDate | date: 'medium' }}</dd>
+
+            <dt>Deactivation Reason</dt>
+            <dd>{{ (user.deactivationReason === 'other' ? user.deactivationNote : DeactivationReasonLabels[user.deactivationReason]) || 'N/A' }}</dd>
+          </ng-container>
+        </dl>
+      </app-panel>
+
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/team-members/{{ user.id }}/edit">
+          Edit Profile
+        </a>
+      </div>
+    </app-tabs-tab>
+    <app-tabs-tab title="Markets">
+      <app-team-member-markets [entity]="user"></app-team-member-markets>
+    </app-tabs-tab>
+  </app-tabs>
+</main>

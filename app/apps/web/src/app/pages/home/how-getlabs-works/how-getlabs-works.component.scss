@@ -1,0 +1,111 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Home > How It Works Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-hiw-block {
+  // Take away 30px here due to separating element causing the default spacing to be too uch
+  margin-bottom: $desktop-section-spacing - 30px;
+
+  h3 {
+    padding-bottom: 3px;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__container {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 30px;
+    }
+
+  } // s
+
+  @include bp(xxs) {
+    &__container {
+      grid-template-columns: 1fr;
+    }
+
+  } // xxs
+
+} // .c-hiw-block
+
+
+
+//
+// Step Item
+//
+.c-hiw-step {
+  position: relative;
+  text-align: center;
+
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing / 2;
+  }
+
+  &__image {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto 20px auto;
+    height: 80px;
+    width: 100%;
+
+    img {
+      object-fit: contain;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+    }
+
+    @include bp(s) {
+      max-width: 200px;
+      height: 80px;
+    }
+  }
+
+  &__inner {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    small {
+      @include gl-sm-text();
+      color: $gl-medium;
+    }
+  }
+
+} // .c-hiw-step
+
+.para-footnote + .para-footnote {
+  margin-top: 25px;
+}
+
+
+
+//
+// Anchor
+//
+.c-hiw-block-anchor {
+  @include shift(top, -40px);
+
+  @include bp(xs) {
+    top: -($mobile-header-height + ($mobile-site-message-height * 1)) - 30px;
+  }
+
+} // .c-hiw-block-anchor

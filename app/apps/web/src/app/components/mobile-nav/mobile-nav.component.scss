@@ -1,0 +1,124 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Mobile Nav
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+$mobile-nav-spacer: 64px;
+
+:host {
+
+  .container {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 65vw;
+    max-width: 450px;
+    height: 100%;
+    padding: 15px 0 20px 0;
+    background-color: $gl-primary;
+    box-shadow: 0 0 30px 0 rgba(#A57A4E, .75);
+    transform: translateX(480px);
+    transition: transform 300ms ease-in-out;
+  }
+
+  &.open {
+    .container {
+      transform: translateX(0);
+    }
+  }
+
+  .header {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    flex: 0 0 $mobile-nav-spacer;
+    padding: 0 15px 0 20px;
+    width: 100%;
+    height: $mobile-nav-spacer;
+    background-color: $gl-primary;
+
+    &__logo-container {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    &__logo {
+      display: block;
+      @include size(27px);
+
+      > svg-icon-sprite {
+        color: $gl-dark;
+        @include size(27px);
+      }
+
+    } // __logo
+
+    &__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include size($gl-xs-ui-height);
+      padding: 0;
+      border: 1px solid $gl-dark;
+      background-color: transparent;
+
+      &:focus {
+        outline: 2px solid darken($gl-primary, 15%);
+      }
+
+    } // __close
+
+  } // .header
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 20px;
+    height: $mobile-nav-spacer;
+    background-color: $gl-primary;
+
+    app-social-links ::ng-deep {
+      display: flex;
+      align-items: center;
+      flex: 0 0 $mobile-nav-spacer;
+    }
+
+  } // .footer
+
+  nav {
+    position: absolute;
+    top: $mobile-nav-spacer;
+    width: 100%;
+    height: calc(100vh - (#{$mobile-nav-spacer} * 2));
+    padding: 0 15px 0 20px;
+    overflow: hidden;
+
+    .inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .primary-link {
+      padding: 15px 0;
+    }
+
+    .secondary-link {
+      padding: 8px 0;
+    }
+
+  } // nav
+
+} // :host

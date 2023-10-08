@@ -1,0 +1,60 @@
+<ng-container *ngIf="!isEditing; else edit">
+  <section class="c-table-container c-table-container--bottom-margin">
+    <div class="c-table">
+      <div class="c-table__row">
+        <div class="c-table__heading">Name</div>
+        <div class="c-table__heading">Account Number</div>
+      </div>
+
+      <ng-container *ngIf="market.labAccountCodes.length > 0; else loading">
+        <div class="c-table__row" *ngFor="let account of market.labAccountCodes; let i = index">
+          <div class="c-table__col">
+            {{ account.company | lab }}
+          </div>
+          <div class="c-table__col">
+            {{ account.accountNumber }}
+          </div>
+        </div>
+        <ng-container *ngIf="market.labAccountCodes.length === 0">
+          <div class="c-table-empty-state">
+            <svg-icon-sprite src="large-circle-search-icon" class="h-mb-25" height="64" width="64"></svg-icon-sprite>
+            No lab accounts found
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </section>
+  <button app-button (click)="toggleEditMode()" type="button" class="h-margin-center h-mt-40">
+    Edit Account Numbers
+  </button>
+</ng-container>
+<ng-template #edit>
+  <form *ngIf="accountCodes.controls.length > 0; else loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <section class="c-table-container c-table-container--bottom-margin">
+      <div class="c-table">
+        <div class="c-table__row">
+          <div class="c-table__heading">Name</div>
+          <div class="c-table__heading">Account Number</div>
+        </div>
+        <ng-container formArrayName="accountCodes">
+          <div class="c-table__row" *ngFor="let account of accountCodes.controls; let index = index" [formGroupName]="index.toString()">
+            <div class="c-table__col">
+              {{ account.get('company').value | lab }}
+            </div>
+            <div class="c-table__col">
+              <input class="ui-input ui-input--small h-full-width--responsive" type="text" placeholder="Account number" formControlName="accountNumber" />
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+    <button app-button type="submit" class="h-margin-center h-mt-40" [loading]="req$">
+      Save Account Numbers
+    </button>
+  </form>
+</ng-template>
+<ng-template #loading>
+  <div class="c-table-empty-state">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

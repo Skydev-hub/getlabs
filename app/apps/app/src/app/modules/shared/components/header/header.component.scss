@@ -1,0 +1,110 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  height: 66px;
+  margin-bottom: 50px;
+  position: relative;
+
+  .phone-link {
+    font-weight: $gl-regular-font-weight;
+  }
+
+  app-avatar {
+    margin-right: 7px;
+    margin-left: 7px;
+  }
+
+  .inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: $desktop-edge;
+      width: calc(100% - #{$desktop-edge} * 2);
+      height: 1px;
+      background-color: $gl-light-l2;
+
+      @include bp(l) {
+        left: $tablet-edge;
+        width: calc(100% - #{$tablet-edge} * 2);
+      }
+
+      @include bp(s) {
+        left: $mobile-edge;
+        width: calc(100% - #{$mobile-edge} * 2);
+      }
+    }
+
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    > * {
+      display: flex;
+    }
+
+    /* svg-icon-sprite elements must be explicitly sized =\ */
+    svg-icon-sprite {
+      width: 89px;
+      height: 64px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  .mobile-nav-icon {
+    position: relative;
+    cursor: pointer;
+    display: none;
+    @include size(32px);
+
+    @include bp(m) {
+      display: block;
+    }
+
+    &__default, &__close {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    &__close {
+      display: none;
+    }
+
+    &--open {
+      .mobile-nav-icon__default {
+        display: none;
+      }
+
+      .mobile-nav-icon__close {
+        display: block;
+      }
+    }
+
+  }
+
+  @include bp(xs) {
+    margin-bottom: 30px;
+
+    .inner {
+      align-items: center;
+
+      .logo { height: 100%; }
+    }
+  }
+}

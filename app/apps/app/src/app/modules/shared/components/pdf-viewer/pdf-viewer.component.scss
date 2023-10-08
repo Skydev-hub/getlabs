@@ -1,0 +1,63 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  position: relative;
+  display: block;
+
+  width: 100%;
+  max-width: 700px;
+  height: 406px;
+
+  pdf-viewer {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    border: 3px solid #fff;
+    box-shadow: 0 15px 70px 0 rgba($gl-dark, .3);
+  }
+
+  .actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    opacity: 0;
+    transition: opacity $transition-duration;
+
+    pointer-events: none;
+
+    .prev {
+      margin-left: 0;
+      margin-right: auto;
+      pointer-events: auto;
+    }
+
+    .next {
+      margin-left: auto;
+      margin-right: 0;
+      pointer-events: auto;
+    }
+  }
+
+  &:hover {
+    .actions {
+      opacity: 1;
+    }
+  }
+
+  @include bp(xs) {
+    min-height: 206px;
+    height: auto;
+  }
+
+
+}

@@ -1,0 +1,106 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Hero > Error Page
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-error-hero {
+  position: relative;
+  flex: 1 0 auto;
+  padding-top: 60px;
+  background-color: $gl-primary;
+  overflow: hidden;
+
+  &__wrapper {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    min-height: 550px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 470px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(l) {
+    &__wrapper {
+      padding-left: 10vw;
+    }
+  }
+
+  @include bp(s) {
+    padding-top: $mobile-header-height;
+
+    &__wrapper {
+      min-height: 300px;
+    }
+
+    &__content {
+      padding-bottom: 0;
+    }
+
+    &__title {
+      margin-bottom: 20px;
+    }
+
+    &__description {
+      margin-bottom: 30px;
+    }
+
+  } // s
+
+  @include bp(xs) {
+    &__wrapper {
+      padding-left: $mobile-edge;
+    }
+
+  } // xs
+
+} // .c-error-hero
+
+
+
+//
+// Error Hero BG
+//
+.c-error-hero-bg {
+  position: absolute;
+  z-index: 0;
+  top: $desktop-header-height;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2560px;
+  height: 550px;
+  background-image: url('/assets/img/large-hero-noodle--desktop.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    height: 200px;
+    background-image: url('/assets/img/hero-noodle--mobile.svg');
+  }
+
+  @include bp(xs) {
+    top: auto;
+    bottom: 5vw;
+    transform: translateX(-50%);
+  }
+
+} // .c-error-hero-bg

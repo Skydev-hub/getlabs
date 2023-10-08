@@ -1,0 +1,33 @@
+<header>
+  <span class="h-large-text h-bold-font-weight">{{ label }}</span>
+</header>
+<div class="inner">
+  <div class="h-flex-col h-mb-20">
+    <span class="h-bold-font-weight">Stopper color</span>
+    <span>{{ TypeLabels[sample.type] }}</span>
+  </div>
+  <ul>
+    <li class="h-flex h-mb-20">
+      <span class="h-flex-one h-bold-font-weight">Quantity</span>
+      <span class="h-text-right">{{ sample.quantity }}</span>
+    </li>
+    <li class="h-flex h-mb-20">
+      <span class="h-flex-one h-bold-font-weight">Temperature</span>
+      <span class="h-text-right">{{ TemperatureLabels[sample.temperature] }}</span>
+    </li>
+    <li class="h-flex h-mb-20">
+      <span class="h-flex-one h-bold-font-weight">Processing</span>
+      <span class="h-text-right">{{ ProcessingLabels[sample.processing] }}</span>
+    </li>
+  </ul>
+
+  <button class="$gl-primary-d1 $gl-primary-d1--medium $gl-primary-d1--square h-full-width" [class.gl-primary-d1--muted]="sample.collected" (click)="toggleStatus()" [appLoading]="req$" [disabled]="locked">
+    <ng-container *ngIf="!sample.collected; else collected">
+      {{ locked ? 'Not Collected' : 'Mark Collected' }}
+    </ng-container>
+    <ng-template #collected>
+      <svg-icon-sprite src="checkmark-icon" class="c-small-icon c-small-icon--white h-mr-5"></svg-icon-sprite>
+      Collected
+    </ng-template>
+  </button>
+</div>

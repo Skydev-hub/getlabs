@@ -1,0 +1,31 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  Select Active Markets
+</div>
+<mat-dialog-content [formGroup]="form">
+  <div class="h-flex h-flex-row h-flex-x-end h-flex-y-center h-mt-20">
+    <app-checkbox-input formControlName="selectAll" class="h-mr-5">
+      <span class="h-medium-r-uil2">Select All</span>
+    </app-checkbox-input>
+  </div>
+  <div class="h-flex-col">
+    <div class="c-checklist h-full-width" formArrayName="markets">
+      <ng-container *ngFor="let market of markets.controls; let index = index" [formGroupName]="index.toString()">
+        <app-checkbox-input class="app-checkbox-input__dot" formControlName="selected">
+          {{market.get('model').value.name}}
+        </app-checkbox-input>
+      </ng-container>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" size="large" responsive="true" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button size="large" responsive="true" class="mat-dialog-primary-action" (click)="confirm()"
+    [disabled]="!form.valid">
+    Confirm
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

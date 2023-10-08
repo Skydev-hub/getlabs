@@ -1,0 +1,6 @@
+<span *ngIf="user.isDocumentComplete(this.docType)" class="status-affirmative h-success-text-color">
+  {{ this.getLabel(CaseType.Affirmative) || 'Completed' }}
+</span>
+<span *ngIf="!user.isDocumentComplete(this.docType)" class="status-negative h-danger-text-color">
+  {{ this.getLabel(CaseType.Negative) || 'Incomplete' }}
+</span>

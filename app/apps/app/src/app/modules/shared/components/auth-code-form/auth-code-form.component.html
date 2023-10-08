@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="submit($event)">
+  <div class="h-flex-col h-flex-y-center h-full-width">
+    <app-form-element [error]="form.touched && getError('authCode')">
+      <app-auth-code-input formControlName="authCode"></app-auth-code-input>
+<!--      <input class="ui-input ui-input&#45;&#45;large" type="text" autocomplete="one-time-code" placeholder="###-###" [textMask]="{mask: authCodeMask, guide: false}" formControlName="authCode" appAutoFocus>-->
+    </app-form-element>
+    <ng-content></ng-content>
+  </div>
+</form>

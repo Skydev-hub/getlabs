@@ -1,0 +1,22 @@
+<ng-container *ngIf="group && group.buttonStyle === group.buttonStyles.BOX; else buttonStyleDefault">
+  <input #input class="input" type="radio" [attr.name]="name" [id]="id" [checked]="checked" [disabled]="disabled" (change)="onChange($event)" (click)="onClick($event)">
+  <label class="c-checkbox-box" [class.c-checkbox-box--checked]="checked" [class.c-checkbox-box--disabled]="disabled" [for]="id">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </label>
+</ng-container>
+
+<ng-template #buttonStyleDefault>
+  <label [class.c-checkbox--checked]="checked" [class.c-checkbox--disabled]="disabled">
+    <span class="element">
+      <input #input class="input" type="radio" [attr.name]="name" [id]="id" [checked]="checked" [disabled]="disabled" (change)="onChange($event)" (click)="onClick($event)">
+      <i class="check"></i>
+    </span>
+    <span class="label">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </span>
+  </label>
+</ng-template>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

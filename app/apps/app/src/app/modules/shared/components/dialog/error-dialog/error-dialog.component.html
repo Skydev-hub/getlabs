@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ data.title || 'Error' }}</h2>
+<mat-dialog-content>
+  {{ data.message || 'An unknown error occurred.' }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button size="undefined" mat-dialog-close>
+    {{ data.action || 'OK' }}
+  </button>
+  <button class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

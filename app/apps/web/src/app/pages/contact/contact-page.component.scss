@@ -1,0 +1,133 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Contact
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/large-body";
+
+.c-contact-container {
+  margin-bottom: $desktop-section-spacing;
+
+  &__wrapper {
+    align-items: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 50%;
+    padding-right: 60px;
+  }
+
+  &__form {
+    flex: 0 0 50%;
+  }
+
+  &__title {
+    max-width: 400px;
+    margin-bottom: 50px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(m) {
+    &__content {
+      padding-right: 30px;
+    }
+  }
+
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__wrapper {
+      flex-direction: column;
+    }
+
+    &__content {
+      flex: 1 1 auto;
+      width: 100%;
+      margin-bottom: $mobile-section-spacing;
+    }
+
+    &__form {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
+  } // s
+
+  @include bp(xs) {
+    &__content {
+      padding: 0;
+    }
+  }
+
+  @include bp(xxs) {
+    &__title {
+      margin-bottom: 30px;
+    }
+
+    &__form {
+      width: calc(100% + #{$mobile-edge * 2});
+    }
+  }
+
+} // .c-contact-container
+
+
+
+//
+// Contact Option
+//
+.c-contact-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+
+  &--no-margin {
+    margin-bottom: 0 !important;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__icon {
+    @include size(80px);
+    margin-right: 25px;
+  }
+
+  &__link {
+    color: $gl-primary-d1;
+
+    &:hover {
+      color: $gl-dark-text-color;
+    }
+
+  } // __link
+
+
+  //
+  // Responsive
+  //
+  @include bp(xxs) {
+    margin-bottom: 30px;
+  } // xxs
+
+} // .c-contact-option
+
+.intercom-start {
+  @extend .h-dark-l-lb2;
+  @extend .c-contact-option__link;
+
+  outline: none;
+  font-weight: $gl-regular-font-weight;
+  padding: 0;
+}

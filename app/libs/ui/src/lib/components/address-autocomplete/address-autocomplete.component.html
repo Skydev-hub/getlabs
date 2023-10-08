@@ -1,0 +1,38 @@
+<div class="address-input-container">
+  <div class="address-verified" *ngIf="isAddressSelected()">
+    <svg-icon-sprite src="check-mark-icon"></svg-icon-sprite>
+  </div>
+  <input
+    type="text"
+    class="ui-input ui-input--large ui-input--location"
+    [placeholder]="placeholder"
+    [appAutoFocus]="autoFocusInput"
+    [matAutocomplete]="auto"
+    [formControl]="input"
+    (focus)="this.matAutocompleteTrigger.openPanel()"
+    (blur)="doBlur()"
+    autocomplete="off"
+    name="notASearchField"
+  />
+  <!--
+      autocomplete="new-password" (chrome) and name=notASearchField (safari) are used here to fool browsers in to not
+      auto completing this field and interfering with the address auto complete drop down. This is unfortunately necessary
+      as browsers will auto fill any field regardless of "autocomplete" attribute value unless the "name" attribute contains
+      the word "search" in it or autcomplete is for a new password.
+    -->
+</div>
+<mat-autocomplete
+  autoActiveFirstOption
+  #auto="matAutocomplete"
+  [disableRipple]="true"
+  class="mat-autocomplete-panel--location mat-autocomplete-panel--powered-by-google"
+  [displayWith]="getSelectedAddressText"
+>
+  <mat-option *ngFor="let result of autocomplete$ | async; let index = index" [value]="result">
+    <svg-icon-sprite src="small-location-pin-icon" class="c-small-icon c-small-icon--medium h-mr-10"></svg-icon-sprite>
+    <span class="mat-option-text__overflow">{{ result.description }}</span>
+  </mat-option>
+  <div class="google-logo">
+    <img src="/assets/img/powered-by-google.png" alt="Powered by Google" />
+  </div>
+</mat-autocomplete>

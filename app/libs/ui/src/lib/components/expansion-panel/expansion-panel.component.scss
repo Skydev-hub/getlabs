@@ -1,0 +1,141 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/library/mixins";
+@import "GLSS/typography/body";
+@import "components/icons";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $gl-light-l2;
+
+  .question {
+    display: flex;
+    align-items: center;
+    padding: 20px 0 10px;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        .title {
+          color: $gl-primary-d1 !important;
+        }
+      }
+    }
+
+  } // .question
+
+  .answer {
+    display: none;
+    padding-bottom: 10px;
+  }
+
+  .title {
+    flex-grow: 1;
+    transition: color 200ms;
+  }
+
+  .chevron {
+    transition: transform 300ms ease-out;
+  }
+
+  &.active {
+    .answer {
+      display: block;
+    }
+
+    .chevron {
+      transform: scaleY(-1);
+    }
+
+    @include bp(xs) {
+      padding-bottom: 10px;
+
+      .answer {
+        padding-bottom: 5px;
+      }
+    }
+
+  } // .active
+
+
+}
+
+:host-context(.app-expansion-panel__chevron-left) {
+  .title {
+    flex-grow: 0;
+    margin-right: 15px;
+  }
+}
+
+:host-context(.app-expansion-panel__border-title) {
+  .question {
+    padding-bottom: 5px;
+    border-bottom: 1px solid $gl-light-l2;
+  }
+
+  &.active {
+    margin-bottom: 15px;
+  }
+}
+
+
+// TODO: Adjust this css when checkout flow is converted to v2
+:host-context(.app-accordian-row) {
+  flex: 1;
+  border-bottom: 0;
+  border-top: 1px solid $gl-light-l2;
+  margin-right: 50px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  header {
+    padding: 10px 0 20px;
+
+    .title {
+      @extend .h-dark-l-b2;
+      font-weight: $gl-regular-font-weight;
+    }
+
+    @include bp(xs) {
+      padding-bottom: 0;
+    }
+  }
+
+  &.active {
+    header {
+      @include bp(xs) {
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+  .chevron {
+    ::ng-deep svg use {
+      fill: $gl-dark-text-color;
+    }
+  }
+
+  .answer {
+    //@extend .h-small-text;
+    @extend .h-medium-l-b3;
+  }
+
+  @include bp(xs) {
+    margin-right: 0;
+
+    .content {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+:host-context(.app-expansion-panel__chevron-primary-d1) {
+  svg-icon-sprite {
+    @extend .c-small-icon--primary-d1;
+  }
+}

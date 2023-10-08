@@ -1,0 +1,41 @@
+@import 'variables';
+@import 'GLSS/typography/ui-labels';
+
+:host {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-select {
+  width: auto;
+
+  ::ng-deep {
+    .mat-select-trigger {
+      //padding-right: 2px;
+
+      .mat-select-value {
+        max-width: inherit;
+        color: $gl-primary-d1;
+      }
+
+      .mat-select-arrow-wrapper {
+        display: none;
+      }
+    }
+  }
+
+  &:first-of-type,
+  &:last-of-type {
+    ::ng-deep .mat-select-trigger {
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
+}
+
+select.ui-select {
+  @extend .h-primary-d1-l-uil2;
+  margin-top: 0;
+
+  cursor: pointer;
+}

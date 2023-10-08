@@ -1,0 +1,50 @@
+@import "variables";
+@import "mixins";
+
+
+.c-dialog {
+
+  &-close {
+    position: absolute !important;
+    z-index: 1;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //@include size(24px);
+    //border: 1px solid $white;
+    //border-radius: 50%;
+    //transition: border-color $transition-duration;
+
+    outline: none;
+    cursor: pointer;
+
+    svg-icon-sprite {
+      @include size(24px);
+      fill: $gl-medium;
+    }
+
+    &:hover {
+      //border-color: rgba($white, .5);
+
+      svg-icon-sprite {
+        fill: lighten($gl-medium, 10%);
+      }
+    }
+
+    @include bp(xs) {
+      top: 15px;
+      right: 15px;
+      padding: 0;
+
+      svg-icon-sprite {
+        background-color: $white;
+        @include size(24px);
+        fill: $gl-medium;
+      }
+
+    } // xs
+  }
+
+}

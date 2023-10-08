@@ -1,0 +1,44 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+    Account Settings
+  </h1>
+  <p class="h-medium-c-b1 h-mb-20">
+    To view or edit your information, just tap on a section below.
+  </p>
+
+  <nav class="c-list-nav h-mb-20">
+
+    <a routerLink="/care/settings/profile" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        My Profile
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/care/settings/phone-number" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Phone Number
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/care/settings/documents" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Getlabs Documents
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </a>
+
+  </nav>
+
+  <div class="h-dark-c-b2 h-mb-20">
+    If you'd like to request supplies or time off, call/text us at <a href="tel:{{ globals.PHONE }}" class="h-primary-link">{{ globals.PHONE }}</a>
+    or email <a href="mailto:hello@getlabs.com" class="h-primary-link">hello@getlabs.com</a>.
+  </div>
+
+  <button app-button="border" (click)="signOut()" class="h-margin-center">
+    Sign Out
+  </button>
+
+</main>

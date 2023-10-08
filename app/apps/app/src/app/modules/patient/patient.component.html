@@ -1,0 +1,12 @@
+<app-header avatarLink="/settings">
+  <ng-template appTemplateId="header-buttons">
+    <app-award-campaign-button type="primary" size="xs" [awardType]="AwardType.OneTimeReferrerCreditAward"
+                               [excludeRoutes]="['/book', '/sign-in']">
+      <ng-template let-awardCampaign="awardCampaign">
+        <span class="award-button-label h-white-c-bl1">Get {{((awardCampaign.award / 100) | currency ) | truncateNumbers}} off</span>
+      </ng-template>
+    </app-award-campaign-button>
+  </ng-template>
+</app-header>
+<router-outlet></router-outlet>
+<app-footer [showHomeLink]="true" [showReferLink]="!!(getUser() | async)"></app-footer>

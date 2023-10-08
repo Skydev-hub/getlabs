@@ -1,0 +1,15 @@
+@import "variables";
+
+[appModalLaunch] {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.app-modal-launch-anchor {
+    text-decoration: underline;
+  }
+}
+
+a[appModalLaunch] {
+  color: $gl-dark-text-color;
+}

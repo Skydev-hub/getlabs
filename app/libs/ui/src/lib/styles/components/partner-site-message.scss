@@ -1,0 +1,23 @@
+@mixin partner-site-message-theme($partner, $background-color, $text-color) {
+  app-site-message.app-partner-site-message__#{$partner}-theme {
+    background-color: $background-color;
+
+    ::ng-deep .c-site-message__content {
+      color: $text-color;
+    }
+
+    @include bp(xxs) {
+      grid-template-columns: auto;
+
+      ::ng-deep {
+        .c-site-message__logo {
+          display: none;
+        }
+        .c-site-message__content {
+          font-size: $b2-fs;
+          line-height: $b2-lh;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<!--<app-mobile-nav></app-mobile-nav>-->
+<div class="navbar-container">
+  <div class="l-wrapper wrapper">
+    <nav>
+      <a routerLink="/" class="logo" aria-label="Home Page Link">
+        <svg-icon-sprite src="getlabs-logo-dark"></svg-icon-sprite>
+      </a>
+      <div class="list-container">
+        <button appModalLaunch [dialog]="Covid19SafetyDialogComponent" class="button-link h-dark-underline-link">
+          COVID-19 Safety
+        </button>
+        <a routerLink="/faq" class="h-dark-underline-link" routerLinkActive="link--active">
+          FAQ
+        </a>
+      </div>
+    </nav>
+
+    <a app-button="border" size="xs" class="h-ml-10" [href]="'/' | interAppUrl:'app'">Sign In</a>
+    <a app-button size="xs" class="h-ml-10" [href]="'/book' | interAppUrl:'app'">Book Now</a>
+  </div>
+</div>

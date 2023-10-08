@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 360px;
+  min-height: 100vh;
+
+  ::ng-deep router-outlet + * {
+    flex-grow: 1;
+    min-height: 480px;
+    margin-bottom: 60px;
+  }
+}

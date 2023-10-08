@@ -1,0 +1,73 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  Delete Lab Order #{{data.ordinal}}
+</div>
+<mat-dialog-content>
+  <p class="h-mb-20 h-dark-c-b2">Are you sure you want to remove Lab Order #{{data.ordinal}}?</p>
+
+  <div class="c-simple-table">
+    <div class="c-simple-table__row">
+      <div class="c-simple-table__label-col">
+        Doctor's Name:
+      </div>
+      <div>
+        {{data.labOrderDetailsEntity.contactName}}
+      </div>
+    </div>
+    <div class="c-simple-table__row">
+      <div class="c-simple-table__label-col">
+        Doctor's Phone Number:
+      </div>
+      <div>
+        {{data.labOrderDetailsEntity.contactPhone | phone}}
+      </div>
+    </div>
+    <div class="c-simple-table__row">
+      <div class="c-simple-table__label-col">
+        Lab Order Files:
+      </div>
+      <div>
+        <ng-container *ngIf="data.labOrderDetailsEntity.labOrderFiles && data.labOrderDetailsEntity.labOrderFiles.length; else noLabOrderFiles">
+          <div *ngFor="let labOrderFile of data.labOrderDetailsEntity.labOrderFiles">
+            <app-file-download-anchor [file]="labOrderFile"></app-file-download-anchor>
+  <!--          <ng-container *ngTemplateOutlet="fileAnchor; context: { file: labOrderFile }"></ng-container>-->
+          </div>
+        </ng-container>
+        <ng-template #noLabOrderFiles>
+          None Uploaded
+        </ng-template>
+      </div>
+    </div>
+    <div class="c-simple-table__row" *ngIf="data.labOrderDetailsEntity.abnDocument">
+      <div class="c-simple-table__label-col">
+       ABN Document
+      </div>
+      <div>
+        <app-file-download-anchor [file]="data.labOrderDetailsEntity.abnDocument"></app-file-download-anchor>
+      </div>
+    </div>
+    <div class="c-simple-table__row" *ngIf="data.labOrderDetailsEntity.accuDraw">
+      <div class="c-simple-table__label-col">
+        AccuDraw Document
+      </div>
+      <div>
+        <app-file-download-anchor [file]="data.labOrderDetailsEntity.accuDraw"></app-file-download-anchor>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button class="mat-dialog-primary-action" (click)="confirmDelete()">
+    Delete Lab Order
+  </button>
+</mat-dialog-actions>
+
+<ng-template #createTitle>
+  Add New Lab Order
+</ng-template>
+
+<ng-template #fileAnchor let-file="file">
+  {{file.name}}
+</ng-template>

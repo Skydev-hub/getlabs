@@ -1,0 +1,11 @@
+<div [formGroup]="form" class="l-form-grid l-form-grid--single">
+
+  <app-form-element [error]="getError('recipient')" class="h-mb-20">
+    <input class="ui-input ui-input--medium ui-input--ignore-responsive" type="text" placeholder="Enter PSC recipient name" formControlName="recipient">
+  </app-form-element>
+
+  <app-form-element [error]="getError('signature')">
+    <app-signature-pad formControlName="signature"></app-signature-pad>
+  </app-form-element>
+
+</div>

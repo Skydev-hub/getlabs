@@ -1,0 +1,9 @@
+@import "components/expansion-panel";
+
+:host {
+
+  app-expansion-panel.overview-panel {
+    @include appointment-overview-panel;
+  }
+
+}

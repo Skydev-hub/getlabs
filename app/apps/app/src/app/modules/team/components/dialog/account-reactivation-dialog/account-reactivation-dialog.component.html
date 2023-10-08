@@ -1,0 +1,11 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  Are you sure you want to reactivate {{ data.user.name }}'s account?
+</div>
+<mat-dialog-actions>
+  <button app-button (click)="reactivate()" [appLoading]="reqSub">
+    Reactivate
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

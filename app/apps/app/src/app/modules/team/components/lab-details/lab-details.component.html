@@ -1,0 +1,51 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <app-tabs>
+    <app-tabs-tab title="Basic Info">
+      <app-panel class="h-mb-40">
+        <dl>
+          <dt>Company</dt>
+          <dd>
+            {{ lab.lab | lab }}
+          </dd>
+          <dt>Address</dt>
+          <dd>
+            {{ lab.address.composed }}
+          </dd>
+          <dt>Markets</dt>
+          <dd>
+            {{ (lab.markets | mapAndJoin: 'code') || 'N/A' }}
+          </dd>
+          <dt>Services</dt>
+          <dd>
+            <ul *ngIf="lab.services && lab.services.length > 0; else NA" class="c-bulleted-list c-bulleted-list--condensed c-bulleted-list--dark">
+              <li *ngFor="let service of lab.services">{{ service }}</li>
+            </ul>
+          </dd>
+          <dt>Notes</dt>
+          <dd>
+            <ul *ngIf="lab.notes && lab.notes.length > 0; else NA" class="c-bulleted-list c-bulleted-list--condensed c-bulleted-list--dark">
+              <li *ngFor="let note of lab.notes">{{ note }}</li>
+            </ul>
+          </dd>
+          <dt>Status</dt>
+          <dd>
+            <app-active-status [active]="lab.active"></app-active-status>,
+            <app-active-status [active]="lab.public" trueText="Public" falseText="Private"></app-active-status>
+          </dd>
+        </dl>
+      </app-panel>
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/labs/{{ lab.id }}/edit">
+          Edit Lab Location
+        </a>
+      </div>
+    </app-tabs-tab>
+
+    <app-tabs-tab title="Markets">
+      <app-lab-markets [entity]="lab"></app-lab-markets>
+    </app-tabs-tab>
+  </app-tabs>
+</main>
+<ng-template #NA>
+  N/A
+</ng-template>

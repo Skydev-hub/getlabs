@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "/",
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types", "typings"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/ui": ["libs/ui/src/index.ts"],
+      "@app/idle": ["libs/idle/src/index.ts"],
+      "@app/shared/environments": ["libs/shared/environments/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

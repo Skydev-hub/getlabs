@@ -1,0 +1,36 @@
+<ul class="c-list h-mb-25">
+  <li class="c-list__item h-dark-l-uil1">Weekly Schedule</li>
+  <li class="c-list__item" *ngFor="let day of days">
+    <div class="c-list__item--left h-dark-l-b2">{{ day | titlecase }}</div>
+    <div class="c-list__item--right h-flex-col h-dark-r-b2">
+      <ng-container *ngIf="getScheduleDay(day) as schedule; else defaultHours">
+        <ng-container *ngIf="!schedule.disabled; else disabled">
+          <ng-container *ngIf="schedule.hours && schedule.hours.length > 0; else defaultHours">
+            <div *ngFor="let range of schedule.hours" class="range">
+              <div class="range__start h-dark-r-b2">{{ convertTimeToDate(range.start) | date: 'h:mm aaa' }}</div>
+              <div class="h-medium-r-b2">to</div>
+              <div class="range__end h-dark-r-b2">{{ convertTimeToDate(range.end) | date: 'h:mm aaa' }}</div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </li>
+</ul>
+
+<ul class="c-list">
+  <li class="c-list__item h-dark-l-uil1">Blackout Dates</li>
+  <li class="c-list__item" *ngFor="let blackout of market.schedule?.blackouts">
+    <div class="c-list__item--left h-dark-l-b2">
+      {{ blackout.start.toDate() | date: 'MMM d, y, h:mm a' }} to {{ blackout.end.toDate() | date: 'MMM d, y, h:mm a' }}
+    </div>
+  </li>
+</ul>
+
+<ng-template #disabled>
+  <span class="h-danger-text-color h-danger-r-uil2">Not Scheduled</span>
+</ng-template>
+
+<ng-template #defaultHours>
+  <span class="h-medium-text-color h-medium-r-b2">Default Hours</span>
+</ng-template>

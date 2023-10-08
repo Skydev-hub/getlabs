@@ -1,0 +1,36 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col h-mb-40">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+    Getlabs Documents
+  </h1>
+  <p class="h-medium-c-b1 h-mb-30">
+    Below is a list of your completed documents with Getlabs.
+  </p>
+</div>
+
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+
+  <app-document-card label="HIPAA Comprehension" [document]="user.getDocument(Type.HIPAA)" class="h-mb-15">
+    <ng-container ngProjectAs=".affirmative-status">Passed</ng-container>
+  </app-document-card>
+
+  <app-document-card label="Bloodborne Pathogens" [document]="user.getDocument(Type.BBP)" class="h-mb-15">
+    <ng-container ngProjectAs=".affirmative-status">Passed</ng-container>
+  </app-document-card>
+
+  <app-document-card label="W4 Form" [document]="user.getDocument(Type.W4)" class="h-mb-15">
+    <ng-container ngProjectAs=".affirmative-status">
+      Signed on {{ user.getDocument(Type.W4)?.completedAt | date }}
+    </ng-container>
+  </app-document-card>
+
+  <app-document-card label="EE Agreement" [document]="user.getDocument(Type.EEA)" class="h-mb-15">
+    <ng-container ngProjectAs=".affirmative-status">
+      Signed on {{ user.getDocument(Type.W4)?.completedAt | date }}
+    </ng-container>
+  </app-document-card>
+
+</div>
+
+<ng-template #notCompleted>
+  <span class="h-danger-text-color">Not Completed</span>
+</ng-template>

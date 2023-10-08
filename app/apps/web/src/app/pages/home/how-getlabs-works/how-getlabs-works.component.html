@@ -1,0 +1,87 @@
+<div name="how-it-works" class="c-hiw-block-anchor"></div>
+
+<section class="c-hiw-block">
+  <div class="l-wrapper l-wrapper--col">
+    <h2 class="h-dark-c-h1 h-dark-c-h1--responsive">
+      How it works
+    </h2>
+    <div class="c-hiw-block__container">
+
+      <div class="c-hiw-step c-hiw-step--1" aria-label="Book a time">
+        <div class="c-hiw-step__image">
+          <img src="/assets/img/how-time@2x.png" alt="Schedule a time for your at-home lab appointment" />
+        </div>
+        <div class="c-hiw-step__inner">
+          <h3 class="h-dark-c-h4">
+            1. Schedule
+          </h3>
+          <div class="h-medium-c-lb4">
+            5am-2pm, Mon-Sat
+          </div>
+        </div>
+      </div>
+
+      <div class="c-hiw-step c-hiw-step--2" aria-label="Mobile lab visit">
+        <div class="c-hiw-step__image">
+          <img src="/assets/img/how-visits@2x.png" alt="Our specialists come to your home at your appointment time" />
+        </div>
+        <div class="c-hiw-step__inner">
+          <h3 class="h-dark-c-h4">
+            2. Lab Draw
+          </h3>
+          <div class="h-medium-c-lb4">
+            Home or office
+          </div>
+        </div>
+      </div>
+
+      <div class="c-hiw-step c-hiw-step--4" aria-label="Laboratory delivery">
+        <div class="c-hiw-step__image">
+          <img src="/assets/img/how-samples@2x.png" alt="We deliver your samples to the lab" />
+        </div>
+        <div class="c-hiw-step__inner">
+          <h3 class="h-dark-c-h4">
+            3. Delivery
+          </h3>
+          <div class="h-medium-c-lb4">
+            <app-partner-inline-content>
+              <ng-template [appPartnerInlineContentBlock]="LabCompany.LabCorp">
+                Directly to Labcorp
+              </ng-template>
+              <ng-template [appPartnerInlineContentBlock]="LabCompany.LabXpress">
+                Directly to LabXpress
+              </ng-template>
+              <ng-template [appPartnerInlineContentBlock]>
+                Any lab you choose
+              </ng-template>
+            </app-partner-inline-content>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-hiw-step c-hiw-step--5" aria-label="Get results">
+        <div class="c-hiw-step__image">
+          <img src="/assets/img/how-results@2x.png" alt="Your health care provider will contact you with your results" />
+        </div>
+        <div class="c-hiw-step__inner">
+          <h3 class="h-dark-c-h4">
+            4. Results
+          </h3>
+          <div class="h-medium-c-lb4">
+            From your doctor
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="l-wrapper l-wrapper--col">
+    <p class="para-footnote h-medium-c-lb4 h-mt-50">
+      For special requests including employer and group rates,
+      <a class="h-medium-d1-link h-underline" routerLink="/contact">contact us</a>
+    </p>
+    <p class="para-footnote h-light-c-b2 h-mt-50 h-hide" [appPartnerContentDirective]="LabCompany.LabCorp">
+      Getlabs is an independent service provider and not a contractor, agent, preferred or official partner, or representative of Labcorp.
+    </p>
+  </div>
+</section>

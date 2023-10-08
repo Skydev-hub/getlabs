@@ -1,0 +1,40 @@
+@import 'mixins';
+
+.labcorp-logo {
+  width: 100px;
+}
+
+.quest-diagnostics-logo {
+  width: 160px;
+}
+
+.partners {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  &__label {
+  }
+
+  &__logos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  @include bp(s) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__label {
+      margin-bottom: 10px;
+    }
+
+    &__logos {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+}

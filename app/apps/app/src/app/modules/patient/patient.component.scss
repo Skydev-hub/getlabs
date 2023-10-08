@@ -1,0 +1,26 @@
+@import "GLSS/library/mixins";
+@import "GLSS/variables/components";
+@import "variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 360px;
+  min-height: 100vh;
+
+  ::ng-deep router-outlet + * {
+    flex-grow: 1;
+    margin-bottom: 60px;
+
+    @include bp(xs) {
+      margin-bottom: 40px;
+    }
+  }
+
+  app-award-campaign-button:hover {
+    .award-button-label {
+      color: $gl-dark-text-color;
+      transition: color $transition-duration ease-in-out;
+    }
+  }
+}

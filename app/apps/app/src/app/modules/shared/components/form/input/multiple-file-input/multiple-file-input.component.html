@@ -1,0 +1,36 @@
+<div class="h-flex-col h-flex-y-center">
+  <div [ngClass]="{ 'h-hide': files.controls.length || useCustomMultiAnchor }" class="input-anchor h-text-center h-full-width">
+    <label class="ui-file-input__elm {{btnClass}} ui-responsive-button" [ngClass]="{
+          'ui-file-input__elm--disabled ui-button-loading': disabled
+        }"
+           #unselected>
+      {{ label || 'Upload File' }}
+      <input type="file" class="ui-file-input__hide" [disabled]="disabled" (change)="doFileSelect($event, true)"
+             [accept]="types"
+             multiple
+             #multiInput>
+    </label>
+  </div>
+
+
+  <ng-container *ngIf="files.controls.length">
+    <ng-container [formGroup]="form">
+      <div [formArrayName]="'files'" [ngClass]="{ 'multiple-files': files.controls.length > 1 }"
+           class="controls-container {{getUploadState().toString()}} controls-container--slots-{{files.controls.length}}">
+        <div *ngFor="let file of files.controls; let index = index" class="file-input-container">
+          <app-form-element [error]="getError(file)">
+            <app-file-input [label]="'Choose file'" [purpose]="purpose" [btnClass]="btnClass" [btnSize]="btnSize"
+                            [types]="types" [formControlName]="index.toString()"
+                            (close)="removeControl(file)"></app-file-input>
+          </app-form-element>
+        </div>
+        <ng-content></ng-content>
+      </div>
+    </ng-container>
+    <div *ngIf="getUploadState() === uploadStates.Uploaded"
+         class="h-flex-col h-flex-y-center h-mt-20 h-full-width">
+      <button *ngIf="showAddFile" app-button="text" size="undefined" responsive="false" class="h-primary-d1-l-uil2 h-mt-10" (click)="openFileDialog($event)">Upload Another File</button>
+      <button *ngIf="!autoAccept" app-button class="h-mt-30" (click)="accept.emit(files.value)">Continue</button>
+    </div>
+  </ng-container>
+</div>

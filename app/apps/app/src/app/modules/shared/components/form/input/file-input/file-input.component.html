@@ -1,0 +1,64 @@
+<ng-container *ngIf="usePreview; else noPreview" [ngSwitch]="getUploadState()">
+  <ng-container *ngSwitchCase="UploadState.Unselected">
+    <ng-container *ngTemplateOutlet="unselected"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="UploadState.Uploading">
+    <ng-container *ngTemplateOutlet="uploading"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="UploadState.Uploaded">
+    <ng-container *ngTemplateOutlet="uploaded"></ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noPreview>
+  <ng-container *ngTemplateOutlet="unselected"></ng-container>
+</ng-template>
+
+<ng-template #unselected>
+  <label
+    class="ui-file-input__elm {{ btnClass }} {{ btnClass }}--{{ btnSize }}"
+    [ngClass]="{
+      'ui-button-loader': disabled
+    }"
+    #unselected
+  >
+    {{ label || 'Upload File' }}
+    <input type="file" class="ui-file-input__hide" [disabled]="disabled" (change)="onFileChange($event)" [accept]="types" #input />
+  </label>
+</ng-template>
+
+<ng-template #uploading>
+  <div class="uploading-container h-flex-col h-flex-x-center h-full-width">
+    <div class="h-bold-font-weight h-text-center h-mb-10">Uploading...{{ uploadProgress }}%</div>
+    <mat-progress-bar mode="determinate" value="{{ uploadProgress }}"></mat-progress-bar>
+  </div>
+</ng-template>
+
+<ng-template #uploaded>
+  <div class="h-flex-col">
+    <div class="uploaded-container">
+      <div class="object-stage h-flex-y-center" (click)="openLightbox(value)" *ngIf="value?.url">
+        <div class="object-container h-margin-center">
+          <!-- TODO - future enhancement - probably don't need to scale up smaller images... -->
+          <object type="{{ getContentType(value) }}" [data]="sanitizeResourceUrl(value.url)" *ngIf="!fileProcess$; else spinner"></object>
+        </div>
+      </div>
+      <div class="uploaded-actions h-mt-10">
+        <svg-icon-sprite (click)="rotate(-90)" *ngIf="value.isImage()"
+                  src="refresh-icon" class="ui-icon-button-inline c-small-icon"></svg-icon-sprite>
+        <span class="replace-upload">
+          <label class="ui-text-button h-primary-d1-l-uil2" *ngIf="allowReplace"
+            >Replace Image
+            <input type="file" class="ui-file-input__hide" [disabled]="disabled" (change)="onFileChange($event)" [accept]="types" #input />
+          </label>
+        </span>
+        <svg-icon-sprite (click)="onClose()" *ngIf="close.observers.length" src="close-icon"
+                  class="ui-icon-button-inline c-small-icon c-small-icon--danger"></svg-icon-sprite>
+      </div>
+      <!--      <img src="{{ value.url }}" alt="{{ value.name }}" *ngIf="value?.url"/>-->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #spinner>
+  <mat-spinner [diameter]="64"></mat-spinner>
+</ng-template>

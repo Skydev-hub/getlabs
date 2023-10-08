@@ -1,0 +1,14 @@
+<app-site-message [ngClass]="{
+  'app-site-message__secondary-theme': !user.isActive,
+  'app-site-message__success-theme': user.isActive
+  }" [fix]="true">
+  <span *ngIf="!user.isActive; else reactivated">
+    Specialist account for {{user.firstName}} {{user.lastName}} has been deactivated.
+    <button app-button size="xs" responsive="false" class="h-ml-20"
+            (click)="openReactivationDialog()">Reactivate Account</button>
+  </span>
+</app-site-message>
+
+<ng-template #reactivated>
+  Specialist profile for {{user.firstName}} {{user.lastName}} is now reactivated.
+</ng-template>

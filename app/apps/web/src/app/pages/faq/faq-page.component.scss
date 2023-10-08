@@ -1,0 +1,25 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > FAQ
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/body";
+
+.c-faq-container {
+  padding-top: 30px;
+  margin-bottom: $desktop-section-spacing;
+
+  @include bp(s) {
+    padding-top: 5px;
+    margin-bottom: $mobile-section-spacing;
+  }
+
+} // .c-faq-container
+
+ul.c-bulleted-list {
+  @extend .h-medium-l-b2;
+}

@@ -1,0 +1,251 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > Table
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/body";
+@import "GLSS/library/mixins";
+
+.c-table {
+  display: grid;
+  @extend .h-medium-l-b2;
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid $gl-light-l2;
+
+    &:last-child, &:first-child {
+      border-bottom: none;
+    }
+
+    &[href], &--clickable {
+      cursor: pointer;
+      color: inherit;
+      outline: none;
+
+      &:hover {
+        color: $gl-dark-text-color;
+      }
+    }
+
+    @include bp(xs) {
+      &__header-row {
+        border: 0;
+      }
+
+      &__content-row {
+        padding: 10px 0;
+
+        &:last-of-type {
+          padding-bottom: 0;
+        }
+      }
+
+      .c-table__heading {
+        grid-column: 1 / -1;
+
+        margin-left: calc(#{$mobile-edge} * -1);
+        margin-right: calc(#{$mobile-edge} * -1);
+
+        padding-left: $mobile-edge;
+        padding-right: $mobile-edge;
+      }
+
+      .c-table__col {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 5px 0;
+
+        .c-table__col__value {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  &__heading {
+    padding: 10px 20px;
+    @extend .h-dark-l-uil2;
+    background-color: $gl-primary;
+
+    &--right {
+      text-align: right;
+    }
+  }
+
+  &__col {
+    padding: 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &--right {
+      text-align: right;
+    }
+  }
+
+  // ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+  //
+  //  Getlabs
+  //  Components > Schedule > Actions Bar
+  //
+  // ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    &__left, &__right {
+      display: flex;
+      align-items: center;
+      flex: 1 1 50%;
+    }
+
+    &__right {
+      justify-content: flex-end;
+
+      &--shift {
+        @include shift(left, $mobile-edge);
+      }
+
+    } // __right
+
+    @include bp(xs) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 30px;
+
+      &__left {
+        flex-basis: auto;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      &__right--shift {
+        left: -($mobile-edge);
+      }
+
+    } // xs
+
+  } // c-sch-actions
+
+
+  //
+  // Types
+  //
+  &--request-supplies {
+    grid-template-columns: 1fr 2fr 3fr 2fr;
+  }
+  &--request-supplies & {
+    &__col:nth-last-child(-n+4) {
+      border-bottom: none;
+    }
+  }
+
+} // c-table
+
+
+
+//
+// Table Container
+//
+.c-table-container {
+
+  &--bottom-margin {
+    margin-bottom: 40px;
+  }
+
+  @include bp(xs) {
+    overflow: auto;
+
+    &--bottom-margin {
+      margin-bottom: 30px;
+    }
+
+  } // xs
+
+} // c-table-container
+
+
+
+//
+// Mobile Table
+//
+.c-mobile-table {
+  display: none;
+  flex-direction: column;
+
+  &__section {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $gl-light-l2;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+  } // __section
+
+  &__row {
+    display: flex;
+    padding: 5px 0;
+  }
+
+  &__col {
+    display: flex;
+    align-items: center;
+    flex: 1 1 50%;
+
+    &:last-child {
+      justify-content: flex-end;
+    }
+
+  } // __col
+
+  @include bp(xs) {
+    display: flex;
+  }
+
+} // c-mobile-table
+
+
+
+//
+// Empty State
+//
+.c-table-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  grid-column: 1 / -1;
+  margin: 5vw 0;
+
+  @include bp(xs) {
+    justify-self: flex-start;
+  }
+
+} // c-table-empty-state
+
+.c-simple-table {
+  display: grid;
+  grid-gap: 5px;
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+
+  &__label-col {
+    font-weight: $gl-bold-font-weight
+  }
+}

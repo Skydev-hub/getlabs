@@ -1,0 +1,39 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  UI > Buttons
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+//
+// Circle Arrow Buttons
+//
+.ui-circle-arrow-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 $gl-xs-ui-height;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background-color: $gl-primary;
+  transition: background-color $transition-duration;
+
+  @include size($gl-xs-ui-height);
+
+  &:hover {
+    background-color: $gl-primary-d1-hover;
+  }
+
+  &:disabled, &--disabled {
+    background-color: $gl-light-l1;
+    background-image: none;
+    box-shadow: none !important;
+    cursor: default;
+  }
+
+} // ui-circle-arrow-button

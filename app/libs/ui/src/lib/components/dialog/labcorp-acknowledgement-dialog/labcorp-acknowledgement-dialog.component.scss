@@ -1,0 +1,38 @@
+@import "variables";
+
+mat-dialog-content {
+  margin-top: 0 !important;
+}
+
+ul {
+  padding-left: 24px;
+
+  li {
+    &::before {
+      content: "\2022";
+      color: $gl-primary-d1;
+      display: inline-block;
+      width: 16px;
+      margin-left: -20px;
+    }
+  }
+}
+
+[appProgressiveDisclosureElement] {
+  border-bottom: 1px solid $gl-light-l2;
+  padding: 20px 0;
+
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  &.progressive-disclosure--closed {
+    .disclosure-content { display: none; }
+    .disclosure-title { color: $gl-medium; }
+  }
+}
+
+::ng-deep .acknowledgement-dialog {
+  flex-basis: 750px;
+}

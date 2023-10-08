@@ -1,0 +1,71 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > About > Mission Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-mission-block {
+  margin-bottom: $desktop-section-spacing;
+
+  &__img {
+    flex: 1 1 50%;
+    margin-right: 40px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 50%;
+    padding-right: 60px;
+  }
+
+  &__title {
+    max-width: 500px;
+    margin-bottom: 20px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(m) {
+    &__content {
+      flex-basis: 60%;
+    }
+
+    &__img {
+      flex-basis: 40%;
+    }
+
+  } // m
+
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+  }
+
+  @include bp(xs) {
+    &__wrapper {
+      flex-direction: column;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &__img {
+      flex-basis: auto;
+      margin: 0 auto 30px;
+    }
+
+    &__content {
+      padding-left: $mobile-edge;
+      padding-right: $mobile-edge;
+    }
+
+  } // xs
+
+} // .c-mission-block

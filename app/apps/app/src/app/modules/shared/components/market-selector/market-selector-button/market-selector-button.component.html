@@ -1,0 +1,22 @@
+<ng-container *appTemplateVariable="(allMarkets$ | async) as allMarkets">
+  <button app-button="border" size="xs" *ngIf="(getActiveMarkets$() | async) as activeMarkets"
+    (click)="openMarketSelector()" [appLoading]="!allMarkets">
+    Market:
+    <ng-container [ngSwitch]="true" *ngIf="allMarkets && allMarkets.total">
+      <ng-container *ngSwitchCase="allMarkets.total === 1">
+        {{allMarkets.data[0].code}}
+      </ng-container>
+      <ng-container *ngSwitchCase="allMarkets.total > 1 && (!activeMarkets || !activeMarkets.length)">
+        All
+      </ng-container>
+      <ng-container *ngSwitchCase="activeMarkets.length > 3">
+        ({{activeMarkets.length}}) Active
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <ng-container *ngFor="let market of activeMarkets; let last = last">
+          {{market.code}}<ng-container *ngIf="!last">, </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </button>
+</ng-container>

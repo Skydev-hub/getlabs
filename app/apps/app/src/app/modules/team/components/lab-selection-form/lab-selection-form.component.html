@@ -1,0 +1,21 @@
+<div [formGroup]="form" class="l-form-grid l-form-grid--single">
+  <app-form-element [error]="getError('lab')" class="h-mb-15">
+    <app-lab-company-select formControlName="lab" [referral]="partnerReferral" [queryDate]="queryDate" [preferredLab]="preferredLab"></app-lab-company-select>
+  </app-form-element>
+
+  <app-form-element [error]="getError('location')" *ngIf="form.get('lab').value">
+    <select class="ui-select ui-select--large" formControlName="location" [compareWith]="compareEntities">
+      <ng-container *ngIf="locations$ | async as locations; else loading">
+        <option [value]="null" selected [disabled]="form.get('location').value !== null">Select Location</option>
+        <option *ngFor="let location of locations" [ngValue]="location" [disabled]="!location.active">
+          <ng-container *ngIf="!location.public">[Internal]</ng-container>
+          {{ location.lab | lab }} - {{ location.address.composed }}
+        </option>
+      </ng-container>
+    </select>
+  </app-form-element>
+</div>
+
+<ng-template #loading>
+  <option [value]="null" selected disabled>Loading...</option>
+</ng-template>

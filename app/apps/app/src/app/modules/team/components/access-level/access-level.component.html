@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="user.accessLevel">
+  <span *ngSwitchCase="'support'">Support Staff</span>
+  <span *ngSwitchCase="'admin'">Administrator</span>
+</ng-container>

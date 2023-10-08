@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="signIn()">
+  <div class="h-flex-col h-align-self-center h-full-width">
+    <app-form-element class="ui-input-container ui-input-container--center h-mb-20 c-sign-in-input" [error]="getError('phoneNumber')">
+      <input class="ui-input ui-input--large" type="tel" autocomplete="tel" placeholder="(###) ###-####"
+             [mask]="phoneNumberMask.getMaskPattern()" formControlName="phoneNumber" appAutoFocus
+        (keydown)="interceptAutofill($event)">
+    </app-form-element>
+    <button app-button size="large" responsive="true" class="h-margin-center h-mb-30" [loading]="req$">
+      {{ buttonLabel }}
+    </button>
+    <div class="l-wrapper l-wrapper--col l-wrapper--xs">
+      <p class="h-medium-c-b3">
+        By signing in, you agree to the Getlabs
+        <a [href]="'/terms' | interAppUrl" class="h-medium-text-color">Terms</a>,
+        <a [href]="'/privacy' | interAppUrl" class="h-medium-text-color">Privacy</a>, and
+        <a [href]="'/payments' | interAppUrl" class="h-medium-text-color">Payments</a> policies.
+      </p>
+    </div>
+  </div>
+</form>
+

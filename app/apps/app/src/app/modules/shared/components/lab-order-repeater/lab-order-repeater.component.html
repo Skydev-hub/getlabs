@@ -1,0 +1,5 @@
+<div class="h-mb-20 lab-order-details" *ngFor="let labOrderDetails of labOrderDetails; let index = index; trackBy: trackById"
+  [class.lab-order-details--deleted]="labOrderDetails.isDeleted">
+  <h3 class="lab-order-details__header h-dark-l-uil1">Lab Order #{{index + 1}}</h3>
+  <ng-container *ngTemplateOutlet="templateRef; context: { labOrderDetails: labOrderDetails, index: index }"></ng-container>
+</div>

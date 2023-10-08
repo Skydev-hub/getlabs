@@ -1,0 +1,64 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+    Account Settings
+  </h1>
+  <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-20 h-mb-xs-30">
+    To view or edit your information, just tap on the section below.
+  </p>
+
+  <nav class="c-list-nav h-mb-30 h-mb-xs-20">
+
+    <!--
+    <a routerLink="/referral" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Referral Credits
+      </span>
+      <svg-icon src="/assets/icons/right-chevron-icon.svg" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon>
+    </a>
+    -->
+
+    <a routerLink="/refer" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Referral Dashboard
+      </span>
+      <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-list-nav-item__icon c-small-icon"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/settings/profile" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Personal Information
+      </span>
+      <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-list-nav-item__icon c-small-icon"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/settings/phone-number" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Phone Number
+      </span>
+      <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-list-nav-item__icon c-small-icon"></svg-icon-sprite>
+    </a>
+
+    <!--
+    <a routerLink="/payment-settings" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Payment Settings
+      </span>
+    <svg-icon src="/assets/icons/right-chevron-icon.svg" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon>
+    </a>
+    -->
+
+    <a routerLink="/settings/insurance" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-dark-l-uil1">
+        Insurance Details
+      </span>
+      <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-list-nav-item__icon c-small-icon"></svg-icon-sprite>
+    </a>
+
+  </nav>
+
+  <button app-button="border" (click)="signOut()" class="h-margin-center">
+    Sign Out
+  </button>
+
+</main>

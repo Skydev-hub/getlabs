@@ -1,0 +1,19 @@
+<button app-button="border" size="small" (click)="showOptions = !showOptions">
+  <ng-content></ng-content>
+</button>
+
+<div class="list-filter__options__popover" [class.h-hide]="!showOptions">
+  <div class="list-filter__close h-flex-x-end">
+    <button app-button="text" (click)="showOptions = false">
+      <svg-icon-sprite src="close-icon" class="c-smaller-icon"></svg-icon-sprite>
+    </button>
+  </div>
+  <div class="list-filter__options">
+    <div class="list-filter__options__option" *ngFor="let option of (criterion.options$ | async)">
+      <app-checkbox-input [clickAction]="'noop'" [checked]="isOptionSet(option)" (change)="toggleFilterOption(option)">
+        {{ criterion.getLabel(option) }}
+      </app-checkbox-input>
+    </div>
+  </div>
+</div>
+

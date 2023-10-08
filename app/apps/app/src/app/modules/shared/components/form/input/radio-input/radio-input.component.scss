@@ -1,0 +1,129 @@
+@import "variables";
+@import "mixins";
+
+@import "components/checkbox";
+@import "GLSS/typography/body";
+
+:host {
+  @extend .c-checkbox;
+
+  .ui-input-container--error & .c-checkbox--checked {
+    .label {
+      color: $gl-ui-danger;
+    }
+
+    .element .input + .check {
+      background-color: $gl-ui-danger;
+      border-color: $gl-ui-danger;
+    }
+  }
+}
+
+:host-context(.app-radio-group__dot) {
+  .c-checkbox--checked {
+    .element {
+      .check {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $gl-primary;
+        border-color: $gl-primary;
+
+        &::after {
+          position: static;
+          border: 0;
+          border-radius: 50%;
+          background-color: $gl-dark;
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+}
+
+//Box style buttons
+::ng-deep .app-radio-group__box {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 10px;
+}
+
+:host {
+  .error .app-radio-group__box & {
+    .c-checkbox-box {
+      border-color: $gl-ui-danger;
+      border-right-color: $white;
+      color: $gl-ui-danger;
+    }
+
+    &:last-child {
+      .c-checkbox-box {
+        &:not(.c-checkbox-box--checked) {
+          border-right-color: $gl-ui-danger;
+        }
+      }
+    }
+  }
+}
+
+:host-context(.app-radio-group__box) {
+  $hoverBorder: 2px solid $gl-primary-d1-hover !important;
+
+  flex-grow: 1;
+  flex-basis: 0;
+
+  input {
+    opacity: 0;
+    position: absolute;
+  }
+
+  //To show focus state for keyboard users
+  input:focus + label:not(.c-checkbox-box--checked) {
+    border: $hoverBorder;
+  }
+
+  .c-checkbox-box {
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 18px;
+    height: $gl-large-ui-height;
+    background-color: $white;
+    border: 1px solid $gl-light;
+    border-right-color: $white;
+    color: $gl-medium-text-color;
+    cursor: pointer;
+    transition: color $transition-duration,
+      background-color $transition-duration;
+
+    &--checked {
+      border-color: $gl-dark;
+      border-width: 2px;
+      color: $gl-dark-text-color;
+    }
+
+    &:not(.c-checkbox-box--checked):hover {
+      border: $hoverBorder;
+    }
+
+    @include bp(xs) {
+      &:not(.c-checkbox-box--ignore-responsive) {
+        height: $gl-medium-ui-height;
+        line-height: 24px;
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  &:last-child {
+    .c-checkbox-box {
+      &:not(.c-checkbox-box--checked) {
+        border-right-color: $gl-light;
+      }
+    }
+  }
+
+}

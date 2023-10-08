@@ -1,0 +1,153 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/user-interface/buttons/buttons";
+
+:host {
+  overflow: hidden;
+  display: block;
+  position: fixed;
+  z-index: $z-index-2;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $white;
+
+  .container {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - #{$gl-large-ui-height});
+    overflow-y: scroll;
+    background-color: $gl-light-l6;
+  }
+
+  .elm {
+    max-width: 700px;
+    margin: 30px;
+  }
+
+  @include bp(s) {
+    .container {
+      height: calc(100vh - #{$gl-large-ui-height} - 95px);
+    }
+
+    .elm {
+      margin: $mobile-edge;
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 25px 0 30px;
+    background-color: $white;
+
+    &__file {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    &__icon {
+      width: 27px;
+      height: 32px;
+      margin-right: 15px;
+      fill: $gl-primary-d1;
+    }
+
+    &__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 100%;
+      cursor: pointer;
+
+      &:hover > svg {
+        fill: $gl-dark-text-color;
+      }
+
+    }
+
+    @include bp(s) {
+      padding-right: 5px;
+      padding-left: $mobile-edge;
+    }
+
+  }
+
+  .nav {
+    position: absolute;
+    z-index: 1;
+    top: $gl-large-ui-height;
+    left: 0;
+    width: 100%;
+    height: calc(100% - #{$gl-large-ui-height});
+
+    &__icon {
+      transform: scale(2);
+    }
+
+    &__button {
+      @include button-reset();
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include size($gl-large-ui-height);
+      border-radius: 50%;
+      border: 1px solid $gl-light-l2;
+      background-color: $white;
+      transition: border-color 200ms;
+
+      &--left {
+        left: 30px;
+      }
+
+      &--right {
+        right: 30px;
+      }
+
+    }
+
+    &__button:hover {
+      border-color: $gl-primary-d1;
+    }
+
+    &__button:hover & {
+      &__icon {
+        fill: $gl-primary-d1;
+      }
+    }
+
+    //
+    // Responsive
+    //
+    @include bp(s) {
+      top: auto;
+      bottom: 0;
+      height: 95px;
+      background-color: $white;
+
+      &__button {
+        &--left {
+          left: $mobile-edge;
+        }
+
+        &--right {
+          right: $mobile-edge;
+        }
+
+      }
+
+    }
+
+  }
+
+}

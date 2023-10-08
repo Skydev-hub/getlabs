@@ -1,0 +1,32 @@
+@import "variables";
+@import '~@angular/material/theming';
+
+$mat-primary: (
+  300: $gl-primary,
+  500: $gl-primary-d1,
+  700: darken($gl-primary-d1, 15%),
+  contrast: (
+    300: $gl-dark-text-color,
+    500: $gl-dark-text-color,
+    700: $gl-dark-text-color,
+  )
+);
+
+$mat-secondary: (
+  300: lighten($gl-dark, 35%),
+  500: $gl-dark,
+  700: darken($gl-dark, 15%),
+  contrast: (
+    300: $gl-light-text-color,
+    500: $gl-light-text-color,
+    700: $gl-light-text-color,
+  )
+);
+
+$mat-theme-primary: mat-palette($mat-primary, 500, 300, 700);
+$mat-theme-accent: mat-palette($mat-secondary, 500, 300, 700);
+$mat-theme: mat-light-theme($mat-theme-primary, $mat-theme-accent);
+
+$mat-typography: mat-typography-config(
+  $font-family: $gl-body-font-family
+);

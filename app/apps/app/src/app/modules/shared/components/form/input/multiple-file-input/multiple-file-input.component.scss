@@ -1,0 +1,53 @@
+@import "variables";
+@import "mixins";
+
+.file-input-container {
+  width: 100%;
+
+  app-form-element.error {
+    app-file-input {
+      display: none;
+    }
+  }
+}
+
+.controls-container.UPLOADING:not(.multiple-files) {
+  width: $l-wrapper-xs-width;
+}
+
+.controls-container.multiple-files, .controls-container.UPLOADED {
+  // TODO - can we remove this duplication?
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: max-content max-content max-content;
+}
+
+.controls-container {
+  &--slots-1.UPLOADED {
+    grid-template-columns: max-content max-content;
+  }
+}
+
+.controls-container.multiple-files, .controls-container.UPLOADED {
+  @include bp(xs) {
+    grid-gap: 20px;
+    grid-template-columns: max-content;
+  }
+}
+
+.ui-file-input {
+  &__hide {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+app-file-input ::ng-deep {
+  .ui-file-input__elm {
+    width: 175px;
+  }
+}

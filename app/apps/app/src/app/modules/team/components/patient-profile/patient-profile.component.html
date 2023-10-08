@@ -1,0 +1,99 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <div class="h-flex-col h-flex-y-center">
+    <app-panel class="h-flex-col h-full-width h-mb-40">
+      <dl>
+        <dt>Name</dt>
+        <dd>{{ user.name || 'Name N/A - Incomplete Profile' }}</dd>
+
+        <dt>DOB</dt>
+        <dd>{{ (user | dob) || 'N/A' }}</dd>
+
+        <dt>Gender</dt>
+        <dd>{{ (user.gender | gender) || 'N/A' }}</dd>
+
+        <dt>Phone</dt>
+        <dd>
+          <a href="tel:{{ user.phoneNumber | phone }}">{{ user.phoneNumber | phone }}</a>
+        </dd>
+
+        <dt>Email</dt>
+        <dd>
+          <span *ngIf="user.email; else notAvailable">
+            <a href="mailto:{{ user.email || 'N/A' }}">{{ user.email || 'N/A' }}</a>
+          </span>
+        </dd>
+
+        <ng-container *ngIf="user.isMinor">
+          <dt>Guardian Name</dt>
+          <dd>{{ user.guardianName || 'N/A' }}</dd>
+
+          <dt>Guardian Relationship</dt>
+          <dd>{{ user.guardianRelationship || 'N/A' }}</dd>
+        </ng-container>
+
+        <dt>Address</dt>
+        <dd>
+          {{ user.address.composed || (user.address | address) || 'N/A' }}
+          <div *ngIf="user.address" class="h-mt-5">
+            <a href="{{ user.address | directionsUrl }}" target="_blank">Start GPS</a>
+          </div>
+        </dd>
+
+        <dt>Insurance (Optional)</dt>
+        <dd>
+          <ng-container *ngTemplateOutlet="insurance; context: { side: 'Front', property: 'front' }"></ng-container>
+        </dd>
+        <dd>
+          <ng-container *ngTemplateOutlet="insurance; context: { side: 'Back', property: 'rear' }"></ng-container>
+        </dd>
+
+        <dt>Notes</dt>
+        <dd style="white-space: pre-line">{{ user.notes || 'N/A' }}</dd>
+
+        <dt>Prior Issues</dt>
+        <dd style="white-space: pre-line">{{ user.priorIssues || 'N/A' }}</dd>
+
+        <dt>Credit Balance</dt>
+        <dd>
+          <div class="h-flex h-flex-row">
+            {{ user.credits / 100 | currency }}
+            &bull;
+            <button [app-button]="'text'" (click)="openIssueCreditDialog()" size="large">
+              <span class="h-success-l-uil1">Issue Credit</span>
+            </button>
+            &bull;
+            <button [app-button]="'text'" (click)="openRevokeCreditDialog()" size="large">
+              <span class="h-danger-l-uil1">Revoke Credit</span>
+            </button>
+          </div>
+        </dd>
+
+        <dt>Status</dt>
+        <dd><app-account-status [(user)]="user" [showAction]="true"></app-account-status></dd>
+
+        <ng-container *ngIf="!user.isActive">
+          <dt>Deactivation Date</dt>
+          <dd>{{ user.deactivationDate | date: 'medium' }}</dd>
+
+          <dt>Deactivation Reason</dt>
+          <dd>{{ (user.deactivationReason === 'other' ? user.deactivationNote : DeactivationReasonLabels[user.deactivationReason]) || 'N/A' }}</dd>
+        </ng-container>
+      </dl>
+    </app-panel>
+
+    <a app-button routerLink="/team/patients/{{ user.id }}/edit">
+      Edit Profile
+    </a>
+  </div>
+</main>
+
+<ng-template #notAvailable>
+  N/A
+</ng-template>
+
+<ng-template #insurance let-side="side" let-property="property">
+  <span *ngIf="user.insurance[property]; else insuranceNotAvailable">
+    <a (click)="preview(user.insurance[property])"> Print {{ side }} </a>
+  </span>
+  <ng-template #insuranceNotAvailable> {{ side }} Not Provided </ng-template>
+</ng-template>

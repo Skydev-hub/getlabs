@@ -1,0 +1,73 @@
+<ng-container [formGroup]="form">
+  <ng-container formArrayName="digits">
+    <input
+      type="text"
+      pattern="[0-9]"
+      inputmode="numeric"
+      class="ui-input ui-input--medium ui-input--ignore-responsive"
+      appAutoFocus
+      formControlName="0"
+      autocomplete="one-time-code"
+      (keydown)="onKeydown($event)"
+      (paste)="onPaste($event)"
+      (input)="interceptAutofill($event)"
+      #digit0
+    />
+    <input
+      type="text"
+      pattern="[0-9]"
+      inputmode="numeric"
+      class="ui-input ui-input--medium ui-input--ignore-responsive"
+      formControlName="1"
+      autocomplete="one-time-code"
+      (keydown)="onKeydown($event)"
+      (paste)="onPaste($event)"
+      (input)="interceptAutofill($event)"
+    />
+    <input
+      type="text"
+      pattern="[0-9]"
+      inputmode="numeric"
+      class="ui-input ui-input--medium ui-input--ignore-responsive"
+      formControlName="2"
+      autocomplete="one-time-code"
+      (keydown)="onKeydown($event)"
+      (paste)="onPaste($event)"
+      (input)="interceptAutofill($event)"
+    />
+    <span class="auth-code-separator h-text-center">-</span>
+    <input
+      type="text"
+      pattern="[0-9]"
+      inputmode="numeric"
+      class="ui-input ui-input--medium ui-input--ignore-responsive"
+      formControlName="3"
+      autocomplete="one-time-code"
+      (keydown)="onKeydown($event)"
+      (paste)="onPaste($event)"
+      (input)="interceptAutofill($event)"
+    />
+    <input
+      type="text"
+      pattern="[0-9]"
+      inputmode="numeric"
+      class="ui-input ui-input--medium ui-input--ignore-responsive"
+      formControlName="4"
+      autocomplete="one-time-code"
+      (keydown)="onKeydown($event)"
+      (paste)="onPaste($event)"
+      (input)="interceptAutofill($event)"
+    />
+    <input
+      type="text"
+      pattern="[0-9]"
+      inputmode="numeric"
+      class="ui-input ui-input--medium ui-input--ignore-responsive"
+      formControlName="5"
+      autocomplete="one-time-code"
+      (keydown)="onKeydown($event)"
+      (paste)="onPaste($event)"
+      (input)="interceptAutofill($event)"
+    />
+  </ng-container>
+</ng-container>

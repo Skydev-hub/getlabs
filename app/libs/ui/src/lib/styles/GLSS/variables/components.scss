@@ -1,0 +1,58 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Variables > Components
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+//
+// Screen Sizes
+//
+$xxs-screen:                            380px !default;
+$xs-screen:                             480px !default;
+$s-screen:                              768px !default;
+$m-screen:                              992px !default;
+$l-screen:                              1200px !default;
+$xl-screen:                             1441px !default;
+
+
+
+//
+// Z Index
+//
+$z-index-1:                             1000;
+$z-index-2:                             900;
+$z-index-3:                             800;
+$z-index-4:                             700;
+$z-index-5:                             600;
+$z-index-6:                             500;
+$z-index-7:                             400;
+$z-index-8:                             300;
+$z-index-9:                             200;
+
+
+
+//
+// User Interface
+//
+$gl-large-ui-height:                    60px;
+$gl-medium-ui-height:                   54px;
+$gl-small-ui-height:                    44px;
+$gl-xs-ui-height:                       34px;
+
+// TODO: Upgrade to using maps once angular is upgraded to >= 8.3
+$gl-ui-height: (
+  "large": $gl-large-ui-height,
+  "medium": $gl-medium-ui-height,
+  "small": $gl-small-ui-height,
+  "xs": $gl-xs-ui-height,
+);
+
+$gl-wide-button-width:                  320px;
+
+
+
+//
+// Animation
+//
+$transition-duration:                   200ms;

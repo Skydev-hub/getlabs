@@ -1,0 +1,24 @@
+@import "variables";
+@import "mixins";
+@import "app/core/layout";
+
+:host {
+
+  @extend .l-wrapper;
+  @extend .l-wrapper--sm;
+
+  h1 {
+    text-align: center;
+    color: $gl-dark-text-color;
+    margin: 0 auto 30px;
+
+    @include bp(xs) {
+      margin-bottom: 25px;
+    }
+  }
+
+
+  p:empty {
+    display: none;
+  }
+}

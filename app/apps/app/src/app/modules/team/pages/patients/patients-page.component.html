@@ -1,0 +1,26 @@
+<div class="l-wrapper l-wrapper--col l-wrapper--sm">
+  <h1 class="h-dark-c-h4 h-mb-10">
+    Patients
+  </h1>
+  <div class="h-medium-c-b1 h-mb-30">
+    Tap below to view and edit patient profiles or view a list of their appointments.
+  </div>
+</div>
+<div class="l-wrapper l-wrapper--col">
+  <section class="c-table__actions">
+    <div class="c-table__actions__left">
+
+      <app-form-element>
+        <input class="ui-input ui-input--small ui-input--narrow ui-input--search" type="text" placeholder="Search patients" [formControl]="search">
+      </app-form-element>
+
+    </div>
+
+    <div class="c-table__actions__right">
+      <button app-button size="small" routerLink="/team/patients/create">Create Profile</button>
+    </div>
+  </section>
+
+  <app-team-patient-list [search]="search.value"></app-team-patient-list>
+
+</div>

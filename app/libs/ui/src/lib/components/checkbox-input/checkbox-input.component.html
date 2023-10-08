@@ -1,0 +1,12 @@
+<label [class.c-checkbox--checked]="checked" [class.c-checkbox--disabled]="disabled">
+  <span class="element">
+    <input #input class="input" type="checkbox" [checked]="checked" [disabled]="disabled" (change)="onChange($event)" (click)="onClick($event)">
+    <i class="check"></i>
+  </span>
+  <span class="label">
+    <ng-content></ng-content>
+  </span>
+  <span class="optional h-medium-r-uil3" *ngIf="isOptional()">
+    Optional
+  </span>
+</label>

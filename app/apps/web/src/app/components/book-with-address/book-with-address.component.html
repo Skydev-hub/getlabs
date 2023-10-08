@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-form-element [error]="getError('address')" name="address">
+    <app-address-autocomplete formControlName="address" class="h-block" placeholder="Enter your home address"></app-address-autocomplete>
+  </app-form-element>
+  <button app-button size="large" type="submit">
+    <svg-icon-sprite src="right-arrow-icon" class="c-medium-icon"></svg-icon-sprite>
+  </button>
+</form>

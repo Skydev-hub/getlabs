@@ -1,0 +1,12 @@
+@import "variables";
+
+.referral-link {
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 2px solid $gl-dark;
+  border-right: 0;
+
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+}

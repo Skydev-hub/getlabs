@@ -1,0 +1,61 @@
+@import "mixins";
+@import "GLSS/variables/components";
+@import "GLSS/typography/body";
+@import "variables";
+
+:host {
+  @include bp(xs) {
+    .c-table-container {
+      overflow: unset;
+      margin-bottom: 0;
+    }
+  }
+
+  .c-table__row {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    //@extend .h-medium-l-b2;
+
+    &.status-confirmed, &.status-en-route, &.status-in-progress, &.status-collected {
+      @extend .h-dark-l-b2;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    &__left, &__right {
+      display: flex;
+      align-items: flex-end;
+      flex: 1 1 50%;
+    }
+
+    &__right {
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    @include bp(xs) {
+      flex-direction: column;
+      margin-bottom: 25px;
+
+      &__left {
+        flex-basis: auto;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      &__right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  app-applied-filters ::ng-deep {
+    .filter-criterion-set:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+}

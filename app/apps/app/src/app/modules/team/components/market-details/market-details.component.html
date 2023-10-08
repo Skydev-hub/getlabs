@@ -1,0 +1,50 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <app-tabs>
+    <app-tabs-tab title="Basic Info">
+      <app-panel class="h-mb-40">
+        <dl>
+          <dt>Name</dt>
+          <dd>
+            {{ market.name }}
+          </dd>
+          <dt>Code</dt>
+          <dd>
+            {{ market.code }}
+          </dd>
+          <dt>Base Price</dt>
+          <dd>
+            <app-price [price]="market.price / 100" [decimals]="true"></app-price>
+          </dd>
+          <dt>Status</dt>
+          <dd>
+            <app-active-status [active]="market.isActive"></app-active-status>
+          </dd>
+        </dl>
+      </app-panel>
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/markets/{{ market.id }}/edit">
+          Edit Market
+        </a>
+      </div>
+    </app-tabs-tab>
+    <app-tabs-tab title="Schedule">
+      <app-team-market-schedule [market]="market" class="h-mb-40"></app-team-market-schedule>
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/markets/{{ market.id }}/schedule/edit">
+          Edit Schedule
+        </a>
+      </div>
+    </app-tabs-tab>
+    <app-tabs-tab title="Service Areas">
+      <app-team-service-area-list [market]="market" class="h-mb-40"></app-team-service-area-list>
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/markets/service-areas/create" [queryParams]="{ market: market.id }">
+          Add Service Area
+        </a>
+      </div>
+    </app-tabs-tab>
+    <app-tabs-tab title="Lab Accounts">
+      <app-team-lab-account-list [market]="market" class="h-mb-40"></app-team-lab-account-list>
+    </app-tabs-tab>
+  </app-tabs>
+</main>

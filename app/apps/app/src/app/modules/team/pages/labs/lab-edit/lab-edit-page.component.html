@@ -1,0 +1,2 @@
+<app-section-header [heading]="lab ? 'Edit Lab Location' : 'New Lab Location'"></app-section-header>
+<app-team-lab-details-form [lab]="lab" (save)="onSave($event)"></app-team-lab-details-form>

@@ -1,0 +1,108 @@
+<main
+  class="l-wrapper l-wrapper--sm l-main-container"
+  [appFormContainer]="form"
+  [hideDisabled]="true"
+  [sections]="sections"
+  [formShape]="formShape"
+  (initForm)="initForm($event)"
+>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!!form">
+    <app-form-group label="{{ contactLabel }}" formGroupName="contact" class="h-flex-col h-mb-40 h-mb-xs-30 profile-contact">
+      <div class="c-form-split-col">
+        <app-form-element [error]="getError('contact.firstName')" label="First Name" name="contact.firstName">
+          <input class="ui-input ui-input--large" type="text" placeholder="First name" formControlName="firstName" autocomplete="given-name" />
+        </app-form-element>
+
+        <app-form-element [error]="getError('contact.lastName')" label="Last Name" name="contact.lastName">
+          <input class="ui-input ui-input--large" type="text" placeholder="Last name" formControlName="lastName" autocomplete="family-name" />
+        </app-form-element>
+
+        <app-form-element [error]="getError('contact.dob')" label="Date of Birth" name="contact.dob">
+          <app-simple-dob-input formControlName="dob"></app-simple-dob-input>
+        </app-form-element>
+
+        <app-form-element [error]="getError('contact.email')" label="Email Address" name="contact.email">
+          <input class="ui-input ui-input--large" type="email" placeholder="Email address" formControlName="email" autocomplete="email" />
+        </app-form-element>
+
+        <app-form-element [error]="getError('contact.phoneNumber')" label="Phone Number" *ngIf="!user" name="contact.phoneNumber">
+          <input
+            class="ui-input ui-input--large"
+            type="tel"
+            formControlName="phoneNumber"
+            autocomplete="tel-national"
+            placeholder="(###) ###-####"
+            [mask]="phoneNumberMask.getMaskPattern()"
+          />
+        </app-form-element>
+
+        <app-form-element [error]="getError('contact.gender')" label="Birth Sex" name="contact.gender" class="c-form-split-col__full-row">
+          <app-radio-group formControlName="gender" [buttonStyle]="radioButtonStyles.BOX" class="app-radio-group__box">
+            <app-radio-input value="male">Male</app-radio-input>
+            <app-radio-input value="female">Female</app-radio-input>
+          </app-radio-group>
+        </app-form-element>
+      </div>
+    </app-form-group>
+
+    <app-form-group label="Address" class="h-flex-col profile-address h-mb-40 h-mb-xs-30" formGroupName="address">
+      <div class="c-form-split-col-3 h-mb-20">
+        <app-form-element [error]="getError('address.street')" label="Street address" name="address.street" class="c-form-split-col-3__2-third-row">
+          <input class="ui-input ui-input--large" type="text" placeholder="Street Address" formControlName="street" autocomplete="street-address" />
+        </app-form-element>
+
+        <app-form-element [error]="getError('address.unit')" label="Unit" name="address.unit" class="c-form-split-col-3__1-third-row">
+          <input class="ui-input ui-input--large" type="text" placeholder="Unit" formControlName="unit" autocomplete="unit" />
+        </app-form-element>
+      </div>
+      <div class="c-form-split-col-3">
+        <app-form-element [error]="getError('address.city')" label="City" name="address.city" class="c-form-split-col-3__1-third-row">
+          <input class="ui-input ui-input--large" type="text" placeholder="City" formControlName="city" autocomplete="address-level2" />
+        </app-form-element>
+
+        <app-form-element [error]="getError('address.state')" label="State" name="address.state" class="c-form-split-col-3__1-third-row">
+          <app-us-state-input formControlName="state"></app-us-state-input>
+        </app-form-element>
+
+        <app-form-element [error]="getError('address.zipCode')" label="ZIP Code" name="address.zipCode" class="c-form-split-col-3__1-third-row">
+          <input class="ui-input ui-input--large" type="text" placeholder="Zip Code" formControlName="zipCode" autocomplete="postal-code" />
+        </app-form-element>
+
+        <ng-container *ngIf="sections[ProfileSections.Address] === FormSectionVisibilityType.Short">
+          <app-form-element
+            [error]="getError('address.fullAddress')"
+            label="Address for Visit"
+            class="c-form-split-col__3-quarters-row"
+            name="address.fullAddress"
+          >
+            <app-address-autocomplete formControlName="fullAddress" class="h-block h-mt-10"></app-address-autocomplete>
+          </app-form-element>
+
+          <app-form-element class="c-form-split-col__1-quarter-row" [error]="getError('address.unit')" label="Unit" name="address.unit">
+            <input class="ui-input ui-input--large" type="text" placeholder="Unit" formControlName="unit" />
+          </app-form-element>
+        </ng-container>
+      </div>
+    </app-form-group>
+
+    <app-form-group label="Additional Notes" formGroupName="additionalNotes" class="h-mt-40 h-mt-xs-30 h-block profile-additional-notes">
+      <div class="h-mb-40 h-mb-xs-30">
+        <app-form-element [error]="getError('additionalNotes.notes')" label="Parking & Entry Instructions" name="additionalNotes.notes" class="h-mb-20">
+          <input class="ui-input ui-input--large" placeholder="Parking & entry instructions" formControlName="notes" />
+        </app-form-element>
+
+        <app-form-element [error]="getError('additionalNotes.priorIssues')" label="Prior Issues" name="additionalNotes.priorIssues">
+          <textarea
+            class="ui-textarea ui-textarea--large"
+            placeholder="If you have had prior issues with getting lab draws, please let us know here."
+            formControlName="priorIssues"
+          ></textarea>
+        </app-form-element>
+      </div>
+    </app-form-group>
+
+    <button type="submit" app-button size="large" responsive="true" class="h-margin-center h-mt-40" [loading]="req$">
+      {{ btnLabel }}
+    </button>
+  </form>
+</main>

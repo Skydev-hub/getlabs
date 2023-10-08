@@ -1,0 +1,59 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="user">
+  <main class="l-wrapper l-main-container">
+    <section>
+      <section class="h-mb-40">
+        <app-form-group label="Basic Information">
+          <div class="c-form-split-col">
+            <app-form-element [error]="getError('firstName')" label="First Name">
+              <input class="ui-input ui-input--large" type="text" placeholder="First Name" formControlName="firstName" />
+            </app-form-element>
+            <app-form-element [error]="getError('lastName')" label="Last Name">
+              <input class="ui-input ui-input--large" type="text" placeholder="Last Name" formControlName="lastName" />
+            </app-form-element>
+            <app-form-element [error]="getError('gender')" label="Gender">
+              <select class="ui-select ui-select--large" formControlName="gender">
+                <option [value]="null" selected disabled>Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </app-form-element>
+            <app-form-element [error]="getError('email')" label="Email Address">
+              <input class="ui-input ui-input--large" type="email" placeholder="Email" formControlName="email" />
+            </app-form-element>
+          </div>
+        </app-form-group>
+      </section>
+      <section>
+        <app-form-group label="Address" formGroupName="address">
+          <div class="c-form-split-col-3 h-mb-20">
+            <app-form-element [error]="getError('address.street')" label="Street Address" class="c-form-split-col-3__2-third-row">
+              <input class="ui-input ui-input--large" type="text" placeholder="Street Address" formControlName="street" />
+            </app-form-element>
+            <app-form-element [error]="getError('address.unit')" label="Unit" class="c-form-split-col-3__1-third-row">
+              <input class="ui-input ui-input--large" type="text" placeholder="Unit" formControlName="unit" />
+            </app-form-element>
+          </div>
+          <div class="c-form-split-col-3">
+            <app-form-element [error]="getError('address.city')" label="City" class="c-form-split-col-3__1-third-row">
+              <input class="ui-input ui-input--large" type="text" placeholder="City" formControlName="city" />
+            </app-form-element>
+            <app-form-element [error]="getError('address.state')" label="State" class="c-form-split-col-3__1-third-row">
+              <select class="ui-select ui-select--large" formControlName="state">
+                <option [value]="null" selected disabled>State</option>
+                <option *ngFor="let state of states | keyvalue" [value]="state.key">{{ state.value }}</option>
+              </select>
+            </app-form-element>
+            <app-form-element [error]="getError('address.zipCode')" label="ZIP Code" class="c-form-split-col-3__1-third-row">
+              <input class="ui-input ui-input--large" type="text" placeholder="ZIP Code" formControlName="zipCode" />
+            </app-form-element>
+          </div>
+        </app-form-group>
+      </section>
+    </section>
+
+    <button app-button type="submit" class="h-margin-center h-mt-20" [appLoading]="req$">
+      {{ btnLabel || 'Save Changes' }}
+    </button>
+  </main>
+</form>

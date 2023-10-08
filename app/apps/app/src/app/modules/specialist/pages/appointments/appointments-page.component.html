@@ -1,0 +1,23 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">Appointments</h1>
+</div>
+<div class="l-wrapper l-wrapper--col">
+  <app-cyclical-navigator previousLabel="Previous Day" nextLabel="Next Day" (previous)="previousDay()" (next)="nextDay()">
+    <span [ngSwitch]="true" class="h-dark-c-h6">
+      <ng-container *ngSwitchCase="isYesterday()">Yesterday</ng-container>
+      <ng-container *ngSwitchCase="isToday()">Today</ng-container>
+      <ng-container *ngSwitchCase="isTomorrow()">Tomorrow</ng-container>
+      <ng-container *ngSwitchDefault>
+        <span class="h-mobile-hide">{{ dateRange.start | date: 'fullDate' }}</span>
+        <span class="h-desktop-hide">{{ dateRange.start | date: 'longDate' }}</span>
+      </ng-container>
+    </span>
+  </app-cyclical-navigator>
+
+  <app-appointments-table
+    [day]="dateRange"
+    (dayChange)="navigateToDate($event.start)"
+    [columns]="[Column.Identifier, Column.Status, Column.Time, Column.Patient, Column.DeliveryLocation]"
+    [filterCriteria]="filterCriteria"
+  ></app-appointments-table>
+</div>

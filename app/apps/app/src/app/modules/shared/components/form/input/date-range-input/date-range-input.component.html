@@ -1,0 +1,25 @@
+<ng-container [formGroup]="form">
+  <div class="h-flex h-flex-col">
+    <app-form-element [error]="getError('start')">
+      <app-date-time-selector formControlName="start"
+                              [restrictRange]="restrictRange"
+                              [defaultTime]="DefaultTimeTypes.StartOfDay"
+                              [setTime]="setTime"
+                              [timezone]="timezone"
+      ></app-date-time-selector>
+    </app-form-element>
+  </div>
+  <span class="divider h-dark-l-b2">
+    to
+  </span>
+  <div class="h-flex h-flex-col">
+    <app-form-element [error]="getError('end')">
+      <app-date-time-selector formControlName="end"
+                              [restrictRange]="restrictRange"
+                              [defaultTime]="DefaultTimeTypes.EndOfDay"
+                              [setTime]="setTime"
+                              [timezone]="timezone"
+      ></app-date-time-selector>
+    </app-form-element>
+  </div>
+</ng-container>

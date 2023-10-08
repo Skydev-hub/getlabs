@@ -1,0 +1,42 @@
+@import "variables";
+@import "mixins";
+
+@import "../../styles/components/checkbox";
+
+:host {
+  @extend .c-checkbox;
+
+  .ui-input-container--error & .c-checkbox--checked {
+    .label {
+      color: $gl-ui-danger;
+    }
+
+    .element .input + .check {
+      background-color: $gl-ui-danger;
+      border-color: $gl-ui-danger;
+    }
+  }
+}
+
+:host-context(.app-checkbox-input__dot) {
+  .c-checkbox--checked {
+    .element {
+      .check {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $gl-primary;
+        border-color: $gl-primary;
+
+        &::after {
+          position: static;
+          border: 0;
+          border-radius: 50%;
+          background-color: $gl-dark;
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+}

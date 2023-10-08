@@ -1,0 +1,48 @@
+@import 'variables';
+@import 'mixins';
+
+.c-totals {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  //margin-bottom: 20px;
+  border-top: 1px solid $gl-light-l2;
+
+  @include bp(xs) {
+    padding-top: 15px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    //color: $gl-medium-text-color;
+
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__label {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    .remove-coupon {
+      margin-top: 2px;
+    }
+  }
+}
+
+.payment-info {
+  margin-top: 30px;
+
+  //@include bp(xs) {
+  //  margin-top: 40px;
+  //}
+}
+
+svg-icon-sprite {
+  color: $gl-medium;
+}

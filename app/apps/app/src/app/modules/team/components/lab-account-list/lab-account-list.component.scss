@@ -1,0 +1,10 @@
+@import 'components/person-list';
+
+:host {
+  .c-table__row {
+    grid-template-columns: 4fr 2fr;
+  }
+  .ui-input--small {
+    height: 22px;
+  }
+}

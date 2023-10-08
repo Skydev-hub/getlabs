@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="true">
+  <span *ngSwitchCase="!user.getDocument(DocumentType.HIPAA)" class="status-negative h-danger-text-color">Not Completed</span>
+  <span *ngSwitchCase="user.isHIPAACompliant() === false" class="h-warning-text-color">Expired since {{ user.getDocument(DocumentType.HIPAA).completedAt | date }}</span>
+  <span *ngSwitchCase="user.isHIPAACompliant() === true" class="status-affirmative h-success-text-color">Up to Date</span>
+</ng-container>

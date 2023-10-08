@@ -1,0 +1,20 @@
+<section class="c-large-hero c-large-hero--small-margin">
+  <div class="l-wrapper c-large-hero__wrapper">
+    <div class="c-large-hero__content-wrapper">
+      <article class="c-large-hero__content">
+        <ng-content></ng-content>
+        <a app-button [href]="'/book' | interAppUrl: 'app'" aria-label="Schedule Appointment Link">
+          Book Now
+          <svg-icon-sprite src="right-chevron-icon" class="c-small-icon h-ml-15"></svg-icon-sprite>
+        </a>
+      </article>
+    </div>
+
+    <picture class="c-large-hero__img" aria-hidden="true">
+      <source srcset="/assets/img/mobile-phlebotomist.webp 1x, /assets/img/mobile-phlebotomist@2x.webp 2x" type="image/webp" />
+      <source srcset="/assets/img/mobile-phlebotomist.png 1x, /assets/img/mobile-phlebotomist@2x.png 2x" type="image/png" />
+      <img class="h-responsive-img h-block h-rel-1" src="/assets/img/mobile-phlebotomist.png" alt="Mobile phlebotomist ready for home lab appointment" />
+    </picture>
+  </div>
+  <div class="c-large-hero-bg"></div>
+</section>

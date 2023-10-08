@@ -1,0 +1,6 @@
+<app-partner-site-message [fix]="true"></app-partner-site-message>
+<app-stepper-header [steps]="steps" [class.h-hide]="this.stepper.getStep() === null || !this.stepper.isVisibleStep(this.stepper.getStep())"></app-stepper-header>
+
+<main class="l-main-container" [class.l-main-container--flow]="this.stepper.isVisibleStep(this.stepper.getStep())">
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,82 @@
+@import "variables";
+
+@mixin l-wrapper-max-width($padding: 0) {
+
+  & {
+    max-width: $l-wrapper-width + ($padding * 2);
+  }
+
+  &--xl {
+    max-width: $l-wrapper-xl-width + ($padding * 2);
+  }
+
+  &--lg {
+    max-width: $l-wrapper-lg-width + ($padding * 2);
+  }
+
+  &--md {
+    max-width: $l-wrapper-md-width + ($padding * 2);
+  }
+
+  &--sm {
+    max-width: $l-wrapper-sm-width + ($padding * 2);
+  }
+
+  &--xs {
+    max-width: $l-wrapper-xs-width + ($padding * 2);
+  }
+
+}
+
+.l-wrapper {
+  display: flex;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $desktop-edge;
+  padding-right: $desktop-edge;
+
+  &--col {
+    flex-direction: column;
+  }
+
+  @include l-wrapper-max-width($desktop-edge);
+
+  @include bp(l) {
+    padding-left: $tablet-edge;
+    padding-right: $tablet-edge;
+    @include l-wrapper-max-width($tablet-edge);
+  }
+
+  @include bp(s) {
+    padding-left: $mobile-edge;
+    padding-right: $mobile-edge;
+    @include l-wrapper-max-width($mobile-edge);
+  }
+
+  /* Wrappers embedded within one another on xs views should not have padding. */
+  @include bp(xs) {
+    .l-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+} // .l-wrapper
+
+//
+// Full Height Container
+//
+.l-full-height-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+.l-as-block {
+  display: block;
+}
+
+.l-as-inline-block {
+  display: inline-block;
+}

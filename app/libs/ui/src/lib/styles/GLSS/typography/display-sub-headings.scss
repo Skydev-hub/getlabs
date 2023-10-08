@@ -1,0 +1,71 @@
+@import 'variables';
+@import '../variables/typography';
+
+// Dark - Left
+.h-dark-l-dsh1 {
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  //font-family: $gl-heading-font-family;
+  font-size: $dsh1-fs;
+  line-height: $dsh1-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $lb4-fs;
+      line-height: $lb4-lh;
+    }
+  }
+} // .h-dark-l-dh1
+
+.h-dark-c-dsh1 {
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  //font-family: $gl-heading-font-family;
+  font-size: $dsh1-fs;
+  line-height: $dsh1-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $lb4-fs;
+      line-height: $lb4-lh;
+    }
+  }
+} // .h-dark-l-dh1
+
+.h-dark-r-dsh1 {
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  //font-family: $gl-heading-font-family;
+  font-size: $dsh1-fs;
+  line-height: $dsh1-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $lb4-fs;
+      line-height: $lb4-lh;
+    }
+  }
+} // .h-dark-l-dh1
+
+.h-dark-c-dsh4 {
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  //font-family: $gl-heading-font-family;
+  font-size: $dsh4-fs;
+  line-height: $dsh4-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $lb4-fs;
+      line-height: $lb4-lh;
+    }
+  }
+} // .h-dark-l-dh1

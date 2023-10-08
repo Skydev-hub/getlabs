@@ -1,0 +1,18 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Providers > FAQ
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-providers-faq {
+  margin-bottom: $desktop-section-spacing;
+
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+  }
+
+} // .c-providers-faq

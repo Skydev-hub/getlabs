@@ -1,0 +1,4 @@
+<select class="ui-select ui-select--large" [formControl]="input" autocomplete="address-level1">
+  <option [value]="null" selected disabled>State</option>
+  <option *ngFor="let state of states | keyvalue" [value]="state.key">{{state.value}}</option>
+</select>

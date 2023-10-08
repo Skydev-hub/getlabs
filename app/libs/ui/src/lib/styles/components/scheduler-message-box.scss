@@ -1,0 +1,37 @@
+@import "GLSS/typography/ui-labels";
+@import "GLSS/typography/body";
+
+@mixin scheduler-message-box {
+  .scheduler-message-box {
+    background-color: $gl-light-l3;
+    border: 1px solid $gl-light;
+    padding: 30px;
+    min-height: 192px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @include bp(xs) {
+      & {
+        min-height: 261px;
+      }
+    }
+
+    &__icon {
+      margin-bottom: 8px;
+      width: 28px;
+      height: 28px;
+    }
+
+    &__heading {
+      margin-bottom: 8px;
+      @extend .h-dark-c-uil2;
+    }
+
+    &__body {
+      margin-bottom: 8px;
+      @extend .h-medium-c-b3;
+    }
+  }
+}

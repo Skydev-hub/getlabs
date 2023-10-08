@@ -1,0 +1,45 @@
+<div class="l-wrapper--col">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+    Let's get your lab order
+  </h1>
+  <div class="h-medium-c-lb3 h-medium-c-lb3--responsive h-mb-30">
+    <app-patient-booking-timeslot-indicator [timeslot]="bookingFlow.timeslot" [tz]="bookingFlow.timezone"></app-patient-booking-timeslot-indicator>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="doOnSubmit()">
+    <div formArrayName="contactInfoSets" class="contact-info-sets" [class.contact-info-sets--multiple]="contactInfoSets.controls.length > 1">
+      <div *ngFor="let form of contactInfoSets.controls; let index = index" class="contact-info-set h-mb-20" [formGroupName]="index.toString()" [appFormContainer]="form">
+        <div class="h-mb-20 contact-info-set__header">
+          <h3 class="h-dark-l-lb4 contact-info-set__header__title h-bold-font-weight">Lab Order #{{index + 1}}</h3>
+          <button class="contact-info-set__header__delete ui-icon-button-inline" type="button" (click)="removeLabOrder(index)">
+            <svg-icon-sprite src="/assets/icons.svg#circle-delete-icon" class="ui-icon-button__icon c-small-icon"></svg-icon-sprite>
+            <span class="h-dark-l-bl1">Remove<span class="h-mobile-hide"> Lab Order</span></span>
+          </button>
+        </div>
+        <div class="contact-info-set__fields">
+          <app-doctor-contact-info [referral]="getReferral()" formControlName="contactInfo" class="h-block h-mb-20"></app-doctor-contact-info>
+          <app-form-element *ngIf="!bookingFlow.timeslot.priority">
+            <app-checkbox-input formControlName="hasLabOrder">
+              <span class="h-bold-font-weight">I have a copy of my lab order</span>
+            </app-checkbox-input>
+          </app-form-element>
+          <app-form-element label="Upload your lab order" class="h-mt-20" [optional]="!bookingFlow.timeslot.priority"
+              *ngIf="form.value.hasLabOrder || bookingFlow.timeslot.priority" [error]="getError('labOrderFiles', form)">
+            <div class="h-medium-l-b2 h-mb-10">Please upload a complete photo or PDF of the order.</div>
+            <app-multiple-file-input label="Upload Lab Order" [purpose]="FilePurpose.LabOrder"
+              class="h-full-width" formControlName="labOrderFiles" [autoAccept]="true" [types]="FileTypeSchemes.IMAGES_AND_PDF">
+            </app-multiple-file-input>
+          </app-form-element>
+        </div>
+      </div>
+    </div>
+    <button class="ui-icon-button-inline" (click)="addLabOrder()" type="button">
+      <svg-icon-sprite src="/assets/icons.svg#circle-plus-icon" class="ui-icon-button__icon c-small-icon h-mr-10"></svg-icon-sprite>
+      <span class="h-dark-l-bl1">Add Another Lab Order</span>
+    </button>
+    <div class="h-mt-30">
+      <button app-button size="large" responsive="true" class="h-margin-center" type="submit">
+        Continue
+      </button>
+    </div>
+  </form>
+</div>

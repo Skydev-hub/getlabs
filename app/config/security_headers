@@ -1,0 +1,12 @@
+# security headers
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "no-referrer-when-downgrade" always;
+add_header X-DNS-Prefetch-Control "off" always;
+
+# Change this header to Content-Security-Policy once verified
+# add_header Content-Security-Policy-Report-Only "default-src 'self' https: data: blob: 'unsafe-inline'" always;
+
+# This header is dangerous... instructs browsers to only ever access over https, and cache that instruction
+add_header Strict-Transport-Security "max-age=15552000; includeSubDomains; preload" always;

@@ -1,0 +1,6 @@
+<app-checkbox-input class="app-checkbox-input__dot" [checked]="getPropertyValue()" (change)="toggleProperty(sample)" clickAction="noop"
+                    *ngIf="!isLoading; else loading" [disabled]="readonly"></app-checkbox-input>
+
+<ng-template #loading>
+  <mat-spinner [diameter]="26"></mat-spinner>
+</ng-template>

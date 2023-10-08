@@ -1,0 +1,22 @@
+@import "components/expansion-panel";
+@import "GLSS/typography/ui-labels";
+@import "variables";
+
+:host {
+
+  app-expansion-panel.overview-panel {
+    @include appointment-overview-panel;
+  }
+
+  .ui-text-button {
+    @extend .h-medium-c-uil2;
+  }
+
+  .lab-order--deleted {
+    opacity: 0.5;
+
+    .overview--subheader {
+      text-decoration: line-through;
+    }
+  }
+}

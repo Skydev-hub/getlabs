@@ -1,0 +1,73 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Buttons > Loader
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+
+@mixin loader($size: 32px) {
+
+  position: relative;
+
+  height: $size;
+  width: $size;
+
+  &::after {
+    content: '';
+    position: absolute;
+    border: 3px solid;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    border-radius: 50%;
+    animation: button-loader 750ms infinite;
+    width: $size;
+    height: $size;
+    top: calc(50% - (#{$size} / 2));
+    left: calc(50% - (#{$size} / 2));
+  }
+
+  &--text-right {
+    padding-left: ($size + 8);
+    line-height: $size;
+    width: auto;
+
+    &::after {
+      left: 0;
+    }
+  }
+
+  &--text-left {
+    padding-right: ($size + 8);
+    line-height: $size;
+    width: auto;
+
+    &::after {
+      left: auto;
+      right: 0;
+    }
+  }
+
+}
+
+.loader, .loading {
+  @include loader;
+}
+
+
+//
+// Loading Animation
+//
+@keyframes button-loader {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.5, 0.05, 0.675, 0.2)
+  }
+  50% {
+    transform: rotate(180deg);
+    animation-timing-function: cubic-bezier(0.25, 0.6, 0.35, 1)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

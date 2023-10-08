@@ -1,0 +1,31 @@
+<mat-dialog-content>
+  <div class="h-flex h-flex-col h-flex-y-center">
+    <div class="h-mb-30">
+      <svg-icon-sprite src="getlabs-logo-dark" class="c-gl-logo-icon--small"></svg-icon-sprite>
+    </div>
+    <h2 class="h-dark-c-h3 h-mb-20">
+      Stay safe with COVID-19
+    </h2>
+    <div class="h-medium-l-b2 h-mb-20">
+      <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank" class="h-medium-l-b2">COVID-19</a> is a highly
+      contagious disease and going to a laboratory can increase your risk of exposure. Stay safe by booking an at-home
+      lab appointment with Getlabs.
+    </div>
+    <div class="h-medium-l-b2 h-mb-20 h-full-width">
+      Here's what we're doing to keep you safe:
+    </div>
+    <div>
+      <ul class="c-bulleted-list c-bulleted-list--condensed h-mb-30">
+        <li><span class="h-medium-l-b2">Our phlebotomists wear medical-grade personal protective equipment (PPE)</span></li>
+        <li><span class="h-medium-l-b2">This includes masks, gloves, medical scrubs, and optional foot coverings</span></li>
+        <li><span class="h-medium-l-b2">Phlebotomists change into new PPE for each visit</span></li>
+        <li><span class="h-medium-l-b2">Phlebotomists carry disinfectants and sanitizers</span></li>
+        <li><span class="h-medium-l-b2">We screen our phlebotomists and patients before each visit and again upon arrival</span></li>
+      </ul>
+    </div>
+    <a app-button [href]="'/book' | interAppUrl:'app'">Book at-home visit</a>
+  </div>
+</mat-dialog-content>
+<button app-button="basic" class="c-dialog-close" mat-dialog-close>
+  <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+</button>

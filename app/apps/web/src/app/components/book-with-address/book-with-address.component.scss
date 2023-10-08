@@ -1,0 +1,27 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  form {
+    display: flex;
+    max-width: 85%;
+    @include bp(s) {
+      max-width: none;
+    }
+  }
+
+  app-form-element {
+    flex: 1;
+  }
+
+  button.btn-type--primary {
+    width: auto;
+    padding: 0 14px;
+
+    @include bp(xs) {
+      height: $gl-medium-ui-height;
+    }
+    //height: $gl-large-ui-height;
+  }
+
+}

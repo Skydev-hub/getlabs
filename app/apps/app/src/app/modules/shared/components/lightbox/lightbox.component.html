@@ -1,0 +1,52 @@
+<header class="header">
+  <div class="header__file">
+    <svg-icon-sprite src="large-file-icon" class="header__icon"></svg-icon-sprite>
+    <div class="h-flex-col">
+      <span class="h-dark-l-b2">
+        {{ file.name }}
+      </span>
+      <span class="h-medium-l-b3">
+        Uploaded on {{ file.createdAt | date }}
+      </span>
+    </div>
+  </div>
+  <button app-button="basic" class="header__close" (click)="ref.close()">
+    <svg-icon-sprite src="close-icon" class="c-small-icon c-small-icon--medium"></svg-icon-sprite>
+  </button>
+</header>
+<!--
+<div class="nav">
+  <button class="nav__button nav__button--left">
+    <svg class="c-small-icon c-small-icon--medium nav__icon">
+      <use xlink:href="#left-chevron-icon"></use>
+    </svg>
+  </button>
+  <button class="nav__button nav__button--right">
+    <svg class="c-small-icon c-small-icon--medium nav__icon">
+      <use xlink:href="#right-chevron-icon"></use>
+    </svg>
+  </button>
+</div>
+-->
+<div class="container">
+  <div class="elm">
+    <ng-container *ngIf="(file$ | async) as file; else loading">
+      <ng-container *ngIf="file.url; else noPreview">
+        <img [src]="file.url" class="h-responsive-img" *ngIf="!file.isPDF() else pdf">
+        <ng-template #pdf>
+          <app-pdf-viewer [url]="file.url"></app-pdf-viewer>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="h-flex h-flex-x-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noPreview>
+  Unable to a show preview for this file.
+</ng-template>

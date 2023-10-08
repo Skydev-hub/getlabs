@@ -1,0 +1,34 @@
+<ng-container *appTemplateVariable="!file || (file && (loading$ | async)?.id === file?.id) as ready">
+  <!-- FileInput must stay active during the upload process, or else we will not be able to hook into reactive form
+        events that tell us when the upload is complete -->
+  <div [class.h-hide]="!ready" class="insurance-card__container">
+    <div class="preview" *ngIf="file?.thumbnail">
+      <img src="{{ file.thumbnail.url }}" alt="{{ file.thumbnail.name }}" (click)="preview(file)" />
+    </div>
+
+    <span class="h-dark-c-uil1 h-mb-15">
+      {{ label }}
+    </span>
+
+    <app-form-element [error]="getError()" class="h-mb-15 h-flex-y-center h-full-width h-full-width-children">
+      <app-file-input
+        [label]="file ? 'Upload Another Photo' : 'Upload Photo'"
+        [purpose]="purpose"
+        btnSize="large"
+        [formControl]="input"
+        [usePreview]="false"
+      ></app-file-input>
+    </app-form-element>
+
+    <span class="h-medium-c-b2">
+      <ng-container *ngIf="file; else notUploaded">Last uploaded {{ file.createdAt | date: 'shortDate' }}</ng-container>
+    </span>
+  </div>
+  <ng-container *ngIf="!ready">
+    <div class="h-flex h-flex-x-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #notUploaded> Not yet uploaded </ng-template>

@@ -1,0 +1,15 @@
+<form [formGroup]="form" [appFormContainer]="form">
+  <div class="c-form-split-col">
+    <app-form-element [error]="getError('contactName')" label="Doctor's Name">
+      <input type="text" class="ui-input ui-input--large ui-input--ignore-responsive" placeholder="Doctor's name" formControlName="contactName">
+    </app-form-element>
+    <app-form-element [error]="getError('contactPhone')" label="Doctor's Phone Number">
+      <input type="tel" class="ui-input ui-input--large ui-input--ignore-responsive" placeholder="(###) ###-####" formControlName="contactPhone"
+             [mask]="phoneNumberMask.getMaskPattern()">
+    </app-form-element>
+    <app-form-element [error]="getError('lab')" label="Preferred Lab" name="lab"
+                      *ngIf="!isReferralActive()" class="c-form-split-col__full-row">
+      <app-lab-company-select formControlName="lab"></app-lab-company-select>
+    </app-form-element>
+  </div>
+</form>

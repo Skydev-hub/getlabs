@@ -1,0 +1,100 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Icons
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+$c-icon-size-xs: 14px;
+$c-icon-size-smaller: 18px;
+$c-icon-size-sm: 24px;
+$c-icon-size-md: 32px;
+$c-icon-size-lg: 70px;
+
+@mixin icon($size) {
+  @include size($size);
+
+  svg {
+    @include size($size);
+  }
+
+  &--dark {
+    color: $gl-dark-text-color;
+    fill: $gl-dark-text-color;
+  }
+
+  &--medium {
+    color: $gl-medium-text-color;
+    fill: $gl-medium-text-color;
+  }
+
+  &--light {
+    color: $gl-light-text-color;
+    fill: $gl-light-text-color;
+  }
+
+  &--white {
+    color: $white;
+    fill: $white;
+  }
+
+  &--primary {
+    color: $gl-primary;
+    fill: $gl-primary;
+  }
+
+  &--primary-d1 {
+    color: $gl-primary-d1;
+    fill: $gl-primary-d1;
+  }
+
+  &--success {
+    color: $gl-ui-success;
+    fill: $gl-ui-success;
+  }
+
+  &--danger {
+    color: $gl-ui-danger;
+    fill: $gl-ui-danger;
+  }
+}
+
+.c-xsmall-icon {
+  @include icon($c-icon-size-xs);
+}
+
+.c-smaller-icon {
+  @include icon($c-icon-size-smaller);
+}
+
+.c-small-icon {
+  @include icon($c-icon-size-sm);
+} // c-small-icon
+
+.c-medium-icon {
+  @include icon($c-icon-size-md);
+}
+
+.c-large-icon {
+  @include icon($c-icon-size-lg);
+}
+
+.c-circle-error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 $c-icon-size-sm;
+  @include size($c-icon-size-sm);
+  background-color: $gl-ui-danger;
+  border-radius: 50%;
+}
+
+.c-gl-logo-icon {
+  &--small {
+    width: 110px;
+    height: 25px;
+  }
+}

@@ -1,0 +1,28 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+    Insurance Settings
+  </h1>
+
+  <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-30">
+    To add your insurance information, upload a photo of your card.
+    <span class="h-mobile-hide">You can also tap Text Link to Phone to open this page on your phone.</span>
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="h-flex-col h-flex-y-center h-full-width">
+
+      <ng-container formGroupName="insurance">
+        <app-insurance-card class="h-full-width" label="Front of Card" [purpose]="getFilePurpose('front')" formControlName="front" (fileChange)="onInsuranceCardChange($event)"></app-insurance-card>
+        <app-insurance-card class="h-full-width" label="Back of Card" [purpose]="getFilePurpose('rear')" formControlName="rear" (fileChange)="onInsuranceCardChange($event)"></app-insurance-card>
+      </ng-container>
+
+      <button app-button type="submit" class="h-margin-center h-mt-20 h-mb-20 h-mb-xs-0" [loading]="req$">
+        Save Changes
+      </button>
+
+      <button app-button="secondary" type="button" class="h-margin-center h-mobile-hide" (click)="textLink()" [loading]="textReq$">
+        Text Link to Phone
+      </button>
+    </div>
+  </form>
+</main>

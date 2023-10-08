@@ -1,0 +1,3 @@
+<ng-container *ngIf="(preferredLabs$ | async) as preferredLabs">
+  <ng-container *ngTemplateOutlet="getCaseTemplate(preferredLabs); context: { preferredLabs: preferredLabs }"></ng-container>
+</ng-container>

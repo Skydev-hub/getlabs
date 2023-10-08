@@ -1,0 +1,49 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Library > Breakpoint Tester
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+
+.bp-tester::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999999;
+  width: 160px;
+  padding: 5px;
+  text-align: center;
+  color: white;
+  opacity: .25;
+  font-size: 10px;
+  font-weight: 500;
+
+  @include bp(xl) {
+    background: red;
+    content: 'XL - #{$xl-screen} +';
+  }
+  @include bp(l)  {
+    background: orange;
+    content: 'L - Min #{$l-screen} · Max #{$xl-screen}';
+  }
+  @include bp(m) {
+    background: green;
+    content: 'M - Min #{$m-screen} · Max #{$l-screen}';
+  }
+  @include bp(s) {
+    background: blue;
+    content: 'S - Min #{$s-screen} · Max #{$m-screen}';
+  }
+  @include bp(xs) {
+    background: purple;
+    content: 'XS - Min #{$xs-screen} · Max #{$s-screen}';
+  }
+  @include bp(xxs) {
+    background: fuchsia;
+    content: 'XXS - Min #{$xxs-screen}';
+  }
+
+} // bp-tester

@@ -1,0 +1,140 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > PSC Location
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+@import 'mixins';
+
+@mixin vertical-responsive-psc-location() {
+  &__secondary {
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &__distance {
+    @include shift(left, -5px);
+    order: -1;
+  }
+
+  &__details-link {
+    padding-top: 0;
+  }
+} // vertical-responsive-psc-location()
+
+//
+// PSC Location
+//
+.c-psc-location {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 15px 20px;
+  background-color: $white;
+  border: 1px solid $gl-light-border-color;
+  color: $gl-dark-text-color;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__secondary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  &__provider {
+    margin-bottom: 5px;
+
+    &--labcorp {
+      color: $labcorp-brand-color;
+    }
+
+    &--sonora-quest {
+      color: $sonora-quest-brand-color;
+    }
+
+    &--quest-diagnostics {
+      color: $quest-diagnostics-brand-color;
+    }
+  } // __provider
+
+  &__map-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include size(20px);
+    font-size: 14px;
+    font-weight: $gl-bold-font-weight;
+    line-height: 16px;
+    text-align: center;
+    border-right: 1px solid $gl-light-border-color;
+    border-bottom: 1px solid $gl-light-border-color;
+  }
+
+  &__details-link {
+    @include shift(left, 5px);
+    padding-top: 5px;
+  }
+
+  &__distance {
+    display: flex;
+    align-items: center;
+  }
+
+  &--highlight {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 2px solid $gl-primary-d1;
+  }
+
+  @media (hover: hover) {
+    &:not(&--highlight):hover {
+      border-color: darken($gl-light-border-color, 20%);
+    }
+    &--highlight:hover {
+      border-color: darken($gl-primary-d1, 20%);
+    }
+  }
+
+  //
+  // Vertical Varient
+  //
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--vertical & {
+    @include vertical-responsive-psc-location;
+
+    &__main {
+      margin-bottom: 20px;
+    }
+  } // --vertical &
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    &__map-number {
+      display: none;
+    }
+  }
+
+  @include bp(xs) {
+    @include vertical-responsive-psc-location;
+    flex-direction: column;
+    padding: 15px;
+
+    &__main {
+      margin-bottom: 15px !important;
+    }
+  } // xs
+} // .c-psc-location

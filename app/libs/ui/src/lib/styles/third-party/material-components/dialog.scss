@@ -1,0 +1,168 @@
+@import "variables";
+@import "mixins";
+@import 'third-party/material-themes';
+@import "GLSS/typography/typography";
+@import "GLSS/variables/typography";
+@import "~@angular/material/theming";
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+@include mat-dialog-theme($mat-theme);
+@include mat-dialog-typography($mat-typography);
+
+$mat-button-spacing: 20px;
+
+.gl {
+  .app-mat-dialog.cdk-overlay-pane {
+    max-width: 80vw;
+  }
+
+  .cdk-overlay-backdrop {
+    background-color: rgba(23, 43, 65, 0.4);
+  }
+
+  .mat-dialog-container {
+    position: relative;
+    padding: 50px 60px;
+    max-width: 750px;
+    border-radius: 5px;
+    box-shadow: 0 12px 54px 0 rgba(23, 43, 65, 0.1);
+
+
+    mat-dialog-content {
+      margin: 10px 0 20px;
+      padding: 0;
+    }
+
+    mat-dialog-actions {
+      padding: 0;
+      margin-bottom: 0;
+      justify-content: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      & > * {
+        margin: 0 0 0 $mat-button-spacing;
+
+        &:first-child {
+          margin: 0;
+        }
+      }
+
+      .mat-dialog-primary-action {
+        flex-grow: 0;
+        flex-shrink: 0;
+        max-width: 280px;
+      }
+
+      & > :not(.mat-dialog-primary-action):not(.c-dialog-close) {
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: unset;
+      }
+    }
+
+    .mat-dialog-title {
+      @include gl-lb-sm-text();
+      line-height: 27px;
+      margin-bottom: 10px;
+    }
+  }
+
+  $mat-dialog-xs-width: 345px;
+
+  .mat-dialog {
+    &--xs {
+      width: $mat-dialog-xs-width;
+
+      .mat-dialog-container {
+        padding: 30px;
+
+        mat-dialog-content {
+          margin: 0;
+        }
+
+        .c-dialog-close {
+          top: 20px;
+          right: 20px;
+          padding: 0;
+        }
+      }
+
+      @include bp(xs) {
+        width: 100%;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .promo-modal {
+    .mat-dialog-content {
+      margin: 0;
+    }
+
+    .promo-modal-hero {
+      overflow: hidden;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 50%;
+
+      img { display: block; }
+    }
+
+    .promo-modal-content {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 50%;
+    }
+
+    @include bp(xs) {
+      .promo-modal-hero {
+        display: none;
+      }
+    }
+
+    @include bp-min(s) {
+      .mat-dialog-container {
+        padding: 0;
+
+        .promo-modal-content {
+          padding: 30px;
+        }
+      }
+    }
+  }
+
+  @include bp(xs) {
+    .app-mat-dialog.cdk-overlay-pane {
+      max-width: 100%;
+      width: 100%;
+      align-self: flex-end;
+    }
+
+    .mat-dialog-container {
+      padding: 50px 15px 30px;
+      border-radius: 0;
+      max-width: unset;
+
+      mat-dialog-actions {
+        flex-direction: column-reverse;
+        & > * {
+          margin: 0 0 $mat-button-spacing;
+
+          &:first-child {
+            margin: 0;
+          }
+        }
+
+        & > .ui-responsive-button:not(.mat-dialog-primary-action):not(.c-dialog-close) {
+          width: $responsive-button-width;
+        }
+      }
+
+      .mat-dialog-title {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

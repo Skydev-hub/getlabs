@@ -1,0 +1,47 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Component > PSC Links
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+
+.h-labcorp-underline-link {
+  color: $labcorp-brand-color;
+  border-bottom: 2px solid rgba($labcorp-brand-color, 0.5);
+  transition: border-bottom-color $transition-duration;
+
+  @media (hover: hover) {
+    &:hover {
+      color: darken($labcorp-brand-color, 10%);
+      border-bottom-color: $labcorp-brand-color;
+    }
+  }
+} // .h-labcorp-underline-link
+
+.h-sonora-quest-underline-link {
+  color: $sonora-quest-brand-color;
+  border-bottom: 2px solid rgba($sonora-quest-brand-color, 0.5);
+  transition: border-bottom-color $transition-duration;
+
+  @media (hover: hover) {
+    &:hover {
+      color: darken($sonora-quest-brand-color, 10%);
+      border-bottom-color: $sonora-quest-brand-color;
+    }
+  }
+} // .h-sonora-quest-underline-link
+
+.h-quest-diagnostics-underline-link {
+  color: $quest-diagnostics-brand-color;
+  border-bottom: 2px solid rgba($quest-diagnostics-brand-color, 0.5);
+  transition: border-bottom-color $transition-duration;
+
+  @media (hover: hover) {
+    &:hover {
+      color: darken($quest-diagnostics-brand-color, 10%);
+      border-bottom-color: $quest-diagnostics-brand-color;
+    }
+  }
+} // .h-sonora-quest-underline-link

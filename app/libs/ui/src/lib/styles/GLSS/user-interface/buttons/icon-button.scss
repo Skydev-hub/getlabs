@@ -1,0 +1,59 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Buttons > Icon Button
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "base";
+
+@mixin ui-icon-button($border-color, $icon-color) {
+  @include base-button();
+  //background-color: $white;
+  //border: 2px solid $border-color;
+
+  svg {
+    color: $icon-color;
+  }
+
+  &--small {
+    width: $gl-small-ui-height;
+    height: $gl-small-ui-height;
+  }
+
+  &--highlight {
+    border-color: $gl-primary-d1;
+
+    svg {
+      color: $gl-primary-d1;
+    }
+
+  } // --highlight
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      border-color: $gl-primary-d1;
+    }
+  }
+}
+
+.ui-icon-button {
+  @include ui-icon-button($gl-primary-border-color, $gl-medium);
+} // .ui-icon-button
+
+.ui-collapsing-icon-button {
+  @include bp(m) {
+    @include ui-icon-button($gl-dark, $gl-dark);
+
+    &__label {
+      display: none;
+    }
+
+    &--xs {
+      height: $gl-xs-ui-height;
+      width: $gl-xs-ui-height;
+      padding: 0;
+    }
+  }
+}

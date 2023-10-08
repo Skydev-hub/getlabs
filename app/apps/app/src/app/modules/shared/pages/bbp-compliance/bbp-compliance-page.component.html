@@ -1,0 +1,44 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <app-stepper>
+    <cdk-step>
+      <div class="h-flex-col h-flex-y-center">
+        <h1 class="h-dark-c-h4 h-mb-10">
+          Bloodborne Pathogens
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          Please review this presentation before taking the comprehension exam.
+        </p>
+        <app-pdf-viewer [url]="hipaaUrl" class="h-mb-30"></app-pdf-viewer>
+        <button app-button type="button" (click)="stepper.next()">Continue to Exam</button>
+      </div>
+    </cdk-step>
+
+    <cdk-step>
+      <div class="h-flex-col h-flex-y-center">
+        <h1 class="h-dark-c-h4 h-mb-10">
+          Bloodborne Pathogens Comprehension Exam
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          To complete your Bloodborne Pathogens Training, please answer the following questions. Choose the most correct answer for each question.
+        </p>
+        <app-bbp-exam #bbpExam (completed)="onDocumentCompleted()"></app-bbp-exam>
+        <button app-button type="button" (click)="bbpExam.quiz.verifyQuizAnswers()" [appLoading]="req$">Submit Answers</button>
+      </div>
+    </cdk-step>
+
+    <cdk-step>
+      <div class="h-flex-col h-flex-y-center">
+        <svg-icon-sprite src="large-circle-check-icon" class="h-mb-30" height="92" width="92"></svg-icon-sprite>
+        <h1 class="h-dark-c-h4 h-mb-20">
+          Bloodborne Pathogens Training Passed
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          Congratulations! You passed the Bloodborne Pathogens Comprehension Exam.
+        </p>
+        <button app-button type="button" (click)="goToDashboard()" [appLoading]="req$">Continue</button>
+      </div>
+    </cdk-step>
+  </app-stepper>
+
+</main>

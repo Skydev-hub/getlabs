@@ -1,0 +1,46 @@
+<div class="container">
+  <header class="header">
+    <div class="header__logo-container">
+      <a routerLink="/" class="header__logo" aria-label="Home Page Link">
+        <svg-icon-sprite src="getlabs-small-primary-icon"></svg-icon-sprite>
+      </a>
+    </div>
+    <button class="header__close" (click)="overlay.dispose()">
+      <svg-icon-sprite src="close-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </button>
+  </header>
+  <nav>
+    <div class="inner">
+      <a routerLink="/about" class="primary-link h-dark-l-lb3">
+        About
+      </a>
+      <a routerLink="/cities" class="primary-link h-dark-l-lb3">
+        Cities
+      </a>
+      <a routerLink="/faq" class="primary-link h-dark-l-lb3">
+        FAQ
+      </a>
+      <a routerLink="/contact" class="primary-link h-dark-l-lb3">
+        Contact
+      </a>
+      <a routerLink="/providers" class="primary-link h-dark-l-lb3">
+        Providers
+      </a>
+      <a href="https://jobs.lever.co/getlabs" target="_blank" class="secondary-link h-dark-l-b2">
+        Careers
+      </a>
+      <a routerLink="/privacy" class="secondary-link h-dark-l-b2">
+        Privacy
+      </a>
+      <a routerLink="/terms" class="secondary-link h-dark-l-b2">
+        Terms
+      </a>
+      <a routerLink="/payments" class="secondary-link h-dark-l-b2">
+        Payments
+      </a>
+    </div>
+  </nav>
+  <footer class="footer">
+    <app-social-links></app-social-links>
+  </footer>
+</div>

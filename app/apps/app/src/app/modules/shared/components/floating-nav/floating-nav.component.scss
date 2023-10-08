@@ -1,0 +1,94 @@
+@import "variables";
+@import "mixins";
+@import "app/core/layout";
+@import "GLSS/typography/ui-labels";
+
+:host {
+  @extend .l-wrapper;
+  @extend .l-wrapper--xl;
+  padding: 0;
+
+  position: relative;
+  top: -20px;
+
+  @include bp(l) {
+  }
+
+  @include bp(m) {
+    top: -50px;
+    margin-bottom: -(50px / 2);
+  }
+
+  nav {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(-($l-wrapper-width/2) - 20px);
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+
+    @include bp(l) {
+      width: 88px;
+      transform: scale(0.85);
+      transform-origin: left top;
+      right: auto;
+      left: 0;
+    }
+
+    @include bp(m) {
+      position: relative;
+      width: 100%;
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 15px;
+      padding: 15px 0;
+      background-color: $white;
+      transform: none;
+    }
+
+    @include bp(xs) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &.active {
+      display: grid;
+    }
+
+    ::ng-deep {
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 88px;
+        background-color: $white;
+        transition: background-color $transition-duration;
+
+        &__icon {
+          fill: $gl-dark-text-color;
+          margin-bottom: 5px;
+        }
+
+        &__label {
+          @extend .h-dark-c-uil4;
+        }
+
+        &--active {
+          background-color: $gl-primary;
+        }
+
+        &:hover {
+          background-color: lighten($gl-primary, 5%);
+        }
+
+        @include bp(m) {
+          &:not(.item--active) {
+            background-color: lighten($gl-primary, 5%);
+          }
+        }
+      }
+    }
+  }
+
+}

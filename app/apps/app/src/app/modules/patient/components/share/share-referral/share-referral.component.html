@@ -1,0 +1,23 @@
+<div class="h-flex-col h-flex-y-center" *ngIf="user.referralCode && ('/r/' + user.referralCode) | interAppUrl as referralUri">
+  <div class="h-dark-c-uil2 h-mb-20">
+    SHARE YOUR LINK
+  </div>
+  <div class="h-mb-20 h-flex-row h-flex-y-center">
+    <div class="referral-link">
+      {{referralUri}}
+    </div>
+    <div>
+      <button app-button="primary" size="small" [cdkCopyToClipboard]="referralUri" (cdkCopyToClipboardCopied)="onCopy()">Copy</button>
+    </div>
+  </div>
+  <div class="h-flex h-flex-row">
+    <app-facebook-share class="h-mr-15" [refLink]="referralUri"></app-facebook-share>
+    <app-twitter-share class="h-mr-15" [refLink]="referralUri" quote="Check out Getlabs! Convenient at-home lab appointments."></app-twitter-share>
+    <a appMailto="" [appMailtoOptions]="{
+          subject: 'Check out Getlabs!',
+          body: 'Check out Getlabs! Convenient at-home lab appointments.\n\n' + referralUri
+        }">
+      <svg-icon-sprite src="email-square-icon" class="c-medium-icon"></svg-icon-sprite>
+    </a>
+  </div>
+</div>

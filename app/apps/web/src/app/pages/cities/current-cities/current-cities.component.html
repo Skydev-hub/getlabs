@@ -1,0 +1,12 @@
+<section class="c-current-cities">
+  <div *ngFor="let market of markets" class="l-wrapper l-wrapper--col cities-by-market">
+    <div class="c-current-cities__intro">
+      <svg-icon-sprite src="location-pin-icon" class="h-mb-20" width="29" height="37"></svg-icon-sprite>
+      <h2 class="h-dark-l-h2 h-dark-l-h2--responsive">Cities we serve near {{ market.market }}</h2>
+    </div>
+
+    <ul class="c-current-cities__list">
+      <li *ngFor="let city of market.cities">{{ city }}</li>
+    </ul>
+  </div>
+</section>

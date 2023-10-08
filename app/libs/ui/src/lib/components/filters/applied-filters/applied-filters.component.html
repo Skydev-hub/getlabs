@@ -1,0 +1,15 @@
+<div *ngFor="let filterSet of (this.listFilterContainerDirective.getFilterSets$() | async); let lastFilterSet = last"
+  class="filter-criterion-set">
+  <mat-chip-list>
+    <ng-container *ngFor="let option of filterSet.appliedOptions; let lastFilterOption = last;">
+      <mat-chip (removed)="removeFilterOption(filterSet.criterion, option)">
+        {{filterSet.criterion.getLabel(option)}}
+        <mat-icon matChipRemove><svg-icon-sprite src="close-icon" class="c-smaller-icon"></svg-icon-sprite></mat-icon>
+      </mat-chip>
+      <span *ngIf="!lastFilterOption" class="h-medium-l-uil3">{{filterSet.criterion.getLogicOperation()}}</span>
+    </ng-container>
+  </mat-chip-list>
+  <div *ngIf="!lastFilterSet" class="h-mt-5 h-mb-5 filter-criterion__separator">
+    <span class="filter-criterion__separator__and h-medium-c-uil2">AND</span>
+  </div>
+</div>

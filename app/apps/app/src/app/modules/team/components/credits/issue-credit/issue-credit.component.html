@@ -1,0 +1,17 @@
+<form class="l-form-grid l-form-grid--single" [formGroup]="formGroup">
+  <app-form-element label="Credit Amount" class="h-mb-20" [error]="getError('amount')">
+    <input class="ui-input ui-input--medium" type="number" placeholder="Credit Amount" formControlName="amount">
+  </app-form-element>
+
+  <app-form-element label="Reason for Issuing Credit" [error]="getError('source')">
+    <select class="ui-select ui-select--large" formControlName="source">
+      <option [value]="null" selected disabled>Select a reason</option>
+      <option *ngFor="let creditSource of (CreditSources | iterable)" [value]="creditSource">{{getLabel(creditSource)}}</option>
+    </select>
+  </app-form-element>
+
+  <app-form-element *ngIf="source === CreditSources.Other" class="h-mt-20" [error]="getError('notes')">
+    <input class="ui-input ui-input--medium" type="text" placeholder="Reason for Issuing Credit"
+           formControlName="notes">
+  </app-form-element>
+</form>

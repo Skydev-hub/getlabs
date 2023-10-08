@@ -1,0 +1,6 @@
+<app-expansion-panel [class.completed]="completed" [class.disabled]="disabled" (closed)="closed.emit($event)" (opened)="opened.emit($event)" [disabled]="disabled">
+  <ng-container ngProjectAs=".title">
+    <ng-container *ngIf="getStepNumber() as stepNumber">Step {{stepNumber}}</ng-container>: <ng-content select=".title"></ng-content>
+  </ng-container>
+  <ng-content></ng-content>
+</app-expansion-panel>

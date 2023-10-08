@@ -1,0 +1,10 @@
+<pdf-viewer [page]="page" [src]="url" [show-all]="false" [original-size]="false" [render-text]="false" (after-load-complete)="onLoadComplete($event)" (error)="onError($event)"></pdf-viewer>
+
+<div class="actions">
+  <button class="ui-circle-arrow-button prev" (click)="prev()" [disabled]="!hasPrev()">
+    <svg-icon-sprite src="left-chevron-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+  </button>
+  <button class="ui-circle-arrow-button next" (click)="next()" [disabled]="!hasNext()">
+    <svg-icon-sprite src="right-chevron-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+  </button>
+</div>

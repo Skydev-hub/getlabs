@@ -1,0 +1,2 @@
+<app-section-header [heading]="user ? 'Patient Profile' : 'New Patient Profile'"></app-section-header>
+<app-team-patient-profile-form [user]="user" (save)="onSave($event)"></app-team-patient-profile-form>

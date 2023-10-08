@@ -1,0 +1,19 @@
+.opt-in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  app-phone-input {
+    margin-bottom: 20px;
+  }
+}
+
+app-sign-in-confirm ::ng-deep {
+  button, .sms-info {
+    display: none;
+  }
+
+  .sign-in-wrapper {
+    padding: 0;
+  }
+}

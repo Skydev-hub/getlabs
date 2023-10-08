@@ -1,0 +1,32 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+    Upload the lab order that your doctor has provided you
+  </h1>
+</div>
+
+<div class="l-wrapper l-wrapper--sm l-wrapper--col h-flex-y-center" [ngClass]="{
+      'l-stage l-stage--sm': dragDropFileUpload.getUploadState() !== UploadState.Unselected
+     }">
+  <div class="book-option-tiles h-mobile-hide" [class.tile-mode]="dragDropFileUpload.getUploadState() === UploadState.Unselected">
+    <app-drag-drop-file-upload [purpose]="getFilePurpose()" (accept)="doAccept($event)" [formControl]="input"
+      [buttonLabel]="'Select Files'" class="book-option-tiles__tile">
+      <div class="h-dark-c-uil2">Drag and drop lab order here</div>
+    </app-drag-drop-file-upload>
+    <div class="book-option-tiles__tile is-desktop" *ngIf="dragDropFileUpload.getUploadState() === UploadState.Unselected">
+      <div class="h-flex-x-center h-mb-15"><svg-icon-sprite src="large-mobile-phone-icon" class="svg-primary-text-color"></svg-icon-sprite></div>
+      <div class="h-dark-c-uil2 h-mb-20">Take a photo with your phone to upload your lab order</div>
+      <div>
+        <button app-button="secondary" size="medium" class="h-margin-center"
+                routerLink="/book/step-3/text-link">Text link to my phone</button>
+      </div>
+    </div>
+  </div>
+  <div class="h-desktop-hide h-flex-col h-flex-y-center">
+    <div class="h-flex-x-center h-mb-15"><svg-icon-sprite src="large-mobile-phone-icon" class="svg-primary-text-color"></svg-icon-sprite></div>
+    <div class="h-dark-c-uil2 h-mb-20">
+      Take a photo with your phone or select files from your device
+    </div>
+    <app-multiple-file-input label="Upload Lab Order" [purpose]="getFilePurpose()" (accept)="doAccept($event)"
+      [formControl]="input" class="h-full-width"></app-multiple-file-input>
+  </div>
+</div>

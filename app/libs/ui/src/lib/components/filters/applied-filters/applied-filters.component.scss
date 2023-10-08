@@ -1,0 +1,33 @@
+@import "variables";
+
+:host {
+  display: inline-flex;
+  flex-direction: column;
+
+  mat-chip-list {
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .filter-criterion__separator {
+    position: relative;
+    width: 100%;
+    text-align: center;
+
+    &__and {
+      background-color: $white;
+      padding: 0 10px;
+    }
+
+    &::after {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      z-index: -1;
+
+      content: '';
+      width: 100%;
+      border: 1px solid $gl-light-border-color;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Textarea
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "base";
+
+@mixin ui-textarea-class-def($height, $padding, $font-size, $line-height) {
+  height: $height;
+  padding: $padding;
+  font-size: $font-size;
+  line-height: $line-height;
+
+  @include bp(xs) {
+    @content;
+  }
+}
+
+@mixin ui-textarea-small {
+  @include ui-textarea-class-def(150px, 10px 15px, 14px, 21px) {
+    @content;
+  }
+}
+
+@mixin ui-textarea-medium {
+  @include ui-textarea-class-def(150px, 10px 15px, 16px, 24px) {
+    @content;
+  };
+}
+
+@mixin ui-textarea-large {
+  @include ui-textarea-class-def(200px, 15px 25px, 18px, 27px) {
+    @content;
+  };
+}
+
+.ui-textarea {
+  @include base-input();
+  resize: vertical;
+  min-height: 150px;
+
+  &--no-resize {
+    resize: none;
+  }
+
+  &--medium {
+    @include ui-textarea-medium {
+      @include ui-textarea-small
+    };
+    //height: 150px;
+    //padding: 10px 15px;
+    //font-size: 16px;
+    //line-height: 24px;
+  }
+
+  &--large {
+    @include ui-textarea-large {
+      @include ui-textarea-medium;
+    }
+    //height: 200px;
+    //padding: 15px 25px;
+    //font-size: 18px;
+    //line-height: 27px;
+  }
+
+} // .ui-textarea

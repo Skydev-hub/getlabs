@@ -1,0 +1,91 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Library > Mixins
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+
+//
+// Simple mixin to output specific code within a media target query
+//
+@mixin retina() {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}
+
+
+
+//
+// Shift Element
+//
+@mixin shift($direction, $value) {
+  position: relative;
+
+  @if $direction == top {
+    top: $value;
+  } @else if $direction == bottom {
+    bottom: $value;
+  } @else if $direction == right {
+    right: $value;
+  } @else if $direction == left {
+    left: $value;
+  }
+}
+
+
+
+//
+// Size Simplification
+//
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}
+
+
+
+//
+// Responsive Breakpoint (SCSS Only)
+//
+@mixin bp($size) {
+
+  @if ($size == xl) {
+    @media (min-width: $xl-screen) { @content }
+  } @else if ($size == l) {
+    @media (max-width: $xl-screen - 1) { @content }
+  } @else if ($size == m) {
+    @media (max-width: $l-screen - 1) { @content }
+  } @else if ($size == s) {
+    @media (max-width: $m-screen - 1) { @content }
+  } @else if ($size == xs) {
+    @media (max-width: $s-screen - 1) { @content }
+  } @else if ($size == xxs) {
+    @media (max-width: $xs-screen - 1) { @content }
+  } @else {
+    @media (max-width: $size) { @content }
+  }
+
+} // bp()
+
+@mixin bp-min($size) {
+
+  @if ($size == xl) {
+    @media (min-width: $xl-screen) { @content }
+  } @else if ($size == l) {
+    @media (min-width: $l-screen) { @content }
+  } @else if ($size == m) {
+    @media (min-width: $m-screen) { @content }
+  } @else if ($size == s) {
+    @media (min-width: $s-screen) { @content }
+  } @else if ($size == xs) {
+    @media (min-width: $xs-screen) { @content }
+  } @else if ($size == xxs) {
+    @media (max-width: $xs-screen - 1) { @content }
+  } @else {
+    @media (min-width: $size) { @content }
+  }
+
+}

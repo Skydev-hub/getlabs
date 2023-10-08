@@ -1,0 +1,12 @@
+@import "GLSS/library/mixins";
+
+:host {
+  app-form-element {
+    width: 100%;
+    max-width: 320px;
+
+    @include bp(xs) {
+      max-width: 100%
+    }
+  }
+}

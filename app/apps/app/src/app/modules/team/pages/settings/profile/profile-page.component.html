@@ -1,0 +1,10 @@
+<main class="l-wrapper l-wrapper--sm l-main-container h-mb-40">
+  <h1 class="h-dark-c-h4 h-mb-10">
+    Team Profile
+  </h1>
+  <div class="h-medium-c-b1 h-mb-30">
+    If this information has changed, simply update it below.
+  </div>
+</main>
+
+<app-team-profile-form [user]="user" (save)="onSave($event)"></app-team-profile-form>

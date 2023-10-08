@@ -1,0 +1,21 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  Issue Credit to {{recipient.name}}
+</div>
+<mat-dialog-content>
+  <app-issue-credit [formControl]="formControl" [recipient]="recipient"></app-issue-credit>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button class="mat-dialog-primary-action" (click)="confirmCreditOperation()">
+    Issue Credit
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon" class="c-small-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>
+
+<ng-template #createTitle>
+  Add New Lab Order
+</ng-template>

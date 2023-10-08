@@ -1,0 +1,213 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > PSC > Location Page
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+@import 'mixins';
+
+.c-psc-location-intro {
+  margin: 0 auto 50px;
+
+  @include bp(s) {
+    margin-bottom: 30px;
+  }
+} // .c-psc-location-intro
+
+//
+// Details Container
+//
+.c-psc-location-details-container {
+  height: 550px;
+  margin-bottom: $desktop-section-spacing;
+
+  &__map-container {
+    width: 45%;
+    height: 100%;
+    background-color: $gl-light-l2;
+
+  } // __map-container
+
+  &__wrapper {
+    align-items: flex-start;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  &__details-container {
+    width: 55%;
+    padding-left: 45px;
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(m) {
+    &__details-container {
+      padding-left: 35px;
+    }
+  }
+
+  @include bp(s) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: $mobile-section-spacing;
+
+    &__wrapper {
+      flex-direction: column-reverse;
+    }
+
+    &__map-container {
+      width: calc(100% + (#{$mobile-edge} * 2));
+      height: 50vw;
+      min-height: 230px;
+      margin-left: calc(#{$mobile-edge} * -1);
+      margin-right: calc(#{$mobile-edge} * -1);
+    }
+
+    &__details-container {
+      width: 100%;
+    }
+  } // s
+} // .c-psc-location-details-container
+
+//
+// Details Grid
+//
+.c-psc-location-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 45px;
+
+  @include bp(m) {
+    gap: 35px;
+  }
+
+  @include bp(s) {
+    margin-bottom: 30px;
+  }
+
+  @include bp(xs) {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    &__col:first-child {
+      margin-bottom: 30px;
+    }
+  } // xs
+} // .c-psc-details-grid
+
+//
+// Details Column Item
+//
+.c-psc-location-details-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__divider {
+    width: 100%;
+    height: 1px;
+    border: 0;
+    margin: 2px 0 10px;
+    background-color: $gl-very-light-border-color;
+  }
+
+  &__list {
+    list-style: disc;
+    padding-left: 20px;
+    color: $gl-primary-d1;
+
+    li {
+      margin-bottom: 5px;
+    }
+  } // __list
+
+  &__day {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+} // .c-psc-location-details-block
+
+//
+// PSC Location About
+//
+.c-psc-location-about {
+  margin-bottom: $desktop-section-spacing;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__chevron {
+    @include shift(top, 1px);
+    transition: transform $transition-duration;
+    transform: scaleY(1);
+
+    &--expanded {
+      transform: scaleY(-1);
+    }
+  } // __chevron
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__title {
+      margin-bottom: 10px;
+    }
+  } // s
+} // .c-psc-location-about
+
+//
+// PSC Close Locations
+//
+.c-psc-close-locations {
+  margin-bottom: $desktop-section-spacing;
+
+  &__title {
+    margin-bottom: 30px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(m) {
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__title {
+      margin-bottom: 20px;
+    }
+  } // s
+
+  @include bp(xs) {
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+  }
+} // .c-psc-close-locations

@@ -1,0 +1,127 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Cites > Coming Soon
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-coming-soon-cities {
+  position: relative;
+  background-color: $gl-primary;
+  padding: $desktop-section-spacing 0;
+  margin-bottom: $desktop-section-spacing;
+  margin-top: $desktop-section-spacing;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: $desktop-section-spacing;
+    left: 0;
+    width: 30%;
+    height: 300px;
+    background-color: $white;
+  }
+
+  &__wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__intro-container {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__intro {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
+    padding-right: 50px;
+    background-color: $white;
+  }
+
+  &__title {
+    max-width: 440px;
+  }
+
+  &__list {
+    display: grid;
+    justify-self: flex-end;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px 30px;
+    margin-top: 20px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    padding: $mobile-section-spacing 0;
+    margin-bottom: $mobile-section-spacing;
+
+    &::before {
+      top: $mobile-section-spacing;
+      height: 250px;
+    }
+
+    &__wrapper {
+      flex-direction: column;
+    }
+
+    &__intro {
+      height: 250px;
+      margin-bottom: 20px;
+    }
+
+    &__list {
+      grid-template-columns: 2fr 2fr 1fr;
+      gap: 30px 20px;
+    }
+
+  } // s
+
+  @include bp(xs) {
+    &__intro {
+      margin-bottom: 10px;
+    }
+
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 10px;
+    }
+
+  } // xs
+
+} // .c-coming-soon-cities
+
+
+
+//
+// Coming Soon Cities BG
+//
+.c-coming-soon-cities-bg {
+  position: absolute;
+  z-index: 0;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 500px;
+  background-image: url('/assets/img/page-noodle--regular.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+
+  @include bp(s) {
+    bottom: 150px;
+  }
+
+} // .c-coming-soon-cities-bg

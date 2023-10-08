@@ -1,0 +1,47 @@
+<section class="date" [class.date-today]="isToday()">
+  <span class="h-dark-c-h2 date-number" [class.h-primary-d1-text-color]="isToday()">
+    {{ _date | date:'d' }}
+  </span>
+  <span class="h-dark-c-uil1" [class.h-primary-d1-text-color]="isToday()">
+    {{ _date | date:'E' | uppercase }}
+  </span>
+</section>
+<ng-content></ng-content>
+<section class="available-slots">
+  <ng-container *ngIf="(slots$ | async) as slots; else loading">
+    <ng-container *ngIf="hasBookableSlots(slots); else noAvailability">
+      <div class="available-slots__slot" [class.disabled]="!slot.key"
+        *ngFor="let slot of slots" (click)="slot.key && select(slot)"
+        [class.available-slots__slot--selected]="isSelected(slot) && !showPriorityFlag"
+        [class.available-slots__slot--booked]="isBooked(slot)">
+      <div class="h-flex-y-end">
+        <svg-icon-sprite src="flash-1" class="c-smaller-icon priority-icon" *ngIf="showPriorityFlag && slot.key && slot.priority"></svg-icon-sprite>
+        <span>
+          {{ slot.start | dateTz:'ha':timezone | lowercase }}-{{ slot.end | dateTz:'ha':timezone | lowercase }}
+          <span *ngIf="slot.key && showPrice"> - {{ slot.price / 100 | price }}</span>
+        </span>
+      </div>
+
+        <!-- TODO: Enable once we have our own scheduling system that can tell us the number of remaining slot
+        <span class="h-c-b4">
+          0 remaining
+        </span>
+        -->
+
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #noAvailability>
+    <div class="scheduler-message-box">
+      <svg-icon-sprite src="outline-time-icon" class="time-icon scheduler-message-box__icon"></svg-icon-sprite>
+      <h2 class="scheduler-message-box__heading">Available by Request</h2>
+      <p class="scheduler-message-box__body">Call or text us at <a href="tel:{{ globals.PHONE }}" class="h-medium-d1-link">{{ globals.PHONE }}</a></p>
+      <button app-button="primary" size="small" (click)="findFirstAvailableDate.emit()">View First Available</button>
+    </div>
+  </ng-template>
+  <ng-template #loading>
+    <div class="available-slots__loading">
+      <span class="h-medium-text h-light-text-color">Loading...</span>
+    </div>
+  </ng-template>
+</section>

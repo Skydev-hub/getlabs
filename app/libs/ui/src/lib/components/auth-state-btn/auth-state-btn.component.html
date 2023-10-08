@@ -1,0 +1,13 @@
+<ng-container *ngIf="auth.isTokenValid(); else signInBtn">
+  <a [href]="auth.getPortalUrl() | interAppUrl:'app'" class="button signed-in h-dark-l-bl2 ui-collapsing-icon-button">
+    <svg-icon-sprite src="small-avatar-icon" class="avatar h-min-hide--large"></svg-icon-sprite>
+    <span class="h-xs-hide ui-collapsing-icon-button__label">Account</span>
+  </a>
+</ng-container>
+
+<ng-template #signInBtn>
+  <a [href]="'/sign-in' | interAppUrl:'app'" class="button h-dark-l-bl2 ui-collapsing-icon-button ui-collapsing-icon-button--xs">
+    <svg-icon-sprite src="small-avatar-icon" class="avatar h-min-hide--large"></svg-icon-sprite>
+    <span class="h-xs-hide ui-collapsing-icon-button__label">Sign In</span>
+  </a>
+</ng-template>

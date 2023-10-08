@@ -1,0 +1,82 @@
+@import "mixins";
+@import "GLSS/user-interface/buttons/buttons";
+@import "variables";
+
+:host {
+  .samples-table {
+
+    &--review ::ng-deep {
+      cdk-header-row, cdk-row {
+        grid-template-columns: 26px 50px 1fr;
+      }
+
+      //
+      // Responsive
+      //
+      @include bp(s) {
+        cdk-header-row, cdk-row {
+          grid-template-columns: 26px 1fr;
+        }
+      }
+
+    }
+
+    &--collect ::ng-deep {
+      cdk-header-row, cdk-row {
+        grid-template-columns: 26px 50px 1fr 30px;
+      }
+
+      //
+      // Responsive
+      //
+      @include bp(s) {
+        cdk-header-row, cdk-row {
+          grid-template-columns: 26px 1fr 30px;
+        }
+      }
+    }
+
+    &--process ::ng-deep {
+      cdk-header-row, cdk-row {
+        grid-template-columns: 26px 50px 3fr 1fr 1.5fr 30px;
+      }
+
+      //
+      // Responsive
+      //
+      @include bp(s) {
+        cdk-header-row, cdk-row {
+          grid-template-columns: 26px 1fr 30px;
+        }
+
+        cdk-header-cell, cdk-cell {
+          &.column {
+            &--qty, &--extra {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+
+              &::before {
+                //align-self: flex-start;
+                flex-grow: 1;
+                flex-shrink: 0;
+              }
+
+              .column__content {
+                font-weight: $gl-bold-font-weight;
+                flex-shrink: 1;
+                flex-grow: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .btn-type--text {
+    padding: 0;
+  }
+
+}

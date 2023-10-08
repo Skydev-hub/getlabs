@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  app:
+    image: gcr.io/gl-stage/getlabs-app:manual-${TAG:-latest}
+    build:
+      context: .
+      args:
+        project: app
+        version: ${VERSION-}
+        sentry_auth_token: ${SENTRY_AUTH_TOKEN?Sentry Auth Token required}
+    ports:
+      - '8081:80'
+
+  web:
+    image: gcr.io/gl-stage/getlabs-web:manual-${TAG:-latest}
+    build:
+      context: .
+      target: ssr
+      args:
+        build_type: ssr
+        project: web
+        version: ${VERSION-}
+        sentry_auth_token: ${SENTRY_AUTH_TOKEN?Sentry Auth Token required}
+    ports:
+      - '3000:3000'

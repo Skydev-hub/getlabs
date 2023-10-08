@@ -1,0 +1,14 @@
+:host {
+  .date-button {
+    padding: 0;
+  }
+
+  &.display-inline {
+    position: relative;
+
+    .date-input-control {
+      visibility: hidden;
+      position: absolute;
+    }
+  }
+}

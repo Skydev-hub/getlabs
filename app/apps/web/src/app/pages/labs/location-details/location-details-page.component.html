@@ -1,0 +1,276 @@
+<app-lab-page-hero>
+  <h1 class="h-dark-l-dh2 h-dark-l-dh4--large-responsive h-mb-40 h-mb-xs-15">{{ location.lab | lab }} at {{ location.address.toString(true) }}</h1>
+  <h2 class="h-dark-l-dsh1 h-dark-l-dsh1--responsive h-mb-40 h-mb-xs-20">
+    Find details about this location below, or book an at-home lab appointment with Getlabs.
+  </h2>
+</app-lab-page-hero>
+
+<section class="c-psc-location-intro">
+  <div class="l-wrapper l-wrapper--md">
+    <h3 class="h-dark-c-h3 h-dark-c-h3--responsive">
+      <ng-container [ngSwitch]="!!location.lab">
+        <ng-container *ngSwitchCase="true"> {{ location.lab | lab }} Patient Service Center </ng-container>
+        <ng-container *ngSwitchDefault>
+          Patient Service Center
+        </ng-container>
+      </ng-container>
+    </h3>
+  </div>
+</section>
+
+<div class="c-psc-location-details-container">
+  <section class="l-wrapper c-psc-location-details-container__wrapper">
+    <section class="c-psc-location-details-container__map-container" *serverRender="false">
+      <google-map *appGoogleMapsLazyLoader width="100%" height="100%" class="l-as-block h-full-height"
+                  [options]="{ zoomControl: true, streetViewControl: false, gestureHandling: 'auto', draggableCursor: 'default', clickableIcons: false }"
+                  appGoogleMapsOptionExt [zoom]="15" [center]="{
+                    lat: location.address.geo?.coordinates[0],
+                    lng: location.address.geo?.coordinates[1]
+                  }">
+        <map-marker [position]="{
+          lat: location.address.geo?.coordinates[0],
+          lng: location.address.geo?.coordinates[1]
+        }" [options]="{ zIndex: 5000, icon: getIconUrl(location.lab) }"></map-marker>
+      </google-map>
+    </section>
+    <div class="c-psc-location-details-container__details-container">
+      <div class="c-psc-location-details-grid">
+        <div class="c-psc-location-details-grid__col">
+          <article class="c-psc-location-details-block">
+            <h4 class="h-dark-l-uil1">
+              Address
+            </h4>
+            <hr class="c-psc-location-details-block__divider" />
+            <address class="h-medium-l-b2">
+              {{ location.address | address }}
+            </address>
+          </article>
+
+          <article class="c-psc-location-details-block">
+            <h4 class="h-dark-l-uil1">
+              Hours
+            </h4>
+            <hr class="c-psc-location-details-block__divider" />
+
+            <div
+              class="c-psc-location-details-block__day"
+              *ngFor="let day of days; let first = first"
+              [class.h-dark-l-uil2]="first"
+              [class.h-medium-l-b2]="!first"
+            >
+              <span class="h-flex-one">
+                {{ day | isoWeekDay }}
+              </span>
+              <span [ngSwitch]="getOpenStatus(day)">
+                <ng-container *ngSwitchCase="OpenStatus.Open">
+                  {{ getOpeningTime(day) | parseDate: 'HHmm' | date: 'shortTime' }}
+                  -
+                  {{ getClosingTime(day) | parseDate: 'HHmm' | date: 'shortTime' }}
+                </ng-container>
+                <ng-container *ngSwitchCase="OpenStatus.Closed">
+                  <ng-container *ngTemplateOutlet="closed"></ng-container>
+                </ng-container>
+                <ng-container *ngSwitchCase="OpenStatus.NotAvailable">
+                  <ng-container *ngTemplateOutlet="notAvailable"></ng-container>
+                </ng-container>
+              </span>
+            </div>
+          </article>
+
+          <article class="c-psc-location-details-block" *ngIf="location.notes && location.notes.length > 0">
+            <h4 class="h-dark-l-uil1">
+              Notes
+            </h4>
+            <hr class="c-psc-location-details-block__divider" />
+            <ul class="c-psc-location-details-block__list">
+              <li *ngFor="let note of location.notes">
+                <span class="h-medium-l-b2">
+                  {{ note }}
+                </span>
+              </li>
+            </ul>
+          </article>
+        </div>
+        <div class="c-psc-location-details-grid__col">
+          <article class="c-psc-location-details-block">
+            <h4 class="h-dark-l-uil1">
+              Phone
+            </h4>
+            <hr class="c-psc-location-details-block__divider" />
+            <a href="tel:{{ location.phoneNumber }}" class="h-dark-l-uil2 h-link">
+              {{ location.phoneNumber }}
+            </a>
+          </article>
+
+          <article class="c-psc-location-details-block">
+            <h4 class="h-dark-l-uil1">
+              Website
+            </h4>
+            <hr class="c-psc-location-details-block__divider" />
+
+            <ng-container [ngSwitch]="location.lab">
+              <a *ngSwitchCase="LabCompany.LabCorp" href="https://labcorp.com/" target="_blank" class="h-dark-l-uil2 h-link">
+                labcorp.com
+              </a>
+              <a *ngSwitchCase="LabCompany.SonoraQuest" href="https://www.sonoraquest.com/" target="_blank" class="h-dark-l-uil2 h-link">
+                sonoraquest.com
+              </a>
+              <a *ngSwitchCase="LabCompany.QuestDiagnostics" href="https://www.questdiagnostics.com/" target="_blank" class="h-dark-l-uil2 h-link">
+                questdiagnostics.com
+              </a>
+              <ng-container *ngSwitchDefault>
+                N/A
+              </ng-container>
+            </ng-container>
+          </article>
+
+          <article class="c-psc-location-details-block" *ngIf="location.services && location.services.length > 0">
+            <h4 class="h-dark-l-uil1">
+              Services
+            </h4>
+            <hr class="c-psc-location-details-block__divider" />
+            <ul class="c-psc-location-details-block__list">
+              <li *ngFor="let service of location.services">
+                <span class="h-medium-l-b2">
+                  {{ service }}
+                </span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="c-psc-location-about">
+  <div class="l-wrapper l-wrapper--md l-wrapper--col">
+    <ng-container [ngSwitch]="location.lab">
+      <ng-container *ngSwitchCase="LabCompany.LabCorp">
+        <h3 class="h-dark-l-h3 h-dark-l-h3--responsive c-psc-location-about__title">
+          About Labcorp
+        </h3>
+        <p class="h-medium-l-b1 h-medium-l-b1--responsive h-mb-20">
+          Labcorp, headquartered in Burlington, North Carolina, is a leading global life sciences company that is deeply integrated in guiding patient care
+          through its comprehensive clinical laboratory and end-to-end drug development services. Employing nearly 61,000 employees worldwide, the company’s
+          mission is to improve health and improve lives by delivering world-class diagnostics, accelerating the availability of innovative medicines to
+          patients, and using technology to change the way care is delivered. Labcorp serves a broad range of customers, including managed care organizations,
+          biopharmaceutical companies, governmental agencies, physicians and other healthcare providers, hospitals and health systems, employers, patients and
+          consumers, contract research organizations, and independent clinical laboratories.
+        </p>
+        <p class="h-medium-l-b1 h-medium-l-b1--responsive h-mb-20">
+          The company provides diagnostic, drug development and technology-enabled solutions for more than 120 million patient encounters per year. Labcorp
+          typically processes tests on more than 2.5 million patient specimens per week and supports clinical trial activity in approximately 100 countries
+          through its industry-leading central laboratory business, generating more safety and efficacy data to support drug approvals than any other company.
+        </p>
+        <p class="h-medium-l-b1 h-medium-l-b1--responsive">
+          Laboratory Corporation of America Holdings is listed on the New York Stock Exchange (NYSE) under ticker symbol LH.
+        </p>
+      </ng-container>
+      <ng-container *ngSwitchCase="LabCompany.QuestDiagnostics">
+        <h3 class="h-dark-l-h3 h-dark-l-h3--responsive c-psc-location-about__title">
+          About Quest Diagnostics
+        </h3>
+        <p class="h-medium-l-b1 h-medium-l-b1--responsive h-mb-20">
+          Quest Diagnostics empowers people to take action to improve health outcomes. Derived from the world's largest database of clinical lab results, our
+          diagnostic insights reveal new avenues to identify and treat disease, inspire healthy behaviors and improve health care management. Quest annually
+          serves one in three adult Americans and half the physicians and hospitals in the United States, and our 47,000 employees understand that, in the right
+          hands and with the right context, our diagnostic insights can inspire actions that transform lives.
+        </p>
+        <p class="h-medium-l-b1 h-medium-l-b1--responsive">
+          Quest Diagnostics is listed on the New York Stock Exchange (NYSE) under ticker symbol DGX.
+        </p>
+      </ng-container>
+      <ng-container *ngSwitchCase="LabCompany.SonoraQuest">
+        <h3 class="h-dark-l-h3 h-dark-l-h3--responsive c-psc-location-about__title">
+          About Sonora Quest
+        </h3>
+        <p class="h-medium-l-b1 h-medium-l-b1--responsive">
+          Sonora Quest Laboratories, an independently run joint venture between Banner Health and Quest Diagnostics, is the nation’s largest integrated
+          laboratory system with approximately 3,200 employees serving more than 28,000 patients every day throughout Arizona. They are the market share leader
+          in clinical laboratory testing in Arizona, performing nearly 85 million diagnostic tests per year. They offer a local comprehensive test menu which
+          encompasses routine, molecular, prescription drug monitoring, genetics/genomics, and pathology testing services. Ninety-five percent of all testing is
+          performed at their primary testing facilities located in Phoenix, Tucson, Flagstaff, Prescott, and Yuma.
+        </p>
+      </ng-container>
+    </ng-container>
+  </div>
+</section>
+
+<section class="c-psc-close-locations">
+  <div class="l-wrapper l-wrapper--col">
+    <h3 class="h-dark-c-h3 h-dark-c-h3--responsive c-psc-close-locations__title">
+      Closest locations to this laboratory
+    </h3>
+
+    <div class="c-psc-close-locations__grid">
+      <a class="c-psc-location c-psc-location--vertical c-psc-location--highlight" [href]="'/book' | interAppUrl: 'app'">
+        <div class="c-psc-location__main">
+          <svg-icon-sprite width="89" height="20" src="getlabs-logo-dark" class="h-mb-10"></svg-icon-sprite>
+          <h5 class="h-dark-l-uil2 h-mb-5">
+            At-home lab appointment
+          </h5>
+          <span class="h-medium-l-b3">
+            Skip the waiting room, we bring the lab to you.
+          </span>
+        </div>
+        <div class="c-psc-location__secondary">
+          <a app-button size="xs" [href]="'/book' | interAppUrl: 'app'" aria-label="Schedule Appointment Link">
+            Book Now
+            <svg-icon-sprite src="right-chevron-icon" class="c-smaller-icon h-ml-5"></svg-icon-sprite>
+          </a>
+          <span class="c-psc-location__distance">
+            <svg-icon-sprite src="small-location-pin-icon" class="c-small-icon c-small-icon--dark"> </svg-icon-sprite>
+            <span class="h-dark-l-uil2">
+              0 mi
+            </span>
+          </span>
+        </div>
+      </a>
+
+      <a class="c-psc-location c-psc-location--vertical" *ngFor="let nearby of (nearby$ | async)?.data" routerLink="/labs/{{ nearby.lab }}/{{ nearby.slug }}">
+        <div class="c-psc-location__main">
+          <span
+            class="h-dark-l-uil1 c-psc-location__provider"
+            [class.c-psc-location__provider--labcorp]="location.lab == LabCompany.LabCorp"
+            [class.c-psc-location__provider--sonora-quest]="location.lab == LabCompany.QuestDiagnostics || location.lab == LabCompany.SonoraQuest"
+          >
+            {{ nearby.lab | lab }}
+          </span>
+          <h6 class="h-dark-l-b3 h-mb-5">
+            Walk-in lab appointment
+          </h6>
+          <span class="h-medium-l-b3">
+            {{ nearby.address | address }}
+          </span>
+        </div>
+        <div class="c-psc-location__secondary">
+          <a routerLink="/labs/{{ nearby.lab }}/{{ nearby.slug }}" class="h-link c-chevron-link c-psc-location__details-link">
+            See Details
+            <svg-icon-sprite src="right-chevron-icon" class="c-small-icon c-chevron-link__chevron"></svg-icon-sprite>
+          </a>
+          <span class="c-psc-location__distance">
+            <svg-icon-sprite src="small-location-pin-icon" class="c-small-icon c-small-icon--dark h-mr-5"> </svg-icon-sprite>
+            <span class="h-dark-l-uil2"> {{ nearby.address.distance | number: '1.0-1' }} mi </span>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <a app-button size="medium" routerLink="/labs" class="h-flex-x-self-center">
+      Find More Locations
+    </a>
+  </div>
+</section>
+
+<app-price-transparency-block> Try Getlabs instead for just <app-price></app-price> </app-price-transparency-block>
+<app-cta-block></app-cta-block>
+<app-note-block></app-note-block>
+
+<ng-template #closed>
+  Closed
+</ng-template>
+
+<ng-template #notAvailable>
+  N/A - call laboratory
+</ng-template>

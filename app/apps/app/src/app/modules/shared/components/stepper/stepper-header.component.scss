@@ -1,0 +1,212 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > Flow Step Indicator
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/body";
+@import "GLSS/typography/ui-labels";
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.c-flow-step {
+
+
+  position: absolute;
+  z-index: 1;
+  top: -93px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  height: 83px;
+  font-size: 0;
+
+  @include bp(xs) {
+    top: -70px;
+
+    width: calc(100% - 250px);
+    min-width: 219px;
+    max-width: 399px;
+    height: 78px;
+    pointer-events: none;
+
+    // Hide original header divider line
+    ~ .c-header .c-header__inner::after {
+      display: none;
+    }
+
+    // 100 / 4 as there are only 4 items in the returning user flow
+    &--returning > .c-flow-step-item {
+      width: 33%;
+    }
+
+  } // sm
+
+} // c-flow-step
+
+
+
+//
+// Flow Step Item
+//
+.c-flow-step-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 150px;
+  height: 100%;
+  color: $gl-medium-text-color;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 41px;
+    left: 70px;
+    width: 155px;
+    height: 3px;
+    background-color: $gl-light-l2;
+    display: block;
+  }
+
+  @include bp(xs) {
+    pointer-events: none;
+
+      &::after {
+        top: 37px;
+      }
+  }
+
+  &:last-of-type::after {
+    display: none;
+
+    @include bp(xs) {
+      display: block;
+      //width: calc(100% + (4 * #{$mobile-edge}));
+    }
+  }
+
+  &__number {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: $gl-light-l2;
+    color: $gl-light;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    z-index: 1;
+    text-align: center;
+    display:block;
+    margin-bottom: 5px;
+
+    //positioned with 0 line height and padding for consistency across browsers/mobile. Other methods would be 1 pixel off sometimes.
+    line-height: 0;
+    padding-top: 14px;
+
+    @include bp(xs) {
+      height: 26px;
+      width: 26px;
+      font-size: 16px;
+      padding-top: 12px;
+    }
+  }
+
+  &__label {
+    //font-weight: $semibold-font-weight;
+    @extend .h-light-c-b3;
+    color: $gl-light;
+  }
+
+  &--active & {
+    &__label {
+      @extend .h-dark-c-uil3;
+    }
+
+    &__number {
+      border-color: $black;
+      background-color: $black;
+      color: $gl-white-text-color;
+    }
+  }
+
+  &--complete & {
+
+    &__number {
+
+      border-color: $black;
+      background-color: $black;
+      color: $black;
+      position: relative;
+
+      &::after {
+        content: '';
+        width: 16px;
+        height: 7px;
+        border: 3px solid $white;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-45deg);
+
+        @include bp(xs) {
+          width: 14px;
+          height: 6px;
+          top: 9px;
+        }
+      }
+
+    }
+
+  }
+
+  &--complete::after {
+    //display: block;
+    background-color: $black;
+  }
+
+  &--complete &::after {
+    background-color: $black;
+  }
+
+  &--active {
+    @include bp(xs) {
+      &::after {
+        background-color: $black;
+      }
+    }
+  }
+
+  @include bp(xs) {
+    width: auto;
+    flex-grow: 1;
+    flex-basis: 0;
+
+    &:first-child::after {
+      display: none;
+    }
+
+    &::after {
+      left: -50%;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    &--active & {
+      &__label {
+        visibility: visible;
+      }
+    }
+
+  } // sm
+
+} // c-flow-step-item

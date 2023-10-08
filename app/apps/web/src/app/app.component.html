@@ -1,0 +1,25 @@
+<!--
+<app-site-message class="c-site-message--alt">
+    <span class="h-white-l-b1 h-white-l-b1--responsive c-site-message__content">
+      Reduce exposure to <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html" target="_blank">Coronavirus COVID-19</a> by booking Getlabs
+    </span>
+</app-site-message>
+-->
+<div appStickyBlock [maxSize]="'s'" appDocumentLeaveListener [debounce]="3000" (documentMouseLeave)="autoOpenModal(true)" [options]="documentMouseLeaveOptions">
+
+<!--
+  <app-site-message [appPartnerContentDirective] *ngIf="!isSignedIn()" class="app-site-message__flow c-site-message--alt">
+    <span class="h-white-l-b1 h-white-l-b1--responsive c-site-message__content">
+      Don't need your labs yet? Save in the future:
+      <a (click)="openOptInModal()">subscribe for promotions</a>
+    </span>
+  </app-site-message>
+-->
+  <app-partner-site-message></app-partner-site-message>
+  <app-header appStickyBlock [minSize]="'m'" [offset]="10"></app-header>
+</div>
+
+<div class="app-main-content">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,43 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  margin-bottom: 50px;
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $gl-light-l2;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: $ui-grid-gap;
+    margin-bottom: 30px;
+
+    &:empty {
+      margin-bottom: 0;
+    }
+
+    &--tripple {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+  } // __grid
+
+  @include bp(s) {
+    .grid--tripple {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @include bp(xs) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+}

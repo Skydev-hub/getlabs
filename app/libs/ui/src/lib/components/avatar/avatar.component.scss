@@ -1,0 +1,87 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include size(47px);
+  padding: 5px;
+  background-color: $white;
+  border: 1px solid $gl-light;
+  border-radius: 50%;
+
+  img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include size(35px);
+    border-radius: 50%;
+  }
+
+  .initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include size(100%);
+    border-radius: 50%;
+
+    background-color: darken($gl-light, 2%);
+    font-size: 12px;
+    font-weight: $gl-bold-font-weight;
+    color: $gl-medium-text-color;
+  }
+
+  &.size-xsmall {
+    @include size(24px);
+    padding: 4px;
+
+    //img {
+    //  @include size()
+    //}
+  }
+
+  //
+  // Sizes
+  //
+  &.size-small {
+    @include size(40px);
+    padding: 4px;
+
+    img {
+      @include size(30px);
+    }
+  }
+
+  &.size-large {
+    @include size(92px);
+    padding: 7px;
+
+    img {
+      @include size(74px);
+    }
+  }
+
+  &.size-xlarge {
+    @include size(136px);
+    padding: 14px;
+
+    img {
+      @include size(108px);
+    }
+  }
+
+  &.no-ring {
+    border: none;
+    padding: 0;
+  }
+
+  //&__check {
+  //  position: absolute;
+  //  top: -15px;
+  //  right: -15px;
+  //  @include size(43px);
+  //}
+
+}

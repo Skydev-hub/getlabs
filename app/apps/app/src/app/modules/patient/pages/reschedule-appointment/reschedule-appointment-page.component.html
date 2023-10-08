@@ -1,0 +1,20 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+    Reschedule Appointment
+  </h1>
+  <div class="h-mb-40 h-full-width">
+    <app-appointment-scheduler *ngIf="!isOutsideServiceArea; else notInServiceArea" class="app-scheduler-slots--button" [type]="AppointmentBookingTypes.PatientAppointment"
+      [days]="days$ | async" [appointment]="appointment" [bufferSize]="(days$ | async) * 2"
+      [zipCode]="appointment.patient.address.zipCode" [restrictions]="restrictions" [formControl]="formControl" (outsideServiceArea)="setOutsideServiceArea($event)"></app-appointment-scheduler>
+  </div>
+  <div>
+    <button app-button size="large" responsive="true" class="h-margin-center" [disabled]="!formControl.valid"
+            [appLoading]="req$" (click)="req$ = reschedule(formControl.value)" #confirmTimeslotButton>
+      Reschedule Appointment
+    </button>
+  </div>
+</div>
+
+<ng-template #notInServiceArea>
+  <p class="h-danger-c-uil1">Your address is outside of our service area</p>
+</ng-template>

@@ -1,0 +1,131 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/typography";
+
+@mixin inline-label($text) {
+  &::before {
+    display: block;
+    content: $text;
+    margin-right: 5px;
+    color: $gl-medium-text-color;
+  }
+}
+
+:host {
+
+  $cdk-padding: 15px;
+
+  cdk-table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  cdk-row {
+    padding: $cdk-padding 0;
+  }
+
+  cdk-header-row {
+    padding: 10px 0;
+  }
+
+  cdk-row, cdk-header-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid $gl-light-l2;
+  }
+
+  @include bp(xs) {
+    cdk-row:first-of-type {
+      border-top: 1px solid $gl-light-l2;
+    }
+  }
+
+  //cdk-header-row {
+  //  @extend .h-bold-font-weight;
+  //}
+
+  cdk-header-cell, cdk-cell {
+    align-items: flex-start;
+
+    &.column {
+      &--qty {
+        display: flex;
+        justify-content: center;
+      }
+      &--type {
+        display: flex;
+        flex-direction: column;
+        margin-left: 35px;
+      }
+      &--menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    cdk-header-row {
+      display: none;
+    }
+
+    cdk-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    cdk-cell {
+
+      margin-bottom: 5px;
+
+      &:not(.column--check):not(.column--menu) {
+        padding-left: 40px;
+        margin-left: 0;
+      }
+
+      &.column {
+        &--qty {
+          @include inline-label("Qty:");
+          order: 1;
+        }
+
+        &--check {
+          position: absolute;
+          top: calc(#{$cdk-padding} + 5px);
+        }
+
+        &--menu {
+          position: absolute;
+          top: $cdk-padding;
+          right: 0;
+
+          button {
+            padding: 0;
+          }
+        }
+
+        &--extra {
+          order: 2;
+        }
+
+        &--processing {
+          @include inline-label("Processing:");
+          margin-bottom: 0;
+        }
+
+        &--temperature {
+          @include inline-label("Temperature:");
+        }
+      }
+    }
+  }
+
+}

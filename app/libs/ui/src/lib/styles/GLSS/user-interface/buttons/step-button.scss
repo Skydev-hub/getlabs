@@ -1,0 +1,69 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Buttons > Step Button
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+//@import "variables";
+//@import "base";
+//
+//.ui-step-button {
+//  @include base-button();
+//  @include button-sizes();
+//  justify-content: center;
+//  background-color: $gl-dark;
+//  border: 2px solid $gl-dark;
+//
+//  &__label {
+//    white-space: nowrap;
+//  }
+//
+//  &__chevron {
+//    fill: $white;
+//    margin-left: 15px;
+//  }
+//
+//  // Loader Spinner color
+//  &::after {
+//    border-color: $gl-primary;
+//  }
+//
+//  &--large {
+//    @extend .h-white-l-bl1;
+//    padding-right: 15px;
+//  }
+//
+//  &--medium {
+//    @extend .h-white-l-bl1;
+//    padding-left: 15px;
+//    padding-right: 10px;
+//  }
+//
+//  &--small {
+//    @extend .h-white-l-bl1;
+//    padding-left: 15px;
+//    padding-right: 5px;
+//  }
+//
+//  &--xs {
+//    @extend .h-white-l-bl2;
+//    padding-left: 15px;
+//    padding-right: 5px;
+//  }
+//
+//  @media (hover: hover) {
+//    &:hover {
+//      background-color: transparent;
+//      color: $gl-dark;
+//    }
+//
+//    &:hover & {
+//      &__chevron {
+//        fill: $gl-primary-d1;
+//      }
+//    }
+//
+//  } // @media hover
+//
+//} // .ui-step-button

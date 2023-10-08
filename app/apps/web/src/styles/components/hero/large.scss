@@ -1,0 +1,135 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Hero > Large
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "hero-variables";
+
+$large-hero-height: 580px;
+
+.c-large-hero {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  min-height: $large-hero-height;
+  margin-bottom: $desktop-section-spacing;
+  background-color: $gl-primary;
+  overflow: hidden;
+
+  &--small-margin {
+    margin-bottom: $mobile-section-spacing;
+  }
+
+  &--no-margin {
+    margin-bottom: 0 !important;
+  }
+
+  &__content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1 0 auto;
+    max-width: 520px;
+    margin-bottom: 60px;
+    padding: $hero-top-padding 0 50px;
+  }
+
+  &__img {
+    align-self: flex-end;
+    width: 100vw;
+    max-width: 520px;
+    max-height: $large-hero-height;
+    margin: 0 auto;
+    pointer-events: none;
+    user-select: none;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    min-height: auto;
+    margin-bottom: $mobile-section-spacing;
+
+    &__content-wrapper {
+      height: 70%;
+    }
+
+    &__content {
+      padding-left: 5vw;
+    }
+
+    &__img {
+      max-width: 50vw;
+    }
+
+  } // s
+
+  @include bp(xs) {
+    &--no-mobile-margin {
+      margin-bottom: 0;
+    }
+
+    &__wrapper {
+      flex-direction: column;
+    }
+
+    &__content-wrapper {
+      height: 100%;
+    }
+
+    &__content {
+      max-width: none;
+      padding: 30px 0 0;
+      margin-bottom: 0;
+    }
+
+    &__img {
+      max-width: 65vw;
+      margin-top: 10px;
+    }
+
+  } // xs
+
+} // .c-large-hero
+
+
+
+//
+// Large Hero BG
+//
+.c-large-hero-bg {
+  position: absolute;
+  bottom: 37px;
+  z-index: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2560px;
+  height: 550px;
+  background-image: url('/assets/img/large-hero-noodle--desktop.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    bottom: 35px;
+    height: 200px;
+    background-image: url('/assets/img/hero-noodle--mobile.svg');
+  }
+
+} // .c-large-hero-bg

@@ -1,0 +1,33 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <div class="h-flex-col h-flex-y-center">
+    <app-panel class="h-flex-col h-full-width h-mb-40">
+      <dl>
+        <dt>Zip Code</dt>
+        <dd>{{ serviceArea.zipCode }}</dd>
+
+        <dt>Market</dt>
+        <dd><a href="/team/markets/{{ serviceArea.market.id }}">{{ serviceArea.market.name }}</a></dd>
+
+        <dt>Status</dt>
+        <dd><app-active-status [active]="serviceArea.active"></app-active-status></dd>
+
+        <dt>Timezone</dt>
+        <dd>{{ serviceArea.timezone }}</dd>
+
+        <dt>Location</dt>
+        <dd>{{ serviceArea.location }}</dd>
+
+        <dt>Coordinates</dt>
+        <dd>{{ serviceArea.geo.coordinates[1] }}, {{ serviceArea.geo.coordinates[0] }}</dd>
+
+      </dl>
+    </app-panel>
+
+    <a app-button routerLink="/team/markets/service-areas/{{ serviceArea.id }}/edit">
+      Edit Service Area
+    </a>
+
+  </div>
+
+</main>

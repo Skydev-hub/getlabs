@@ -1,0 +1,65 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Search Input
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "base";
+
+.ui-search-input {
+  display: flex;
+  align-items: center;
+  background-color: $white;
+  border: 1px solid $gl-primary-border-color;
+
+  &__input {
+    @include input-reset();
+  }
+
+  &__clear-icon {
+    opacity: 0;
+    cursor: pointer;
+
+    &--show {
+      opacity: 1;
+    }
+
+    &:hover {
+      color: $gl-medium-text-color;
+    }
+
+  } // __clear-icon
+
+  // TODO: wire this in with JS
+  &--focus {
+    border-color: $gl-primary-d1;
+    outline: 2px solid $gl-primary-d1;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: $gl-primary-d1;
+    }
+  }
+
+
+  //
+  // Sizes
+  //
+  &--small {
+    height: $gl-small-ui-height;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  &--small & {
+    &__input {
+      font-size: 14px;
+      line-height: 21px;
+    }
+  }
+
+} // .ui-search-input

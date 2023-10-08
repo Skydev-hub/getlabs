@@ -1,0 +1,30 @@
+<section class="c-reviews-block l-wrapper">
+  <div class="wrapper">
+    <div class="content">
+      <svg-icon-sprite src="five-stars-icon" class="icon" aria-hidden="true"></svg-icon-sprite>
+      <h2 class="h-dark-c-h1 h-dark-c-h1--responsive c-reviews-block__title">
+        Our patients love us
+      </h2>
+      <div class="quotes">
+        <div #quotesContainer class="container">
+          <div class="quote" *ngFor="let quote of customerQuotes">
+            <p>
+              &ldquo;{{ quote.text }}&rdquo;
+            </p>
+            <small>
+              {{ quote.by }}
+            </small>
+          </div>
+        </div>
+        <ul class="bullets">
+          <li
+            *ngFor="let bullet of customerQuotes; let i = index"
+            (click)="goToSlide(i)"
+            class="bullet"
+            [class.active]="i === activeSlide">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<div class="l-wrapper l-wrapper--col l-wrapper--sm">
+  <h1 class="h-dark-c-h4 h-mb-10">
+    Care Specialists
+  </h1>
+  <div class="h-medium-c-b1 h-mb-30">
+    Tap below to view and edit specialists profiles or assign appointments.
+  </div>
+</div>
+<div class="l-wrapper l-wrapper--col">
+
+
+  <section class="c-table__actions">
+    <div class="c-table__actions__left">
+
+      <app-form-element>
+        <input class="ui-input ui-input--small ui-input--narrow ui-input--search" type="text" placeholder="Search specialists" [formControl]="search">
+      </app-form-element>
+
+    </div>
+
+    <div class="c-table__actions__right">
+      <button app-button size="small" (click)="openChecklistDialog()">Create Profile</button>
+    </div>
+  </section>
+
+  <app-team-specialist-list [search]="search.value"></app-team-specialist-list>
+
+</div>

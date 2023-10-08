@@ -1,0 +1,43 @@
+<div mat-dialog-title class="h-dark-c-lb3">
+  Why are you cancelling this appointment?
+</div>
+<mat-dialog-content>
+  <form [formGroup]="form" class="l-form-grid l-form-grid--single">
+    <app-form-element [error]="getError('reason')">
+      <select class="ui-select ui-select--large" formControlName="reason">
+        <option [value]="null" selected disabled>Select a reason</option>
+        <option [value]="CancelReason.NoAnswer">{{ CancelReasonLabel[CancelReason.NoAnswer] }}</option>
+        <option [value]="CancelReason.NoConfirm">{{ CancelReasonLabel[CancelReason.NoConfirm] }}</option>
+        <option [value]="CancelReason.PatientRequested">{{ CancelReasonLabel[CancelReason.PatientRequested] }}</option>
+        <option [value]="CancelReason.PatientProvidedIncorrectInfo">{{ CancelReasonLabel[CancelReason.PatientProvidedIncorrectInfo] }}</option>
+        <option [value]="CancelReason.PatientBookedInLabAppointment">{{ CancelReasonLabel[CancelReason.PatientBookedInLabAppointment] }}</option>
+        <option [value]="CancelReason.PatientUnderage">{{ CancelReasonLabel[CancelReason.PatientUnderage] }}</option>
+        <option [value]="CancelReason.PatientFailedToFast">{{ CancelReasonLabel[CancelReason.PatientFailedToFast] }}</option>
+        <option [value]="CancelReason.LabOrderUnclear">{{ CancelReasonLabel[CancelReason.LabOrderUnclear] }}</option>
+        <option [value]="CancelReason.SpecialistInsufficientSupplies">{{ CancelReasonLabel[CancelReason.SpecialistInsufficientSupplies] }}</option>
+        <option [value]="CancelReason.SpecialistUnavailable">{{ CancelReasonLabel[CancelReason.SpecialistUnavailable] }}</option>
+        <option [value]="CancelReason.LogisticsIssue">{{ CancelReasonLabel[CancelReason.LogisticsIssue] }}</option>
+        <option [value]="CancelReason.OpsInsufficientSupplies">{{ CancelReasonLabel[CancelReason.OpsInsufficientSupplies] }}</option>
+        <option [value]="CancelReason.UnsupportedTest">{{ CancelReasonLabel[CancelReason.UnsupportedTest] }}</option>
+        <option [value]="CancelReason.NoLabOrder">{{ CancelReasonLabel[CancelReason.NoLabOrder] }}</option>
+        <option [value]="CancelReason.Duplicate">{{ CancelReasonLabel[CancelReason.Duplicate] }}</option>
+        <option [value]="CancelReason.Other">{{ CancelReasonLabel[CancelReason.Other] }}</option>
+      </select>
+    </app-form-element>
+
+    <app-form-element class="h-mt-10" [error]="getError('note')" *ngIf="form.get('reason').value === 'other'">
+      <input class="ui-input ui-input--medium" type="text" placeholder="Enter the reason for the cancellation" formControlName="note">
+    </app-form-element>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="h-flex">
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Go Back
+  </button>
+  <button app-button (click)="cancel()" [appLoading]="reqSub">
+    Cancel Appointment
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

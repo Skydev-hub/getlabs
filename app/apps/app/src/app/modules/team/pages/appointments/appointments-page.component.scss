@@ -1,0 +1,9 @@
+::ng-deep app-appointments-table {
+  &.date-selection-mode-Range .pick-date {
+    display: none;
+  }
+
+  .c-table__row {
+    grid-template-columns: 0.7fr 1fr 1fr .8fr .8fr 2fr 2fr !important;
+  }
+}

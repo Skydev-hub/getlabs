@@ -1,0 +1,18 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  <ng-container *ngIf="data.labOrderDetailsEntity; else createTitle">Editing Lab Order #{{data.ordinal}}</ng-container>
+</div>
+<mat-dialog-content>
+  <app-doctor-contact-info [referral]="data.referral" [formControl]="formControl"></app-doctor-contact-info>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button class="mat-dialog-primary-action" (click)="save()">
+    Save Lab Order
+  </button>
+</mat-dialog-actions>
+
+<ng-template #createTitle>
+  Add New Lab Order
+</ng-template>

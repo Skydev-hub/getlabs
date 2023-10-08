@@ -1,0 +1,56 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Cites > Current
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+@import 'mixins';
+
+.c-current-cities {
+  margin-bottom: $desktop-section-spacing;
+
+  .cities-by-market {
+    margin-bottom: $gl-large-ui-height;
+
+    .c-current-cities__intro {
+      margin-bottom: 40px;
+      display: flex;
+
+      h2 {
+        margin-left: $ui-grid-gap;
+        line-height: 1;
+      }
+    }
+
+    .c-current-cities__list {
+      display: grid;
+      grid-template-columns: 2fr 2fr 2fr 1fr;
+      gap: 40px 30px;
+    }
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__list {
+      grid-template-columns: 2fr 2fr 1fr;
+      gap: 30px 20px;
+    }
+  } // s
+
+  @include bp(xs) {
+    &__intro {
+      margin-bottom: 30px;
+    }
+
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 10px;
+    }
+  } // xs
+} // .c-current-cities

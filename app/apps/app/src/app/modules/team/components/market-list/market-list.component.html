@@ -1,0 +1,41 @@
+<section class="c-table-container c-table-container--bottom-margin" infiniteScroll [infiniteScrollThrottle]="0"
+         [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
+  <div class="c-table">
+    <div class="c-table__row">
+      <div class="c-table__heading">Name</div>
+      <div class="c-table__heading">Code</div>
+      <div class="c-table__heading">Base Price</div>
+      <div class="c-table__heading">Status</div>
+    </div>
+
+    <ng-container *ngIf="(data$ | async) as markets; else loading">
+      <a routerLink="/team/markets/{{ market.id }}" class="c-table__row" *ngFor="let market of markets">
+        <div class="c-table__col h-bold-font-weight">
+          {{ market.name }}
+        </div>
+        <div class="c-table__col">
+          {{ market.code }}
+        </div>
+        <div class="c-table__col">
+          <app-price [price]="market.price / 100" [decimals]="true"></app-price>
+        </div>
+        <div class="c-table__col">
+          <app-active-status [active]="market.isActive"></app-active-status>
+        </div>
+      </a>
+      <ng-container *ngIf="markets.length === 0">
+        <div class="c-table-empty-state">
+          <svg-icon-sprite src="large-circle-search-icon" class="h-mb-25" width="92" height="92"></svg-icon-sprite>
+          No markets found matching "{{search}}"
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="c-table-empty-state">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+
+  </div>
+</section>

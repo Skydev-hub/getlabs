@@ -1,0 +1,37 @@
+<app-header avatarLink="/team/settings" logoHref="getlabs-team-logo">
+  <ng-template appTemplateId="header-buttons">
+    <app-market-selector-button></app-market-selector-button>
+  </ng-template>
+</app-header>
+<app-floating-nav *ngIf="auth.isTokenValid() && auth.getUser()?.isOnboarded() && auth.getUser()?.isActive">
+  <a
+    appFloatingNavItem
+    routerLink="/team/appointments"
+    [ngClass]="{ 'item--active': router.isActive('/team', true) || router.isActive('/team/appointments', false) }"
+  >
+    <svg-icon-sprite src="calendar-icon" class="item__icon c-medium-icon h-dark-text-color"></svg-icon-sprite>
+    <span class="item__label">Appointments</span>
+  </a>
+  <a appFloatingNavItem routerLink="/team/patients" routerLinkActive="item--active">
+    <svg-icon-sprite src="patient-icon" class="item__icon c-medium-icon h-dark-text-color"></svg-icon-sprite>
+    <span class="item__label">Patients</span>
+  </a>
+  <a appFloatingNavItem routerLink="/team/specialists" routerLinkActive="item--active">
+    <svg-icon-sprite src="medic-briefcase-icon" class="item__icon c-medium-icon h-dark-text-color"></svg-icon-sprite>
+    <span class="item__label">Care</span>
+  </a>
+  <a appFloatingNavItem routerLink="/team/team-members" routerLinkActive="item--active">
+    <svg-icon-sprite src="dual-user-icon" class="item__icon c-medium-icon h-dark-text-color"></svg-icon-sprite>
+    <span class="item__label">Team</span>
+  </a>
+  <a appFloatingNavItem routerLink="/team/markets" routerLinkActive="item--active">
+    <svg-icon-sprite src="real-estate-location-house-pin-1" class="item__icon c-medium-icon h-dark-text-color"></svg-icon-sprite>
+    <span class="item__label">Markets</span>
+  </a>
+  <a appFloatingNavItem routerLink="/team/labs" routerLinkActive="item--active">
+    <svg-icon-sprite src="labs-icon" class="item__icon c-medium-icon h-dark-text-color"></svg-icon-sprite>
+    <span class="item__label">Labs</span>
+  </a>
+</app-floating-nav>
+<router-outlet></router-outlet>
+<app-footer [showHomeLink]="true"></app-footer>

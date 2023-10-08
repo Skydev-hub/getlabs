@@ -1,0 +1,63 @@
+<div *ngIf="(slotsByDay$ | async)?.data || loadedSlotsByDay as slotsByDay; else loading">
+  <ng-container *ngIf="!isOutsideServiceArea">
+    <div class="h-dark-c-uil1 h-mb-20 date-title" [class.date-title--disabled]="isDisabled()">
+      {{ slotsByDay | dates: getDate:'MMMM y' }}
+    </div>
+    <div class="days-container h-flex h-flex-row h-mb-20">
+      <button class="move-day previous-day" (click)="previous()" [disabled]="isDisabled() || isTodayOrBefore(slotsByDay && slotsByDay[0].date)">
+        <svg-icon-sprite src="left-chevron-icon" class="c-small-icon"></svg-icon-sprite>
+      </button>
+      <div *ngFor="let day of loadedSlotsByDay; let i = index" class="h-flex-one h-flex h-flex-x-center single-date-container">
+        <div
+          [class.single-date--selected]="selectedDailySlotSet && isSelected(day)"
+          class="single-date"
+          (click)="!isDisabled() ? (selectedDailySlotSet = day) : null"
+          [class.single-date--disabled]="isDisabled()"
+          [class.single-date--unavailable]="!hasBookableSlots(day)"
+          [class.single-date--no-price]="!showPrice"
+        >
+          <span class="h-dark-c-lb2 h-bold-font-weight single-date__number">{{ day.date | date: 'd' }}</span>
+          <span class="h-dark-c-b2 h-bold-font-weight single-date__day">{{ day.date | date: 'E' | uppercase }}</span>
+          <ng-container *ngIf="showPrice && !isDisabled()">
+            <span class="h-dark-c-b4 single-date__price" *ngIf="hasBookableSlots(day)">from {{ getLowestSlotPrice(day) / 100 | price }}</span>
+            <span class="h-medium-c-b4 single-date__price" *ngIf="!hasBookableSlots(day) && hasSlots(day)">booked</span>
+            <span class="h-medium-c-b4 single-date__price" *ngIf="!hasSlots(day) && !day.loading">closed</span>
+            <span class="h-medium-c-b4 single-date__price" *ngIf="day.loading">&nbsp;</span>
+          </ng-container>
+        </div>
+      </div>
+      <button
+        class="move-day next-day"
+        (click)="next()"
+        [disabled]="isDisabled() || !slotsByDay || slotsByDay.length < numberOfDays || selectedDailySlotSet?.loading"
+      >
+        <svg-icon-sprite src="right-chevron-icon" class="c-small-icon"></svg-icon-sprite>
+      </button>
+    </div>
+    <div class="scheduler-message-box" *ngIf="!zipCode; else schedulerSlots">
+      <svg-icon-sprite src="outline-time-icon" class="time-icon scheduler-message-box__icon"></svg-icon-sprite>
+      <div class="scheduler-message-box__heading">Enter address for availability</div>
+      <div class="scheduler-message-box__body">Address needed to check available times</div>
+    </div>
+  </ng-container>
+</div>
+<ng-template #schedulerSlots>
+  <div *ngIf="selectedDailySlotSet && !selectedDailySlotSet.loading && zipCode; else loading">
+    <app-scheduler-slots
+      [timezone]="timezone"
+      [date]="selectedDailySlotSet.date"
+      [formControl]="slotSelector"
+      [type]="type"
+      class="app-scheduler-slots--inline"
+      (findFirstAvailableDate)="goToFirstAvailableDate()"
+      [restrictions]="restrictions"
+      [showPrice]="showPrice"
+      [showPriorityFlag]="showPriorityFlag"
+    ></app-scheduler-slots>
+  </div>
+</ng-template>
+<ng-template #loading>
+  <div class="h-flex h-flex-col h-flex-y-center loader-container">
+    <span class="loader"></span>
+  </div>
+</ng-template>

@@ -1,0 +1,47 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/body";
+
+.available-slots {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: stretch;
+
+  &__slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 56px;
+    margin: 10px 0 5px;
+
+    background-color: $white;
+    border: 1px solid $black;
+    //color: $gl-dark-text-color;
+    cursor: pointer;
+
+    transition: color $transition-duration,
+    background-color $transition-duration,
+    border-color $transition-duration;
+
+    @extend .h-dark-c-b2;
+
+    &:hover:not(&--selected) {
+      border-color: $gl-primary-d1;
+    }
+
+    &--selected {
+      background-color: $gl-dark;
+      @extend .h-white-c-b2;
+      //border-color: $gl-primary-d1;
+    }
+
+    //@include bp(xs) {
+    //  &:not(&--selected) {
+    //    background-color: $gl-light-l2;
+    //    border-color: $gl-light-l2;
+    //  }
+    //}
+  }
+}

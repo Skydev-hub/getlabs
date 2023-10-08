@@ -1,0 +1,78 @@
+@import "variables";
+@import "mixins";
+
+.consent.ui-input-container--error ::ng-deep {
+  .ui-input-container__error-icon {
+    display: none;
+  }
+}
+
+.ui-input-container--error ::ng-deep {
+  .ui-input-container__error-icon {
+    z-index: 1001;
+  }
+}
+
+.contact-info-sets {
+  .contact-info-set {
+    &__header {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+    }
+
+    &__header__title {
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+
+    &__header__delete {
+      flex-grow: 0;
+      flex-shrink: 1;
+    }
+  }
+
+  &:not(&--multiple) {
+    .contact-info-set {
+
+      &__header {
+        display: none;
+      }
+    }
+  }
+}
+
+.contact-info-set {
+  &:not(:first-of-type) {
+    border-top: 1px solid $gl-light-border-color;
+    padding-top: 20px;
+  }
+
+  &:last-of-type:not(:first-of-type) {
+    border-bottom: 1px solid $gl-light-border-color;
+    padding-bottom: 20px;
+  }
+
+  &__header__delete {
+    .ui-icon-button__icon {
+      margin-right: 10px;
+    }
+  }
+
+  @include bp-min(s) {
+    border: 1px solid $gl-light-border-color;
+    padding: 20px;
+  }
+}
+
+app-multiple-file-input ::ng-deep {
+  .ui-file-input__elm {
+    max-width: 100%;
+  }
+
+  .controls-container {
+    &.UPLOADED, &.UPLOADING {
+      grid-template-columns: 1fr;
+    }
+  }
+}

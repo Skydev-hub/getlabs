@@ -1,0 +1,71 @@
+<ng-container *ngIf="isServiceable(); else notAvailable">
+  <div [class.h-hide]="!!phoneNumber" class="h-flex-col">
+    <div class="l-wrapper l-wrapper--col">
+      <ng-container *ngIf="user && user.isProfileCompleted(); else firstTime">
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+          Welcome back. Is your address still current?
+        </h1>
+        <div class="h-medium-c-lb3 h-medium-c-lb3--responsive h-mb-30">
+          <app-patient-booking-timeslot-indicator [timeslot]="bookingFlow.timeslot" [tz]="bookingFlow.timezone"></app-patient-booking-timeslot-indicator>
+        </div>
+      </ng-container>
+    </div>
+    <div class="ui-section profile-form-container" [class.new-user]="!user">
+      <app-patient-profile-form [btnLabel]="user ? 'Continue' : 'Sign Up'" contactLabel="New Patients" [user]="user" [address]="bookingFlow.address"
+        [submitHandler]="confirmUser" [sections]="profileSections" class="app-form-group__heading-divider-light"></app-patient-profile-form>
+      <app-privacy-block class="h-mt-30" *ngIf="!user"></app-privacy-block>
+    </div>
+  </div>
+  <ng-container *ngIf="phoneNumber" class="l-wrapper l-wrapper--col">
+    <div class="l-wrapper l-wrapper--sm l-wrapper--col">
+      <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+        Type in the security code we just texted you at <span class="h-no-wrap">{{phoneNumber}}</span>
+      </h1>
+      <app-sign-in-confirm [userType]="PatientUser" [phoneNumber]="phoneNumber"
+        (authenticated)="onAuthenticated()" [source]="bookStep"></app-sign-in-confirm>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #firstTime>
+  <ng-container *ngIf="user; else unauthenticated">
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+      Create an account to continue booking
+    </h1>
+  </ng-container>
+  <ng-template #unauthenticated>
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+      Sign in to book your at-home lab visit
+    </h1>
+    <h3 class="h-medium-c-lb3 h-medium-c-lb3--responsive h-mb-30">
+      <app-patient-booking-timeslot-indicator [timeslot]="bookingFlow.timeslot" [tz]="bookingFlow.timezone"></app-patient-booking-timeslot-indicator>
+    </h3>
+    <div class="h-flex-col l-wrapper l-wrapper--sm h-mb-50">
+      <h2 class="h-dark-l-h4 h-dark-l-h4--responsive h-mb-30 h-mb-xs-20 c-inline-divider c-inline-divider--light">
+        <span>Returning Patients</span>
+      </h2>
+      <button app-button size="large" responsive="true" (click)="signIn()">Sign In</button>
+    </div>
+  </ng-template>
+</ng-template>
+
+<ng-template #notAvailable>
+  <div class="l-wrapper l-wrapper--sm l-main-container">
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-20">
+      Getlabs is not available in your area yet, but we’ll notify you as soon as we expand
+    </h1>
+
+    <div class="l-wrapper l-wrapper--sm">
+      <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-30">
+        As a token of our appreciation for your interest, we'll also send you a coupon code for $10 off your first visit when we launch in your area.
+      </p>
+    </div>
+
+    <div class="c-divider c-divider--large c-divider--thin c-divider--light h-mb-30"></div>
+    <div class="h-dark-l-uil2 h-flex h-flex-y-center h-margin-center h-flex-row">
+      <span>Get Latest Updates</span>
+      <app-social-links
+        class="h-ml-40 h-ml-xs-30 app-social-links--medium app-social-links--circle"></app-social-links>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,11 @@
+@import "variables";
+
+.ui-input {
+  &--search {
+    @include ui-input--icon('/assets/icons/search-icon.svg');
+  }
+
+  &--narrow {
+    width: $gl-wide-button-width;
+  }
+}

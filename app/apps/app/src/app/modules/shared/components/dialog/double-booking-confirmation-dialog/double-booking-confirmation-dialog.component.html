@@ -1,0 +1,14 @@
+<div mat-dialog-title class="h-dark-c-lb3">
+  Double Booking Confirmation
+</div>
+<mat-dialog-content>
+  Selecting this time slot will result in double booking the specialist for the same time as another appointment. Are you sure you wish to proceed?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button class="mat-dialog-primary-action" [mat-dialog-close]="true">
+    Confirm
+  </button>
+</mat-dialog-actions>

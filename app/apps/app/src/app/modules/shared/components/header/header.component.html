@@ -1,0 +1,18 @@
+<div class="l-wrapper inner">
+  <a class="logo h-dark-text-color" [href]="getLogoLink()">
+    <svg-icon-sprite [src]="logoHref"></svg-icon-sprite>
+  </a>
+  <div class="actions">
+    <ng-container *ngIf="auth.isTokenValid() && (auth.user$ | async) as user">
+      <ng-container *ngTemplateOutlet="getTemplate('header-buttons')"></ng-container>
+      <a app-button="icon" size="xs" collapsable="true" [routerLink]="avatarLink" class="h-flex-y-center avatar-anchor h-ml-15 h-mr-xs-5" title="Account Settings">
+        <app-avatar [user]="user" [ring]="false" [size]="'xsmall'" [avatarType]="AvatarType.Shadow"></app-avatar>
+      </a>
+      <div class="mobile-nav-icon" *ngIf="isAdministrator()" (click)="floatingNav.toggle()" [class.mobile-nav-icon--open]="floatingNav.open$ | async">
+        <svg-icon-sprite src="menu-icon" class="mobile-nav-icon__default c-small-icon c-small-icon--dark"></svg-icon-sprite>
+        <svg-icon-sprite src="close-icon" class="mobile-nav-icon__close c-small-icon c-small-icon--dark"></svg-icon-sprite>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<ng-content></ng-content>

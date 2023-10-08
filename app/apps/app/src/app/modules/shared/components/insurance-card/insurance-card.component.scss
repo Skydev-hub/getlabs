@@ -1,0 +1,59 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  position: relative;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  background-color: $gl-light-l5;
+  border: 1px dashed $gl-primary-d1;
+  transition: background-color $transition-duration, border-color $transition-duration;
+
+  &:hover:not(.is-complete) {
+    border-color: darken($gl-primary-d1, 10%);
+  }
+
+  &.is-complete {
+    border: 2px solid $gl-primary-d1;
+    background-color: $white;
+  }
+
+  .insurance-card__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview {
+    position: absolute;
+    z-index: 1;
+    top: 15px;
+    left: 15px;
+    width: 110px;
+    height: 70px;
+    cursor: pointer;
+
+    > img {
+      max-width: 110px;
+      max-height: 70px;
+    }
+  }
+
+  @include bp(xs) {
+    margin-bottom: 20px;
+
+    .preview {
+      width: 55px;
+      height: 36px;
+
+      > img {
+        max-width: 55px;
+        max-height: 36px;
+      }
+    }
+  }
+
+  app-form-element ::ng-deep .form-element-error {
+    text-align: center;
+  }
+}

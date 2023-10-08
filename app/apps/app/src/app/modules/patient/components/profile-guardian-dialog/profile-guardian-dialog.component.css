@@ -1,0 +1,7 @@
+app-form-element {
+  margin-bottom: 20px;
+}
+
+mat-dialog-content form {
+  padding: 0 5px;
+}

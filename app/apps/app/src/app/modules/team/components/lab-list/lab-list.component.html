@@ -1,0 +1,45 @@
+<section class="c-table-container c-table-container--bottom-margin" infiniteScroll [infiniteScrollThrottle]="0"
+         [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
+  <div class="c-table">
+    <div class="c-table__row">
+      <div class="c-table__heading">Company</div>
+      <div class="c-table__heading">Address</div>
+      <div class="c-table__heading">Markets</div>
+      <div class="c-table__heading">Status</div>
+      <div class="c-table__heading">Public</div>
+    </div>
+
+    <ng-container *ngIf="data$ | async as labs; else loading">
+      <a routerLink="/team/labs/{{ lab.id }}" class="c-table__row" *ngFor="let lab of labs">
+        <div class="c-table__col h-bold-font-weight">
+          {{ lab.lab | lab }}
+        </div>
+        <div class="c-table__col">
+          {{ lab.address.composed }}
+        </div>
+        <div class="c-table__col">
+          {{ (lab.markets | mapAndJoin: 'code') || 'N/A' }}
+        </div>
+        <div class="c-table__col">
+          <app-active-status [active]="lab.active"></app-active-status>
+        </div>
+        <div class="c-table__col">
+          <app-active-status [active]="lab.public" trueText="Public" falseText="Private"></app-active-status>
+        </div>
+      </a>
+      <ng-container *ngIf="labs.length === 0">
+        <div class="c-table-empty-state">
+          <svg-icon-sprite src="large-circle-search-icon" class="h-mb-25"
+                    height="92" width="92"></svg-icon-sprite>
+          No labs found matching "{{ search }}"
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="c-table-empty-state">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+</section>

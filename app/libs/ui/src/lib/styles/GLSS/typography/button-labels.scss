@@ -1,0 +1,170 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Typography > Button Labels
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+
+// Dark - Left
+.h-dark-l-bl1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl1-fs;
+  line-height: $bl1-lh;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $bl1-ls;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-l-bl2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl2-fs;
+  line-height: $bl2-lh;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $bl2-ls;
+  color: $gl-dark-text-color;
+}
+
+// Dark - Center
+.h-dark-c-bl1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl1-fs;
+  line-height: $bl1-lh;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: $bl1-ls;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-c-bl2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl2-fs;
+  line-height: $bl2-lh;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: $bl2-ls;
+  color: $gl-dark-text-color;
+}
+
+
+
+//
+// Medium
+//
+
+// Medium - Left
+.h-medium-l-bl1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl1-fs;
+  line-height: $bl1-lh;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $bl1-ls;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-l-bl2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl2-fs;
+  line-height: $bl2-lh;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $bl2-ls;
+  color: $gl-medium-text-color;
+}
+
+// Medium - Center
+.h-medium-c-bl1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl1-fs;
+  line-height: $bl1-lh;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: $bl1-ls;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-c-bl2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl2-fs;
+  line-height: $bl2-lh;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: $bl2-ls;
+  color: $gl-medium-text-color;
+}
+
+
+
+//
+// White
+//
+
+// White - Left
+.h-white-l-bl1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl1-fs;
+  line-height: $bl1-lh;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $bl1-ls;
+  color: $gl-white-text-color;
+}
+
+.h-white-l-bl2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl2-fs;
+  line-height: $bl2-lh;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: $bl2-ls;
+  color: $gl-white-text-color;
+}
+
+// White - Center
+.h-white-c-bl1 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl1-fs;
+  line-height: $bl1-lh;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: $bl1-ls;
+  color: $gl-white-text-color;
+}
+
+.h-white-c-bl2 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: $gl-bold-font-weight;
+  font-size: $bl2-fs;
+  line-height: $bl2-lh;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: $bl2-ls;
+  color: $gl-white-text-color;
+}

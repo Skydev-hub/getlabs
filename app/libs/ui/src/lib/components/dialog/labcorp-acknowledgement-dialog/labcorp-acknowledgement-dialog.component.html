@@ -1,0 +1,46 @@
+<mat-dialog-content>
+  <h2 class="h-dark-c-h4">
+    To continue, please acknowledge the following:
+  </h2>
+  <div class="h-dark-l-b2" appProgressiveDisclosure (acknowledge)="acknowledge($event)" (disacknowledge)="disacknowledge($event)">
+    <div appProgressiveDisclosureElement sectionId="acknowledgements">
+      <div class="disclosure-content h-mt-20">
+        <div class="h-mb-30">
+          <ul>
+            <li class="h-mb-10">
+              If you are a Medicare home health recipient, or a skilled nursing facility patient, medicare end-stage
+              neal disease patient, Medicaid patient, or hospice patient then you are ineligible to use Collection
+              Services provided by Getlabs.
+            </li>
+            <li class="h-mb-10">
+              If you are a health plan member, including Medicare Advantage plans, specimen collection services would
+              likely be covered by your health plan if you visit a patient service center, and you may not be eligible
+              to seek reimbursement from your health plan if you elect to use Collection Services provided by Getlabs.
+            </li>
+            <li class="h-mb-10">
+              If you are a homebound patient, specimen collection services may be available from Labcorp (and covered by
+              insurance) and by continuing you elect to receive and self-pay for Collection Services provided by Getlabs.
+            </li>
+            <li class="h-mb-10">
+              If you are a Medicare beneficiary, you understand that specimen collection services would be covered at
+              Labcorp patient service center and by continuing you elect to receive and self-pay for Collection Services
+              provided by Getlabs.
+            </li>
+            <li class="h-mb-10">
+              All patients have the option to receive services from Labcorp via a visit to Labcorp patient service
+              center and by continuing you elect to receive and self-pay for Collection Services provided by Getlabs.
+            </li>
+          </ul>
+        </div>
+        <div class="h-flex h-flex-row h-mb-5">
+          <app-progressive-disclosure-disacknowledge class="h-flex-one h-mr-10 h-mr-xs-0">
+            No, Cancel
+          </app-progressive-disclosure-disacknowledge>
+          <app-progressive-disclosure-acknowledge class="h-flex-one h-ml-10 h-ml-xs-0">
+            I agree, Continue
+          </app-progressive-disclosure-acknowledge>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

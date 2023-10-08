@@ -1,0 +1,7 @@
+@import '~@angular/material/theming';
+@import "variables";
+
+iframe {
+  border: 3px solid #fff;
+  @include mat-elevation(24);
+}

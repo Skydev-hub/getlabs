@@ -1,0 +1,46 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > Table > Mobile Table
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-mobile-table {
+  display: none;
+  flex-direction: column;
+
+  &__section {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $gl-light-l2;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+  } // __section
+
+  &__row {
+    display: flex;
+    padding: 5px 0;
+  }
+
+  &__col {
+    display: flex;
+    align-items: center;
+    flex: 1 1 50%;
+
+    &:last-child {
+      justify-content: flex-end;
+    }
+
+  } // __col
+
+  @include bp(xs) {
+    display: flex;
+  }
+
+} // c-mobile-table

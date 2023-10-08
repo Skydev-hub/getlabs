@@ -1,0 +1,50 @@
+<section class="c-table-container c-table-container--bottom-margin" infiniteScroll [infiniteScrollThrottle]="0"
+         [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
+  <div class="c-table">
+    <div class="c-table__row">
+      <div class="c-table__heading">Name</div>
+      <div class="c-table__heading">Phone Number</div>
+      <div class="c-table__heading">Location</div>
+      <div class="c-table__heading">Registered</div>
+      <div class="c-table__heading">In Area</div>
+    </div>
+
+    <ng-container *ngIf="(data$ | async) as users; else loading">
+      <a routerLink="/team/patients/{{ user.id }}" class="c-table__row" *ngFor="let user of users">
+        <div class="c-table__col  h-bold-font-weight">
+          {{ user.name }}
+        </div>
+        <div class="c-table__col">
+          {{ user.phoneNumber | phone }}
+        </div>
+        <div class="c-table__col">
+          {{ user.address | address:'city' }}
+        </div>
+        <div class="c-table__col">
+          {{ user.createdAt | dateDistance }}
+        </div>
+        <div class="c-table__col">
+          <ng-container *ngIf="user.isServiceable(); else notServiceable">
+            <span class="h-success-text-color">Yes</span>
+          </ng-container>
+          <ng-template #notServiceable>
+            <span class="h-danger-text-color">No</span>
+          </ng-template>
+        </div>
+      </a>
+      <ng-container *ngIf="users.length === 0">
+        <div class="c-table-empty-state">
+          <svg-icon-sprite src="large-circle-search-icon" class="h-mb-20" height="92" width="92"></svg-icon-sprite>
+          No patients found matching "{{search}}"
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="c-table-empty-state">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+
+  </div>
+</section>

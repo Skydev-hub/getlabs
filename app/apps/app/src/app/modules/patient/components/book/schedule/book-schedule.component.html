@@ -1,0 +1,34 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+  <div class="h-flex-col h-flex-y-center">
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+      Book your at-home lab appointment
+    </h1>
+    <h2 class="h-medium-c-lb4 h-mb-30">
+      <app-partner-inline-content>
+        <ng-template [appPartnerInlineContentBlock]="LabCompany.LabCorp">
+          Getlabs draws your labs at home and delivers to Labcorp.
+        </ng-template>
+        <ng-template [appPartnerInlineContentBlock]>
+          Getlabs draws your labs at home and delivers to your preferred laboratory.
+        </ng-template>
+      </app-partner-inline-content>
+    </h2>
+  </div>
+  <app-address-autocomplete-form #addressForm class="h-mb-30" (locationUpdated)="locationUpdated($event)" [user]="this.user"></app-address-autocomplete-form>
+  <ng-container *ngIf="!isOutsideServiceArea; else notInServiceArea">
+    <app-appointment-scheduler *ngIf="this.address !== undefined" [type]="AppointmentBookingTypes.PatientAppointment" [formControl]="formControl"
+                               [days]="days$ | async" [restrictions]="restrictions" [showPrice]="true" [showPriorityFlag]="true"
+                               [bufferSize]="(days$ | async) * 2" [zipCode]="getZipCode()" (outsideServiceArea)="setOutsideServiceArea($event)" class="app-scheduler-slots--button"></app-appointment-scheduler>
+  </ng-container>
+</div>
+
+<ng-template #notInServiceArea>
+  <div class="scheduler-message-box">
+    <img src="/assets/icons/alarm-bell-ring-icon.svg" class="alarm-bell-ring-icon scheduler-message-box__icon" />
+    <h2 class="scheduler-message-box__heading">Getlabs is expanding to your area soon!</h2>
+    <ng-container *ngIf="!user">
+      <p class="scheduler-message-box__body">Enter your number to be notified when we expand</p>
+      <app-sign-in [userType]="PatientUser" buttonLabel="Get Notified" (codeRequested)="signIn($event)"></app-sign-in>
+    </ng-container>
+  </div>
+</ng-template>

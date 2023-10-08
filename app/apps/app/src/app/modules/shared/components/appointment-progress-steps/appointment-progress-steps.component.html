@@ -1,0 +1,303 @@
+<app-accordian appStepIndexerDirective [steps]="steps">
+  <app-appointment-step [completed]="isStepCompleted(Step.ReviewRequirements)">
+    <ng-container ngProjectAs=".title">
+      Review requirements
+    </ng-container>
+
+    <div class="h-mb-5 h-mb-xs-20">
+      Check to ensure you have sufficient supplies. If not, order more or contact us as soon as possible.
+    </div>
+
+    <app-appointment-samples-table
+      class="samples-table--review"
+      [(appointment)]="appointment"
+      [readonly]="readonly"
+      [showErrors]="false"
+      [columns]="[SamplesTableColumns.SupplyVerificationToggle, SamplesTableColumns.Quantity, SamplesTableColumns.Type]"
+    >
+    </app-appointment-samples-table>
+
+    <button
+      app-button
+      size="medium"
+      responsive="true"
+      class="h-mt-20"
+      *ngIf="!readonly"
+      (click)="complete(Step.ReviewRequirements)"
+      [disabled]="!isStepCompleted(Step.ReviewRequirements)"
+    >
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step
+    [completed]="isStepCompleted(Step.PrintDeliveryForm)"
+    [disabled]="!readonly && !isStepCompleted(Step.ReviewRequirements)"
+    (opened)="this.getDeliveryFormFile()"
+  >
+    <ng-container ngProjectAs=".title">
+      Print delivery form
+    </ng-container>
+
+    <div class="h-mb-20">
+      You must provide a printed copy of the patient's delivery form to the lab at drop off.
+    </div>
+
+    <ng-container *ngIf="appointment.deliveryForm && !deliveryFormProcessor?.generating; else deliveryFormGenerating">
+      <button app-button="text" size="undefined" class="h-primary-d1-l-uil1 h-mb-10" (click)="req$ = openDeliveryForm()" [loading]="req$">
+        Open Delivery Form <svg-icon-sprite src="/assets/icons.svg#external-link-icon" class="c-small-icon"></svg-icon-sprite>
+      </button>
+      <p *ngIf="appointment.deliveryForm">
+        Generated at: {{ appointment.deliveryForm.createdAt | date: 'medium' }}.
+        <ng-container *ngIf="isStaffUser()"> (<a (click)="triggerDeliveryFormGeneration()">Regenerate</a>) </ng-container>
+      </p>
+    </ng-container>
+
+    <ng-template #deliveryFormGenerating>
+      <p [loading]="true" behavior="show" loadingStyle="text-right">
+        Generating form&hellip;
+      </p>
+    </ng-template>
+
+    <button app-button size="medium" class="h-mt-20" *ngIf="!readonly" (click)="complete(Step.PrintDeliveryForm)">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.DepartToPatient)" [disabled]="!readonly && !isStepCompleted(Step.PrintDeliveryForm)">
+    <ng-container ngProjectAs=".title">
+      Depart to patient
+    </ng-container>
+
+    <div class="h-mb-20">
+      Proceed to the patient's address.
+    </div>
+
+    <div class="h-mb-20">
+      <a href="{{ appointment.patient.address | directionsUrl }}" target="_blank" class="h-primary-d1-l-uil1">
+        {{ appointment.patient.address.composed }}
+      </a>
+    </div>
+
+    <div class="h-mb-20">
+      <div class="h-dark-l-uil1 h-mb-5">
+        Parking &amp; Entry Instructions
+      </div>
+      <div>
+        {{ appointment.patient.notes || 'None' }}
+      </div>
+    </div>
+
+    <button app-button size="medium" class="h-mt-20" *ngIf="!readonly" (click)="req$ = setStatus(Status.EnRoute)" [appLoading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.ArriveAtPatient)" [disabled]="!readonly && !isStepCompleted(Step.DepartToPatient)">
+    <ng-container ngProjectAs=".title">
+      Arrive at patient
+    </ng-container>
+
+    <div class="h-mb-20">
+      Greet patient, identify, yourself, and confirm patient ID.
+    </div>
+
+    <a class="h-primary-d1-l-uil1 h-mb-20" (click)="showBadge()">
+      Display Getlabs Badge
+    </a>
+
+    <div>
+      {{ appointment.patient.name }}
+    </div>
+    <div>
+      {{ appointment.patient.gender | gender }}
+    </div>
+    <div>
+      {{ appointment.patient | dob }}
+    </div>
+
+    <div class="h-mt-20 h-mb-20">
+      <div class="h-dark-l-uil1 h-mb-5">
+        Parking &amp; Entry Instructions
+      </div>
+      <div>
+        {{ appointment.patient.notes || 'None' }}
+      </div>
+    </div>
+
+    <button app-button size="medium" class="h-mt-20" *ngIf="!readonly" (click)="req$ = setStatus(Status.InProgress)" [appLoading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step
+    [completed]="isStepCompleted(Step.SignAbn)"
+    *ngIf="isDocumentSet(FilePurpose.AbnDocument, false)"
+    [disabled]="!readonly && !isStepCompleted(Step.ArriveAtPatient)"
+  >
+    <ng-container ngProjectAs=".title">
+      Sign Advance Beneficiary Notice of Non-Coverage
+    </ng-container>
+
+    <div class="h-mb-20">
+      This appointment has an Advance Beneficiary Notice of Non-Coverage. The patient must sign this document before proceeding. The document is found at the
+      end of the delivery form printed in Step 2. Do not sign anywhere on the ABN yourself - only the patient should sign the ABN.
+    </div>
+
+    <button app-button size="medium" class="h-mt-20" *ngIf="!readonly" (click)="complete(Step.SignAbn)">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step
+    [completed]="isStepCompleted(Step.CollectSamples)"
+    [disabled]="!readonly && !isStepCompleted(isDocumentSet(FilePurpose.AbnDocument, false) ? Step.SignAbn : Step.ArriveAtPatient)"
+  >
+    <ng-container ngProjectAs=".title">
+      Collect samples
+    </ng-container>
+
+    <div class="h-mb-20">
+      Review the information and then collect each sample to the fill line in the order below.
+    </div>
+
+    <div class="h-flex h-mb-15 h-mb-xs-20">
+      <ul class="h-mr-20">
+        <li>Fasting:</li>
+        <li>Prior Issues:</li>
+      </ul>
+      <ul class="h-dark-l-uil2 h-flex-col">
+        <li>{{ appointment.requiresFasting ? 'Required' : 'Not Required' }}</li>
+        <li style="white-space: pre-line;">{{ appointment.patient.priorIssues || 'None' }}</li>
+      </ul>
+    </div>
+
+    <app-appointment-samples-table
+      class="samples-table--collect"
+      [(appointment)]="appointment"
+      [readonly]="readonly"
+      [columns]="[SamplesTableColumns.CollectedToggle, SamplesTableColumns.Quantity, SamplesTableColumns.Type, SamplesTableColumns.CollectActions]"
+    >
+    </app-appointment-samples-table>
+
+    <button
+      app-button
+      size="medium"
+      class="h-mt-20"
+      *ngIf="!readonly"
+      (click)="complete(Step.CollectSamples)"
+      [disabled]="!isStepCompleted(Step.CollectSamples)"
+    >
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.ProcessSamples)" [disabled]="!readonly && !isStepCompleted(Step.CollectSamples)">
+    <ng-container ngProjectAs=".title">
+      Process samples
+    </ng-container>
+
+    <div class="h-mb-10 h-mb-xs-20">
+      Process each tube according to its requirements below.
+    </div>
+
+    <app-appointment-samples-table
+      class="samples-table--process"
+      [(appointment)]="appointment"
+      [readonly]="readonly"
+      [columns]="[
+        SamplesTableColumns.ProcessedToggle,
+        SamplesTableColumns.Quantity,
+        SamplesTableColumns.Type,
+        SamplesTableColumns.Temperature,
+        SamplesTableColumns.Processing,
+        SamplesTableColumns.ProcessActions
+      ]"
+    >
+    </app-appointment-samples-table>
+
+    <button
+      app-button
+      size="medium"
+      class="h-mt-20"
+      *ngIf="!readonly"
+      (click)="req$ = setStatus(Status.Collected)"
+      [disabled]="!isProcessSamplesComplete()"
+      [appLoading]="req$"
+    >
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.DepartToPSC)" [disabled]="!readonly && !isStepCompleted(Step.ProcessSamples)">
+    <ng-container ngProjectAs=".title">
+      Depart to PSC
+    </ng-container>
+
+    <div class="h-mb-20">
+      Depart to the closest patient service center (PSC) for
+      <span class="h-bold-font-weight">{{ appointment.labLocation.lab | lab }}</span
+      >. To maintain the viability of the samples, you must deliver them within one hour of collection.
+    </div>
+
+    <div class="h-dark-l-uil1 h-mb-5">
+      PSC Address
+    </div>
+    <div>
+      <a href="{{ appointment.labLocation.address | directionsUrl: appointment.labLocation.place_id }}" target="_blank" class="h-primary-d1-l-uil1">
+        {{ appointment.labLocation.lab | lab }}, {{ appointment.labLocation.address.composed }}
+      </a>
+    </div>
+
+    <button app-button size="medium" class="h-mt-20" *ngIf="!readonly" (click)="complete(Step.DepartToPSC)" [loading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <!-- Resize is called here because the signature canvas element does not know its size until it is visible -->
+  <app-appointment-step
+    [completed]="isStepCompleted(Step.DeliverSamples)"
+    [disabled]="!readonly && !isStepCompleted(Step.DepartToPSC)"
+    (opened)="delivery.redrawCanvas()"
+  >
+    <ng-container ngProjectAs=".title">
+      Deliver samples
+    </ng-container>
+
+    <div class="h-mb-20">
+      Provide the patient's delivery form and samples, then complete the following information.
+    </div>
+
+    <div class="h-dark-l-uil1 h-mb-5">
+      PSC Address
+    </div>
+    <div class="h-mb-20">
+      <a href="{{ appointment.labLocation.address | directionsUrl: appointment.labLocation.place_id }}" target="_blank" class="h-primary-d1-l-uil1">
+        {{ appointment.labLocation.lab | lab }}, {{ appointment.labLocation.address.composed }}
+      </a>
+    </div>
+
+    <app-delivery-verification-form
+      #delivery
+      [appointment]="appointment"
+      [disabled]="readonly"
+      (deliveryVerified)="req$ = confirmDelivery($event)"
+    ></app-delivery-verification-form>
+
+    <button app-button size="medium" class="h-mt-20" *ngIf="!readonly" (click)="delivery.submit()" [loading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [disabled]="!readonly && !isStepCompleted(Step.DeliverSamples)">
+    <ng-container ngProjectAs=".title">
+      Appointment completed
+    </ng-container>
+
+    <div>All steps are now completed. <span *ngIf="!readonly">Would you like to return to your schedule?</span></div>
+
+    <button app-button size="medium" routerLink="/care" class="h-mt-20" *ngIf="!readonly">
+      Back to Appointments
+    </button>
+  </app-appointment-step>
+</app-accordian>

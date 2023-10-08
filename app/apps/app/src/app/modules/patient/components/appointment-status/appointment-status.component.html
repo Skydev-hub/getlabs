@@ -1,0 +1,141 @@
+<ng-container [ngSwitch]="appointment.status">
+  <ng-container *ngSwitchCase="Status.Cancelled">
+    <ng-container *ngTemplateOutlet="cancelled"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="Status.Completed">
+    <ng-container *ngTemplateOutlet="completed"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <ng-container *ngTemplateOutlet="default"></ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #cancelled>
+  <div class="l-wrapper l-wrapper--col h-flex-y-center">
+    <svg-icon-sprite src="/assets/icons.svg#large-circle-error-icon" class="h-mb-20 c-large-icon"></svg-icon-sprite>
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">Your appointment has been cancelled.</h1>
+    <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-30">
+      If you have any questions, please text or call us at <a href="tel:{{ globals.PHONE }}" class="h-dark-primary-link h-no-wrap">{{ globals.PHONE }}</a
+      >.
+    </p>
+    <ng-container *ngTemplateOutlet="rebookButton"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #completed>
+  <div class="l-wrapper l-wrapper--sm l-wrapper--col h-flex-y-center">
+    <svg-icon-sprite src="/assets/icons.svg#large-circle-check-icon" class="h-mb-20 h-mb-xs-10 c-large-icon"></svg-icon-sprite>
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">Thank you for using Getlabs.</h1>
+    <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-30">
+      Your doctor will receive your results in about 3 days from the date of your appointment. For questions about your results, please call your doctor's
+      office.
+    </p>
+    <ng-container *ngTemplateOutlet="rebookButton"></ng-container>
+    <div class="h-mb-20"></div>
+    <ng-container *ngTemplateOutlet="referButton"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #default>
+  <div class="l-wrapper l-wrapper--sm l-wrapper--col">
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">{{ appointment.patient.firstName }}, appointment #{{ appointment.identifier }} confirmed</h1>
+    <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-20">Please save our number {{ globals.PHONE }}. Our team will call you to confirm your visit.</p>
+    <div class="h-flex-col h-flex-y-center h-full-width">
+      <app-panel class="h-full-width">
+        <span class="h-dark-c-uil2 h-mb-15"> Get $5 for each friend or relative you refer. </span>
+        <div class="h-flex-y-center h-full-width h-full-width-children">
+          <a app-button size="large" responsive="true" [routerLink]="'/refer'" class="ui-file-input__large"> Refer Friends </a>
+        </div>
+      </app-panel>
+      <app-panel class="h-full-width">
+        <span class="h-dark-c-uil2 h-mb-15"> Upload your insurance for the laboratory </span>
+        <div class="h-flex-y-center h-full-width h-full-width-children">
+          <a app-button size="large" responsive="true" [routerLink]="'/settings/insurance'" class="ui-file-input__large"> Upload insurance </a>
+        </div>
+      </app-panel>
+    </div>
+    <div class="h-flex-col h-ml-15 h-mr-15">
+      <div class="c-form-split-col h-mb-15 h-medium-l-b3">
+        <app-form-element label="APPOINTMENT TIME">
+          <p>
+            {{ appointment.startAt | dateTz: 'ha':appointment.patient.timezone }} to {{ appointment.endAt | dateTz: 'ha':appointment.patient.timezone }} on
+            {{ appointment.endAt | dateTz: 'EEEE':appointment.patient.timezone }}
+          </p>
+          <p>{{ appointment.startAt | dateTz: 'longDate':appointment.patient.timezone }}</p>
+        </app-form-element>
+        <app-form-element label="ADDRESS FOR VISIT">
+          <p>{{ appointment.patient.address.composed || (appointment.patient.address | address) }}</p>
+        </app-form-element>
+      </div>
+      <div class="h-full-width h-mb-20" [formGroup]="patient_form">
+        <app-form-element label="PARKING & ENTRY INSTRUCTIONS" class="h-mb-15">
+          <div class="notes-input-container">
+            <div class="notes-saved" *ngIf="notes_saved">
+              <svg-icon-sprite src="check-mark-icon"></svg-icon-sprite>
+            </div>
+            <textarea
+              class="ui-textarea ui-input--large"
+              placeholder="Leave parking & entry instructions, or any other notes you may have for us."
+              formControlName="notes"
+            ></textarea>
+          </div>
+        </app-form-element>
+        <app-form-element label="Payment">
+          <span>
+            <ng-container *ngIf="payment$ | async as payment; else spinner">
+              <ng-container *ngIf="payment.status === 'succeeded'; else incompleteStatus">
+                <ng-container *ngIf="!payment.refunded; else refunded">
+                  {{ payment.amount / 100 | currency }} charged to {{ payment.card.brand | uppercase }} ending in {{ payment.card.last4 }}
+                </ng-container>
+                <ng-template #refunded>
+                  Refunded {{ payment.amountRefunded / 100 | currency }} to {{ payment.card.brand | uppercase }} {{ payment.card.last4 }}
+                </ng-template>
+              </ng-container>
+              <ng-template #incompleteStatus>
+                <ng-container *ngIf="payment.amount === 50; else incompletePayment"> Free appointment </ng-container>
+              </ng-template>
+              <ng-template #incompletePayment>
+                <span class="h-medium-text-color">{{ payment.amount / 100 | currency }} Incomplete</span>
+              </ng-template>
+            </ng-container>
+          </span>
+        </app-form-element>
+      </div>
+      <hr class="h-full-width h-mb-30" />
+    </div>
+    <div class="h-flex h-flex-col h-flex-y-center h-flex-text-center">
+      <div class="h-flex-col h-flex-y-center h-full-width">
+        <div class="h-mb-30 h-flex-text-center appointment-actions">
+          <span class="h-text-right" matTooltip="Please contact us if you need to reschedule your appointment" [matTooltipDisabled]="appointment.isRebookable">
+            <a routerLink="/reschedule" class="h-medium-c-uil2" [class.disabled]="!appointment.isRebookable"> Reschedule Visit </a>
+          </span>
+          <a routerLink="/cancel" class="h-medium-c-uil2 h-text-left"> Cancel Visit </a>
+        </div>
+        <div class="h-mb-30 h-flex-text-center description-actions h-medium-c-b3">
+          <app-expansion-panel>
+            <ng-container ngProjectAs=".title"> Insurance Coverage </ng-container>
+            Although Getlabs does not accept insurance, the lab testing your samples typically will. To check, just call the lab and ask whether you're covered.
+            Once your Getlabs visit is booked, we will collect your insurance details to provide to the lab.
+          </app-expansion-panel>
+
+          <app-expansion-panel>
+            <ng-container ngProjectAs=".title"> Price Transparency </ng-container>
+            Your payment covers recruiting, assessing, and compensating phlebotomists, as well as supplies and transporting your samples to the lab for testing.
+          </app-expansion-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #rebookButton>
+  <button app-button size="large" responsive="true" routerLink="/book">Book New Appointment</button>
+</ng-template>
+<ng-template #spinner>
+  <mat-spinner diameter="16"></mat-spinner>
+</ng-template>
+<ng-template #referButton>
+  <app-award-campaign-button [awardType]="AwardType.OneTimeReferrerCreditAward" type="border" size="large" class="h-full-width h-flex h-flex-x-center">
+    <ng-template let-awardCampaign="awardCampaign"> Get {{ awardCampaign.award / 100 | currency | truncateNumbers }} Off - Refer Friends </ng-template>
+  </app-award-campaign-button>
+</ng-template>

@@ -1,0 +1,29 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  Why do you want to deactivate {{ data.user.name }}'s account?
+</div>
+<mat-dialog-content>
+  <form [formGroup]="form" class="l-form-grid l-form-grid--single">
+    <app-form-element [error]="getError('deactivationReason')">
+      <select class="ui-select ui-select--large" formControlName="deactivationReason">
+        <option [value]="null" selected disabled>Select a reason</option>
+        <option *ngFor="let r of data.deactivationReasons" [value]="r.reason">{{r.label}}</option>
+      </select>
+    </app-form-element>
+
+    <app-form-element [error]="getError('deactivationNote')" *ngIf="form.get('deactivationReason').value === 'other'">
+      <input class="ui-input ui-input--medium" type="text" placeholder="Enter the reason for deactivation"
+             formControlName="deactivationNote">
+    </app-form-element>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" size="large" responsive="true" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button size="large" responsive="true" class="mat-dialog-primary-action" (click)="deactivate()" [appLoading]="reqSub">
+    Deactivate
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

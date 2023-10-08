@@ -1,0 +1,44 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <app-stepper>
+    <cdk-step>
+      <div class="h-flex-col h-flex-y-center">
+        <h1 class="h-dark-c-h4 h-mb-10">
+          HIPAA Compliance
+        </h1>
+        <p class="h-medium-c-b1 h-text-center h-mb-30">
+          Please review this presentation before taking the comprehension exam.
+        </p>
+        <app-pdf-viewer [url]="hipaaUrl" class="h-mb-30"></app-pdf-viewer>
+        <button app-button type="button" (click)="stepper.next()">Continue to Exam</button>
+      </div>
+    </cdk-step>
+
+    <cdk-step>
+      <div class="h-flex-col h-flex-y-center">
+        <h1 class="h-dark-c-h4 h-mb-10">
+          HIPAA Compliance Comprehension Exam
+        </h1>
+        <p class="h-medium-c-b1 h-mb-30">
+          To complete your HIPAA Compliance, please answer the following questions. Choose the most correct answer for each question.
+        </p>
+        <app-hipaa-exam #hipaaExam (completed)="onDocumentCompleted()"></app-hipaa-exam>
+        <button app-button type="button" (click)="hipaaExam.quiz.verifyQuizAnswers()" [appLoading]="req$">Submit Answers</button>
+      </div>
+    </cdk-step>
+
+    <cdk-step>
+      <div class="h-flex-col h-flex-y-center">
+        <svg-icon-sprite src="large-circle-check-icon" class="h-mb-15" width="92" height="92"></svg-icon-sprite>
+        <h1 class="h-dark-c-h4 h-mb-10">
+          HIPAA Compliance Passed
+        </h1>
+        <p class="h-medium-c-b1 h-text-center h-mb-30">
+          Congratulations! You passed the HIPAA Compliance Comprehension Exam.
+        </p>
+        <button app-button type="button" (click)="goToDashboard()" [appLoading]="req$">Continue</button>
+      </div>
+    </cdk-step>
+  </app-stepper>
+
+</main>

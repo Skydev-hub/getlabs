@@ -1,0 +1,58 @@
+{
+  "npmScope": "app",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tslint.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*",
+    ".eslintrc.json": "*"
+  },
+  "projects": {
+    "app": {
+      "tags": ["scope:app", "type:app"],
+      "implicitDependencies": ["shared-environments", "shared-assets", "shared-styles"]
+    },
+    "app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["app"]
+    },
+    "web": {
+      "tags": ["scope:web", "type:app"],
+      "implicitDependencies": ["shared-environments", "shared-assets", "shared-styles"]
+    },
+    "web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["web"]
+    },
+    "ui": {
+      "tags": []
+    },
+    "idle": {
+      "tags": []
+    },
+    "shared-environments": {
+      "tags": ["scope:shared", "type:environments"]
+    },
+    "shared-assets": {
+      "tags": ["scope:shared", "type:assets"]
+    },
+    "shared-styles": {
+      "tags": ["scope:shared", "type:styles"]
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  }
+}

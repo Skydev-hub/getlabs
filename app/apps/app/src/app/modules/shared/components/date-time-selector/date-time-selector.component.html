@@ -1,0 +1,10 @@
+<div class="h-flex h-flex-row h-flex-y-end" [formGroup]="formGroup">
+  <app-date-input formControlName="date" displayMode="inline" modelType="string"></app-date-input>
+  <app-time-selector
+    formControlName="time"
+    [minuteIntervals]="minuteIntervals"
+    [restrictRange]="restrictRange"
+    [defaultTime]="defaultTime"
+    *ngIf="setTime"
+  ></app-time-selector>
+</div>

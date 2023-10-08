@@ -1,0 +1,58 @@
+@import "variables";
+@import "GLSS/typography/large-body";
+
+.time-countdown-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 5px;
+
+  :nth-child(odd) {
+    white-space: nowrap;
+    margin-right: 5px;
+  }
+
+  :nth-child(even) {
+    font-weight: $gl-bold-font-weight;
+  }
+}
+
+.ui-text-button {
+  padding: 0;
+}
+
+app-appointment-step {
+  a {
+    display: inline-block;
+
+    svg-icon-sprite {
+      vertical-align: bottom;
+    }
+  }
+}
+
+.doc-upload {
+  align-items: flex-start;
+
+  ::ng-deep {
+    label { padding: 0; }
+  }
+}
+
+.lab-order {
+  &--orders {
+    ::ng-deep .lab-order-details {
+      position: relative;
+
+      .lab-order__controls {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.add-lab-order .ui-icon-button-inline {
+  padding-left: 0;
+}

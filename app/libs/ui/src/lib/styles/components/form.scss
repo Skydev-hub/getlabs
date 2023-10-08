@@ -1,0 +1,132 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Form
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+@import 'mixins';
+
+.c-form {
+  position: relative;
+  padding: 40px 50px;
+  border: 1px solid $gl-light;
+
+  &__sent-msg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 60px 60px 80px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+  }
+
+  &--sent & {
+    &__container {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &__sent-msg {
+      opacity: 1;
+      visibility: visible;
+    }
+  } // --sent &
+
+  @include bp(m) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include bp(s) {
+    &--sent {
+      height: 460px;
+    }
+  }
+
+  @include bp(xs) {
+    border-left: none;
+    border-right: none;
+  }
+
+  @include bp(xxs) {
+    padding-left: $mobile-edge;
+    padding-right: $mobile-edge;
+  }
+} // .c-form
+
+.c-form-basic {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+//
+// Split Col
+//
+.c-form-split-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 'major-left minor-left major-right minor-right';
+  gap: 20px;
+
+  & > * {
+    grid-column: span 2;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__full-row {
+    grid-column: 1 / -1;
+  }
+
+  &__3-quarters-row {
+    grid-column: span 3;
+  }
+
+  &__1-quarter-row {
+    grid-column: span 1;
+  }
+
+  @include bp(xs) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'column';
+
+    & > * {
+      grid-column: auto;
+    }
+  }
+}
+
+.c-form-split-col-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 'major-left minor-left major-right minor-right';
+  gap: 20px;
+  margin-right: -20px;
+
+  &__2-third-row {
+    grid-column: 1 / span 2;
+    gap: 20px 10px;
+  }
+
+  &__1-third-row {
+    grid-column: span 1;
+  }
+}

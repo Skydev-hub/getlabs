@@ -1,0 +1,66 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <main class="l-wrapper l-wrapper--sm l-main-container">
+    <section class="h-mb-40">
+      <app-form-group label="Basic Information">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('lab')" label="Company">
+            <select class="ui-select ui-select--large" formControlName="lab" (ngModelChange)="updateAddressField()">
+              <option [value]="null" selected disabled>Select Lab Company</option>
+              <option *ngFor="let company of labCompanies" [ngValue]="company">
+                {{ company | lab }}
+              </option>
+            </select>
+          </app-form-element>
+          <app-form-element [error]="getError('public')" label="Public">
+            <select class="ui-select ui-select--large" formControlName="public" (ngModelChange)="updateAddressField()">
+              <option [ngValue]="true" selected>Yes</option>
+              <option [ngValue]="false">No</option>
+            </select>
+          </app-form-element>
+          <app-form-element [error]="getError('address')" label="Lab Address" class="c-form-split-col__full-row" name="address">
+            <app-address-autocomplete
+              formControlName="address"
+              class="h-block h-mt-10"
+              placeholder="Lab Address"
+              [placeType]="form.value.public ? 'establishment' : 'address'"
+              [searchPrefix]="form.value.public ? (form.value.lab | lab) : undefined"
+            ></app-address-autocomplete>
+          </app-form-element>
+        </div>
+      </app-form-group>
+    </section>
+    <section class="h-mb-40">
+      <app-form-group label="Status">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('active')" label="Active">
+            <select class="ui-select ui-select--large" formControlName="active">
+              <option [ngValue]="true" selected>Yes</option>
+              <option [ngValue]="false">No</option>
+            </select>
+          </app-form-element>
+        </div>
+      </app-form-group>
+    </section>
+
+    <section class="h-mb-40">
+      <app-form-group label="Metadata">
+        <div class="c-form-split-col">
+          <div class="c-form-split-col__full-row">
+            <app-form-element [error]="getError('services')" label="Services (one per line)">
+              <textarea class="ui-textarea ui-textarea--large" placeholder="Services" formControlName="services"></textarea>
+            </app-form-element>
+          </div>
+          <div class="c-form-split-col__full-row">
+            <app-form-element [error]="getError('notes')" label="Notes (one per line)">
+              <textarea class="ui-textarea ui-textarea--large" placeholder="Notes" formControlName="notes"></textarea>
+            </app-form-element>
+          </div>
+        </div>
+      </app-form-group>
+    </section>
+
+    <button app-button type="submit" class="h-margin-center h-mt-40" [loading]="req$">
+      {{ lab ? 'Save Changes' : 'Create Lab Location' }}
+    </button>
+  </main>
+</form>

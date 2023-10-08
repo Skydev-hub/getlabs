@@ -1,0 +1,5 @@
+{{ timeslot.start | dateTz:'ha':tz | lowercase }} to {{ timeslot.end | dateTz:'ha':tz | lowercase }}
+on
+{{ timeslot.start | dateTz:'EEE, MMM d':tz }}
+for
+<app-price [price]="timeslot.price / 100"></app-price>

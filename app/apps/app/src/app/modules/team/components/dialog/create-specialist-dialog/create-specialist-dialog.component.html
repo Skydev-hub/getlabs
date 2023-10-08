@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="h-dark-c-lb3 h-mb-10">
+  Before creating this account, confirm this specialist meets Industry Standards.
+</h2>
+<mat-dialog-content>
+  <div class="h-flex-col h-flex-y-center">
+    <div class="h-medium-c-b2 h-mb-10">
+      Check to confirm that they've been vetted, are certified, and passed their background check.
+    </div>
+
+    <div class="c-checklist h-dark-l-b3 h-full-width" [formGroup]="form">
+      <app-checkbox-input class="app-checkbox-input__dot" formControlName="passedInterview">
+        Passed interview
+      </app-checkbox-input>
+      <app-checkbox-input class="app-checkbox-input__dot" formControlName="isCertified">
+        Valid phlebotomy certification
+      </app-checkbox-input>
+      <app-checkbox-input class="app-checkbox-input__dot" formControlName="passedBgCheck">
+        Passed background check
+      </app-checkbox-input>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button [mat-dialog-close]="true" [disabled]="!form.valid">
+    Continue
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

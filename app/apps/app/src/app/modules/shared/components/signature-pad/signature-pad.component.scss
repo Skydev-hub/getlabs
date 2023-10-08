@@ -1,0 +1,73 @@
+@import "variables";
+@import "GLSS/variables/typography";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-color: $white;
+  border: 1px solid $gl-light;
+  padding: 10px;
+
+  &:before {
+    content: 'Signature';
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    top: 33%;
+    left: calc(50% - 75px);
+    color: $gl-medium;
+    user-select: none;
+    pointer-events: none;
+
+    @include gl-lg-text();
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    padding: 10px;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid $gl-dark;
+    user-select: none;
+    pointer-events: none;
+
+    button {
+      pointer-events: all;
+      z-index: 20;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .ui-input-container--error & {
+    border-color: $gl-ui-danger;
+  }
+}

@@ -1,0 +1,41 @@
+@import "variables";
+
+:host {
+  position: relative;
+}
+
+.list-filter {
+  &__options__popover {
+    position: absolute;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid $gl-primary-border-color;
+    box-shadow: 10px 10px 20px -8px #000000;
+    z-index: 1000;
+
+    background-color: #FFF;
+    min-width: 200px;
+
+    white-space: nowrap;
+  }
+
+  &__close {
+    // padding-bottom: 10px;
+
+    button {
+      padding: 0;
+    }
+  }
+
+  &__options {
+    padding: 5px 10px 10px;
+
+    &__option {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

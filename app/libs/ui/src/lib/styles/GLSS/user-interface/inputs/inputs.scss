@@ -1,0 +1,117 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Inputs
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+@import 'GLSS/library/mixins';
+@import 'base';
+
+@mixin ui-input-class-def($height, $padding, $font-size, $line-height) {
+  height: $height;
+  padding: $padding;
+  font-size: $font-size;
+  line-height: $line-height;
+
+  //&--responsive {
+  @include bp(xs) {
+    &:not(.ui-input--ignore-responsive) {
+      @content;
+    }
+  }
+  //}
+}
+
+//@mixin ui-input-class-definition($size, $height, $padding, $font-size, $line-height) {
+//  &--#{$size} {
+//    @include ui-input-class-def($height, $padding, $font-size, $line-height) {
+//      @content
+//    }
+//  }
+//}
+
+@mixin ui-input-small {
+  @include ui-input-class-def($gl-small-ui-height, 10px 15px, 14px, 21px);
+}
+
+@mixin ui-input-medium {
+  @include ui-input-class-def($gl-medium-ui-height, 10px 15px, 16px, 24px) {
+    @content;
+  }
+}
+
+@mixin ui-input-large {
+  @include ui-input-class-def($gl-large-ui-height, 15px 25px, 18px, 27px) {
+    @content;
+  }
+}
+
+@mixin ui-input--icon($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+
+  /* Ugh.  Necessary because this mixin conflicts with the ui-input classes listed above; while the padding definition
+   * works without !important for desktop, it does not for mobile.  Implementing this 'properly' would involve out-
+   * precedenting the above by adding classes, which effectively is the same thing! */
+  padding-left: 45px !important;
+}
+
+.ui-input {
+  @include input-reset();
+  @include base-input();
+
+  &--large {
+    @include ui-input-large {
+      @include ui-input-medium;
+    }
+  }
+
+  &--medium {
+    @include ui-input-medium {
+      @include ui-input-small;
+    }
+  }
+
+  &--small {
+    @include ui-input-small;
+  }
+
+  &--location {
+    @include ui-input--icon('/assets/icons/small-location-pin-icon.svg');
+    background-size: 40px 40px;
+    background-position: 6px center;
+  }
+} // .ui-input
+
+.ui-select {
+  @include input-reset();
+  @include base-input();
+  @extend .ui-input;
+
+  &--large {
+    @include ui-input-large {
+      @include ui-input-medium;
+    }
+  }
+
+  &--medium {
+    @include ui-input-medium {
+      @include ui-input-small;
+    }
+  }
+
+  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.12597 9.60529L11.6173 15.836C11.6671 15.8878 11.7268 15.9291 11.7929 15.9573C11.859 15.9855 11.9302 16 12.002 16C12.0739 16 12.145 15.9855 12.2112 15.9573C12.2773 15.9291 12.337 15.8878 12.3867 15.836L17.8756 9.60529C17.9195 9.55586 17.953 9.49812 17.9741 9.43549C17.9953 9.37287 18.0036 9.30664 17.9986 9.24074C17.9936 9.17483 17.9754 9.11061 17.9451 9.05187C17.9148 8.99314 17.8729 8.94109 17.8221 8.89883L16.8972 8.12093C16.7941 8.03404 16.6609 7.99115 16.5264 8.00152C16.3919 8.0119 16.2669 8.07471 16.1783 8.17639L12.0963 12.8992C12.0845 12.9129 12.07 12.9238 12.0537 12.9313C12.0373 12.9388 12.0195 12.9427 12.0015 12.9427C11.9835 12.9427 11.9658 12.9388 11.9494 12.9313C11.9331 12.9238 11.9185 12.9129 11.9068 12.8992L7.82327 8.17789C7.77927 8.12726 7.72571 8.0858 7.66566 8.05589C7.60561 8.02597 7.54025 8.00817 7.47331 8.00352C7.40674 7.99759 7.33966 8.00506 7.27603 8.02548C7.2124 8.0459 7.15352 8.07887 7.10285 8.12243L6.17746 8.90083C6.12674 8.94317 6.08502 8.99525 6.05478 9.05398C6.02455 9.11271 6.0064 9.17691 6.00141 9.24277C5.99642 9.30863 6.0047 9.37482 6.02575 9.43743C6.0468 9.50004 6.0802 9.5578 6.12397 9.60728L6.12597 9.60529Z" fill="currentColor"/></svg>')
+    no-repeat right 8px top 50%;
+
+  &--inline {
+    height: auto;
+
+    border: 0;
+    padding: 0;
+
+    background: none;
+  }
+}

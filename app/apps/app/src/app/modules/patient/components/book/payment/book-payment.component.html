@@ -1,0 +1,119 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+    Almost done! Finish checking out below.
+  </h1>
+  <div class="h-medium-c-lb3 h-medium-c-lb3--responsive h-mb-30">
+    <app-patient-booking-timeslot-indicator [timeslot]="bookingFlowService.timeslot" [tz]="bookingFlowService.timezone"></app-patient-booking-timeslot-indicator>
+  </div>
+
+  <app-patient-credit-card-form class="h-mb-20" [user]="getUser()" (success)="req$ = goToNextStep()" (error)="error = $event" (ready)="onReady($event)" [bookingKey]="getTimeslot().key"></app-patient-credit-card-form>
+
+  <ng-container *ngIf="paymentDetails$ | async">
+
+    <form [formGroup]="form">
+      <app-form-element label="Email for Receipt" [error]="getError('email')" name="email" [optional]="true" class="h-mb-20">
+        <input class="ui-input ui-input--large" type="email" placeholder="Email address" formControlName="email" autocomplete="email">
+      </app-form-element>
+
+      <app-form-element label="Promo Code" [error]="getError('coupon')" name="coupon" [optional]="true" class="h-mb-20" *ngIf="showCoupon">
+        <div class="h-flex-row">
+          <input class="ui-input ui-input--large h-flex-three" type="text" placeholder="Promo code" formControlName="coupon" autocomplete="off" spellcheck="false">
+          <button app-button="border" class="ui-inline-form-button h-flex-one h-flex-x-self-end h-ml-10"
+                  (click)="applyCoupon(form.get('coupon').value)" [appLoading]="applyCouponReq$">Apply</button>
+        </div>
+      </app-form-element>
+
+      <button app-button="basic" class="h-medium-l-uil3 h-mb-20 h-flex-row" *ngIf="!showCoupon" (click)="showCoupon=true">
+        <svg-icon-sprite src="plus-icon" class="c-smaller-icon"></svg-icon-sprite>
+        Add Promo Code
+      </button>
+    </form>
+
+
+    <div class="c-totals">
+      <div class="c-totals__item">
+        <span class="c-totals__label h-medium-l-b2">
+          Subtotal
+        </span>
+        <span class="h-dark-r-b1">
+          {{ getPrice(PriceType.ORIGINAL) | currency }}
+        </span>
+      </div>
+
+      <div class="c-totals__item" *ngFor="let adjustment of (paymentDetails$ | async).adjustments">
+        <span class="c-totals__label h-success-text-color">
+          <ng-container *ngTemplateOutlet="adjustment.type === PaymentAdjustmentType.COUPON ? couponTemplate : creditTemplate; context: { adjustment: adjustment }"></ng-container>
+        </span>
+        <span class="h-success-text-color">
+          -{{ (adjustment.amount / 100) | currency }}
+        </span>
+      </div>
+
+      <div class="c-totals__item h-large-text">
+        <span class="c-totals__label h-dark-l-uil1">
+          Total
+        </span>
+        <span class="h-dark-r-uil1">
+          {{ getPrice(PriceType.FINAL) | currency }}
+        </span>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="c-alert--danger h-mt-30">
+      <div class="c-alert--danger__title">Payment Processing Error</div>
+      {{ error }}
+    </div>
+
+
+    <button app-button size="large" responsive="true" class="h-margin-center h-mt-35 h-mb-30 h-mt-xs-30 h-mb-xs-30" (click)="submit()" [appLoading]="req$ || updateUserReq$">
+      Book Now
+    </button>
+
+    <p class="h-medium-c-b3">
+      Your payment information is securely encrypted. This service is not covered by Medicare, Medicaid, or private insurance.
+      You may cancel 24 hours in advance for a full refund. Within 24 hours, no refunds are provided due to advance work.
+      By tapping Book Now you agree to our <a [href]="'/payments' | interAppUrl" target="_blank" class="h-medium-text-color">Payments Policy</a> and agree to self-pay {{ getPrice(PriceType.FINAL) | currency }}.
+    </p>
+  </ng-container>
+
+  <div class="payment-info">
+    <app-accordian [row]="true">
+      <app-expansion-panel>
+        <ng-container ngProjectAs=".title">
+          Lab Pricing
+        </ng-container>
+        Getlabs' convenience fee is separate from laboratory testing fees. Once we deliver your samples to your preferred
+        laboratory, they handle the rest of the process independently. If you have questions about their testing fees and
+        pricing, call the laboratory directly.
+      </app-expansion-panel>
+
+      <app-expansion-panel>
+        <ng-container ngProjectAs=".title">
+          Insurance Coverage
+        </ng-container>
+        Although Getlabs does not accept insurance, the lab testing your samples typically will. To check, just call
+        the lab and ask whether you're covered. Once your Getlabs visit is booked, we will collect your insurance
+        details to provide to the lab.
+      </app-expansion-panel>
+
+      <app-expansion-panel>
+        <ng-container ngProjectAs=".title">
+          Price Transparency
+        </ng-container>
+        Your payment covers recruiting, assessing, and compensating phlebotomists, as well as supplies and transporting your samples to the lab for testing.
+      </app-expansion-panel>
+    </app-accordian>
+  </div>
+
+</div>
+
+<ng-template #couponTemplate let-adjustment="adjustment">
+  Promo - {{ adjustment.data.coupon.code | uppercase }} ({{adjustment.data.coupon | discount}})
+  <button app-button="basic" class="h-ml-10" (click)="removeCoupon()" [appLoading]="removeCouponReq$">
+    <svg-icon-sprite src="close-icon" class="c-smaller-icon remove-coupon"></svg-icon-sprite>
+  </button>
+</ng-template>
+<ng-template #creditTemplate>
+  Credits Applied
+</ng-template>

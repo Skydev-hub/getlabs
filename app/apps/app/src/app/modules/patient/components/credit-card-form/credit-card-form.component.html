@@ -1,0 +1,22 @@
+<ng-container *ngIf="paymentIntent$ | async; else loading">
+  <form [formGroup]="form">
+    <div class="h-flex-col">
+      <div class="c-form-basic">
+        <app-form-element [error]="getError('name')" style="grid-column: 1 / 3" label="Name on Card">
+          <input class="ui-input ui-input--large" type="text" placeholder="Name on card"
+                 autocomplete="cc-name" formControlName="name">
+        </app-form-element>
+        <app-form-element [error]="ccError" style="grid-column: 1 / 3" label="Card Number">
+          <div class="ui-input ui-input--large credit-card-input" #cc></div>
+        </app-form-element>
+      </div>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #loading>
+  <div class="l-wrapper l-wrapper--xs l-wrapper--col h-flex-y-center h-mt-30">
+    <span class="h-medium-text-color h-mb-5">Loading...</span>
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+  </div>
+</ng-template>

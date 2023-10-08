@@ -1,0 +1,21 @@
+@import "variables";
+@import "GLSS/typography/ui-labels";
+
+@mixin c-alert($type, $alert-color) {
+  .c-alert--#{$type} {
+    border-width: 1px 1px 1px 5px;
+    border-color: $alert-color;
+    border-style: solid;
+    padding: 15px 25px;
+    background-color: transparentize($alert-color, 0.9);
+
+    @extend .h-#{$type}-l-uil2;
+
+    &__title {
+      @extend .h-#{$type}-l-uil1;
+    }
+  }
+}
+
+@include c-alert('danger', $gl-ui-danger);
+

@@ -1,0 +1,27 @@
+@import "variables";
+
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+// The following pointer-events css fixes a bug in the default styling of the overlay pane that prevents
+// clicks from bleeding through to the backdrop and closing the overlay.
+.cdk-overlay-pane {
+  pointer-events: none !important;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+
+.cdk-overlay-backdrop {
+  background-color: transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+
+  &-showing {
+    background-color: rgba($gl-dark, .4);
+    opacity: 1;
+    visibility: visible;
+  }
+}

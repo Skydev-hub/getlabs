@@ -1,0 +1,16 @@
+@import "GLSS/library/mixins";
+
+.ui-input-container .StripeElement {
+  padding: 24px;
+}
+
+input { font-size: 18px; }
+
+.StripeElement {
+  display: flex;
+  align-items: center;
+
+  ::ng-deep & > * {
+    width: 100%;
+  }
+}

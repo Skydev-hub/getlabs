@@ -1,0 +1,8 @@
+<ng-container *ngIf="(awardCampaign$ | async) as awardCampaign">
+  <ng-container *ngTemplateOutlet="templateRef ? templateRef : awardAmount;
+  context: { awardCampaign: awardCampaign, amount: ((awardCampaign.award / 100) | currency) | truncateNumbers }"></ng-container>
+</ng-container>
+
+<ng-template #awardAmount let-amount="amount">
+  {{amount}}
+</ng-template>

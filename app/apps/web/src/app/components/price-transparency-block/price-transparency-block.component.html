@@ -1,0 +1,25 @@
+<div class="l-wrapper">
+  <div class="wrapper">
+    <div class="content" aria-label="Comforting home succulent plant">
+      <svg-icon-sprite src="calendar-cash-icon" class="icon" aria-hidden="true"></svg-icon-sprite>
+      <h2 class="h-dark-c-h1 h-dark-c-h1--responsive title">
+        <span [noContent]="price">
+          <ng-content></ng-content>
+        </span>
+      </h2>
+      <p class="price h-dark-c-lb2 h-dark-c-lb2--responsive">
+        For comparison, the draw fee at labs is around $25.
+      </p>
+      <div class="note">
+        <svg-icon-sprite src="small-check-mark-icon" class="c-small-icon c-small-icon--dark check" aria-hidden="true"></svg-icon-sprite>
+        <p class="h-dark-l-b2">
+          No surprises, no bills, no hidden fees. 100% up-front price transparency
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #price>
+  Book Getlabs starting at just <app-price></app-price>
+</ng-template>

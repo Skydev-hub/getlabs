@@ -1,0 +1,14 @@
+google-map {
+  height: 400px;
+}
+
+.specialist-index {
+  &__name {
+    margin-left: 5px;
+    padding-top: 5px;
+  }
+
+  &__icon {
+    max-height: 32px;
+  }
+}

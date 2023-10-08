@@ -1,0 +1,2 @@
+<app-section-header [heading]="market ? 'Edit Market' : 'New Market'"></app-section-header>
+<app-team-market-details-form [market]="market" (save)="onSave($event)"></app-team-market-details-form>

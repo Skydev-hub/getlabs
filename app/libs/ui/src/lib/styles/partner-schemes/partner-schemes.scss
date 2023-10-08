@@ -1,0 +1,5 @@
+@import "../variables";
+@import "../components/partner-site-message";
+
+@include partner-site-message-theme('rupa', $rupa-brand-color, $white);
+@include partner-site-message-theme('lab-corp', $labcorp-brand-color, $white);

@@ -1,0 +1,27 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <ng-container *ngIf="phoneNumber; then confirm; else signIn"></ng-container>
+
+  <ng-template #signIn>
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30" [ngSwitch]="true">
+      <ng-container *ngSwitchCase="isStaff()">
+        Enter your phone number to sign in to Getlabs Team
+      </ng-container>
+      <ng-container *ngSwitchCase="isSpecialist()">
+        Enter your phone number to sign in to Getlabs Care
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        Enter your phone number to sign in
+      </ng-container>
+    </h1>
+    <app-sign-in [userType]="userType" (codeRequested)="setPhoneNumber($event)"></app-sign-in>
+  </ng-template>
+
+  <ng-template #confirm>
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+      Type in the security code we just texted you at <span class="h-no-wrap">{{ phoneNumber | phone }}</span>
+    </h1>
+    <app-sign-in-confirm [userType]="userType" [phoneNumber]="phoneNumber" (authenticated)="redirect()"></app-sign-in-confirm>
+  </ng-template>
+
+</main>

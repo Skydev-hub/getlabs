@@ -1,0 +1,47 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Core > Layout
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'variables';
+@import 'mixins';
+@import 'GLSS/library/helpers';
+
+@import 'libs/ui/src/lib/styles/core/layout';
+
+//
+// Main Content Container
+//
+.l-main-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &--flow {
+    padding-top: 40px;
+  }
+
+  @include bp(s) {
+    &--flow {
+      padding-top: 30px;
+    }
+  }
+} // l-main-container
+
+.l-stage {
+  @extend .l-wrapper;
+  @extend .l-wrapper--col;
+  @extend .h-flex-x-center;
+
+  min-height: 300px;
+
+  &--xs {
+    @extend .l-wrapper--xs;
+  }
+
+  &--sm {
+    @extend .l-wrapper--sm;
+  }
+}

@@ -1,0 +1,7 @@
+@import "components/person-list";
+
+:host {
+  .c-table__row {
+    grid-template-columns: 250px repeat(auto-fit, minmax(100px, 1fr));
+  }
+}

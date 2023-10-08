@@ -1,0 +1,147 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  display: block;
+  flex: 0 0 auto;
+  background-color: $gl-light-l3;
+
+  &.footer {
+    width: 100%;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 68%;
+    padding: 40px 0;
+
+    nav a {
+      white-space: nowrap;
+    }
+  }
+
+  .bottom {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    color: $black;
+    padding: 8px 0;
+    flex: 1 1 32%;
+    width: 100%;
+
+    a:hover {
+      color: $gl-primary-d1-hover;
+    }
+
+    .wrapper {
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      padding: 12px 0;
+    }
+  }
+
+  .phone {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-direction: column;
+    flex: auto;
+  }
+
+  .logo {
+    display: block;
+    margin: 0 0 10px 0;
+    height: 27px;
+    color: $gl-dark;
+  }
+
+  .copyright,
+  .social {
+    flex: 1 1 15%;
+  }
+
+  .bottom-nav {
+    flex-grow: 1;
+  }
+
+  .copyright {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .social {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(xs) {
+    height: auto;
+
+    .phone {
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      margin: 0 0 20px 0;
+    }
+
+    .bottom {
+      .wrapper {
+        flex-direction: column;
+      }
+    }
+
+    .bottom-nav {
+      margin-bottom: 20px;
+
+      a {
+        margin-top: 0;
+      }
+    }
+
+    .social {
+      margin-bottom: 20px;
+    }
+
+    .copyright {
+      text-align: center;
+      margin: 8px 0 20px;
+    }
+  } // xs
+} // :host
+
+//
+// Navigation
+//
+nav {
+  display: flex;
+  justify-content: center;
+
+  a {
+    margin: 0 15px;
+  }
+
+  @include bp(xxs) {
+    flex-wrap: wrap;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @include bp(xs) {
+    a {
+      margin: 10px 6px 0;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div mat-dialog-title class="h-dark-c-lb2 h-flex-col h-flex-y-center">
+  <svg-icon-sprite src="flash-1" class="c-medium-icon h-full-width"></svg-icon-sprite>
+  <div class="h-mt-15">
+    This is a last-minute slot. Do you have your lab order ready to upload?
+  </div>
+</div>
+<mat-dialog-content class="h-medium-c-b2 h-mt-10 h-mb-10">
+  If you do not have your lab order, pick a later time and our team will call your doctor to get your lab order for you.
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" size="medium" class="mat-dialog-secondary-action" mat-dialog-close>
+    No, pick later time
+  </button>
+  <button app-button size="medium" class="mat-dialog-primary-action" [mat-dialog-close]="true">
+    Yes, continue
+  </button>
+  <button class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,155 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid $gl-light-l2;
+
+  &:first-of-type {
+    border-top: 1px solid $gl-light-l2;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  mat-select {
+    width: auto;
+    min-width: 72px;
+
+    &:not(:first-of-type) {
+      text-align: right;
+    }
+
+    ::ng-deep {
+      .mat-select-trigger {
+        .mat-select-value {
+          max-width: inherit;
+          color: $gl-primary-d1;
+        }
+        .mat-select-arrow-wrapper {
+          display: none;
+        }
+      }
+    }
+  }
+
+
+  .label {
+    flex: 1;
+  }
+
+  .operating-hours {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    //width: 42%;
+    margin-right: 20px;
+
+    @mixin content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      //margin-right: 20px;
+    }
+
+    .hours {
+      //@include content;
+      //width: 100%;
+      margin-right: 40px;
+
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+
+      .range {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
+    .default-hours {
+      @include content;
+
+      button {
+        margin-left: 15px;
+      }
+    }
+
+    .not-scheduled {
+      @include content;
+    }
+
+  }
+
+  .add-range {
+    padding-right: 0;
+  }
+
+  .availability-controls {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .add-range {
+      margin-right: 20px;
+
+      svg-icon {
+        fill: $gl-primary-d1;
+      }
+
+      &:hover {
+        svg-icon {
+          fill: $gl-primary-d1-hover;
+        }
+      }
+    }
+
+    &--multiple {
+      flex-direction: column;
+      align-self: stretch;
+      align-items: flex-end;
+
+      //& > * {
+      //  flex: 1;
+      //}
+
+      //.add-container {
+      //  flex-grow: 1;
+      //}
+
+      mat-slide-toggle {
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+
+      .add-range {
+        margin-top: 10px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(xs) {
+    flex-direction: column;
+    align-items: stretch;
+
+    .operating-hours {
+      margin-top: 10px;
+      width: 100%;
+
+      .hours {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+

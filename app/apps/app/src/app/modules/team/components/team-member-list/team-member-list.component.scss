@@ -1,0 +1,20 @@
+@import "components/person-list";
+
+:host {
+  .c-table__row {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  }
+
+  //::ng-deep {
+  //  .status-affirmative {
+  //    font-weight: $gl-bold-font-weight;
+  //    color: $gl-ui-success;
+  //  }
+  //
+  //  .status-negative {
+  //    color: $gl-medium;
+  //  }
+  //}
+
+
+}

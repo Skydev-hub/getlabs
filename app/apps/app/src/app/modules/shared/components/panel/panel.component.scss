@@ -1,0 +1,63 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/body";
+@import "GLSS/typography/ui-labels";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  background-color: #fcfcfd;
+  border: 1px solid $gl-light-l2;
+
+  &.panel {
+    &--compact {
+      padding: 10px 15px;
+    }
+
+    &--row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      @include bp(s) {
+        flex-direction: column;
+        justify-content: center;
+
+        ::ng-deep > *:not(:last-child) {
+          margin-bottom: 10px;
+          text-align: center;
+        }
+      }
+    }
+
+    &--dark {
+      border: 0;
+      background-color: $gl-light-l3;
+    }
+
+    &--warning {
+      border: 1px solid $gl-ui-warning;
+      background-color: lighten($gl-ui-warning, 40%);
+    }
+
+    &--primary {
+      border: 0;
+      background-color: $gl-primary;
+    }
+  }
+
+  ::ng-deep {
+    dt {
+      @extend .h-medium-l-b2;
+
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+    }
+
+    dd {
+      @extend .h-dark-l-uil1;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@import "variables";
+@import "mixins";
+
+:host {
+
+  app-expansion-panel {
+    border: 1px solid $gl-light-l2;
+    margin-bottom: 15px;
+    padding: 20px 25px;
+
+    ::ng-deep {
+      .question {
+        padding: 0;
+      }
+
+      .header {
+        padding: 0;
+      }
+
+      .chevron {
+        display: none;
+      }
+
+      .content {
+        padding-bottom: 0;
+        color: $gl-dark-text-color;
+      }
+
+      .answer {
+        padding-top: 5px;
+        padding-bottom: 0;
+      }
+    }
+
+    &.active ::ng-deep {
+      .header {
+        margin-bottom: 10px;
+      }
+    }
+
+    &.completed ::ng-deep {
+      .title {
+        text-decoration: line-through;
+      }
+    }
+
+    &.disabled ::ng-deep {
+      .header {
+        cursor: not-allowed;
+        color: $gl-light-text-color;
+
+        &:hover {
+          color: $gl-light-text-color;
+        }
+      }
+    }
+
+    //
+    // Responsive
+    //
+    @include bp(s) {
+      width: calc(100% + #{$mobile-edge * 2});
+      margin-left: -$mobile-edge;
+      border-radius: 0;
+      padding: 15px $mobile-edge;
+    }
+  }
+
+  ::ng-deep {
+    a, .ui-text-button {
+      display: inline-block;
+
+      svg-icon-sprite {
+        vertical-align: bottom;
+      }
+    }
+
+    .ui-text-button {
+      padding: 0;
+    }
+  }
+}

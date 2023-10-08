@@ -1,0 +1,10 @@
+.input-container {
+  position: relative;
+}
+
+.address-verified {
+  position: absolute;
+  top: calc((100% / 2) - 12px);
+  right: 0;
+  margin-right: 10px;
+}

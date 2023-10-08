@@ -1,0 +1,12 @@
+@import "variables";
+@import "mixins";
+
+:host {
+
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+} // __item

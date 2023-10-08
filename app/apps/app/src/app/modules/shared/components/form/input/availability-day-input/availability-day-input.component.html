@@ -1,0 +1,48 @@
+<ng-container [formGroup]="form">
+  <div class="label h-dark-l-b2">{{ label }}</div>
+
+  <div class="operating-hours" formArrayName="ranges">
+    <ng-container *ngIf="form.get('enabled').value; else notScheduled">
+      <ng-container *ngIf="ranges.controls.length > 0; else defaultHours">
+        <div class="hours" *ngFor="let item of ranges.controls; let index = index; let last = last;" [formGroupName]="index.toString()">
+          <div class="range">
+            <mat-select formControlName="start" [disableRipple]="true" class="h-primary-d1-c-uil2">
+              <mat-option *ngFor="let option of getStartTimeOptions(index)" [value]="option">{{ convertTimeToDate(option) | date:'h:mm aaa' }}</mat-option>
+            </mat-select>
+            <span class="h-dark-text-color h-ml-10 h-mr-10">to</span>
+            <mat-select formControlName="end" [disableRipple]="true" class="h-primary-d1-c-uil2">
+              <mat-option *ngFor="let option of getEndTimeOptions(index)" [value]="option">{{ convertTimeToDate(option) | date:'h:mm aaa' }}</mat-option>
+            </mat-select>
+            <button app-button="basic" class="h-ml-15" (click)="removeRange(index)">
+              <svg-icon-sprite src="circle-delete-icon" class="c-small-icon"></svg-icon-sprite>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="availability-controls" [ngClass]="{'availability-controls--multiple': ranges.controls.length}">
+    <mat-slide-toggle class="toggle" formControlName="enabled" color="primary" [disableRipple]="true"></mat-slide-toggle>
+    <ng-container *ngIf="form.get('enabled').value" [ngTemplateOutlet]="addRangeBtn"></ng-container>
+  </div>
+</ng-container>
+
+<ng-template #notScheduled>
+  <div class="not-scheduled">
+    <span class="h-danger-r-uil2">Not Scheduled</span>
+  </div>
+</ng-template>
+
+<ng-template #defaultHours>
+  <div class="default-hours">
+    <span class="h-medium-text-color">Default Hours</span>
+<!--    <ng-container [ngTemplateOutlet]="addRangeBtn"></ng-container>-->
+  </div>
+</ng-template>
+
+<ng-template #addRangeBtn>
+  <button app-button="basic" type="button" class="add-range" (click)="addRange()" >
+    <svg-icon-sprite src="circle-plus-icon" class="c-small-icon"></svg-icon-sprite>
+  </button>
+</ng-template>

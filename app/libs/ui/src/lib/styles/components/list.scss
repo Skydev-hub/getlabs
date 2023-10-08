@@ -1,0 +1,64 @@
+@import 'variables';
+@import 'mixins';
+
+.c-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid $gl-light-l2;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &--left {
+      flex: 1;
+      align-self: flex-start;
+    }
+
+    &--right {
+      flex: 1;
+      justify-self: flex-end;
+
+      display: flex;
+      justify-content: flex-end;
+
+      text-align: right;
+    }
+  }
+}
+
+.c-bulleted-list {
+  list-style: disc;
+  padding-left: 30px;
+  color: $gl-primary-d1;
+
+  & > li {
+    padding: 10px 0;
+  }
+
+  @include bp(s) {
+    & > li:first-child {
+      padding-top: 0;
+    }
+  }
+
+  &--condensed {
+    & > li {
+      padding: 0;
+    }
+  }
+}
+
+.c-bulleted-list--dark {
+  color: $gl-dark-text-color;
+}

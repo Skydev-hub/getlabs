@@ -1,0 +1,7 @@
+<input class="ui-input ui-input--large date-input-control" placeholder="Date" [matDatepicker]="picker" (click)="picker.open()" [formControl]="input" readonly />
+<div *ngIf="displayMode === 'inline'" class="h-flex h-flex-row h-flex-y-end">
+  <button class="date-button ui-button ui-text-button h-primary-d1-r-uil2" *ngIf="displayMode === 'inline'" (click)="$event.preventDefault(); picker.open()">
+    {{ (input.value && (input.value | date: 'mediumDate')) || 'Select Date' }}
+  </button>
+</div>
+<mat-datepicker #picker [startAt]="start" (closed)="onTouched()"></mat-datepicker>

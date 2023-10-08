@@ -1,0 +1,54 @@
+@import "variables";
+@import "GLSS/typography/headings";
+
+:host {
+  width: 100%;
+
+  .ui-input-container--error & {
+    .label {
+      color: $gl-ui-danger;
+    }
+  }
+
+  h3 {
+    display: flex;
+    flex-direction: row;
+
+    @extend .h-dark-l-h4;
+    @extend .h-dark-l-h4--responsive;
+
+    span {
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+
+      flex-shrink: 1;
+      flex-grow: 0;
+
+      width: 100%;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 20px;
+      height: 1px;
+      border-bottom: 1px solid $gl-primary-d1;
+    }
+  }
+}
+
+:host-context(.app-form-group__heading-sm) {
+  h3 {
+    @extend .h-dark-l-h6;
+  }
+}
+
+:host-context(.app-form-group__heading-divider-light) {
+  h3 {
+    &::after {
+      border-bottom-color: $gl-light-l2;
+    }
+  }
+}

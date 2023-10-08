@@ -1,0 +1,18 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+  <h2 class="h-dark-c-h4 h-dark-c-h3--responsive">Upload the lab order your doctor provided you</h2>
+  <div class="l-stage l-stage--xs">
+    <div class="h-mb-20 h-mt-25 h-flex-x-center">
+  <!--    <svg-icon src="assets/icons/circle-check-gradient-icon.svg" [svgStyle]="{ 'width.px': '64', 'height.px': '64' }"></svg-icon>-->
+      <img src="/assets/icons/large-circle-check-icon.svg" alt="Link Sent" width="64" height="64">
+    </div>
+    <div class="h-flex-col">
+      <span class="h-dark-c-uil1">
+        Link texted to {{ getUser().phoneNumber | phone }}
+      </span>
+    </div>
+    <div class="h-dark-c-b2">
+      Didn’t get the link?
+      <button class="ui-text-button h-primary-d1-l-uil2" (click)="sendMobileLink()" [appLoading]="req$">Click to Resend</button>
+    </div>
+  </div>
+</div>

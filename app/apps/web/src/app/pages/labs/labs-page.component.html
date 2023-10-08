@@ -1,0 +1,180 @@
+<app-lab-page-hero>
+  <ng-container [ngSwitch]="!!lab">
+    <ng-container *ngSwitchCase="true">
+      <h1 class="h-dark-l-dh2 h-dark-l-dh4--large-responsive h-mb-40 h-mb-xs-15">Schedule a {{ lab | lab }} Appointment.</h1>
+      <h2 class="h-dark-l-dsh1 h-dark-l-dsh1--responsive h-mb-40 h-mb-xs-20">
+        Find locations near you or save time by booking an at-home appointment with Getlabs.
+      </h2>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <h1 class="h-dark-l-dh2 h-dark-l-dh4--large-responsive h-mb-40 h-mb-xs-15">
+        Find nearby labs or book a mobile lab draw.
+      </h1>
+      <h2 class="h-dark-l-dsh1 h-dark-l-dsh1--responsive h-mb-40 h-mb-xs-20">
+        Getlabs comes to your home or office and delivers your samples to
+        <a routerLink="/labs/labcorp" class="h-labcorp-underline-link">Labcorp</a> and
+        <a routerLink="/labs/quest-diagnostics" class="h-quest-diagnostics-underline-link">Quest Diagnostics</a>.
+      </h2>
+    </ng-container>
+  </ng-container>
+</app-lab-page-hero>
+
+<section class="c-psc-map-intro">
+  <div class="l-wrapper l-wrapper--md c-psc-map-intro__wrapper">
+    <h3 class="h-dark-c-h3 h-dark-c-h3--responsive c-psc-map-intro__title">
+      <ng-container [ngSwitch]="lab">
+        <ng-container *ngSwitchCase="LabCompany.LabCorp">
+          All Labcorp locations near me
+        </ng-container>
+        <ng-container *ngSwitchCase="LabCompany.SonoraQuest">
+          All Sonora Quest locations near me
+        </ng-container>
+        <ng-container *ngSwitchCase="LabCompany.QuestDiagnostics">
+          All Quest Diagnostics locations near me
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          Find laboratory locations near you
+        </ng-container>
+      </ng-container>
+    </h3>
+    <div class="c-psc-map-intro__actions">
+      <button app-button="basic" class="c-psc-map-intro__loc-button h-mr-15" (click)="useBrowserLocation()">
+        <svg-icon-sprite src="location-icon" class="c-small-icon c-small-icon--medium"></svg-icon-sprite>
+      </button>
+      <div class="ui-search-input ui-search-input--small c-psc-map-intro__search" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+        <svg-icon-sprite src="search-icon" class="c-small-icon c-small-icon--medium h-mr-10"></svg-icon-sprite>
+        <input
+          type="text"
+          class="ui-search-input__input"
+          placeholder="Search by zip code, city, or address"
+          [formControl]="address"
+          [matAutocomplete]="auto"
+          [matAutocompleteConnectedTo]="origin"
+        />
+
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [disableRipple]="true"
+          [displayWith]="getAutocompleteAddressLabel"
+          (optionSelected)="onSelectedAutocompleteAddress($event)"
+        >
+          <mat-option [value]="'my-location'">
+            <svg-icon-sprite src="location-icon" class="c-small-icon c-small-icon--primary-d1 h-mr-10"></svg-icon-sprite>
+            <span class="mat-option-text__overflow">Use my location</span>
+          </mat-option>
+          <mat-option *ngFor="let result of autocomplete$ | async; let index = index" [value]="result">
+            <svg-icon-sprite src="small-location-pin-icon" class="c-small-icon c-small-icon--medium h-mr-10"></svg-icon-sprite>
+            <span class="mat-option-text__overflow">{{ result.description }}</span>
+          </mat-option>
+        </mat-autocomplete>
+
+        <svg-icon-sprite src="clear-icon" class="c-small-icon c-small-icon--light h-ml-10 ui-search-input__clear-icon"></svg-icon-sprite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="c-psc-map-list-container" *ngIf="{ locations: (locations$ | async)?.data } as data">
+  <div class="c-psc-map-list-tabs">
+    <button class="c-psc-map-list-tabs__tab h-dark-c-uil2" [class.c-psc-map-list-tabs__tab--active]="tab === 'list'" (click)="tab = 'list'">
+      List
+    </button>
+    <button class="c-psc-map-list-tabs__tab h-dark-c-uil2" [class.c-psc-map-list-tabs__tab--active]="tab === 'map'" (click)="tab = 'map'">
+      Map
+    </button>
+  </div>
+  <section class="l-wrapper c-psc-map-list-container__wrapper">
+    <section class="c-psc-map-list-container__map-container" [class.c-psc-map-list-container__map-container--active]="tab === 'map'" *serverRender="false">
+      <google-map *appGoogleMapsLazyLoader width="100%" height="100%"
+                  [options]="{ zoomControl: true, streetViewControl: false, gestureHandling: 'auto', draggableCursor: 'default', clickableIcons: false }"
+                  appGoogleMapsOptionExt bounds="ContiguousUsa" [zoom]="4">
+        <map-marker [position]="{ lat: location[0], lng: location[1] }" [options]="{ zIndex: 5000, icon: '/assets/icons/location-pin-icon-default.svg' }"></map-marker>
+        <map-marker
+          *ngFor="let location of data.locations; index as i"
+          [label]="i + 1 | mapPinLabel"
+          [options]="{ zIndex: 1000, icon: getIconUrl(location.lab) }"
+          [position]="{ lat: location.address.geocoding?.coordinates[0], lng: location.address.geocoding?.coordinates[1] }"
+          [clickable]="true"
+          (mapClick)="goToLocation(location)"
+        ></map-marker>
+      </google-map>
+    </section>
+    <div class="c-psc-map-list-container__list-container" [class.c-psc-map-list-container__list-container--hide]="tab !== 'list'">
+      <h4 class="h-dark-l-h6 c-psc-map-list-container__list-title">
+        Locations in the United States
+      </h4>
+
+      <div class="c-psc-list">
+        <a class="c-psc-location c-psc-location--highlight h-mb-15" [href]="'/book' | interAppUrl: 'app'">
+          <div class="c-psc-location__main">
+            <svg-icon-sprite width="89" height="20" src="getlabs-logo-dark" class="h-mt-10 h-mb-10"></svg-icon-sprite>
+            <h5 class="h-dark-l-uil2 h-mb-5">
+              At-home lab appointment
+            </h5>
+            <span class="h-medium-l-b3">
+              Skip the wait, we bring the lab to you.
+            </span>
+          </div>
+          <div class="c-psc-location__secondary">
+            <a app-button size="xs" [href]="'/book' | interAppUrl: 'app'" aria-label="Schedule Appointment Link">
+              Book Now
+              <svg-icon-sprite src="right-chevron-icon" class="c-smaller-icon h-ml-5"></svg-icon-sprite>
+            </a>
+            <span class="c-psc-location__distance">
+              <svg-icon-sprite src="small-location-pin-icon" class="c-small-icon c-small-icon--dark h-mr-5"> </svg-icon-sprite>
+              <span class="h-dark-l-uil2">
+                0 mi
+              </span>
+            </span>
+          </div>
+        </a>
+
+        <a class="c-psc-location h-mb-15" *ngFor="let location of data.locations; index as i" routerLink="/labs/{{ location.lab }}/{{ location.slug }}">
+          <span class="c-psc-location__map-number">
+            {{ i + 1 }}
+          </span>
+          <div class="c-psc-location__main">
+            <span
+              class="h-dark-l-uil1 c-psc-location__provider"
+              [class.c-psc-location__provider--labcorp]="location.lab == LabCompany.LabCorp"
+              [class.c-psc-location__provider--sonora-quest]="location.lab == LabCompany.SonoraQuest"
+              [class.c-psc-location__provider--quest-diagnostics]="location.lab == LabCompany.QuestDiagnostics"
+            >
+              {{ location.lab | lab }}
+            </span>
+            <h6 class="h-dark-l-b3 h-mb-5">
+              Walk-in lab appointment
+            </h6>
+            <span class="h-medium-l-b3">
+              {{ location.address | address }}
+            </span>
+          </div>
+          <div class="c-psc-location__secondary">
+            <a routerLink="/labs/{{ location.lab }}/{{ location.slug }}" class="h-link c-chevron-link c-psc-location__details-link">
+              See Details
+              <svg-icon-sprite src="right-chevron-icon" class="c-small-icon c-chevron-link__chevron"></svg-icon-sprite>
+            </a>
+            <span class="c-psc-location__distance">
+              <svg-icon-sprite src="small-location-pin-icon" class="c-small-icon c-small-icon--dark h-mr-5"> </svg-icon-sprite>
+              <span class="h-dark-l-uil2"> {{ location.address.distance | number: '1.0-1' }} mi </span>
+            </span>
+          </div>
+        </a>
+
+        <div class="c-psc-list__more" *ngIf="lab">
+          <h6 class="h-dark-l-h6 h-mb-20">
+            Looking for another location?
+          </h6>
+          <a app-button size="small" routerLink="/labs" class="h-flex-x-self-start">
+            Find More Locations
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-price-transparency-block> Try Getlabs instead for just <app-price></app-price> </app-price-transparency-block>
+<app-cta-block></app-cta-block>
+<app-note-block></app-note-block>

@@ -1,0 +1,57 @@
+<section class="c-table-container c-table-container--bottom-margin" infiniteScroll [infiniteScrollThrottle]="0"
+         [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
+  <div class="c-table">
+    <div class="c-table__row">
+      <div class="c-table__heading">Name</div>
+      <div class="c-table__heading">Markets</div>
+      <div class="c-table__heading">
+        <span matTooltip="Meets all criteria to be assigned appointments">Internally Bookable</span>
+      </div>
+      <div class="c-table__heading">
+        <span matTooltip="Availability is exposed for patients to book">Externally Bookable</span>
+      </div>
+      <div class="c-table__heading">Status</div>
+    </div>
+
+    <ng-container *ngIf="(data$ | async) as users; else loading">
+      <a routerLink="/team/specialists/{{ user.id }}" class="c-table__row" *ngFor="let user of users">
+        <div class="c-table__col h-bold-font-weight">
+          {{ user.name }}
+        </div>
+        <div class="c-table__col">
+          {{ user.markets | mapAndJoin:'code' }}
+        </div>
+        <div class="c-table__col">
+          <ng-container *ngIf="user.isBookable; then yes; else no"></ng-container>
+        </div>
+        <div class="c-table__col">
+          <ng-container *ngIf="user.isAvailable; then yes; else no"></ng-container>
+        </div>
+        <div class="c-table__col">
+          <app-account-status [user]="user"></app-account-status>
+        </div>
+      </a>
+      <ng-container *ngIf="users.length === 0">
+        <div class="c-table-empty-state">
+          <svg-icon-sprite src="large-circle-search-icon" class="h-mb-25" height="92" width="92"></svg-icon-sprite>
+          No specialists found matching "{{search}}"
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="c-table-empty-state">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+
+  </div>
+</section>
+
+<ng-template #no>
+  <span class="h-danger-text-color h-bold-font-weight">No</span>
+</ng-template>
+
+<ng-template #yes>
+  <span class="h-success-text-color h-bold-font-weight">Yes</span>
+</ng-template>

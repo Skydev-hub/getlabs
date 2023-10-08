@@ -1,0 +1,58 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Core > Base
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+  font-size: 16px;
+  line-height: 1.5em;
+  font-family: $gl-body-font-family;
+  color: $gl-dark-text-color;
+  overscroll-behavior-y: none;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  &.gl-primary-bg {
+    background-color: $gl-primary;
+  }
+
+  // Single Message
+  &.has-site-message {
+    padding-top: $desktop-site-message-height;
+
+    @include bp(xs) {
+      padding-top: $mobile-site-message-height;
+    }
+
+  } // has-site-message
+
+  // Dual Messages
+  &.has-site-messages {
+    padding-top: $desktop-site-message-height * 2;
+
+    @include bp(xs) {
+      padding-top: $mobile-site-message-height * 2;
+    }
+
+  } // has-site-messages
+
+  .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: $gl-primary-d1;
+  }
+
+} // body

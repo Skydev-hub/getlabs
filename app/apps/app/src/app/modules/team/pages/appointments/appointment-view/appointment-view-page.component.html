@@ -1,0 +1,298 @@
+<main class="l-main-container">
+  <div class="l-wrapper l-wrapper--sm l-wrapper--col c-section-title">
+    <h1 class="h-dark-c-h4 h-mb-20">Appointment - #{{ appointment.identifier }}</h1>
+
+    <span class="h-dark-c-uil1 h-mb-10">
+      {{ appointment.startAt | dateTz: 'ha':appointment.patient.timezone }}
+      -
+      {{ appointment.endAt | dateTz: 'ha':appointment.patient.timezone }}
+    </span>
+
+    <span class="h-dark-c-uil1 h-mb-10">
+      {{ appointment.startAt | dateTz: 'fullDate':appointment.patient.timezone }}
+    </span>
+
+    <div class="h-dark-c-uil1">
+      <app-appointment-status-text [appointment]="appointment"></app-appointment-status-text>
+    </div>
+
+    <span class="h-medium-c-b2 h-mt-10" *ngIf="appointment.isCancelled()">
+      <span class="h-bold-font-weight">Reason:</span> {{ appointment.cancelDescription }}
+    </span>
+  </div>
+
+  <div class="l-wrapper l-wrapper--col">
+    <app-panel class="panel--compact panel--row panel--dark h-mb-40" *ngIf="appointment.isRebooked()">
+      <div>
+        This appointment has been rebooked.
+      </div>
+      <a app-button size="undefined" responsive="false" routerLink="/team/appointments/{{ appointment.rebookedTo }}">
+        View Appointment
+      </a>
+    </app-panel>
+
+    <app-expansion-panel [expanded]="expandInformationPanels()" class="overview-panel app-expansion-panel__chevron-left app-expansion-panel__border-title">
+      <ng-container ngProjectAs=".title">
+        Patient Overview
+      </ng-container>
+      <div class="overview--item">
+        <span>Patient Name</span>
+        <span>
+          <a routerLink="/team/patients/{{ appointment.patient.id }}" class="h-primary-link">
+            {{ appointment.patient.name }}
+          </a>
+        </span>
+      </div>
+      <div class="overview--item">
+        <span>Gender</span>
+        <span>
+          {{ appointment.patient.gender | gender }}
+        </span>
+      </div>
+      <div class="overview--item">
+        <span>Date of Birth</span>
+        <span>
+          {{ appointment.patient | dob }}
+        </span>
+      </div>
+      <ng-container *ngIf="appointment.patient.isMinor">
+        <div class="overview--item">
+          <span>Guardian Name</span>
+          <span>
+            {{ appointment.patient.guardianName || 'N/A' }}
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Guardian Relationship</span>
+          <span>
+            {{ appointment.patient.guardianRelationship || 'N/A' }}
+          </span>
+        </div>
+      </ng-container>
+      <div class="overview--item">
+        <span>Phone Number</span>
+        <span>
+          <a href="tel:{{ appointment.patient.phoneNumber | phone }}" class="h-primary-link">
+            {{ appointment.patient.phoneNumber | phone }}
+          </a>
+        </span>
+      </div>
+      <div class="overview--item">
+        <span>Email</span>
+        <span>
+          <a href="mailto:{{ appointment.patient.email }}" *ngIf="appointment.patient.email" class="h-primary-link">
+            {{ appointment.patient.email }}
+          </a>
+        </span>
+      </div>
+      <div class="overview--item">
+        <span>Market</span>
+        <span>
+          <ng-container *ngIf="appointment.market"> {{ appointment.market.name }} - {{ appointment.market.code }} </ng-container>
+        </span>
+      </div>
+      <div class="overview--item overview--item__simple">
+        <span>Address</span>
+        <span>
+          {{ appointment.patient.address.composed || (appointment.patient.address | address) }}
+          <span class="h-danger-text-color h-block" *appIfAddressIsLab="appointment.patient.address">
+            Potential Lab Address
+          </span>
+        </span>
+      </div>
+      <div class="overview--item">
+        <span>Insurance</span>
+        <span>
+          <span class="h-flex h-flex-y-center">
+            <button
+              class="ui-text-button ui-text-button--primary"
+              (click)="preview(appointment.patient.insurance.front)"
+              *ngIf="appointment.patient.insurance.front"
+            >
+              Front
+            </button>
+            <span
+              class="c-divider c-divider--vertical c-divider--medium"
+              *ngIf="appointment.patient.insurance.front && appointment.patient.insurance.rear"
+            ></span>
+            <button
+              class="ui-text-button ui-text-button--primary"
+              (click)="preview(appointment.patient.insurance.rear)"
+              *ngIf="appointment.patient.insurance.rear"
+            >
+              Back
+            </button>
+          </span>
+        </span>
+      </div>
+      <div class="overview--item">
+        <span>Payment</span>
+        <span>
+          <ng-container *ngIf="payment$ | async as payment; else spinner">
+            <ng-container *ngIf="payment.status === 'succeeded'; else incompletePayment">
+              <ng-container *ngIf="!payment.refunded; else refunded">
+                {{ payment.amount / 100 | currency }} to {{ payment.card.brand | uppercase }} {{ payment.card.last4 }}
+                <ng-container *ngTemplateOutlet="stripeLink"></ng-container>
+                <button app-button="text" (click)="refund()">Refund</button>
+              </ng-container>
+              <ng-template #refunded>
+                Refunded {{ payment.amountRefunded / 100 | currency }} to {{ payment.card.brand | uppercase }} {{ payment.card.last4 }}
+                <ng-container *ngTemplateOutlet="stripeLink"></ng-container>
+              </ng-template>
+            </ng-container>
+            <ng-template #incompletePayment>
+              <span class="h-medium-text-color">Incomplete</span>
+              <ng-container *ngTemplateOutlet="stripeLink"></ng-container>
+            </ng-template>
+            <ng-template #stripeLink>
+              <a app-button="basic" href="https://dashboard.stripe.com/payments/{{ payment.id }}" target="_blank" class="h-ml-5 h-mr-5">
+                <svg-icon-sprite src="external-link-icon" class="c-smaller-icon"></svg-icon-sprite>
+              </a>
+            </ng-template>
+          </ng-container>
+        </span>
+      </div>
+      <div class="overview--item" *ngIf="appointment.coupon">
+        <span>Discount</span>
+        <span> {{ appointment.coupon.code }} ({{ appointment.coupon | discount }}) </span>
+      </div>
+    </app-expansion-panel>
+
+    <app-expansion-panel [expanded]="expandInformationPanels()" class="overview-panel app-expansion-panel__chevron-left app-expansion-panel__border-title">
+      <ng-container ngProjectAs=".title">
+        Specialist Overview
+      </ng-container>
+
+      <ng-container *ngIf="appointment.specialist; else assignSpecialist">
+        <div class="overview--item">
+          <span>Specialist Name</span>
+          <span>
+            <a routerLink="/team/specialists/{{ appointment.specialist.id }}" class="h-primary-link">
+              {{ appointment.specialist.name }}
+            </a>
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Phone</span>
+          <span>
+            <a href="tel:{{ appointment.specialist.phoneNumber | phone }}" class="h-primary-link">
+              {{ appointment.specialist.phoneNumber | phone }}
+            </a>
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Email</span>
+          <span>
+            <a href="mailto:{{ appointment.specialist.email }}" *ngIf="appointment.specialist.email" class="h-primary-link">
+              {{ appointment.specialist.email }}
+            </a>
+          </span>
+        </div>
+        <div class="overview--item">
+          <span></span>
+          <span>
+            <button app-button size="xs" (click)="assign()" [disabled]="appointment.isCancelled()">
+              Reassign
+            </button>
+          </span>
+        </div>
+      </ng-container>
+
+      <ng-template #assignSpecialist>
+        <app-panel class="panel--compact panel--row panel--dark">
+          <div class="h-dark-l-b2">
+            This appointment is not assigned to anyone yet.
+          </div>
+          <button app-button size="xs" (click)="assign()" [disabled]="appointment.isCancelled()">
+            Assign
+          </button>
+        </app-panel>
+      </ng-template>
+    </app-expansion-panel>
+
+    <app-expansion-panel [expanded]="expandInformationPanels()" class="overview-panel app-expansion-panel__chevron-left app-expansion-panel__border-title">
+      <ng-container ngProjectAs=".title">
+        Lab Order Contact Information
+      </ng-container>
+      <div class="overview--subsection" *ngFor="let lod of appointment.labOrderDetails; let index = index" [class.lab-order--deleted]="lod.isDeleted">
+        <ng-container *ngIf="lod.getLabOrderType() === LabOrderSeedTypes.DoctorContact">
+          <div class="overview--subheader" *ngIf="appointment.labOrderDetails.length > 1">Lab Order #{{ index + 1 }}</div>
+          <div class="overview--item" [class.h-danger-text-color]="!lod.hasLabOrder">
+            (The patient {{ lod.hasLabOrder ? 'has' : 'does not have' }} this lab order in-hand)
+          </div>
+          <div class="overview--item">
+            <span>Doctor Name</span>
+            <span>
+              {{ lod.contactName }}
+            </span>
+          </div>
+          <div class="overview--item">
+            <span>Phone</span>
+            <span>
+              <a href="tel:{{ lod.contactPhone | phone }}" class="h-primary-link">
+                {{ lod.contactPhone | phone }}
+              </a>
+            </span>
+          </div>
+          <div class="overview--item">
+            <span>Preferred Lab</span>
+            <span>
+              {{ lod.lab | lab }}
+            </span>
+          </div>
+        </ng-container>
+      </div>
+    </app-expansion-panel>
+
+    <ng-container *ngIf="showSetupSteps(); then setupSteps; else progressSteps"></ng-container>
+
+    <div class="h-flex-col h-flex-y-center h-mt-40">
+      <button app-button routerLink="/team/appointments/{{ appointment.id }}/rebook" *ngIf="!appointment.isRebooked() && !appointment.isCancelled()">
+        Rebook Appointment
+      </button>
+      <button app-button="text" size="undefined" class="h-primary-d1-l-uil2 h-mt-30" (click)="cancel()" *ngIf="appointment.isCancellable()">
+        Cancel Appointment
+      </button>
+    </div>
+  </div>
+</main>
+
+<ng-template #spinner>
+  <mat-spinner diameter="16"></mat-spinner>
+</ng-template>
+
+<ng-template #setupSteps>
+  <app-panel class="panel--compact panel--warning h-mb-30" *ngIf="appointment.status !== Status.Pending">
+    <div class="h-text-center h-mb-10">
+      This appointment has already been confirmed and might be in progress.
+    </div>
+
+    <div class="h-text-center h-mb-20">
+      You must ensure that any changes you make are communicated with the specialist.
+    </div>
+
+    <button app-button size="xs" class="h-align-self-center" (click)="editing = false">
+      Exit Editing Mode
+    </button>
+  </app-panel>
+
+  <app-team-appointment-setup-steps
+    [appointment]="appointment"
+    (finished)="onSetupFinished($event)"
+    (updated)="onUpdatedAppointment($event)"
+  ></app-team-appointment-setup-steps>
+</ng-template>
+
+<ng-template #progressSteps>
+  <ng-container *ngIf="appointment.status !== Status.Cancelled">
+    <app-panel class="panel--compact panel--row panel--primary h-mb-30" *ngIf="appointment.status !== Status.Completed">
+      <div class="h-dark-l-b2">
+        This is a read-only state of the specialist's appointment progress.
+      </div>
+      <button app-button size="xs" (click)="editing = true">
+        Make Changes
+      </button>
+    </app-panel>
+    <app-appointment-progress-steps [appointment]="appointment" [readonly]="true"></app-appointment-progress-steps>
+  </ng-container>
+</ng-template>

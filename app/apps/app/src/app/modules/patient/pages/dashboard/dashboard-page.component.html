@@ -1,0 +1,70 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <h1 class="h-h1 h-text-center h-mb-15">
+    Account Dashboard
+  </h1>
+  <p class="h-medium-text-color h-text-center h-mb-30">
+    Welcome to your account dashboard. To book an appointment, or to view/edit your information, just tap on the section below.
+  </p>
+
+  <nav class="c-list-nav">
+
+    <!--
+    <a routerLink="/referral" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Referral Credits
+      </span>
+      <svg-icon src="/assets/icons/right-chevron-icon.svg" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon>
+    </a>
+    -->
+
+    <a routerLink="/book" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Book an Appointment
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon-sprite>
+    </a>
+    <a routerLink="/profile" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Personal Information
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/phone-number" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Phone Number
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon-sprite>
+    </a>
+
+    <!--
+    <a routerLink="/payment-settings" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Payment Settings
+      </span>
+    <svg-icon src="/assets/icons/right-chevron-icon.svg" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon>
+    </a>
+    -->
+
+    <a routerLink="/insurance" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Insurance Details
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon-sprite>
+    </a>
+
+    <a routerLink="/preferred-lab" class="c-list-nav-item">
+      <span class="c-list-nav-item__label h-bold-font-weight">
+        Preferred Lab
+      </span>
+      <svg-icon-sprite src="right-chevron-icon" class="c-list-nav-item__icon c-small-icon c-small-icon--primary"></svg-icon-sprite>
+    </a>
+
+  </nav>
+
+  <button app-button="border" (click)="signOut()" class="h-align-self-center">
+    Sign Out
+  </button>
+
+</main>

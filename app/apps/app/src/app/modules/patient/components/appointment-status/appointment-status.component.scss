@@ -1,0 +1,104 @@
+@import 'variables';
+@import 'mixins';
+
+google-map {
+  height: 280px;
+}
+
+.cta-block {
+  justify-content: space-between;
+
+  @include bp(xs) {
+    flex-direction: column;
+
+    &__button {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.appointment-actions {
+  & > * {
+    border-right: 1px solid $gl-light;
+    padding: 0 20px;
+    min-width: 200px;
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      border: 0;
+    }
+
+    :disabled,
+    .disabled {
+      color: $gl-light;
+    }
+  }
+}
+.description-actions {
+  min-width: 80%;
+  & > * {
+    margin: 0 15px;
+    border: 0;
+    border-top: 1px solid #ccc;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      margin-left: 25px;
+    }
+
+    :disabled,
+    .disabled {
+      color: $gl-light;
+    }
+  }
+}
+hr {
+  color: #eee;
+}
+
+app-panel {
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  background-color: #f8efe6;
+  border: 1px solid #e5c297;
+  transition: background-color $transition-duration, border-color $transition-duration;
+  a {
+    margin: 0 auto;
+  }
+}
+
+.notes-input-container {
+  position: relative;
+
+  $_padding: 2px;
+  $_icon-size: 18px;
+
+  .notes-saved {
+    position: absolute;
+    top: calc((100%) - (#{$_icon-size}/ 2 + 20px));
+    right: 0;
+    margin-right: 10px;
+
+    background-color: $gl-ui-success;
+    border-radius: 50%;
+    padding: $_padding;
+
+    svg-icon-sprite {
+      height: $_icon-size;
+      width: $_icon-size;
+      color: $gl-white-text-color;
+    }
+  }
+
+  input {
+    padding-right: 35px;
+    margin-top: 0;
+  }
+}

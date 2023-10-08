@@ -1,0 +1,57 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Variables > Color
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+// Main Colors
+$gl-primary: #ffe7d1;
+$gl-primary-d1: #dbaf82;
+$gl-primary-d1-hover: darken($gl-primary-d1, 5%);
+$gl-primary-d2-hover: darken($gl-primary-d1, 35%);
+$gl-dark: #000000;
+$gl-medium: #767676;
+$gl-light: #c3c3c3;
+$gl-light-l1: #cccccc;
+$gl-light-l2: #e5e5e5;
+$gl-light-l3: #f3f4f5;
+$gl-light-l4: #f3e5d6;
+$gl-light-l5: #fffbf7;
+$gl-light-l6: #f7f7f7;
+
+// User Interface Colors
+$gl-ui-success: #66ca72;
+$gl-ui-warning: #ebb24a;
+$gl-ui-danger: #fd6363;
+$gl-ui-info: #3fa7e3;
+$gl-ui-purple: #4f5bed;
+
+// Base Colors
+$black: #000;
+$white: #fff;
+
+// 3rd Party brands
+$labcorp-brand-color: #3a5ce9;
+$sonora-quest-brand-color: #842b37;
+$quest-diagnostics-brand-color: #35792a;
+$rupa-brand-color: #014772;
+
+// TODO - needs a second look - are these used anywhere?
+//
+// Typography
+//
+$gl-body-font-family: sofia-pro, sans-serif;
+$gl-heading-font-family: 'DM Serif Display', serif;
+$gl-regular-font-weight: 400;
+$gl-bold-font-weight: 700;
+$gl-dark-text-color: $gl-dark;
+$gl-medium-text-color: $gl-medium;
+$gl-light-text-color: $gl-light;
+$gl-white-text-color: $white;
+
+// TODO - needs a second look - are these used anywhere?
+// Other Colors
+$gl-primary-border-color: $gl-light;
+$gl-light-border-color: $gl-light-l1;
+$gl-very-light-border-color: $gl-light-l2;

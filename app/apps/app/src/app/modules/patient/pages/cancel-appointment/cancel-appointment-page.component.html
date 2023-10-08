@@ -1,0 +1,60 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <ng-container *ngIf="appointment.isCancellable(); else feedback">
+    <h2 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-40">
+      Are you sure you want to cancel your appointment?
+    </h2>
+
+    <div class="h-primary-d1-c-uil1 h-mb-40">
+      {{ appointment.startAt | date:'haaaaa' }}m-{{ appointment.endAt | date:'haaaaa' }}m on
+      <span class="h-no-wrap">{{ appointment.startAt | date:'fullDate' }}</span>
+    </div>
+
+    <div class="actions-container l-wrapper l-wrapper--sm">
+      <button app-button="border" size="large" responsive="true" class="h-flex-one h-mr-20 h-mr-xs-0" routerLink="/">
+        No, Don't Cancel
+      </button>
+      <button app-button size="large" responsive="true" class="h-flex-one h-ml-20 h-ml-xs-0 h-mb-xs-20" (click)="cancel()" [loading]="req$">
+        Yes, I'm sure
+      </button>
+    </div>
+  </ng-container>
+</main>
+
+<ng-template #feedback>
+  <ng-container *ngIf="!hasFeedback; else feedbackSent">
+    <h2 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+      Your appointment is now cancelled.
+    </h2>
+
+    <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-20">
+      If you have a minute, please tell us why you cancelled and whether we can do anything to improve your experience.
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="h-flex-col h-flex-y-center">
+      <app-form-element [error]="getError('feedback')" class="h-full-width h-mb-20">
+        <textarea class="ui-textarea ui-textarea--medium" placeholder="Tell us how we can improve..." formControlName="feedback"></textarea>
+      </app-form-element>
+      <button app-button size="large" responsive="true" type="submit" class="h-mb-20" [appLoading]="req$">
+        Send Feedback
+      </button>
+      <a app-button="secondary" size="large" responsive="true" routerLink="/">
+        Back to Dashboard
+      </a>
+    </form>
+  </ng-container>
+</ng-template>
+
+<ng-template #feedbackSent>
+  <div class="l-wrapper l-wrapper--col h-flex-y-center">
+    <svg-icon-sprite src="/assets/icons.svg#large-circle-check-icon" class="h-mb-20 c-large-icon"></svg-icon-sprite>
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+      Thank you for your feedback.
+    </h1>
+    <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-30">
+      We take your feedback seriously and appreciate your time. Thank you again for using Getlabs.
+    </p>
+    <button app-button size="large" responsive="true" routerLink="/">
+      Back to Dashboard
+    </button>
+  </div>
+</ng-template>

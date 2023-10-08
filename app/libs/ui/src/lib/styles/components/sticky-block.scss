@@ -1,0 +1,47 @@
+@import "mixins";
+@import "variables";
+
+@mixin sticky-block() {
+  $shadow-buffer: 20px;
+
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+  z-index: $z-index-1;
+
+  & + .sticky-placeholder {
+    display: block;
+  }
+}
+
+@mixin min-size($size) {
+  [appStickyBlock].sticky-block[min-size="#{$size}"] {
+    @include bp-min($size) {
+      @include sticky-block();
+    }
+  }
+}
+
+@mixin max-size($size) {
+  [appStickyBlock].sticky-block[max-size="#{$size}"] {
+    @include bp($size) {
+      @include sticky-block();
+    }
+  }
+}
+
+$sizes: xs, s, m, l, xl;
+
+.sticky-block:not([min-size]):not([max-size]) {
+  @include sticky-block();
+}
+
+@each $size in $sizes {
+  @include min-size($size);
+  @include max-size($size);
+}
+
+.sticky-placeholder {
+  display: none;
+}

@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
+  <div class="l-wrapper--col h-flex-y-center sign-in-wrapper">
+    <div class="input-section h-mb-30">
+      <app-form-element class="ui-input-container ui-input-container--center" [error]="form.touched && getError('code')" [class.h-hide]="(loading$ | async) === true">
+        <app-auth-code-input formControlName="code"></app-auth-code-input>
+      </app-form-element>
+
+      <div class="loading" [class.h-hide]="(loading$ | async) !== true"></div>
+    </div>
+
+    <p class="sms-info h-medium-c-b3 h-mb-30">
+      It may take a minute or two for the code to arrive.
+    </p>
+
+    <ng-container *ngIf="showExtraButtons">
+      <button type="button" app-button="border" size="large" responsive="true" class="h-mb-20" (click)="resend()" [loading]="resendReq$" [disabled]="resendDisabled">
+        Resend Code
+      </button>
+
+      <button type="button" app-button="border" size="large" responsive="true" class="h-mb-20" (click)="call()" [loading]="callMeReq$" [disabled]="callMeDisabled">
+        Call Me Instead
+      </button>
+    </ng-container>
+  </div>
+</form>

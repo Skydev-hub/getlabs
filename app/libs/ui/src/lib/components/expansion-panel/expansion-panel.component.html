@@ -1,0 +1,21 @@
+<!--
+<div class="header" (click)="toggle()">
+  <h3 class="title">
+    <ng-content select=".title"></ng-content>
+  </h3>
+  <svg-icon src="assets/icons/down-chevron-icon.svg" class="c-small-icon chevron"></svg-icon>
+</div>
+<div class="content">
+  <ng-content></ng-content>
+</div>
+-->
+
+<header class="question" (click)="toggle()">
+  <h3 class="h-dark-l-uil1 h-responsive-uil2 title" #title>
+    <ng-content select=".title"></ng-content>
+  </h3>
+  <svg-icon-sprite src="down-chevron-icon" class="c-small-icon chevron h-ml-15"></svg-icon-sprite>
+</header>
+<p class="answer h-medium-l-b2">
+  <ng-content></ng-content>
+</p>

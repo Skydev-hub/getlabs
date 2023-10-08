@@ -1,0 +1,139 @@
+@import 'variables';
+@import 'mixins';
+@import 'third-party/material-themes';
+@import '~@angular/material/theming';
+@import 'GLSS/typography/typography';
+@import 'GLSS/variables/typography';
+
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+@include mat-core-theme($mat-theme);
+@include mat-core($mat-typography);
+
+@include mat-autocomplete-theme($mat-theme);
+@include mat-autocomplete-typography($mat-typography);
+
+@include mat-button-toggle-theme($mat-theme);
+@include mat-button-toggle-typography($mat-typography);
+
+@include mat-chips-theme($mat-theme);
+@include mat-chips-typography($mat-typography);
+
+@include mat-datepicker-theme($mat-theme);
+@include mat-datepicker-typography($mat-typography);
+
+@include mat-snack-bar-theme($mat-theme);
+@include mat-snack-bar-typography($mat-typography);
+
+@include mat-progress-bar-theme($mat-theme);
+@include mat-progress-bar-typography($mat-typography);
+
+@include mat-progress-spinner-theme($mat-theme);
+@include mat-progress-spinner-typography($mat-typography);
+
+@include mat-select-theme($mat-theme);
+@include mat-select-typography($mat-typography);
+
+@include mat-slide-toggle-theme($mat-theme);
+@include mat-slide-toggle-typography($mat-typography);
+
+@include mat-tooltip-theme($mat-theme);
+@include mat-tooltip-typography($mat-typography);
+
+@include mat-menu-theme($mat-theme);
+@include mat-menu-typography($mat-typography);
+
+@include mat-badge-theme($mat-theme);
+@include mat-badge-typography($mat-typography);
+
+$mat-button-spacing: 20px;
+
+.mat-autocomplete-panel {
+  top: -1px;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid rgba($black, 0.2);
+}
+
+.mat-autocomplete-panel {
+  /* Specifically relates to autocomplete functionality for selecting an address. */
+  &--location {
+    .mat-option-text {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &--powered-by-google {
+    max-height: 288px;
+
+    .google-logo {
+      text-align: right;
+      padding-right: 10px;
+      height: 28px;
+    }
+  }
+}
+
+.mat-autocomplete-panel-above .mat-autocomplete-panel {
+  top: 2px;
+}
+
+.mat-option-text .c-small-icon {
+  flex: 0 0 24px;
+}
+
+.gl {
+  mat-slide-toggle {
+    $mat-slide-toggle-thumb-size: 18px;
+    $mat-slider-size-height: 26px;
+    $mat-slider-size-width: 41px;
+
+    line-height: $mat-slider-size-height;
+    height: $mat-slider-size-height;
+
+    &.mat-primary.mat-checked {
+      .mat-slide-toggle-thumb {
+        background-color: $gl-dark;
+      }
+
+      .mat-slide-toggle-bar {
+        background-color: $gl-primary;
+      }
+    }
+
+    .mat-slide-toggle-bar {
+      display: flex;
+      height: $mat-slider-size-height;
+      align-items: center;
+      border-radius: calc(#{$mat-slider-size-height} / 2);
+      width: $mat-slider-size-width;
+    }
+
+    .mat-slide-toggle-thumb {
+      height: $mat-slide-toggle-thumb-size;
+      width: $mat-slide-toggle-thumb-size;
+      margin-left: 4px;
+    }
+
+    .mat-slide-toggle-thumb-container {
+      position: static;
+      height: $mat-slide-toggle-thumb-size;
+      width: $mat-slide-toggle-thumb-size;
+    }
+  }
+
+  .mat-menu-item {
+    @extend .h-dark-l-b2;
+  }
+
+  .mat-progress-bar .mat-progress-bar-background {
+    @include bp(xs) {
+      width: 100%;
+    }
+  }
+
+  .mat-tooltip {
+    @extend .h-white-l-uil4;
+  }
+}

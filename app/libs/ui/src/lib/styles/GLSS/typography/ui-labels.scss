@@ -1,0 +1,873 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Typography > UI Labels
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "GLSS/library/mixins";
+
+// Dark - Left
+.h-dark-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+
+// Dark - Center
+.h-dark-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+
+// Dark - Right
+.h-dark-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+}
+
+
+
+//
+// Medium
+//
+
+// Medium - Left
+.h-medium-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+}
+
+
+// Medium - Center
+.h-medium-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+}
+
+
+// Medium - Right
+.h-medium-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+}
+
+
+
+//
+// White
+//
+
+// White - Left
+.h-white-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+}
+
+.h-white-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+}
+
+.h-white-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+}
+
+.h-white-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-white-text-color;
+}
+
+
+// White - Center
+.h-white-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-lh;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+}
+
+.h-white-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+}
+
+.h-white-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+}
+
+.h-white-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-white-text-color;
+}
+
+
+// White - Right
+.h-white-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-white-text-color;
+}
+
+.h-white-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-white-text-color;
+}
+
+.h-white-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-white-text-color;
+}
+
+.h-white-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-white-text-color;
+}
+
+
+
+//
+// Primary D1
+//
+
+// Primary D1 - Left
+.h-primary-d1-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-primary-d1;
+}
+
+
+// Primary D1 - Center
+.h-primary-d1-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-primary-d1;
+}
+
+
+// Primary D1 - Right
+.h-primary-d1-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-primary-d1;
+}
+
+.h-primary-d1-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-primary-d1;
+}
+
+
+
+//
+// Success
+//
+
+// Success - Left
+.h-success-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-ui-success;
+}
+
+.h-success-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-ui-success;
+}
+
+.h-success-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-ui-success;
+}
+
+.h-success-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-ui-success;
+}
+
+
+// Success - Center
+.h-success-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-ui-success;
+}
+
+.h-success-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-ui-success;
+}
+
+.h-success-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-ui-success;
+}
+
+.h-success-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-ui-success;
+}
+
+
+// Success - Right
+.h-success-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-ui-success;
+}
+
+.h-success-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-ui-success;
+}
+
+.h-success-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-ui-success;
+}
+
+.h-success-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-ui-success;
+}
+
+
+
+//
+// Danger
+//
+
+// Danger - Left
+.h-danger-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-ui-danger;
+}
+
+.h-danger-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-ui-danger;
+}
+
+.h-danger-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-ui-danger;
+}
+
+.h-danger-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-ui-danger;
+}
+
+
+// Danger - Center
+.h-danger-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-ui-danger;
+}
+
+.h-danger-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-ui-danger;
+}
+
+.h-danger-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-ui-danger;
+}
+
+.h-danger-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-ui-danger;
+}
+
+
+// Danger - Right
+.h-danger-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-ui-danger;
+}
+
+.h-danger-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-ui-danger;
+}
+
+.h-danger-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-ui-danger;
+}
+
+.h-danger-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-ui-danger;
+}
+
+
+
+//
+// Warning
+//
+
+// Warning - Left
+.h-warning-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-ui-warning;
+}
+
+.h-warning-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-ui-warning;
+}
+
+.h-warning-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-ui-warning;
+}
+
+.h-warning-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-ui-warning;
+}
+
+
+// Warning - Center
+.h-warning-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-ui-warning;
+}
+
+.h-warning-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-ui-warning;
+}
+
+.h-warning-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-ui-warning;
+}
+
+.h-warning-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-ui-warning;
+}
+
+
+// Warning - Right
+.h-warning-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-ui-warning;
+}
+
+.h-warning-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-ui-warning;
+}
+
+.h-warning-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-ui-warning;
+}
+
+.h-warning-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-ui-warning;
+}
+
+
+
+//
+// Purple
+//
+
+// Purple - Left
+.h-purple-l-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: left;
+  color: $gl-ui-purple;
+}
+
+.h-purple-l-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: left;
+  color: $gl-ui-purple;
+}
+
+.h-purple-l-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: left;
+  color: $gl-ui-purple;
+}
+
+.h-purple-l-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: left;
+  color: $gl-ui-purple;
+}
+
+
+// Purple - Center
+.h-purple-c-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: center;
+  color: $gl-ui-purple;
+}
+
+.h-purple-c-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: center;
+  color: $gl-ui-purple;
+}
+
+.h-purple-c-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: center;
+  color: $gl-ui-purple;
+}
+
+.h-purple-c-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: center;
+  color: $gl-ui-purple;
+}
+
+
+// Purple - Right
+.h-purple-r-uil1 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil1-fs;
+  line-height: $uil1-lh;
+  text-align: right;
+  color: $gl-ui-purple;
+}
+
+.h-purple-r-uil2 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil2-fs;
+  line-height: $uil2-lh;
+  text-align: right;
+  color: $gl-ui-purple;
+}
+
+.h-purple-r-uil3 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil3-fs;
+  line-height: $uil3-lh;
+  text-align: right;
+  color: $gl-ui-purple;
+}
+
+.h-purple-r-uil4 {
+  font-weight: $gl-bold-font-weight;
+  font-size: $uil4-fs;
+  line-height: $uil4-lh;
+  text-align: right;
+  color: $gl-ui-purple;
+}
+
+@mixin h-uil-responsive($uil-level, $font-size, $font-weight) {
+  .h-responsive-uil#{$uil-level} {
+    @include bp(xs) {
+      font-size: $font-size;
+      line-height: $font-weight;
+    }
+  }
+}
+
+@include h-uil-responsive(1, $uil1-fs, $uil1-lh);
+@include h-uil-responsive(2, $uil2-fs, $uil2-lh);
+@include h-uil-responsive(3, $uil3-fs, $uil3-lh);
+@include h-uil-responsive(4, $uil4-fs, $uil4-lh);

@@ -1,0 +1,18 @@
+<div [formGroup]="form" class="l-form-grid l-form-grid--single">
+  <app-form-group formArrayName="samples">
+    <div class="c-form-split-col">
+      <app-team-appointment-required-sample-input *ngFor="let sample of samples.controls; let i = index"
+        [label]="'Sample ' + (i+1)" (remove)="removeSample(i)" [formControl]="sample"
+      ></app-team-appointment-required-sample-input>
+    </div>
+    <button class="ui-icon-button-inline" (click)="addSample()" [class.h-mt-20]="samples.controls.length">
+      <svg-icon-sprite src="circle-plus-icon" class="ui-text-button__icon c-small-icon h-mr-10"
+                height="24" width="24"></svg-icon-sprite>
+      <span class="h-dark-l-bl1">Add Sample</span>
+    </button>
+  </app-form-group>
+
+  <app-form-element class="h-mt-20">
+    <app-checkbox-input formControlName="requiresFasting">Fasting Required</app-checkbox-input>
+  </app-form-element>
+</div>

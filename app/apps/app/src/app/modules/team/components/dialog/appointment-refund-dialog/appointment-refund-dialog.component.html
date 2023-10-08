@@ -1,0 +1,33 @@
+<div mat-dialog-title class="h-dark-c-lb3">
+  Why are you refunding this appointment?
+</div>
+<mat-dialog-content>
+  <p *ngIf="data.appointment.isRebooked()" class="h-flex-text-center h-danger-text-color h-mb-30">
+    This appointment has been rebooked. Payments for rebooked appointments are linked, and refunding the payment here will refund the payment on both appointments.
+  </p>
+
+  <form [formGroup]="form" class="l-form-grid l-form-grid--single">
+    <app-form-element [error]="getError('reason')">
+      <select class="ui-select ui-select--large" formControlName="reason">
+        <option [value]="null" selected disabled>Select a reason</option>
+        <option *ngFor="let reason of reasons" [value]="reason">{{ reason }}</option>
+        <option value="other">Other</option>
+      </select>
+    </app-form-element>
+
+    <app-form-element class="h-mt-10" [error]="getError('note')" *ngIf="form.get('reason').value === 'other'">
+      <input class="ui-input ui-input--medium" type="text" placeholder="Enter the reason for the refund" formControlName="note">
+    </app-form-element>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="h-flex">
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button (click)="refund()" [appLoading]="reqSub">
+    Refund to Card
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

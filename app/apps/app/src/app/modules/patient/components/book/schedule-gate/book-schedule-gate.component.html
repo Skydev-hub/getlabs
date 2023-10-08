@@ -1,0 +1,27 @@
+<div class="l-wrapper l-wrapper--col l-wrapper--sm">
+  <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">Do you have a copy of your lab order?</h1>
+  <div class="c-option-tiles">
+    <div class="c-option-tiles__tile"
+         (click)="setLabOrder(true)">
+      <h2 class="h-dark-c-uil1 h-mb-5">Yes, I have my lab order</h2>
+      <div class="h-medium-c-b2">
+          This is the quickest option
+      </div>
+      <div class="h-mt-20 h-mt-xs-10 h-text-center">
+        <span class="h-primary-d1-c-uil1">Continue</span>
+        <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-small-icon"></svg-icon-sprite>
+      </div>
+    </div>
+    <div class="c-option-tiles__tile"
+         (click)="setLabOrder(false)">
+      <h2 class="h-dark-c-uil1 h-mb-5">No, my doctor has my lab order</h2>
+      <div class="h-medium-c-b2">
+          This option is a little slower
+      </div>
+      <div class="h-mt-20 h-mt-xs-10 continue h-text-center">
+        <span class="h-primary-d1-c-uil1">Continue</span>
+        <svg-icon-sprite src="/assets/icons.svg#right-chevron-icon" class="c-small-icon"></svg-icon-sprite>
+      </div>
+    </div>
+  </div>
+</div>

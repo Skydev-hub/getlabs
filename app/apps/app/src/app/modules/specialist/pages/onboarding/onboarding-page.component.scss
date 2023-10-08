@@ -1,0 +1,17 @@
+@import '~@angular/material/theming';
+
+@import "variables";
+
+:host {
+  app-stepper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    ::ng-deep > * {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+  }
+}

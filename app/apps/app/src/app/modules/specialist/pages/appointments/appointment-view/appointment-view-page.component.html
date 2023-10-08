@@ -1,0 +1,117 @@
+<ng-container *ngIf="appointment.isViewable(); then details; else redacted"></ng-container>
+
+<ng-template #redacted let-message="message">
+  <ng-container *ngTemplateOutlet="heading; context: { appointment: appointment }"></ng-container>
+  <div class="l-wrapper l-wrapper--col h-flex-y-center">
+    <ng-container *ngIf="appointment.status === Status.Pending; then pendingMsg; else redactedMsg"></ng-container>
+
+    <button app-button routerLink="/care" class="h-mt-30">Back to Appointments</button>
+  </div>
+
+  <ng-template #pendingMsg>
+    <p class="h-medium-c-b1">The appointment details will be made visible once this visit is marked as ready by our team.</p>
+  </ng-template>
+  <ng-template #redactedMsg>
+    <p class="h-medium-c-b1">To protect the privacy of patient health information, the appointment details have been redacted.</p>
+  </ng-template>
+</ng-template>
+
+<ng-template #heading let-appointment="appointment">
+  <div class="l-wrapper l-wrapper--sm l-wrapper--col c-section-title">
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-20">Appointment - #{{ appointment.identifier }}</h1>
+    <span class="h-dark-c-uil1 h-mb-10">
+      {{ appointment.startAt | dateTz: 'shortTime':appointment.patient.timezone }}
+      -
+      {{ appointment.endAt | dateTz: 'shortTime':appointment.patient.timezone }}
+    </span>
+    <span class="h-dark-c-uil1 h-mb-10">
+      {{ appointment.startAt | dateTz: 'fullDate':appointment.patient.timezone }}
+    </span>
+    <div class="h-mb-20 h-dark-c-uil1">
+      <app-appointment-status-text [appointment]="appointment"></app-appointment-status-text>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #details>
+  <main class="l-main-container">
+    <ng-container *ngTemplateOutlet="heading; context: { appointment: appointment }"></ng-container>
+
+    <div class="l-wrapper l-wrapper--col">
+      <app-expansion-panel [expanded]="true" class="overview-panel">
+        <ng-container ngProjectAs=".title"> Patient Overview </ng-container>
+        <div class="overview--item">
+          <span>Patient Name</span>
+          <span>
+            {{ appointment.patient.name }}
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Gender</span>
+          <span>
+            {{ appointment.patient.gender | gender }}
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Date of Birth</span>
+          <span>
+            {{ appointment.patient | dob }}
+          </span>
+        </div>
+        <ng-container *ngIf="appointment.patient.isMinor">
+          <div class="overview--item">
+            <span>Guardian Name</span>
+            <span>
+              {{ appointment.patient.guardianName || 'N/A' }}
+            </span>
+          </div>
+          <div class="overview--item">
+            <span>Guardian Relationship</span>
+            <span>
+              {{ appointment.patient.guardianRelationship || 'N/A' }}
+            </span>
+          </div>
+        </ng-container>
+        <div class="overview--item">
+          <span>Phone Number</span>
+          <span>
+            <a href="tel:{{ appointment.patient.phoneNumber | phone }}" class="h-primary-link">
+              {{ appointment.patient.phoneNumber | phone }}
+            </a>
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Email</span>
+          <span>
+            <a href="mailto:{{ appointment.patient.email }}" *ngIf="appointment.patient.email" class="h-primary-link">
+              {{ appointment.patient.email }}
+            </a>
+          </span>
+        </div>
+        <div class="overview--item overview--item__simple">
+          <span>Address</span>
+          <span>
+            <a href="{{ appointment.patient.address | directionsUrl }}" target="_blank" class="h-primary-link">
+              {{ appointment.patient.address.composed }}
+            </a>
+            <span class="h-danger-text-color h-block" *appIfAddressIsLab="appointment.patient.address"> Potential Lab Address </span>
+          </span>
+        </div>
+        <div class="overview--item overview--item__simple">
+          <span>Unit</span>
+          <span>
+            {{ appointment.patient.address.unit }}
+          </span>
+        </div>
+        <div class="overview--item">
+          <span>Fasting</span>
+          <span>
+            {{ appointment.requiresFasting ? 'Required' : 'Not Required' }}
+          </span>
+        </div>
+      </app-expansion-panel>
+
+      <app-appointment-progress-steps [appointment]="appointment"></app-appointment-progress-steps>
+    </div>
+  </main>
+</ng-template>

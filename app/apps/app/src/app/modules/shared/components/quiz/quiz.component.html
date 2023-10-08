@@ -1,0 +1,7 @@
+<form #quiz [formGroup]="form" (ngSubmit)="verifyQuizAnswers()" class="h-flex-col h-flex-y-center h-flex-one">
+  <app-form-element *ngFor="let q of questions; let i = index" class="h-full-width h-mb-40" [error]="getError(q._id)" label="{{i + 1}}. {{q.question}}">
+    <app-radio-group class="c-checklist c-checklist--alpha app-radio-group__dot" [formControl]="q._control">
+      <app-radio-input *ngFor="let o of q.options" [value]="o">{{ o.option }}</app-radio-input>
+    </app-radio-group>
+  </app-form-element>
+</form>

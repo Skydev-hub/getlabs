@@ -1,0 +1,113 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > Checkbox
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+@import "GLSS/typography/typography";
+
+.c-checkbox {
+
+  $size: 26px;
+
+  display: flex;
+
+  label {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .element {
+    flex-grow: 0;
+    display: flex;
+    position: relative;
+    flex-shrink: 0;
+    @include size($size);
+
+    .check {
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include size($size);
+      background-color: $white;
+      border: 1px solid $gl-primary-border-color;
+      border-radius: 50%;
+      transition: background-color $transition-duration, border-color $transition-duration;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 6px;
+        width: 12px;
+        height: 6px;
+        border: 2px solid $white;
+        border-top: none;
+        border-right: none;
+        background: transparent;
+        transform: rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    .input {
+      visibility: hidden;
+
+      &:checked + .check {
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .label {
+    display: none;
+    flex-grow: 1;
+
+    &:not(:empty) {
+      display: flex;
+      justify-content: flex-start;
+      margin-left: 10px;
+    }
+  }
+
+  .optional {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &--checked {
+    //.label {
+    //  @extend .h-primary-text-color;
+    //}
+
+    .element .input + .check {
+      opacity: 1;
+      background-color: $gl-primary-d1;
+      border-color: $gl-primary-d1;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed !important;
+
+    .label {
+      @extend .h-light-text-color;
+    }
+
+    .element .input + .check {
+      background-color: inherit;
+      border-color: $gl-light;
+
+      &::after {
+        border-color: $gl-light;
+      }
+    }
+  }
+}

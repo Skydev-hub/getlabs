@@ -1,0 +1,33 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Component > Chevron Link
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-chevron-link {
+  display: flex;
+  align-items: center;
+  font-weight: $gl-bold-font-weight;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
+
+  &__chevron {
+    @include shift(top, 1px);
+    color: $gl-dark;
+    transition: transform $transition-duration;
+  }
+
+  @media (hover: hover) {
+    &:hover & {
+      &__chevron {
+        transform: translateX(2px);
+      }
+    }
+  }
+
+} // .c-chevron-link

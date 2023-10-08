@@ -1,0 +1,13 @@
+@import "variables";
+
+.grecaptcha {
+
+  &-badge {
+    visibility: hidden;
+  }
+
+  &-message {
+    font-size: 12px;
+    color: $gl-medium-text-color;
+  }
+}

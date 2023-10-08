@@ -1,0 +1,90 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > CTA Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+:host {
+  display: block;
+  margin-bottom: $desktop-section-spacing;
+
+  .wrapper {
+    align-items: center;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 50%;
+  }
+
+  .img {
+    flex: 1 1 50%;
+    pointer-events: none;
+    user-select: none;
+
+    img {
+      float: right;
+    }
+  }
+
+  .check {
+    @include size(34px);
+    margin-bottom: 20px;
+  }
+
+  .title {
+    max-width: 340px;
+    margin-bottom: 30px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    .img {
+      left: auto;
+
+      img {
+        float: none;
+        margin: 0 auto;
+      }
+    }
+
+  } // s
+
+  @include bp(xs) {
+    .wrapper {
+      flex-direction: column;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .content {
+      padding-left: $mobile-edge;
+      padding-right: $mobile-edge;
+    }
+
+    .img {
+      flex: auto;
+      order: -1;
+      margin-bottom: 30px;
+      width: 80%;
+    }
+
+  } // xs
+
+  @include bp(xxs) {
+    .content {
+      width: 100%;
+    }
+  }
+
+} // :host

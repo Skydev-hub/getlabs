@@ -1,0 +1,47 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 9px 1fr 1fr 1fr;
+  grid-gap: 10px;
+  align-items: center;
+
+  input {
+    width: 46px;
+    height: 60px;
+    padding: 15px 15px;
+    text-align: center;
+  }
+
+  @include bp(xs) {
+    grid-template-columns: 1fr 1fr 1fr $mobile-ui-grid-gap 1fr 1fr 1fr;
+
+    input {
+      width: 46px;
+    }
+  }
+
+  .auth-code-separator {
+    color: $gl-primary-border-color;
+  }
+}
+
+:host-context(.auth-narrow) {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  .auth-code-separator {
+    display: none;
+  }
+
+  input {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 36px;
+
+    @include bp(xs) {
+      width: 36px;
+    }
+  }
+}

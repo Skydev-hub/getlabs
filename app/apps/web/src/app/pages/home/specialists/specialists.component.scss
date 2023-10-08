@@ -1,0 +1,79 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Home > Specialists Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-specialists-block {
+  margin-bottom: $desktop-section-spacing;
+
+  &__wrapper {
+    align-items: center;
+  }
+
+  &__img {
+    flex: 0 0 50%;
+    margin-right: 30px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 50%;
+    max-width: 480px;
+    padding-left: 20px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__wrapper {
+      align-items: flex-start;
+    }
+
+    &__img {
+      flex-basis: 40%;
+      width: 80%;
+
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    &__content {
+      flex-basis: 60%;
+    }
+  } // s
+
+  @include bp(xs) {
+    &__wrapper {
+      flex-direction: column;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &__content {
+      padding-left: $mobile-edge;
+      padding-right: $mobile-edge;
+      max-width: none;
+    }
+
+    &__img {
+      flex-basis: auto;
+      margin: 0 auto 30px;
+      width: 80%;
+    }
+
+  } // xs
+
+} // .c-specialists-block

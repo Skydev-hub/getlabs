@@ -1,0 +1,42 @@
+<section class="c-table-container c-table-container--bottom-margin" infiniteScroll [infiniteScrollThrottle]="0"
+         [infiniteScrollDisabled]="scrollDisabled" (scrolled)="onScroll()">
+  <div class="c-table">
+    <div class="c-table__row">
+      <div class="c-table__heading">Zip Code</div>
+      <div class="c-table__heading">Location</div>
+      <div class="c-table__heading">Status</div>
+    </div>
+
+    <ng-container *ngIf="(data$ | async) as serviceAreas; else loading">
+      <a routerLink="/team/markets/service-areas/{{ serviceArea.id }}" class="c-table__row" *ngFor="let serviceArea of serviceAreas">
+        <div class="c-table__col h-bold-font-weight">
+          {{ serviceArea.zipCode }}
+        </div>
+        <div class="c-table__col">
+          {{ serviceArea.location }}
+        </div>
+        <div class="c-table__col">
+          <app-active-status [active]="serviceArea.active"></app-active-status>
+        </div>
+      </a>
+      <ng-container *ngIf="serviceAreas.length === 0">
+        <div class="c-table-empty-state">
+          <svg-icon-sprite src="large-circle-search-icon" class="h-mb-25" height="64" width="64"></svg-icon-sprite>
+          <ng-container *ngIf="search; else noneFound">
+            No service areas found matching "{{search}}"
+          </ng-container>
+          <ng-template #noneFound>
+            No service areas found
+          </ng-template>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #loading>
+      <div class="c-table-empty-state">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+
+  </div>
+</section>

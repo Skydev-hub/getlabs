@@ -1,0 +1,48 @@
+<div class="data">
+  <span class="h-dark-l-uil1">
+    {{ label }}
+  </span>
+  <div class="h-flex-y-center document-status h-dark-l-b3">
+    <ng-container *ngIf="document; else notCompleted">
+      <svg-icon-sprite src="checkmark-icon" class="c-small-icon c-small-icon--success"></svg-icon-sprite>
+      <span class="h-success-text-color">
+        <ng-container *appDefaultContent="defaultAffirmativeStatus">
+          <ng-content select=".affirmative-status"></ng-content>
+        </ng-container>
+        <ng-template #defaultAffirmativeStatus>
+          Completed on {{ document.completedAt | date }}
+        </ng-template>
+      </span>
+    </ng-container>
+    <ng-template #notCompleted>
+      <span class="h-medium-text-color">
+        <ng-container *appDefaultContent="defaultNegativeStatus">
+          <ng-content select=".negative-status"></ng-content>
+        </ng-container>
+        <ng-template #defaultNegativeStatus>
+          Not Completed
+        </ng-template>
+      </span>
+    </ng-template>
+  </div>
+</div>
+<div class="cta" *ngIf="document" [ngSwitch]="document.type">
+  <a app-button size="xs" responsive="false" href="#" *ngSwitchCase="Type.EEA">
+    <span>View</span> <ng-container *ngTemplateOutlet="chevron"></ng-container>
+  </a>
+  <a app-button size="xs" responsive="false" href="#" *ngSwitchCase="Type.W4">
+    <span>View</span> <ng-container *ngTemplateOutlet="chevron"></ng-container>
+  </a>
+  <a app-button size="xs" responsive="false" routerLink="{{ auth.getPortalUrl() }}/compliance/hipaa"
+    *ngSwitchCase="Type.HIPAA">
+    <span>View</span> <ng-container *ngTemplateOutlet="chevron"></ng-container>
+  </a>
+  <a app-button size="xs" responsive="false" routerLink="{{ auth.getPortalUrl() }}/compliance/bbp"
+    *ngSwitchCase="Type.BBP">
+    <span>View</span> <ng-container *ngTemplateOutlet="chevron"></ng-container>
+  </a>
+</div>
+
+<ng-template #chevron>
+  <svg-icon-sprite src="right-chevron-icon" class="ui-button-chevron ui-button-chevron--no-space c-small-icon h-ml-20"></svg-icon-sprite>
+</ng-template>

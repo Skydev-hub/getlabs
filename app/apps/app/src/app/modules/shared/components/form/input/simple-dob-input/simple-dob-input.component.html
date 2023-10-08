@@ -1,0 +1,2 @@
+<input class="ui-input ui-input--large" placeholder="MM/DD/YYYY" type="text" autocomplete="bday"
+       [formControl]="input" [mask]="dobMask.getMaskPattern()" (blur)="onTouched()">

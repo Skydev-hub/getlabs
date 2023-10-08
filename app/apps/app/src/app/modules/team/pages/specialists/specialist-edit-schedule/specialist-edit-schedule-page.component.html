@@ -1,0 +1,16 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+
+  <div class="h-flex-col h-flex-y-center h-flex-one">
+
+    <app-section-header [heading]="'Specialist Profile'"></app-section-header>
+
+    <app-avatar [user]="user" size="xlarge"></app-avatar>
+
+    <span class="h-mt-15 h-mb-50 h-bold-font-weight">
+      {{ user.name }}
+    </span>
+
+    <app-team-specialist-schedule-form [user]="user" (save)="onSave($event)"></app-team-specialist-schedule-form>
+
+  </div>
+</main>

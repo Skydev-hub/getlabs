@@ -1,0 +1,23 @@
+@import "mixins";
+
+$margin-desktop: 30px;
+$margin-mobile: 30px;
+
+:host {
+  ::ng-deep router-outlet + * {
+    margin-bottom: $margin-desktop;
+
+    @include bp(xs) {
+      margin-bottom: $margin-mobile;
+    }
+  }
+
+  h1 {
+    margin-bottom: $margin-desktop;
+
+    @include bp(xs) {
+      margin-bottom: $margin-mobile;
+    }
+  }
+
+}

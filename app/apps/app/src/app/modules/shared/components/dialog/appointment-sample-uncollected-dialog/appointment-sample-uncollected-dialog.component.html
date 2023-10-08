@@ -1,0 +1,29 @@
+<div mat-dialog-title class="h-dark-c-lb3">
+  Why were you unable to collect this sample?
+</div>
+<mat-dialog-content>
+  <form [formGroup]="form" class="l-form-grid l-form-grid--single h-mt-10 h-mt-xs-0">
+    <app-form-element [error]="getError('uncollectedReason')">
+      <select class="ui-select ui-select--large" formControlName="uncollectedReason">
+        <option [value]="null" selected disabled>Select a reason</option>
+        <option *ngFor="let reason of reasons" [value]="reason">{{ Reasons[reason] }}</option>
+      </select>
+    </app-form-element>
+
+    <app-form-element [error]="getError('uncollectedNote')" class="l-as-block h-mt-10"
+                      *ngIf="form.get('uncollectedReason').value === 'other'">
+      <input class="ui-input ui-input--large" type="text" placeholder="Enter the reason" formControlName="uncollectedNote">
+    </app-form-element>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button class="mat-dialog-primary-action" (click)="save()" [appLoading]="req$">
+    Save
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

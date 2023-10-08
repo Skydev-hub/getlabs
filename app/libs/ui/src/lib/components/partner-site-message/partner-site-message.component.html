@@ -1,0 +1,14 @@
+<app-site-message *ngIf="banner" [class]="'app-partner-site-message__' + banner.partnerId + '-theme app-site-message__flow app-site-message__logo-message'"
+  [fix]="fix">
+  <span class="c-site-message__logo">
+    <img class="image-logo" [src]="'/assets/img/' + banner.logo" *ngIf="banner.logo; else noLogo" />
+    <ng-template #noLogo>
+      <span class="h-white-l-uil1 h-line-height-1 text-logo">
+        {{banner.displayName}}
+      </span>
+    </ng-template>
+  </span>
+  <span class="h-white-l-b1 h-white-l-b1--responsive c-site-message__content">
+      Welcome {{banner.displayName}} patients, we're proud to serve you.
+    </span>
+</app-site-message>

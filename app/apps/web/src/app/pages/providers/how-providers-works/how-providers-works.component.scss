@@ -1,0 +1,142 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Providers > How Providers Works
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-providers-hiw-block {
+  margin-bottom: $desktop-section-spacing;
+
+  &__wrapper {
+    align-items: center;
+  }
+
+  &__img {
+    flex: 0 0 50%;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__content-container {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 0 50%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+  }
+
+  &__title {
+    max-width: 500px;
+    margin-bottom: 20px;
+  }
+
+  &--reverse & {
+    &__content-container {
+      justify-content: flex-start;
+      padding-right: 0;
+    }
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(m) {
+    &__img {
+      margin-right: 30px;
+      flex-shrink: 1;
+    }
+
+    &--reverse & {
+      &__img {
+        margin-right: auto;
+        margin-left: 30px;
+      }
+    }
+
+  } // m
+
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    &__wrapper {
+      align-items: flex-start;
+    }
+
+  } // s
+
+  @include bp(xs) {
+    &__wrapper {
+      flex-direction: column;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &__img {
+      order: -1;
+      flex-basis: auto;
+      margin: 0 auto 30px;
+    }
+
+    &__content {
+      padding-left: $mobile-edge;
+      padding-right: $mobile-edge;
+    }
+
+    &--reverse & {
+      &__img {
+        margin-left: auto;
+      }
+
+      &__content-container {
+        padding-left: inherit;
+      }
+
+    } // --reverse &
+
+  } // xs
+
+} // .c-providers-hiw-block
+
+
+
+//
+// HiW Block List
+//
+.c-providers-hiw-block-list {
+  margin-top: 15px;
+  padding-left: 20px;
+
+  > li {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  &__step {
+    display: flex;
+    justify-content: center;
+    @include size(34px);
+    margin-right: 20px;
+    border-radius: 50%;
+    line-height: 31px;
+    background-color: $gl-primary;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    padding-left: 0;
+  }
+
+} // .c-providers-hiw-block-list

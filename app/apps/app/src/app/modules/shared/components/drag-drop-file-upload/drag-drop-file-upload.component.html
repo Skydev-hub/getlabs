@@ -1,0 +1,28 @@
+<div class="drag-drop-container h-flex-y-center h-full-width" [formGroup]="form" [ngClass]="{ 'multi-files': hasMultipleFiles() }"
+     appDragDropUpload (fileSelect)="doDragDrop($event)" #dragDropUnselected>
+  <div class="l-wrapper--col is-desktop" *ngIf="filesInput.getUploadState() === UploadState.Unselected" #unselectedDragDrop>
+    <div class="h-mb-15 h-mobile-hide">
+      <div class="h-flex-x-center h-mb-15"><svg-icon-sprite src="large-file-plus-icon" class="svg-primary-text-color c-large-icon"></svg-icon-sprite></div>
+      <div class="h-mb-15" #contentRef><ng-content></ng-content></div>
+      <div *ngIf="!contentRef.hasChildNodes()" class="h-mb-15">Drag and drop files here</div>
+      <div class="c-horizontal-separator c-horizontal-separator--with-content h-medium-c-uil2">Or</div>
+    </div>
+  </div>
+  <app-multiple-file-input [label]="buttonLabel || 'Select Files'" [purpose]="purpose" (accept)="accept.emit($event)"
+                           [types]="types" [showAddFile]="false" [useCustomMultiAnchor]="false" formControlName="files"
+                           [btnClass]="'ui-primary-button ui-primary-button--medium'"
+                           class="h-flex-col h-flex-y-center">
+    <div appDragDropUpload (fileSelect)="doDragDrop($event, true)"
+      *ngIf="filesInput.getUploadState() === UploadState.Uploaded" class="add-new-files h-flex-col h-flex-y-center h-flex-x-center">
+      <div>
+        <svg-icon-sprite src="large-file-plus-icon" class="svg-primary-text-color c-large-icon"></svg-icon-sprite>
+      </div>
+      <div class="h-dark-c-uil2">
+        Drag & drop files here
+      </div>
+      <div class="h-dark-c-b3">
+        Or click to choose files
+      </div>
+    </div>
+  </app-multiple-file-input>
+</div>

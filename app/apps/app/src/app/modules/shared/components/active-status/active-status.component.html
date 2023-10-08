@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="active">
+  <span *ngSwitchCase="true" class="h-success-text-color">{{ trueText }}</span>
+  <span *ngSwitchCase="false" class="h-medium-text-color">{{ falseText }}</span>
+</ng-container>

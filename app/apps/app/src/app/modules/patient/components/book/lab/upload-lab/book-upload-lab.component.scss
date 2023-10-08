@@ -1,0 +1,40 @@
+@import "variables";
+@import "mixins";
+@import "components/option-tiles.scss";
+
+app-drag-drop-file-upload {
+  width: 100%;
+}
+
+.book-option-tiles {
+  &.tile-mode {
+    @extend .c-option-tiles;
+    font-size: 18px;
+
+    app-drag-drop-file-upload.book-option-tiles__tile {
+      background-color: $gl-light-l5;
+      padding: 0;
+      border: 1px dashed $gl-primary-d1;
+
+      ::ng-deep .drag-drop-container {
+        padding: 30px;
+        height: 100%;
+
+        &.drag-drop-hover {
+          background-color: $gl-light-l4;
+        }
+      }
+    }
+  }
+
+  &.tile-mode &__tile {
+    @extend .c-option-tiles__tile;
+  }
+}
+
+.c-option-tiles {
+  &__tile {
+    height: 256px;
+    cursor: default;
+  }
+}

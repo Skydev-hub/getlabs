@@ -1,0 +1,87 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Components > Hero > Small
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "apps/web/src/styles/components/hero/hero-variables";
+
+.c-small-hero {
+  position: relative;
+  flex: 0 0 auto;
+  height: 300px;
+  margin-bottom: $desktop-section-spacing - 20px;
+  background-color: $gl-primary;
+  background-image: url('/assets/img/small-hero-noodle--desktop.svg');
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  overflow: hidden;
+  padding-top: $hero-top-padding;
+
+  &--small-margin {
+    margin-bottom: $mobile-section-spacing;
+  }
+
+  &--no-margin {
+    margin-bottom: 0 !important;
+  }
+
+  &__wrapper {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    padding-bottom: 120px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    height: 160px;
+    background-image: url('/assets/img/hero-noodle--mobile.svg');
+    background-position: center center;
+    background-size: 160%;
+    margin-bottom: $mobile-section-spacing - 10px;
+    padding-top: 30px;
+
+    &__content {
+      padding-bottom: 60px;
+
+      > h1 {
+        text-align: center;
+      }
+
+    } // __content
+
+  } // s
+
+  @include bp(xs) {
+    &::before, &::after {
+      width: 26%;
+    }
+
+    &--no-mobile-margin {
+      margin-bottom: 0;
+    }
+
+  } // xs
+
+  @include bp(xxs) {
+    &::before, &::after {
+      width: 12%;
+    }
+
+  } // xxs
+
+} // .c-small-hero

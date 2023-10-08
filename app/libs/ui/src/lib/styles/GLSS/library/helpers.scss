@@ -1,0 +1,416 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Library > Helpers
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import 'mixins';
+
+//
+// Layout Helpers
+//
+.h-flex {
+  display: flex;
+}
+
+.h-flex-one {
+  flex: 1;
+}
+
+.h-flex-two {
+  flex: 2;
+}
+
+.h-flex-three {
+  flex: 3;
+}
+
+.h-flex-four {
+  flex: 4;
+}
+
+.h-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.h-flex-y-center {
+  display: flex;
+  align-items: center;
+}
+
+.h-flex-y-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.h-flex-y-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.h-flex-x-center {
+  display: flex;
+  justify-content: center;
+}
+
+.h-flex-x-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.h-flex-x-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.h-flex-x-self-start {
+  align-self: flex-start;
+}
+
+.h-flex-x-self-center {
+  align-self: center;
+}
+
+.h-flex-x-self-end {
+  align-self: flex-end;
+}
+
+.h-flex-text-center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.h-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.h-full-width-children {
+  & > * {
+    width: 100%;
+  }
+}
+
+.h-block {
+  display: block;
+}
+
+.h-hide {
+  display: none !important;
+}
+
+.h-rel-1 {
+  position: relative;
+  z-index: 1;
+}
+
+.h-full-width {
+  width: 100%;
+
+  &--responsive {
+    @include bp(xs) {
+      width: 100%;
+    }
+  }
+}
+
+.h-full-height {
+  height: 100%;
+}
+
+.h-desktop-hide {
+  @include bp-min(s) {
+    display: none !important;
+  }
+}
+
+.h-mobile-hide {
+  @include bp(xs) {
+    display: none !important;
+  }
+}
+
+$size-indicator-mapping: (
+  'large': l,
+  'medium': m,
+  'small': s,
+  'xs': xs
+);
+
+@mixin h-size-hide($minOrMax, $size) {
+  @include h-size($minOrMax, 'hide', $size) {
+    display: none !important;
+  }
+}
+
+@mixin h-size($minOrMax, $operation, $size) {
+  .h-#{$minOrMax}-#{$operation}--#{$size} {
+    @if ($minOrMax == 'min') {
+      @include bp-min(map-get($size-indicator-mapping, $size)) {
+        @content;
+      }
+    } @else {
+      @include bp(map-get($size-indicator-mapping, $size)) {
+        @content;
+      }
+    }
+  }
+}
+
+/**
+ * Generates classes named h-min-hide--(size) / h-max-hide--(size).  The resulting classes will apply
+ * display: none to the targeted elements when the screen size is wider (min) or narrower (max) than a
+ * given size (according to the responsive size definition).
+ */
+@each $sizeName, $sizeIndicator in $size-indicator-mapping {
+  @include h-size-hide('min', $sizeName);
+  @include h-size-hide('max', $sizeName);
+}
+
+.h-uncap-width {
+  max-width: 100%;
+
+  &--xs {
+    @include bp(xs) {
+      max-width: 100%;
+    }
+  }
+}
+
+//.h-flex-even-sizing {
+//  & > * {
+//    flex-grow: 1;
+//    flex-shrink: 1;
+//    flex-basis: 0;
+//  }
+//}
+
+//
+// Spacing
+//
+.h-mt-5 {
+  margin-top: 5px;
+}
+.h-mt-10 {
+  margin-top: 10px;
+}
+.h-mt-15 {
+  margin-top: 15px;
+}
+.h-mt-20 {
+  margin-top: 20px;
+}
+.h-mt-25 {
+  margin-top: 25px;
+}
+.h-mt-30 {
+  margin-top: 30px;
+}
+.h-mt-35 {
+  margin-top: 35px;
+}
+.h-mt-40 {
+  margin-top: 40px;
+}
+.h-mt-45 {
+  margin-top: 45px;
+}
+.h-mt-50 {
+  margin-top: 50px;
+}
+.h-mt-55 {
+  margin-top: 55px;
+}
+.h-mt-60 {
+  margin-top: 60px;
+}
+.h-mt-80 {
+  margin-top: 70px;
+}
+.h-mt-90 {
+  margin-top: 90px;
+}
+
+.h-mr-5 {
+  margin-right: 5px;
+}
+.h-mr-10 {
+  margin-right: 10px;
+}
+.h-mr-15 {
+  margin-right: 15px;
+}
+.h-mr-20 {
+  margin-right: 20px;
+}
+.h-mr-25 {
+  margin-right: 25px;
+}
+.h-mr-30 {
+  margin-right: 30px;
+}
+.h-mr-40 {
+  margin-right: 40px;
+}
+.h-mr-50 {
+  margin-right: 50px;
+}
+.h-mr-60 {
+  margin-right: 60px;
+}
+.h-mr-70 {
+  margin-right: 70px;
+}
+.h-mr-80 {
+  margin-right: 80px;
+}
+.h-mr-90 {
+  margin-right: 90px;
+}
+
+.h-mb-5 {
+  margin-bottom: 5px;
+}
+.h-mb-10 {
+  margin-bottom: 10px;
+}
+.h-mb-15 {
+  margin-bottom: 15px;
+}
+.h-mb-20 {
+  margin-bottom: 20px;
+}
+.h-mb-25 {
+  margin-bottom: 25px;
+}
+.h-mb-30 {
+  margin-bottom: 30px;
+}
+.h-mb-35 {
+  margin-bottom: 30px;
+}
+.h-mb-40 {
+  margin-bottom: 40px;
+}
+.h-mb-45 {
+  margin-bottom: 45px;
+}
+.h-mb-50 {
+  margin-bottom: 50px;
+}
+.h-mb-60 {
+  margin-bottom: 60px;
+}
+.h-mb-70 {
+  margin-bottom: 70px;
+}
+.h-mb-80 {
+  margin-bottom: 80px;
+}
+.h-mb-90 {
+  margin-bottom: 90px;
+}
+
+.h-ml-5 {
+  margin-left: 5px;
+}
+.h-ml-10 {
+  margin-left: 10px;
+}
+.h-ml-15 {
+  margin-left: 15px;
+}
+.h-ml-20 {
+  margin-left: 20px;
+}
+.h-ml-25 {
+  margin-left: 25px;
+}
+.h-ml-30 {
+  margin-left: 30px;
+}
+.h-ml-40 {
+  margin-left: 40px;
+}
+.h-ml-50 {
+  margin-left: 50px;
+}
+.h-ml-60 {
+  margin-left: 60px;
+}
+.h-ml-70 {
+  margin-left: 70px;
+}
+.h-ml-80 {
+  margin-left: 80px;
+}
+.h-ml-90 {
+  margin-left: 90px;
+}
+
+@mixin h-margin-mobile($screenSize, $marginSize) {
+  @include bp($screenSize) {
+    .h-mt-#{$screenSize}-#{$marginSize} {
+      margin-top: calc(#{$marginSize} * 1px);
+    }
+    .h-mr-#{$screenSize}-#{$marginSize} {
+      margin-right: calc(#{$marginSize} * 1px);
+    }
+    .h-mb-#{$screenSize}-#{$marginSize} {
+      margin-bottom: calc(#{$marginSize} * 1px);
+    }
+    .h-ml-#{$screenSize}-#{$marginSize} {
+      margin-left: calc(#{$marginSize} * 1px);
+    }
+  }
+}
+
+@include h-margin-mobile(xs, 5);
+@include h-margin-mobile(xs, 10);
+@include h-margin-mobile(xs, 15);
+@include h-margin-mobile(xs, 20);
+@include h-margin-mobile(xs, 25);
+@include h-margin-mobile(xs, 30);
+@include h-margin-mobile(xs, 40);
+@include h-margin-mobile(xs, 50);
+@include h-margin-mobile(xs, 60);
+@include h-margin-mobile(xs, 70);
+@include h-margin-mobile(xs, 80);
+@include h-margin-mobile(xs, 90);
+@include h-margin-mobile(xs, 0);
+
+//
+// Other
+//
+.h-pointer {
+  cursor: pointer;
+}
+
+.h-margin-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.h-text-left {
+  text-align: left;
+}
+
+.h-text-center {
+  text-align: center;
+}
+
+.h-text-right {
+  text-align: right;
+}
+
+.h-no-wrap {
+  white-space: nowrap;
+}
+
+.h-responsive-img {
+  max-width: 100%;
+  height: auto;
+}

@@ -1,0 +1,175 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Home > Benefits Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-benefits-block {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 0;
+  margin-bottom: $desktop-section-spacing;
+  overflow: hidden;
+
+  hr {
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: 2px solid $gl-primary;
+    margin: 0 auto $mobile-section-spacing auto;
+    max-width: 1040px;
+    display: block;
+    width: 100%;
+  }
+
+  &__title {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin: 0 auto 60px;
+  }
+
+  &__wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 30px;
+    padding-right: 5vw;
+  }
+
+  &__img {
+    pointer-events: none;
+    user-select: none;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+    padding: 0;
+
+    hr {
+      margin: 0 auto $mobile-section-spacing auto;
+      width: calc(100% - 30px);
+    }
+
+    &__wrapper {
+      flex-direction: column;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &__img {
+      position: static;
+      margin: 0 auto;
+      width: 80%;
+
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    &__content {
+      order: 1;
+      margin: 40px auto 0;
+      padding-left: $mobile-edge;
+      padding-right: $mobile-edge;
+      max-width: none;
+    }
+
+  } // s
+
+} // .c-benefits-block
+
+
+
+//
+// Benefit Item
+//
+.c-benefit {
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  margin: 25px 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 64px;
+    @include size(64px);
+    margin-right: 35px;
+    background-color: $gl-primary;
+    border-radius: 50%;
+  }
+
+  &__title {
+    margin-bottom: 5px;
+  }
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    flex-direction: column;
+    align-items: center;
+
+    &__icon {
+      margin: 0 0 15px;
+    }
+
+    &__title, &__description {
+      text-align: center;
+    }
+
+  } // s
+
+  @include bp(xs) {
+    margin: 20px 0;
+  }
+
+} // .c-benefit
+
+
+
+//
+// Benefits Block Background
+//
+.c-benefits-block-bg {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 2560px;
+  height: 400px;
+  background-image: url('/assets/img/page-noodle--reverse.svg');
+  background-repeat: no-repeat;
+
+  @include bp(s) {
+    top: auto;
+    bottom: 350px;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+} // .c-benefits-block-bg

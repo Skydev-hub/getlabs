@@ -1,0 +1,38 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > Checklist
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+
+.c-checklist {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    padding: 15px 0;
+    border-bottom: 1px solid $gl-light-l2;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &--alpha {
+    counter-reset: checklist-group;
+
+    > * {
+      counter-increment: checklist-group;
+
+      .label {
+        &::before {
+          content: counter(checklist-group, lower-alpha) ". ";
+          padding-right: 4px;
+        }
+      }
+    }
+  }
+
+} // c-checklist

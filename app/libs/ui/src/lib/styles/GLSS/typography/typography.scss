@@ -1,0 +1,157 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Typography
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "GLSS/variables/typography";
+@import "GLSS/library/mixins";
+
+
+//
+// Text colors
+// NOTE: Ideally use the proper utility text class
+//
+.h-dark-text-color {
+  color: $gl-dark-text-color
+}
+
+.h-medium-text-color {
+  color: $gl-medium-text-color;
+}
+
+.h-light-text-color {
+  color: $gl-light-text-color;
+}
+
+.h-primary-text-color {
+  color: $gl-primary;
+}
+
+.h-primary-d1-text-color {
+  color: $gl-primary-d1;
+}
+
+.h-white-text-color {
+  color: $white;
+}
+
+
+
+//
+// Weights
+//
+.h-regular-font-weight {
+  font-weight: $gl-regular-font-weight;
+}
+
+.h-bold-font-weight {
+  font-weight: $gl-bold-font-weight;
+}
+
+.h-underline {
+  text-decoration: underline;
+}
+
+
+
+//
+// Links
+//
+.h-link {
+  color: $gl-primary-d1;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $gl-dark-text-color;
+    }
+  }
+
+} // .h-link
+
+.h-dark-primary-d1-link {
+  color: $gl-dark-text-color;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $gl-primary-d1;
+    }
+  }
+
+} // .h-dark-primary-d1-link
+
+.h-medium-d1-link {
+  color: $gl-medium-text-color;
+
+  @media (hover: hover) {
+    &:hover {
+      color: $gl-dark-text-color;
+    }
+  }
+}  // .h-medium-d1-link
+
+.h-dark-underline-link {
+  position: relative;
+  color: $gl-dark-text-color;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $gl-primary-d1;
+    transform: scaleX(0);
+    transition: transform 200ms ease-in-out;
+  }
+
+  @media (hover: hover) {
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+
+// TODO: look into this, ideally we should not apply styles to the element itself.
+a {
+  @extend .h-link;
+}
+
+.h-lg-text-size {
+  @include gl-lg-text();
+}
+
+.h-md-text-size {
+  @include gl-md-text();
+}
+
+.h-sm-text-size {
+  @include gl-sm-text();
+}
+
+.h-xs-text-size {
+  @include gl-xs-text();
+}
+
+
+.h-success-text-color {
+  color: $gl-ui-success;
+}
+
+.h-danger-text-color {
+  color: $gl-ui-danger;
+}
+
+.h-warning-text-color {
+  color: $gl-ui-warning;
+}
+
+.h-text-align-center--xs {
+  @include bp(xs) {
+    text-align: center;
+  }
+}

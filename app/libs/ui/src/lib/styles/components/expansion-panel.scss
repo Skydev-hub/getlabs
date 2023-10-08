@@ -1,0 +1,107 @@
+@import "variables";
+@import "GLSS/typography/typography";
+@import "GLSS/typography/body";
+@import "GLSS/typography/ui-labels";
+@import "components/icons";
+
+@mixin appointment-overview-panel {
+  border-bottom: none;
+  margin-bottom: 35px;
+  padding-bottom: 0;
+
+  &.active {
+    border-bottom: 1px solid $gl-light-l2;
+    //margin-bottom: 15px;
+    padding-bottom: 10px;
+
+    ::ng-deep {
+      header {
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  ::ng-deep {
+    header {
+      padding: 0 0 5px;
+      border-bottom: 1px solid $gl-light-l2;
+      margin-bottom: 0;
+
+      &:hover {
+        color: inherit;
+      }
+
+      .title {
+        flex-grow: 0;
+      }
+    }
+
+    .content {
+      padding-bottom: 0;
+    }
+
+    .chevron {
+      //@extend .c-small-icon--primary;
+    }
+  }
+
+  .overview--item ~ .overview--subheader {
+    border-top: 1px solid $gl-very-light-border-color;
+    margin-top: 15px;
+    padding-top: 10px;
+  }
+
+  .overview {
+    &--subsection {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $gl-very-light-border-color;
+
+      &:last-of-type {
+        border-bottom: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &--subheader {
+      margin-bottom: 10px;
+      @extend .h-medium-l-uil2;
+    }
+
+    &--item {
+      display: flex;
+      margin-bottom: 10px;
+
+      > :nth-child(1) {
+        flex: 1 1 50%;
+        margin-right: 20px;
+        @extend .h-medium-l-b2;
+      }
+
+      > :nth-child(2) {
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        @extend .h-dark-r-uil2;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    &--item__simple {
+      > :nth-child(2) {
+        justify-content: normal;
+        display: block;
+      }
+    }
+  }
+
+  @include bp(xs) {
+    margin-bottom: 30px;
+  }
+}
+
+

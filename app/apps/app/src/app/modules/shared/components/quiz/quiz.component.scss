@@ -1,0 +1,23 @@
+@import "variables";
+
+:host {
+  app-form-element.error {
+    ::ng-deep {
+      .label-container label {
+        color: $gl-ui-danger;
+      }
+    }
+
+    app-radio-group {
+      app-radio-input {
+        ::ng-deep .c-checkbox--checked {
+          color: $gl-ui-danger;
+
+          .element .input + .check {
+            background-color: $gl-ui-danger;
+          }
+        }
+      }
+    }
+  }
+}

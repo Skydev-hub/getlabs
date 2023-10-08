@@ -1,0 +1,138 @@
+@import "variables";
+@import "GLSS/user-interface/buttons/buttons";
+@import "GLSS/user-interface/buttons/icon-button";
+
+//@use "sass:map";
+
+$types: 'primary', 'secondary', 'border';
+$sizes: 'large', 'medium', 'small', 'xs';
+
+:host {
+
+  position: relative;
+
+  @extend .ui-button;
+
+  // TODO: Remove once base button css is brought in to here
+  ::ng-deep svg {
+    transition:
+      fill $transition-duration ease-in-out;
+  }
+
+  @each $type in $types {
+    &.btn-type--#{$type} {
+      @extend .ui-#{$type}-button;
+
+      @each $size in $sizes {
+        &.btn-size--#{$size} {
+          @extend .ui-#{$type}-button--#{$size};
+        }
+      }
+
+      &.btn-size--undefined {
+        // No set size
+      }
+
+      &.btn-responsive {
+        @extend .ui-#{$type}-button--responsive;
+      }
+    }
+
+  }
+
+  &.btn-type--basic {
+    //@extend .h-dark-l-bl1;
+
+    .btn-content ::ng-deep {
+      svg-icon, svg-icon-sprite {
+        fill: $gl-medium;
+
+        & + * {
+          margin-left: 10px;
+        }
+      }
+    }
+
+    &:hover {
+      .btn-content ::ng-deep {
+        svg-icon, svg-icon-sprite {
+          fill: $gl-dark;
+        }
+      }
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  &.btn-type--text {
+    @extend .ui-text-button;
+  }
+
+  &.btn-type--icon {
+    @extend .ui-icon-button;
+    @extend .h-dark-l-bl1;
+  }
+
+  &.btn-collapsable {
+    .btn-content ::ng-deep {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      .btn-collapsable--show {
+        display: none;
+      }
+      .btn-collapsable--hide {
+        display: inherit;
+      }
+    }
+  }
+
+  @include bp(s) {
+    &.btn-collapsable {
+
+      &.btn-collapsable--border {
+        border: 2px solid black;
+      }
+
+      @each $size in $sizes {
+        &.btn-size--#{$size} {
+          height: $gl-xs-ui-height;
+          width: $gl-xs-ui-height; // TODO: Use map when angular is upgraded to >= 8.3 // map.get($gl-ui-height, $size);
+          padding: 0;
+        }
+      }
+
+      .btn-content ::ng-deep {
+        .btn-collapsable--show {
+          display: inherit;
+        }
+        .btn-collapsable--hide {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  .btn-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+
+  // .loading is added by loading directive
+  &.loading {
+    .btn-content {
+      visibility: hidden;
+    }
+  }
+
+
+
+}

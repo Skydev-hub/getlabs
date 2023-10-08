@@ -1,0 +1,32 @@
+<div mat-dialog-title class="h-dark-c-lb2 h-flex-col h-flex-y-center">
+  <svg-icon-sprite src="alert-circle-icon" class="c-medium-icon h-full-width"></svg-icon-sprite>
+  <div class="h-mt-15">
+    <ng-container [ngSwitch]="dialogData.type">
+      <ng-container *ngSwitchCase="types.LabLocation"> This address looks like {{ dialogData.data.lab | lab | aOrAn }} lab location. </ng-container>
+      <ng-container *ngSwitchCase="types.MissingStreetNumber">
+        This address is missing a street number.
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<mat-dialog-content class="h-medium-c-b2 h-mt-10 h-mb-10">
+  <ng-container [ngSwitch]="dialogData.type">
+    <ng-container *ngSwitchCase="types.LabLocation">
+      We cannot book appointments for lab locations but we can come to your home or office. Is this address correct?
+    </ng-container>
+    <ng-container *ngSwitchCase="types.MissingStreetNumber">
+      Are you sure this is your correct address?
+    </ng-container>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" size="medium" class="mat-dialog-secondary-action" mat-dialog-close>
+    No, enter a new address
+  </button>
+  <button app-button size="medium" class="mat-dialog-primary-action" [mat-dialog-close]="true">
+    Yes, continue
+  </button>
+  <button class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,34 @@
+@import "GLSS/typography/typography";
+
+:host {
+  &.status {
+    &-cancelled {
+      color: #74808d;
+    }
+
+    &-pending {
+      color: #f19f0b;
+    }
+
+    &-confirmed {
+      color: #57ce79;
+    }
+
+    &-en-route {
+      color: #39b7ff;
+    }
+
+    &-in-progress {
+      color: #39b7ff;
+    }
+
+    &-collected {
+      color: #4F5bed;
+    }
+
+    &-completed {
+      color: #172b41;
+    }
+  }
+
+}

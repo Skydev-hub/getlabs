@@ -1,0 +1,148 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.date-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+  margin: 0 70px 20px;
+  border-bottom: 1px solid $gl-light-l2;
+
+  //&__date {
+  //  color: $gl-dark-text-color;
+  //  font-family: $gl-body-font-family;
+  //  font-size: 18px;
+  //}
+
+  &__buttons {
+    display: none;
+
+    > *:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+
+  @include bp(xs) {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 15px;
+
+    //justify-content: space-between;
+
+    &__buttons {
+      display: inherit;
+    }
+  }
+}
+
+.slot-selector {
+  display: flex;
+  flex-direction: row;
+
+  &__edge {
+    display: flex;
+    flex: 0 0 50px;
+
+    &--start {
+      justify-content: flex-start;
+      padding-top: 20px;
+    }
+
+    &--end {
+      justify-content: flex-end;
+      padding-top: 20px;
+    }
+  }
+
+  &__slots {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+
+    justify-content: space-between;
+
+    app-scheduler-slots  {
+      $slot-gap: 15px;
+
+      ::ng-deep {
+        .date {
+          @include bp(xs) {
+            position: relative;
+            padding-bottom: 15px;
+
+            &::after {
+              // #thankssafari
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+
+              margin-left: calc(-50%);
+              padding-left: calc(50%);
+            }
+          }
+        }
+      }
+
+      &:not(:last-of-type) {
+        ::ng-deep {
+          .date {
+            @include bp(xs) {
+              &::after {
+                padding-right: calc(50% + #{$slot-gap});
+                margin-right: calc(-50% - #{$slot-gap});
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__controls {
+      display: none;
+
+      @include bp(xs) {
+        display: block;
+        height: 34px;
+
+        &.next-button {
+          align-self: flex-end;
+        }
+
+        &.previous-button {
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+
+  @include bp(xs) {
+    //position: relative;
+    //flex-direction: column;
+
+    //&__edge {
+    //  padding-top: 10px;
+    //
+    //  &--end {
+    //    position: absolute;
+    //    right: 0;
+    //  }
+    //}
+    &__edge {
+      display: none;
+    }
+
+    app-scheduler-slots {
+      &:first-of-type, &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
+}

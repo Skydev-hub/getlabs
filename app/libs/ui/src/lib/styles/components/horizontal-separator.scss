@@ -1,0 +1,55 @@
+@import "variables";
+
+$separator-spacer-size: 20px;
+
+@mixin separator($color) {
+  content: '';
+  border-bottom: 1px solid $color;
+  height: 1px;
+  display: block;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.c-horizontal-separator {
+  $separator-color: $gl-light-l4;
+
+  &--dark {
+    $separator-color: $gl-dark;
+  }
+
+  &--medium {
+    $separator-color: $gl-medium;
+  }
+
+  &--light {
+    $separator-color: $gl-light-l1;
+  }
+
+  &--with-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    &::after {
+      @include separator($separator-color);
+    }
+
+    &::before {
+      margin-right: $separator-spacer-size;
+    }
+
+    &::after {
+      margin-left: $separator-spacer-size;
+    }
+  }
+
+  &--xs {
+    width: 240px;
+  }
+
+  &::before {
+    @include separator($separator-color);
+  }
+}

@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="h-flex-col">
+
+  <section class="h-mb-30">
+    <div class="h-dark-l-uil1 h-mb-10">Weekly Schedule</div>
+    <app-form-group>
+      <app-availability-day-input formControlName="monday" label="Monday"></app-availability-day-input>
+      <app-availability-day-input formControlName="tuesday" label="Tuesday"></app-availability-day-input>
+      <app-availability-day-input formControlName="wednesday" label="Wednesday"></app-availability-day-input>
+      <app-availability-day-input formControlName="thursday" label="Thursday"></app-availability-day-input>
+      <app-availability-day-input formControlName="friday" label="Friday"></app-availability-day-input>
+      <app-availability-day-input formControlName="saturday" label="Saturday"></app-availability-day-input>
+      <app-availability-day-input formControlName="sunday" label="Sunday"></app-availability-day-input>
+    </app-form-group>
+  </section>
+
+  <section class="h-mb-30">
+    <div class="h-dark-l-uil1 h-mb-10">Schedule Settings</div>
+    <app-form-group>
+      <app-checkbox-input formControlName="exposeHours">Expose availability to patients</app-checkbox-input>
+    </app-form-group>
+  </section>
+
+  <section class="h-mb-30">
+    <div class="h-dark-l-uil1 h-mb-10">Blackout Dates</div>
+    <app-form-group>
+      <app-team-blackout-periods-input [timezone]="user.timezone"
+                                       formControlName="blackouts"></app-team-blackout-periods-input>
+    </app-form-group>
+  </section>
+
+  <button app-button type="submit" class="h-margin-center h-mt-40" [loading]="req$">
+    Save Schedule
+  </button>
+
+</form>

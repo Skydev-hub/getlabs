@@ -1,0 +1,72 @@
+<ng-container *ngIf="appointments?.length; else noAppointments">
+  <google-map *appGoogleMapsLazyLoader width="100%" height="100%"
+              [options]="{ zoomControl: true, streetViewControl: false, gestureHandling: 'auto', draggableCursor: 'default', clickableIcons: false }"
+              appGoogleMapsOptionExt [bounds]="true" class="l-as-block">
+    <map-marker
+      *ngFor="let appointment of appointments; index as i"
+      [label]="i+1 | mapPinLabel"
+      [options]="{ zIndex: 1000 - i, icon: getIconPath(appointment.specialist) }"
+      [position]="{
+        lat: appointment.patient.address.geocoding?.coordinates[0],
+        lng: appointment.patient.address.geocoding?.coordinates[1]
+      }"
+      [clickable]="true"
+      (mapClick)="apptInfo.open(apptMapMarker)"
+    #apptMapMarker="mapMarker">
+      <map-info-window #apptInfo="mapInfoWindow">
+        <div class="h-dark-l-b3">
+          <div class="h-bold-font-weight h-dark-l-b2">
+            <a [routerLink]="getAppointmentUri(appointment)">#{{ appointment.identifier }}</a>
+          </div>
+          <div class="">
+            {{ appointment.startAt | dateTz:'shortTime':appointment.patient.timezone }}
+          </div>
+          <div class="">
+            <ng-container *ngIf="appointment.specialist; else unassigned">
+              Assigned to {{appointment.specialist.firstName}} {{appointment.specialist.lastName}}
+            </ng-container>
+            <ng-template #unassigned>
+              Unassigned
+            </ng-template>
+          </div>
+          <div class="">{{appointment.patient.firstName}} {{appointment.patient.lastName}}</div>
+          <div class="">
+            <app-appointment-status-text [appointment]="appointment"></app-appointment-status-text>
+          </div>
+          <div *ngIf="appointment.labLocation">Deliver to: {{appointment.labLocation.address.toString()}}</div>
+        </div>
+      </map-info-window>
+    </map-marker>
+
+    <ng-container *ngFor="let specialist of specialists; index as i">
+      <map-marker
+        *ngIf="specialist"
+        [label]="(specialist.firstName.charAt(0) + specialist.lastName.charAt(0)) | mapPinLabel"
+        [options]="{ zIndex: 1000-i, icon: getIconPath() }"
+        [position]="{ lat: specialist.address.geocoding?.coordinates[0], lng: specialist.address.geocoding?.coordinates[1] }"
+        [clickable]="true"
+        (mapClick)="specInfo.open(specMapMarker)"
+        class="c-small-icon c-small-icon--white"
+      #specMapMarker="mapMarker">
+        <map-info-window #specInfo="mapInfoWindow">
+          <div class="h-bold-font-weight h-dark-l-b2">{{specialist.firstName}} {{specialist.lastName}}</div>
+          <div class="h-dark-c-b3">{{specialist.address.toString()}}</div>
+        </map-info-window>
+      </map-marker>
+    </ng-container>
+  </google-map>
+  <div class="h-mt-20">
+    <h3 class="h-dark-l-lb3">Specialist Assignments</h3>
+    <div *ngFor="let specialist of specialists" class="h-flex-y-center specialist-index">
+      <img class="specialist-index__icon" [src]="getIconPath(specialist)">
+      <div class="specialist-index__name">{{ specialist ? specialist.name : 'Unassigned'}}</div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noAppointments>
+  <div class="c-table-empty-state h-medium-c-b2">
+    <svg-icon-sprite src="large-circle-time-icon" class="h-mb-20" height="92" width="92"></svg-icon-sprite>
+    No appointments booked for this date
+  </div>
+</ng-template>

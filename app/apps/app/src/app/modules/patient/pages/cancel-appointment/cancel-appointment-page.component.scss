@@ -1,0 +1,15 @@
+@import "GLSS/library/helpers";
+@import "GLSS/library/mixins";
+
+.actions-container {
+  @extend .h-flex-row;
+  justify-content: center;
+
+  @include bp(xs) {
+    flex-direction: column-reverse;
+
+    button {
+      flex: auto;
+    }
+  }
+}

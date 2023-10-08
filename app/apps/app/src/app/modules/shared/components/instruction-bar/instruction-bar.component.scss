@@ -1,0 +1,49 @@
+@import "variables";
+@import "mixins";
+
+:host {
+  margin-bottom: 20px;
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $gl-light-l2;
+    cursor: pointer;
+  }
+
+  .chevron {
+    transition: transform $transition-duration;
+  }
+
+  .grid {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  &.open {
+    .chevron {
+      transform: rotate(-180deg);
+    }
+
+    .grid {
+      display: grid;
+    }
+  } // --open &
+
+  @include bp(xs) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @include bp(xxs) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

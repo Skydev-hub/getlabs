@@ -1,0 +1,90 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Library > Responsive
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "mixins";
+
+//
+// Mobile & Desktop Hide Helpers
+//
+.h-xl-hide {
+  @include bp(xl) {
+    display: none !important;
+  }
+}
+
+.h-l-hide {
+  @include bp(l) {
+    display: none !important;
+  }
+}
+
+.h-m-hide {
+  @include bp(m) {
+    display: none !important;
+  }
+}
+
+.h-s-hide {
+  @include bp(s) {
+    display: none !important;
+  }
+}
+
+.h-xs-hide {
+  @include bp(xs) {
+    display: none !important;
+  }
+}
+
+.h-xxs-hide {
+  @include bp(xxs) {
+    display: none !important;
+  }
+}
+
+
+.h-xl-show {
+  display: none !important;
+  @include bp(xl) {
+    display: inherit !important;
+  }
+}
+
+.h-l-show {
+  display: none !important;
+  @include bp(l) {
+    display: inherit !important;
+  }
+}
+
+.h-m-show {
+  display: none !important;
+  @include bp(m) {
+    display: inherit !important;
+  }
+}
+
+.h-s-show {
+  display: none !important;
+  @include bp(s) {
+    display: inherit !important;
+  }
+}
+
+.h-xs-show {
+  display: none !important;
+  @include bp(xs) {
+    display: inherit !important;
+  }
+}
+
+.h-xxs-show {
+  display: none !important;
+  @include bp(xxs) {
+    display: inherit !important;
+  }
+}

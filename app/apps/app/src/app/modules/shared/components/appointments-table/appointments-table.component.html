@@ -1,0 +1,168 @@
+<ng-container appListFilterContainer [type]="AppointmentEntityType" [formGroup]="formGroup">
+  <section class="actions">
+    <div class="actions__left">
+
+      <app-form-element class="c-icon-input h-full-width--responsive">
+  <!--      <svg-icon src="/assets/icons/search-icon.svg" class="ui-input-container__icon ui-input-container__icon&#45;&#45;less-padding" [svgStyle]="{ 'width.px': '19',  'height.px': '18' }"></svg-icon>-->
+        <input class="ui-input ui-input--small ui-input--search ui-input--narrow h-full-width--responsive" type="text"
+               placeholder="Search appointments" formControlName="query">
+      </app-form-element>
+
+      <ng-container *ngFor="let filterCriterion of filterCriteria">
+        <!-- Above ngFor will only ever yield FilterCriterion objects thanks to the class' iterator.  Thus, we need
+             to wrap the below object in $any to force the compiler to play nice -->
+        <app-list-filter [criterion]="$any(filterCriterion)" class="h-ml-10">
+          {{ filterCriterion.getAnchorLabel() }}
+        </app-list-filter>
+
+      </ng-container>
+
+    </div>
+
+    <div class="actions__right">
+
+    <button app-button="basic" class="pick-date h-medium-l-uil3" (click)="datepicker.open()">
+      <svg-icon-sprite src="circle-time-icon" class="c-small-icon"></svg-icon-sprite>
+      <span>Pick Date</span>
+      <ng-container [formGroup]="dateRangeControl">
+        <app-datepicker #datepicker formControlName="start"></app-datepicker>
+      </ng-container>
+    </button>
+
+      <!--
+      <button class="ui-icon-button-inline ui-icon-button-inline--icon-hover">
+        <svg-icon src="/assets/icons/location-pin-icon.svg" class="ui-icon-button__icon h-mr-10" [svgStyle]="{ 'width.px': '16',  'height.px': '21' }"></svg-icon>
+        Map View
+      </button>
+      -->
+    </div>
+
+  </section>
+  <app-applied-filters></app-applied-filters>
+</ng-container>
+<div class="h-mb-20 h-flex-x-center">
+  <mat-button-toggle-group [formControl]="toggleControl">
+    <mat-button-toggle [value]="ViewModes.ListView">List View</mat-button-toggle>
+    <mat-button-toggle [value]="ViewModes.MapView">Map View</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
+<ng-container *appTemplateVariable="(data$ | async) as appointments">
+  <ng-container
+    *ngTemplateOutlet="toggleControl.value === ViewModes.ListView ? listView : mapView; context: { appointments: appointments }"></ng-container>
+</ng-container>
+
+<ng-template #mapView let-appointments="appointments">
+  <ng-container *ngIf="appointments; else loading">
+    <div class="h-mb-20" *ngIf="appointments && appointments.length < _total">
+      Retrieval in progress... {{appointments.length}} of {{_total}} appointments retrieved.
+    </div>
+    <app-appointment-map [appointments]="(data$ | async)"></app-appointment-map>
+  </ng-container>
+</ng-template>
+
+<ng-template #listView let-appointments="appointments">
+  <section class="c-table-container c-table-container--bottom-margin">
+    <div class="c-table">
+      <div class="c-table__row c-table__row__header-row c-table__row h-mobile-hide">
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Date)">Date</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Identifier)">ID</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Status)">Status</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Market)">Market</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Time)">Time</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Patient)">Patient</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.Specialist)">Specialist</div>
+        <div class="c-table__heading" *ngIf="isColumnVisible(Column.DeliveryLocation)">Deliver to</div>
+      </div>
+
+      <div class="c-table__row c-table__row__header-row h-desktop-hide" *ngIf="!dateRangeControl.value.end">
+        <div class="c-table__heading" [ngSwitch]="true">
+          Appointments
+          <ng-container *ngSwitchCase="isYesterday(dateRangeControl.value.start)">Yesterday</ng-container>
+          <ng-container *ngSwitchCase="isToday(dateRangeControl.value.start)">Today</ng-container>
+          <ng-container *ngSwitchCase="isTomorrow(dateRangeControl.value.start)">Tomorrow</ng-container>
+          <ng-container *ngSwitchDefault>{{dateRangeControl.value.start | date: 'longDate' }}</ng-container>
+        </div>
+      </div>
+
+      <!-- infiniteScrollThrottle must be set to 0 to avoid an internal bug caused by the misuse of the sampleTime pipe
+           (see https://github.com/orizens/ngx-infinite-scroll/issues/198 for more info) -->
+      <div infiniteScroll [infiniteScrollDisabled]="scrollDisabled"
+           [infiniteScrollThrottle]="0"
+           (scrolled)="onScroll(appointments ? appointments.length : 0)">
+        <ng-container *ngIf="appointments; else loading">
+          <a routerLink="{{ auth.getPortalUrl() }}/appointments/{{ appointment.id }}"
+             *ngFor="let appointment of appointments"
+             class="status-{{appointment.status}} c-table__row c-table__row__content-row">
+            <div class="c-table__col h-dark-l-uil2" *ngIf="isColumnVisible(Column.Date)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Status</div>
+              <div class="c-table__col__value">
+                {{appointment.startAt | date: 'M/d'}}
+              </div>
+            </div>
+            <div class="c-table__col h-dark-l-uil2" *ngIf="isColumnVisible(Column.Identifier)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Status</div>
+              <div class="c-table__col__value">
+                #{{appointment.identifier}}
+              </div>
+            </div>
+            <div class="c-table__col h-dark-l-uil2" *ngIf="isColumnVisible(Column.Status)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Status</div>
+              <div class="c-table__col__value">
+                <app-appointment-status-text [appointment]="appointment"></app-appointment-status-text>
+                <span *ngIf="(appointment | redact)?.isMedicare" class="h-purple-l-uil2 h-ml-10">M</span>
+              </div>
+            </div>
+            <div class="c-table__col h-dark-l-uil2" *ngIf="isColumnVisible(Column.Market)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Market</div>
+              <div class="c-table__col__value">
+                {{appointment.market?.code}}
+              </div>
+            </div>
+            <div class="c-table__col" *ngIf="isColumnVisible(Column.Time)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Time</div>
+              <div class="c-table__col__value">
+                {{ appointment.startAt | dateTz:'shortTime':appointment.patient.timezone }}
+              </div>
+            </div>
+            <div class="c-table__col" *ngIf="isColumnVisible(Column.Patient)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Patient</div>
+              <div class="c-table__col__value">
+                {{ ((appointment | redact)?.patient.name) || '--' }}
+              </div>
+            </div>
+            <div class="c-table__col" *ngIf="isColumnVisible(Column.Specialist)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Specialist</div>
+              <div class="c-table__col__value">
+                <ng-container *ngIf="appointment.specialist; else assignSpecialist">
+                  {{ appointment.specialist.name }}
+                </ng-container>
+                <ng-template #assignSpecialist>
+                  <span class="h-light-text-color">Unassigned</span>
+                </ng-template>
+              </div>
+            </div>
+            <div class="c-table__col" *ngIf="isColumnVisible(Column.DeliveryLocation)">
+              <div class="c-table__col__label h-medium-l-uil2 h-desktop-hide">Laboratory</div>
+              <div class="c-table__col__value">
+                {{ ((appointment | redact)?.labLocation?.lab | lab) || '--' }}
+              </div>
+            </div>
+          </a>
+          <ng-container *ngIf="appointments.length === 0">
+            <div class="c-table-empty-state h-medium-c-b2">
+              <svg-icon-sprite src="large-circle-time-icon" class="h-mb-20" width="92" height="92"></svg-icon-sprite>
+              No appointments booked for this date
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+</ng-template>
+
+<ng-template #loading>
+  <div class="c-table-empty-state">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

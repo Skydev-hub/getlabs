@@ -1,0 +1,17 @@
+<div class="form-element-container">
+  <div class="h-flex-y-center label-container" *ngIf="label || optional">
+    <label [for]="id">
+      {{ label }}
+    </label>
+    <!-- TODO - support for embedded fields -->
+    <span class="h-medium-r-uil3 h-flex-one optional-label"
+          *ngIf="optional || (name && formContainer && !formContainer.isRequired(name))">
+      Optional
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>
+<div *ngIf="error" class="h-danger-l-uil3 h-mt-5 form-element-error">
+  {{ error }}
+</div>

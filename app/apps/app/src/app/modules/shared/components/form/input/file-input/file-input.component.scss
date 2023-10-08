@@ -1,0 +1,145 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/user-interface/buttons/buttons";
+
+:host {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ui-file-input {
+
+  &__hide {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__elm {
+
+    &--dark {
+      background-image: none;
+      background-color: $gl-dark;
+      box-shadow: none;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      &:not(.ui-text-button) {
+        background-color: $gl-light;
+        background-image: none;
+        box-shadow: none !important;
+      }
+
+      &.ui-text-button {
+        color: $gl-medium-text-color;
+      }
+    }
+
+  } // __elm
+
+  &.ui-input-container--error .ui-input-container__label {
+    width: 100%;
+    text-align: center;
+  }
+
+  @include bp(xs) {
+    &__elm {
+      width: 100%;
+      max-width: none;
+      padding-left: $mobile-edge;
+      padding-right: $mobile-edge;
+    }
+  }
+
+} // ui-file-input
+
+$upload-control-width: 220px;
+$upload-control-height: 230px;
+
+$mobile-upload-control-width: 345px;
+
+mat-progress-bar  {
+  height: 6px;
+}
+
+.uploading-container {
+  min-width: $upload-control-width;
+
+  @include bp(xs) {
+    height: auto;
+    width: $mobile-upload-control-width;
+  }
+}
+
+.uploaded-container {
+  display: flex;
+  flex-direction: column;
+
+  width: $upload-control-width;
+  height: $upload-control-height;
+
+  padding: 10px;
+  border: 1px $gl-light-l2 solid;
+
+  @include bp(xs) {
+    width: $mobile-upload-control-width;
+  }
+
+  .object-stage {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    cursor: pointer;
+    align-self: center;
+    background-color: $gl-light-l2;
+    width: 100%;
+
+    .object-container {
+      width: 200px;
+    }
+
+    object {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none;
+
+      &[type="application/pdf"] {
+        height: 100%;
+      }
+    }
+  }
+
+  .ui-icon-button-inline {
+    padding: 0;
+  }
+
+  .uploaded-actions {
+    flex-shrink: 1;
+    flex-grow: 0;
+
+    display: flex;
+    flex-direction: row;
+
+    & > * {
+      flex-grow: 0;
+      flex-shrink: 1;
+    }
+
+    .replace-upload {
+      flex-grow: 1;
+      flex-shrink: 0;
+      justify-content: center;
+    }
+  }
+}
+
+.h-medium-text-color {
+  color: $gl-medium-text-color;
+}

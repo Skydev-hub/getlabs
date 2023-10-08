@@ -1,0 +1,6 @@
+<app-active-status [active]="user.isActive"></app-active-status>
+<ng-container [ngSwitch]="user.isActive" *ngIf="showAction">
+  &bull;
+  <a *ngSwitchCase="true" (click)="openDeactivateDialog()">Deactivate</a>
+  <a *ngSwitchCase="false" (click)="openReactivateDialog()">Reactivate</a>
+</ng-container>

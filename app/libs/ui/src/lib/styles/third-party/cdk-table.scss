@@ -1,0 +1,11 @@
+@import "variables";
+@import "GLSS/typography/ui-labels";
+@import "GLSS/typography/body";
+
+.cdk-header-cell {
+  @extend .h-dark-l-uil2;
+}
+
+.cdk-cell {
+  @extend .h-dark-l-b2;
+}

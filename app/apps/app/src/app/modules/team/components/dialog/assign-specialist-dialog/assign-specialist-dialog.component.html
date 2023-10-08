@@ -1,0 +1,24 @@
+<div mat-dialog-title class="h-dark-c-h4">
+  Assign to Specialist
+</div>
+<mat-dialog-content>
+  <form [formGroup]="form" class="l-form-grid l-form-grid--single">
+    <app-form-element [error]="getError('specialist')">
+      <select class="ui-select ui-select--large" formControlName="specialist">
+        <option [value]="null" selected disabled>Select a specialist</option>
+        <option *ngFor="let specialist of specialists$ | async" [ngValue]="specialist">{{specialist.name}}</option>
+      </select>
+    </app-form-element>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button="border" size="large" responsive="true" class="mat-dialog-secondary-action" mat-dialog-close>
+    Cancel
+  </button>
+  <button app-button size="large" responsive="true" class="mat-dialog-primary-action" (click)="assign()" [appLoading]="req$">
+    Assign
+  </button>
+  <button app-button="basic" class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-actions>

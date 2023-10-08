@@ -1,0 +1,28 @@
+<h2 class="h-dark-c-h3 h-mb-20">
+  To draw patients under 18, we require the consent of a parent or guardian.
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!!form" class="l-form-grid l-form-grid--single h-mt-10 h-mt-xs-0">
+    <app-form-element [error]="getError('guardianName')" label="Full Name of Parent/Guardian" name="contact.guardianName">
+      <input class="ui-input ui-input--large" type="text" placeholder="Full name of parent/guardian" formControlName="guardianName">
+    </app-form-element>
+
+    <app-form-element [error]="getError('guardianRelationship')" label="Relationship to Patient" name="contact.guardianRelationship">
+      <input class="ui-input ui-input--large" type="text" placeholder="Relationship to patient" formControlName="guardianRelationship">
+    </app-form-element>
+
+    <app-form-element class="c-form-split-col__full-row" [error]="getError('guardianConfirmation')" name="contact.guardianConfirmation">
+      <app-checkbox-input formControlName="guardianConfirmation" [optional]="false">
+        I attest that I have legal custody of this individual and am authorized to initiate and consent for treatment and/or legally authorized to initiate and consent to treatment on behalf of this individual.
+      </app-checkbox-input>
+    </app-form-element>
+  </form>
+  <button class="c-dialog-close" mat-dialog-close>
+    <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+  </button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button app-button class="mat-dialog-primary-action" (click)="onSubmit()">
+    Continue
+  </button>
+</mat-dialog-actions>

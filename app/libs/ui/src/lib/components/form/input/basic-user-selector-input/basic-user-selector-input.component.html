@@ -1,0 +1,5 @@
+<select class="ui-select ui-select--large" [formControl]="input">
+  <option [value]="null" selected>All</option>
+  <option *ngFor="let user of (users$ | async)" [ngValue]="user" [disabled]="!user.isActive">{{user.name}}
+    <ng-container *ngIf="!user.isActive">(Inactive)</ng-container></option>
+</select>

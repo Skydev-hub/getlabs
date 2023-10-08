@@ -1,0 +1,77 @@
+<mat-dialog-content>
+  <div class="h-flex h-flex-row" appInlineTemplateManager>
+    <div class="promo-modal-hero">
+      <img src="/assets/img/nurse-patient-interaction.png"
+           srcset="/assets/img/nurse-patient-interaction.png 1x, /assets/img/nurse-patient-interaction@2x.png 2x"
+           alt="Specialist interacting with a first-time patient" />
+    </div>
+    <div class="promo-modal-content">
+      <div class="h-flex h-flex-col h-flex-y-center">
+        <div class="h-mb-20">
+          <svg-icon-sprite src="getlabs-logo-dark" class="c-gl-logo-icon--small"></svg-icon-sprite>
+        </div>
+        <ng-container *ngTemplateOutlet="tplManager.getTemplate(optInComponent.getState())"></ng-container>
+        <app-opt-in class="auth-narrow h-full-width" (optInCompleted)="onOptIn($event)" [optInType]="OptInType.CouponCodes">
+          <button app-button (click)="invokeAction(optInComponent.getState())" *ngIf="ButtonTexts[optInComponent.getState()]">
+            {{ ButtonTexts[optInComponent.getState()] }}
+          </button>
+        </app-opt-in>
+      </div>
+
+      <ng-template [name]="OptInComponentState.Unauthenticated">
+        <ng-container *ngIf="dialogData?.isLeaving; else defaultUnauthenticated">
+          <h2 class="h-dark-c-h3 h-mb-20">
+            Don’t need your labs collected yet?
+          </h2>
+          <div class="h-mb-20 h-text-center">
+            Subscribe to get a 10% off code now & occasional promo codes in the future.
+          </div>
+        </ng-container>
+        <ng-template #defaultUnauthenticated>
+          <h2 class="h-dark-c-h3 h-mb-20">
+            Save 10% off your first visit
+          </h2>
+          <div class="h-mb-20 h-text-center">
+            Subscribe to get a 10% off code now & occasional promo codes in the future.
+          </div>
+        </ng-template>
+      </ng-template>
+
+      <ng-template [name]="OptInComponentState.Authenticating">
+        <h2 class="h-dark-c-h3 h-mb-20">
+          Check your text messages
+        </h2>
+        <div class="h-mb-20 h-text-center">
+          Enter the code we just texted you.
+        </div>
+      </ng-template>
+
+      <ng-template [name]="OptInComponentState.Complete">
+        <ng-container *ngIf="result?.reasons.length; else optInComplete">
+          <h2 class="h-dark-c-h3 h-mb-20">
+            You're already subscribed!
+          </h2>
+          <div class="h-mb-20 h-text-center">
+            We’ll text you when we release new promo codes.
+          </div>
+        </ng-container>
+      </ng-template>
+
+      <ng-template [name]="OptInComponentState.OptInProgress">
+        <h2 class="h-dark-c-h3 h-mb-20">One moment...</h2>
+      </ng-template>
+
+      <ng-template #optInComplete>
+        <h2 class="h-dark-c-h3 h-mb-20">
+          You're all set!
+        </h2>
+        <div class="h-mb-20 h-text-center">
+          We just texted you a 10% off promo code. Just tap below to book a visit.
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</mat-dialog-content>
+<button app-button="basic" class="c-dialog-close" mat-dialog-close>
+  <svg-icon-sprite src="close-icon"></svg-icon-sprite>
+</button>

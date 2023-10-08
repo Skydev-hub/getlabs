@@ -1,0 +1,168 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > User Interface > Buttons
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+@import "components/icons";
+
+@mixin button-reset() {
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+
+
+//
+// Base Button Styling
+//
+@mixin base-button() {
+  @include button-reset();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //flex: 0 0 auto;
+  font-family: $gl-body-font-family;
+  outline: none;
+
+  transition:
+    background-color $transition-duration ease-in-out,
+    border-color $transition-duration ease-in-out,
+    color $transition-duration ease-in-out;
+
+  svg {
+    transition:
+      fill $transition-duration ease-in-out;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $gl-light;
+    border-color: $gl-light;
+  }
+
+  > span {
+    opacity: 1;
+    transition: opacity $transition-duration ease-in-out;
+  }
+} // base-button()
+
+
+@mixin loader-positioning($loader-size) {
+  top: calc(50% - (#{$loader-size} / 2));
+  left: calc(50% - (#{$loader-size} / 2));
+  @include size($loader-size);
+}
+
+//
+// Button Sizes
+//
+@mixin button-sizes() {
+  &--large {
+    width: 100%;
+    height: $gl-large-ui-height;
+    max-width: $gl-wide-button-width;
+    padding: 0 25px;
+
+    &::after {
+      @include loader-positioning($c-icon-size-md);
+      //top: calc(50% - (#{$c-icon-size-md} / 2));
+      //left: calc(50% - (#{$c-icon-size-md} / 2));
+      //@include size($c-icon-size-md);
+    }
+
+  } // --large
+
+  &--medium {
+    height: $gl-medium-ui-height;
+    padding: 0 25px;
+
+    &::after {
+      @include loader-positioning($c-icon-size-md);
+    }
+
+  } // --medium
+
+  &--small {
+    height: $gl-small-ui-height;
+    padding: 0 25px;
+
+    &::after {
+      @include loader-positioning($c-icon-size-sm);
+    }
+
+  } // --small
+
+  &--xs {
+    height: $gl-xs-ui-height;
+    padding: 0 15px;
+
+    &::after {
+      @include loader-positioning($c-icon-size-sm);
+    }
+
+  } // --xs
+
+  @include bp(xs) {
+    &--responsive {
+      max-width: 100%;
+    }
+  }
+
+} // button-sizes()
+
+@mixin button-state-colours($standardBackground, $standardText, $hoverBackground, $hoverText) {
+  background-color: $standardBackground;
+  color: $standardText;
+
+  svg-icon, svg-icon-sprite {
+    fill: $standardText;
+  }
+
+  &.loading {
+    background-color: $standardBackground;
+    color: $standardBackground;
+
+    svg-icon, svg-icon-sprite {
+      fill: $standardBackground;
+    }
+
+    @media (hover: hover) {
+      &:hover:not(:disabled):not(.disabled) {
+        background-color: $standardBackground;
+        color: $standardBackground;
+      }
+
+      svg-icon, svg-icon-sprite {
+        fill: $standardBackground;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover:not(:disabled):not(.disabled) {
+      background-color: $hoverBackground;
+      color: $hoverText;
+
+      svg-icon, svg-icon-sprite {
+        fill: $hoverText;
+      }
+    }
+  }
+}
+
+//
+// Responsive Button
+//
+.ui-responsive-button {
+  @include bp(xs) {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

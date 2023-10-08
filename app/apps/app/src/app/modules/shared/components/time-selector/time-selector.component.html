@@ -1,0 +1,8 @@
+<ng-container *ngIf="_restrictRange$ | async">
+  <select [formControl]="formControl" class="ui-select ui-select--medium ui-select--inline">
+    <option [ngValue]="null" selected>Set Time</option>
+    <option *ngFor="let timeOption of _timeOptions$ | async" [ngValue]="timeOption">
+      {{ timeOption.toString() }}
+    </option>
+  </select>
+</ng-container>

@@ -1,0 +1,745 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Typography > Body
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Responsive Body Copy
+//  --------------------------------------
+//  B1 - B2  1 step down
+//  B3 - B4  Not responsive
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+
+
+//
+// Non Colored - Used when another utility class or component provides the color
+//
+
+// Non Colored - Left
+.h-l-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: left;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-l-b1
+
+.h-l-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: left;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-l-b2
+
+.h-l-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: left;
+}
+
+.h-l-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: left;
+}
+
+
+// Non Colored - Center
+.h-c-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: center;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-c-b1
+
+.h-c-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: center;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-c-b2
+
+.h-c-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: center;
+}
+
+.h-c-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: center;
+}
+
+
+// Non Colored - Right
+.h-r-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: right;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-r-b1
+
+.h-r-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: right;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-r-b2
+
+.h-r-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: right;
+}
+
+.h-r-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: right;
+}
+
+
+
+//
+// Dark
+//
+
+// Dark - Left
+.h-dark-l-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-dark-l-b1
+
+.h-dark-l-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-dark-l-b2
+
+.h-dark-l-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-l-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: left;
+  color: $gl-dark-text-color;
+}
+
+
+// Dark - Center
+.h-dark-c-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-dark-c-b1
+
+.h-dark-c-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-dark-c-b2
+
+.h-dark-c-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-c-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: center;
+  color: $gl-dark-text-color;
+}
+
+
+// Dark - Right
+.h-dark-r-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-dark-r-b1
+
+.h-dark-r-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-dark-r-b2
+
+.h-dark-r-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+}
+
+.h-dark-r-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: right;
+  color: $gl-dark-text-color;
+}
+
+
+
+//
+// Medium
+//
+
+// Medium - Left
+.h-medium-l-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-medium-l-b1
+
+.h-medium-l-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-medium-l-b2
+
+.h-medium-l-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-l-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: left;
+  color: $gl-medium-text-color;
+}
+
+
+// Medium - Center
+.h-medium-c-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-medium-c-b1
+
+.h-medium-c-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-medium-c-b2
+
+.h-medium-c-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-c-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: center;
+  color: $gl-medium-text-color;
+}
+
+
+// Medium - Right
+.h-medium-r-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-medium-r-b1
+
+.h-medium-r-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-medium-r-b2
+
+.h-medium-r-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+}
+
+.h-medium-r-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: right;
+  color: $gl-medium-text-color;
+}
+
+
+
+//
+// Light
+//
+
+// Light - Left
+.h-light-l-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: left;
+  color: $gl-light-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-light-l-b1
+
+.h-light-l-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: left;
+  color: $gl-light-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-light-l-b2
+
+.h-light-l-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: left;
+  color: $gl-light-text-color;
+}
+
+.h-light-l-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: left;
+  color: $gl-light-text-color;
+}
+
+
+// Light - Center
+.h-light-c-b1 {
+  font-size: 18px;
+  line-height: $b1-lh;
+  text-align: center;
+  color: $gl-light-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-light-c-b1
+
+.h-light-c-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: center;
+  color: $gl-light-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-light-c-b2
+
+.h-light-c-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: center;
+  color: $gl-light-text-color;
+}
+
+.h-light-c-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: center;
+  color: $gl-light-text-color;
+}
+
+
+// Light - Right
+.h-light-r-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: right;
+  color: $gl-light-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+  }
+
+} // .h-light-r-b1
+
+.h-light-r-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: right;
+  color: $gl-light-text-color;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-light-r-b2
+
+.h-light-r-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: right;
+  color: $gl-light-text-color;
+}
+
+.h-light-r-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: right;
+  color: $gl-light-text-color;
+}
+
+
+
+//
+// White
+//
+
+// White - Left
+.h-white-l-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: left;
+  color: $white;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+    @include bp(xxs) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-white-l-b1
+
+.h-white-l-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: left;
+  color: $white;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+    @include bp(xxs) {
+      font-size: $b4-fs;
+      line-height: $b4-lh;
+    }
+  }
+
+} // .h-white-l-b2
+
+.h-white-l-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: left;
+  color: $white;
+}
+
+.h-white-l-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: left;
+  color: $white;
+}
+
+
+// White - Center
+.h-white-c-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: center;
+  color: $white;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+    @include bp(xxs) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-white-c-b1
+
+.h-white-c-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: center;
+  color: $white;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+    @include bp(xss) {
+      font-size: $b4-fs;
+      line-height: $b4-lh;
+    }
+  }
+
+} // .h-white-c-b2
+
+.h-white-c-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: center;
+  color: $white;
+}
+
+.h-white-c-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: center;
+  color: $white;
+}
+
+
+// White - Right
+.h-white-r-b1 {
+  font-size: $b1-fs;
+  line-height: $b1-lh;
+  text-align: right;
+  color: $white;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b2-fs;
+      line-height: $b2-lh;
+    }
+    @include bp(xss) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+  }
+
+} // .h-white-r-b1
+
+.h-white-r-b2 {
+  font-size: $b2-fs;
+  line-height: $b2-lh;
+  text-align: right;
+  color: $white;
+
+  &--responsive {
+    @include bp(s) {
+      font-size: $b3-fs;
+      line-height: $b3-lh;
+    }
+    @include bp(xss) {
+      font-size: $b4-fs;
+      line-height: $b4-lh;
+    }
+  }
+
+} // .h-white-r-b2
+
+.h-white-r-b3 {
+  font-size: $b3-fs;
+  line-height: $b3-lh;
+  text-align: right;
+  color: $white;
+}
+
+.h-white-r-b4 {
+  font-size: $b4-fs;
+  line-height: $b4-lh;
+  text-align: right;
+  color: $white;
+}

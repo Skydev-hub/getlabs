@@ -1,0 +1,403 @@
+<app-accordian appStepIndexerDirective [steps]="steps">
+  <app-appointment-step
+    [completed]="isStepCompleted(Step.ReviewLabOrder)"
+    class="lab-order lab-order--orders"
+    [class.lab-order--multiple]="appointment.labOrderDetails.length > 1"
+  >
+    <ng-container ngProjectAs=".title"> Review lab {{ appointment.labOrderDetails.length > 1 ? 'orders' : 'order' }} </ng-container>
+    <div class="h-mb-20" *ngIf="getProvisioningTypes() as provTypes">
+      <ng-container *ngIf="provTypes.includes(LabOrderSeedTypes.File)">
+        Open the patient's lab order to begin filling the collection requirements. If the image isn't clear, tap Request to prompt the patient to upload a
+        clearer image.
+      </ng-container>
+      <ng-container *ngIf="provTypes.includes(LabOrderSeedTypes.DoctorContact)">
+        <p class="h-mb-20">
+          Contact the doctor's office or laboratory to request the patient's lab order. Once received, upload it, then begin filling in the collection
+          requirements.
+        </p>
+
+        <p class="h-mb-20">
+          Getlabs' fax is <span class="h-bold-font-weight h-dark-text-color">{{ globals.FAX }}</span
+          >, email is <a class="ui-text-button h-primary-d1-l-uil2" href="mailto:labs@getlabs.com">labs@getlabs.com</a>, and the appointment ID is
+          <span class="h-bold-font-weight h-dark-text-color">#{{ appointment.identifier }}</span
+          >.
+        </p>
+      </ng-container>
+      <ng-container *ngIf="provTypes.includes(LabOrderSeedTypes.DoctorSubmit)">
+        <p class="h-mb-20">
+          Check to see if the doctor has sent us the patient's lab order. Once received, upload it, then continue below.
+        </p>
+        <div class="time-countdown-grid" *ngIf="getTimingDurations(); let timingDurations">
+          <div>Hours Since Booked:</div>
+          <div>{{ timingDurations.sinceBooking }}</div>
+          <div>Hours Until Appointment:</div>
+          <div>{{ timingDurations.untilAppointment }}</div>
+        </div>
+      </ng-container>
+    </div>
+
+    <app-lab-order-repeater [labOrderDetails]="appointment.labOrderDetails">
+      <ng-template let-labOrderDetails="labOrderDetails" let-index="index">
+        <ng-container *appTemplateVariable="{ operation: undefined } as appLoading">
+          <ng-container *ngIf="!appLoading.operation || !appLoading.operation.update$ || (appLoading.operation.update$ | async); else loading">
+            <div class="lab-order__controls h-flex-row">
+              <ng-container *ngIf="!labOrderDetails.isDeleted; else deletedControls">
+                <button app-button="border" size="xs" class="lab-order-controls__edit"
+                        (click)="appLoading.operation = openEditLabOrderDialog(labOrderDetails, index + 1)">
+                  Edit
+                </button>
+                <button class="h-ml-10 lab-order-controls__delete ui-icon-button-inline" type="button"
+                        (click)="appLoading.operation = openRemoveLabOrderDialog(labOrderDetails, index + 1)">
+                  <svg-icon-sprite src="/assets/icons.svg#circle-delete-icon"
+                                   class="ui-icon-button__icon c-small-icon"></svg-icon-sprite>
+                  <span class="h-dark-l-bl1 h-ml-10">Remove</span>
+                </button>
+              </ng-container>
+              <ng-template #deletedControls>
+                <span class="h-danger-r-uil2">Deleted</span>
+              </ng-template>
+            </div>
+            <div *ngIf="labOrderDetails.getLabOrderType() === LabOrderSeedTypes.DoctorContact" class="h-mb-20">
+              <div class="h-mb-5 h-dark-l-uil2">
+                {{ labOrderDetails.contactName }}
+              </div>
+              <div class="h-mb-5 h-primary-d1-l-uil2">
+                <a href="tel:{{ labOrderDetails.contactPhone | phone }}">
+                  {{ labOrderDetails.contactPhone | phone }}
+                </a>
+              </div>
+              <div class="h-medium-l-uil2" *ngIf="labOrderDetails.lab">
+                {{ labOrderDetails.lab | lab }}
+              </div>
+            </div>
+
+            <div class="h-flex h-flex-y-center h-medium-l-uil1">
+            <button
+              class="ui-text-button h-primary-d1-l-uil2"
+              (click)="download(labOrderDetails.labOrderFiles)"
+              [disabled]="!labOrderDetails.labOrderFiles || !labOrderDetails.labOrderFiles.length"
+            >
+                View Form
+              </button>
+              <span class="c-divider c-divider--vertical c-divider--medium"></span>
+            <button class="ui-text-button h-primary-d1-l-uil2" (click)="multipleFileInputComponent.openFileDialog()" [disabled]="labOrderDetails.isDeleted">
+                Upload
+              </button>
+            </div>
+            <div>
+            <app-multiple-file-input
+              [label]="'Upload'"
+              [purpose]="FilePurpose.LabOrder"
+                                       [btnClass]="'ui-text-button h-primary-d1-l-uil2'"
+              [showAddFile]="false"
+              [types]="FileTypeSchemes.IMAGES_AND_PDF"
+                                       (removed)="removeFile(FilePurpose.LabOrder, labOrderDetails, $event)"
+              (accept)="updateDocument(FilePurpose.LabOrder, labOrderDetails, $event)"
+              [useCustomMultiAnchor]="true"
+                                       [autoAccept]="true"
+              #multipleFileInputComponent
+            ></app-multiple-file-input>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+    </app-lab-order-repeater>
+    <div class="add-lab-order h-mt-30">
+      <button class="ui-icon-button-inline h-mb-20" (click)="openEditLabOrderDialog()" type="button">
+        <svg-icon-sprite src="/assets/icons.svg#circle-plus-icon" class="ui-icon-button__icon c-small-icon h-mr-10"></svg-icon-sprite>
+        <span class="h-dark-l-bl1">Add Another Lab Order</span>
+      </button>
+    </div>
+
+    <button app-button size="medium" class="h-flex-x-self-start" (click)="complete(Step.ReviewLabOrder)" [disabled]="!isDocumentSet(FilePurpose.LabOrder)">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.SelectLab)">
+    <ng-container ngProjectAs=".title">
+      Select laboratory
+    </ng-container>
+
+    <div class="h-mb-15">
+      <app-lab-order-preference [labOrderDetails]="appointment.labOrderDetails" *ngIf="!isReferralActive(partnerReferral); else referralActive">
+        <ng-template [labOrderPreferenceCase]="LabOrderPreferenceCase.SinglePreferredLab" let-preferredLabs="preferredLabs">
+          The patient has indicated <span class="h-bold-font-weight">{{ preferredLabs[0].labCompany | lab }}</span> as their preferred lab; please select this
+          lab accordingly.
+        </ng-template>
+        <ng-template [labOrderPreferenceCase]="LabOrderPreferenceCase.NoPreferredLab">
+          The patient has not indicated a preferred lab; please select the lab that is stated on
+          <ng-container [ngSwitch]="true">
+            <ng-container *ngSwitchCase="appointment.labOrderDetails.length > 1">
+              the majority of the supplied lab orders,
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              the supplied lab order,
+            </ng-container>
+          </ng-container>
+          if applicable.
+        </ng-template>
+        <ng-template [labOrderPreferenceCase]="LabOrderPreferenceCase.SplitPreferredLab" let-preferredLabs="preferredLabs">
+          <div class="h-danger-l-uil2 h-mb-10">The patient has indicated multiple preferred labs:</div>
+          <div *ngFor="let preferredLab of preferredLabs">
+            <span class="h-bold-font-weight">{{ preferredLab.labCompany | lab }}</span> is indicated as the preferred lab for
+            {{ preferredLab.labOrderDetails.length }} order{{ preferredLab.labOrderDetails.length > 1 ? 's' : '' }}.
+          </div>
+          <div class="h-mt-10">Please select the lab that is most feasible for this appointment.</div>
+        </ng-template>
+      </app-lab-order-preference>
+      <ng-template #referralActive>
+        <div class="h-mb-10 h-medium-l-uil2">
+          This appointment is locked to <span class="h-bold-font-weight"> {{ partnerReferral.data.referrer | lab }}</span
+          >.
+        </div>
+        <div class="h-mb-10">
+          The patient was referred to Getlabs by {{ partnerReferral.data.referrer | lab }}, and subsequently booked this appointment while the referral was
+          active.
+        </div>
+        <div>This appointment's specimens must be delivered to a {{ partnerReferral.data.referrer | lab }} location.</div>
+      </ng-template>
+    </div>
+
+    <ng-container *appTemplateVariable="labOrderPreferenceComponent && labOrderPreferenceComponent.preferredLabs$ | async as preferredLabs">
+      <app-team-lab-selection-form
+        #labSelectionForm
+        [location]="appointment.labLocation"
+        [partnerReferral]="partnerReferral"
+        [queryDate]="appointment.createdAt"
+        [preferredLab]="preferredLabs && preferredLabs.length === 1 ? preferredLabs[0].labCompany : null"
+        (locationChange)="saveLabLocation($event)"
+        [market]="appointment.market"
+        class="h-mb-20"
+      ></app-team-lab-selection-form>
+    </ng-container>
+
+    <button
+      app-button
+      size="medium"
+      class="h-flex-x-self-start"
+      (click)="openNextIncompleteStep(true)"
+      [appLoading]="req$"
+      [disabled]="!appointment.labLocation"
+    >
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step
+    *ngIf="isStepApplicable(Step.UploadAbn)"
+    [completed]="isStepCompleted(Step.UploadAbn) || isStepCompleted(Step.UploadAccuDraw) || isStepCompleted(Step.ReviewTestMenu)"
+    class="lab-order"
+    [class.lab-order--multiple]="appointment.labOrderDetails.length > 1"
+  >
+    <ng-container ngProjectAs=".title"> Upload ABN <em>(if necessary)</em> </ng-container>
+    <div class="h-mb-15">
+      This appointment is for a potential medicare patient, and is to be delivered to a Labcorp PSC. Please determine if an ABN is necessary, and if so, please
+      <a href="https://www.labcorplink.com/ui/#/login" target="_blank">retrieve</a> and upload the ABN to this appointment.
+    </div>
+
+    <app-lab-order-repeater [labOrderDetails]="appointment.labOrderDetails">
+      <ng-template let-labOrderDetails="labOrderDetails" let-index="index">
+        <app-file-input
+          [label]="labOrderDetails.abnDocument ? 'Re-upload ABN' : 'Upload ABN'"
+          class="doc-upload h-mb-20"
+          btnClass="ui-text-button h-primary-d1-l-uil2 {{ labOrderDetails.isDeleted ? 'disabled' : '' }}"
+          (close)="removeFile(FilePurpose.AbnDocument, labOrderDetails, $event)"
+          [purpose]="FilePurpose.AbnDocument"
+          [types]="FileTypeSchemes.PDF"
+          (uploaded)="req$ = updateDocument(FilePurpose.AbnDocument, labOrderDetails, $event)"
+          [class.disabled]=""
+        ></app-file-input>
+      </ng-template>
+    </app-lab-order-repeater>
+
+    <button app-button size="medium" class="h-flex-x-self-start" (click)="complete(Step.UploadAbn)" [loading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step
+    [completed]="isStepCompleted(Step.UploadAccuDraw)"
+    *ngIf="isStepApplicable(Step.UploadAccuDraw)"
+    class="lab-order"
+    [class.lab-order--multiple]="appointment.labOrderDetails.length > 1"
+  >
+    <ng-container ngProjectAs=".title">
+      Upload AccuDraw Form
+    </ng-container>
+    <div class="h-mb-15">
+      This appointment is to be delivered to a Labcorp PSC.
+      <a href="https://www.labcorplink.com/ui/#/login" target="_blank"> Please complete an AccuDraw form</a>, and upload it to this appointment.
+    </div>
+    <app-lab-order-repeater [labOrderDetails]="appointment.labOrderDetails">
+      <ng-template let-labOrderDetails="labOrderDetails" let-index="index">
+        <app-file-input
+          [label]="labOrderDetails.accuDraw ? 'Re-upload AccuDraw' : 'Upload AccuDraw'"
+          class="doc-upload h-mb-20"
+          btnClass="ui-text-button h-primary-d1-l-uil2 {{ labOrderDetails.isDeleted ? 'disabled' : '' }}"
+          (close)="removeFile(FilePurpose.AccuDraw, labOrderDetails, $event)"
+          [purpose]="FilePurpose.AccuDraw"
+          [types]="FileTypeSchemes.PDF"
+          (uploaded)="req$ = updateDocument(FilePurpose.AccuDraw, labOrderDetails, $event)"
+        ></app-file-input>
+      </ng-template>
+    </app-lab-order-repeater>
+    <button
+      app-button
+      size="medium"
+      class="h-flex-x-self-start"
+      (click)="openNextIncompleteStep(true)"
+      [loading]="req$"
+      [disabled]="!isDocumentSet(FilePurpose.AccuDraw)"
+    >
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.ReviewTestMenu)">
+    <ng-container ngProjectAs=".title">
+      Review testing menu
+    </ng-container>
+
+    <div class="h-mb-20">
+      Go to the testing menu for {{ (appointment.labLocation?.lab | lab) || '[lab not selected]' }} so you can view their collection requirements.
+    </div>
+
+    <div class="h-mb-20">
+      <ng-container [ngSwitch]="appointment.labLocation?.lab">
+        <a *ngSwitchCase="LabCompany.LabCorp" class="h-primary-link h-bold-font-weight" target="_blank" href="https://www.labcorp.com/test-menu/search">
+          Access Testing Menu <svg-icon-sprite src="/assets/icons.svg#external-link-icon" class="c-small-icon"></svg-icon-sprite>
+        </a>
+        <a
+          *ngSwitchCase="LabCompany.QuestDiagnostics || LabCompany.SonoraQuest"
+          class="h-primary-link h-bold-font-weight"
+          target="_blank"
+          href="https://testdirectory.questdiagnostics.com/test/home"
+        >
+          Access Testing Menu <svg-icon-sprite src="/assets/icons.svg#external-link-icon" class="c-small-icon"></svg-icon-sprite>
+        </a>
+        <span *ngSwitchCase="LabCompany.LabXpress" style="font-style: italic;"
+          >LabXpress doesn't have a testing menu, so you're on your own... good luck!‍</span
+        >
+      </ng-container>
+    </div>
+
+    <button app-button size="medium" class="h-flex-x-self-start" (click)="complete(Step.ReviewTestMenu)">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.EnterRequirements)">
+    <ng-container ngProjectAs=".title">
+      Enter requirements
+    </ng-container>
+
+    <div class="h-mb-20">
+      Select the precise collection and processing requirements for the patient's lab order as specified on the testing menu.
+    </div>
+
+    <app-team-appointment-collection-requirements-form
+      #samplesForm
+      [appointment]="appointment"
+      (appointmentChange)="saveSamples($event)"
+      class="h-mb-20"
+    ></app-team-appointment-collection-requirements-form>
+
+    <button app-button size="medium" class="h-flex-x-self-start" (click)="samplesForm.submit()" [appLoading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.ConfirmWithSpecialist)">
+    <ng-container ngProjectAs=".title">
+      Confirm with specialist
+    </ng-container>
+
+    <ng-container *ngIf="appointment.specialist; else assignSpecialist">
+      <div class="h-mb-20">
+        Contact the specialist to confirm their appointment.
+      </div>
+
+      <div class="h-mb-20 h-flex h-flex-col" *ngIf="appointment.specialist">
+        <span class="h-dark-l-uil2">{{ appointment.specialist.name }}</span>
+        <a href="tel:{{ appointment.specialist.phoneNumber | phone }}" class="h-primary-d1-l-uil2">
+          {{ appointment.specialist.phoneNumber | phone }}
+        </a>
+        <a href="mailto:{{ appointment.specialist.email }}" class="h-primary-d1-l-uil2" *ngIf="appointment.specialist.email">
+          {{ appointment.specialist.email }}
+        </a>
+      </div>
+
+      <button app-button size="large" class="h-flex-x-self-start" (click)="verifiedWithSpecialist()" [appLoading]="req$">
+        Complete
+      </button>
+    </ng-container>
+
+    <ng-template #assignSpecialist>
+      <app-panel class="panel--compact panel--row panel--dark h-mt-10">
+        <div class="h-dark-l-b2">
+          This appointment is not assigned to anyone yet.
+        </div>
+        <button app-button size="xs" (click)="assign()" [disabled]="appointment.isCancelled()">
+          Assign
+        </button>
+      </app-panel>
+    </ng-template>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.ConfirmWithPatient)">
+    <ng-container ngProjectAs=".title">
+      Confirm with patient
+    </ng-container>
+
+    <div class="h-mb-20">
+      Contact the patient to confirm their appointment and details below.
+    </div>
+
+    <div class="h-mb-20 h-flex h-flex-col">
+      <span class="h-dark-l-uil2">{{ appointment.patient.name }}</span>
+      <a href="tel:{{ appointment.patient.phoneNumber | phone }}" class="h-primary-d1-l-uil2">
+        {{ appointment.patient.phoneNumber | phone }}
+      </a>
+      <a href="mailto:{{ appointment.patient.email }}" *ngIf="appointment.patient.email" class="h-primary-d1-l-uil2">
+        {{ appointment.patient.email }}
+      </a>
+    </div>
+
+    <div class="h-mb-20 h-flex h-flex-col h-medium-l-b2">
+      <div class="h-mb-5">
+        Fasting: <span class="h-dark-l-uil2">{{ appointment.requiresFasting ? 'Required' : 'Not Required' }}</span>
+      </div>
+      <div class="h-mb-5">
+        Insurance: <span class="h-dark-l-uil2">{{ appointment.patient.isInsuranceProvided() ? 'Provided' : 'Not Provided' }}</span>
+      </div>
+      <div>
+        Prior Issues: <span class="h-dark-l-uil2">{{ appointment.patient.priorIssues || 'N/A' }}</span>
+      </div>
+    </div>
+
+    <button app-button size="medium" class="h-flex-x-self-start" (click)="verifiedWithPatient()" [appLoading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+
+  <app-appointment-step [completed]="isStepCompleted(Step.MarkReady)" *ngIf="appointment.status === Status.Pending">
+    <ng-container ngProjectAs=".title">
+      Mark ready
+    </ng-container>
+
+    <div class="h-mb-20">
+      Confirm the above steps were completed properly and then tap Complete to mark the appointment ready.
+    </div>
+
+    <button app-button size="medium" class="h-flex-x-self-start" (click)="markReady()" [appLoading]="req$">
+      Complete
+    </button>
+  </app-appointment-step>
+</app-accordian>
+
+<ng-template #loading>
+  <div class="h-flex h-flex-x-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

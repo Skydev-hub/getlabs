@@ -1,0 +1,18 @@
+<ng-container [formGroup]="form">
+  <div class="range-form-container h-mb-10" formArrayName="ranges">
+    <ng-container *ngFor="let range of ranges.controls; let index = index; let last = last">
+      <app-date-range-input [formControlName]="index.toString()" [restrictRange]="true" [setTime]="true" [modelType]="SimpleDateTime"></app-date-range-input>
+      <div class="action-container">
+        <button app-button="basic" (click)="removeRange(index)">
+          <svg-icon-sprite src="circle-delete-icon" class="c-small-icon"></svg-icon-sprite>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="add-blackout-date-container h-mt-10">
+    <button app-button="basic" class="h-dark-l-bl1" type="button" (click)="addRange()">
+      <svg-icon-sprite src="circle-plus-icon" class="c-small-icon h-mr-10"></svg-icon-sprite>
+      Add Blackout Date
+    </button>
+  </div>
+</ng-container>

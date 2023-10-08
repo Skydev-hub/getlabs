@@ -1,0 +1,18 @@
+@import "mixins";
+
+.gl-logo {
+  width: 110px;
+  height: 25px;
+}
+
+app-opt-in ::ng-deep {
+  app-auth-code-input {
+    margin-bottom: 10px;
+  }
+}
+
+@include bp-min(s) {
+  .promo-modal-content {
+    max-height: 436px;
+  }
+}

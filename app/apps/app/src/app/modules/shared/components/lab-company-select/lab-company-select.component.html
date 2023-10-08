@@ -1,0 +1,7 @@
+<select class="ui-select ui-select--large" [formControl]="input">
+  <option [ngValue]="null" selected>No Preference</option>
+  <option *ngFor="let labCompany of (LabCompany | iterable)" [value]="labCompany">
+    {{labCompany | lab}}
+    <ng-container *ngIf="preferredLab === labCompany">(Patient Preferred)</ng-container>
+  </option>
+</select>

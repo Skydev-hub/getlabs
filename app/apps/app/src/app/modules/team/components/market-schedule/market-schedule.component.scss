@@ -1,0 +1,25 @@
+:host {
+
+  display: block;
+
+  .range {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    &__start, &__end {
+      min-width: 75px;
+    }
+
+    &__start {
+      text-align: left;
+      margin-right: 10px;
+    }
+
+    &__end {
+      text-align: right;
+      margin-left: 10px;
+    }
+  }
+
+}

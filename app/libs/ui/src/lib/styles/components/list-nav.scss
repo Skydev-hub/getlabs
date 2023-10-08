@@ -1,0 +1,106 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  Components > List Navigation
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-list-nav {
+  display: flex;
+  flex-direction: column;
+} // c-list-nav
+
+
+
+//
+// List Navigation Block
+//
+.c-list-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  color: $gl-dark-text-color;
+
+  span {
+    transition: color $transition-duration;
+  }
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+  }
+
+  &::before {
+    z-index: 0;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 1px;
+    background-color: $gl-light-l2;
+  }
+
+  &:first-child::before {
+    display: none;
+  }
+
+  &__label, &__meta, &__icon {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__label {
+    flex-grow: 1;
+  }
+
+  &__meta {
+    margin-right: 20px;
+  }
+
+  &:hover {
+
+    color: $gl-primary-d1;
+
+    svg {
+      fill: $gl-primary-d1;
+    }
+
+    span {
+      color: $gl-primary-d1;
+    }
+
+  } // :hover
+
+
+  //
+  // Responsive
+  //
+  @include bp(xs) {
+    padding-left: 0;
+    padding-right: 0;
+
+    &::before {
+      left: 0;
+      width: 100%;
+    }
+
+    &--responsive {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &--responsive & {
+      &__icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+      }
+    }
+
+  } // xs
+
+} // c-list-nav-item

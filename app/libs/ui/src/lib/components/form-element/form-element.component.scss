@@ -1,0 +1,61 @@
+@import "variables";
+@import "GLSS/typography/ui-labels";
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .label-container {
+    margin-bottom: 5px;
+  }
+
+  &.error {
+
+    ::ng-deep {
+      .ui-input, .ui-textarea, .ui-select {
+        border-color: $gl-ui-danger;
+
+        &::placeholder {
+          color: $gl-ui-danger;
+        }
+      }
+    }
+
+  }
+
+  label {
+    @extend .h-dark-l-uil2
+  }
+
+  ::ng-deep {
+    .ui-input, .ui-textarea, .ui-select {
+      margin-top: 5px;
+
+      @include bp(xs) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &.hide-disabled {
+    display: none;
+  }
+}
+
+:host-context(.app-form-element__horizontal) {
+
+  .form-element-container {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+
+    .label-container {
+      margin-bottom: 0;
+    }
+  }
+}
+
+:host-context(.app-form-element__label-sm) {
+  label {
+    @extend .h-dark-l-uil3;
+  }
+}

@@ -1,0 +1,190 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Style System
+//  GLSS > Variables > Typography
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+// Base
+$gl-body-font-family:                   sofia-pro, sans-serif;
+$gl-heading-font-family:                'DM Serif Display', serif;
+$gl-regular-font-weight:                400;
+$gl-bold-font-weight:                   700;
+
+
+// Colors
+$gl-dark-text-color:                    $gl-dark;
+$gl-medium-text-color:                  $gl-medium;
+$gl-light-text-color:                   $gl-light;
+$gl-white-text-color:                   $white;
+
+
+// Display Heading Sizes
+$dh1-fs:                                72px;
+$dh1-lh:                                86px;
+$dh1-ls:                                -1.8px;
+
+$dh2-fs:                                68px;
+$dh2-lh:                                84px;
+$dh2-ls:                                -1.6px;
+
+$dh3-fs:                                54px;
+$dh3-lh:                                68px;
+$dh3-ls:                                -1.4px;
+
+$dh4-fs:                                46px;
+$dh4-lh:                                62px;
+$dh4-ls:                                -1.2px;
+
+// Display Sub-Heading Sizes
+$dsh1-fs:                                25px;
+$dsh1-lh:                                37px;
+
+$dsh2-fs:                                24px;
+$dsh2-lh:                                33px;
+
+$dsh3-fs:                                22px;
+$dsh3-lh:                                31px;
+
+$dsh4-fs:                                20px;
+$dsh4-lh:                                28px;
+
+// Heading Sizes
+$h1-fs:                                 42px;
+$h1-lh:                                 54px;
+$h1-ls:                                 -1.2px;
+
+$h2-fs:                                 38px;
+$h2-lh:                                 49px;
+$h2-ls:                                 -0.8px;
+
+$h3-fs:                                 34px;
+$h3-lh:                                 44px;
+$h3-ls:                                 -0.4px;
+
+$h4-fs:                                 30px;
+$h4-lh:                                 39px;
+
+$h5-fs:                                 26px;
+$h5-lh:                                 33px;
+
+$h6-fs:                                 22px;
+$h6-lh:                                 28px;
+
+
+// Large Body Sizes
+$lb1-fs:                                26px;
+$lb1-lh:                                36px;
+
+$lb2-fs:                                24px;
+$lb2-lh:                                33px;
+
+$lb3-fs:                                22px;
+$lb3-lh:                                31px;
+
+$lb4-fs:                                20px;
+$lb4-lh:                                28px;
+
+
+// Body Sizes
+$b1-fs:                                 18px;
+$b1-lh:                                 27px;
+
+$b2-fs:                                 16px;
+$b2-lh:                                 24px;
+
+$b3-fs:                                 14px;
+$b3-lh:                                 21px;
+
+$b4-fs:                                 12px;
+$b4-lh:                                 18px;
+
+
+// UI Label Sizes
+$uil1-fs:                               18px;
+$uil1-lh:                               27px;
+
+$uil2-fs:                               16px;
+$uil2-lh:                               24px;
+
+$uil3-fs:                               14px;
+$uil3-lh:                               21px;
+
+$uil4-fs:                               12px;
+$uil4-lh:                               18px;
+
+
+// Button Label Sizes
+$bl1-fs:                               14px;
+$bl1-lh:                               21px;
+$bl1-ls:                               1.2px;
+
+$bl2-fs:                               12px;
+$bl2-lh:                               18px;
+$bl2-ls:                               1.1px;
+
+// TODO - needs a second look
+$gl-lg-text-size: 18px;
+$gl-lg-text-line-height: 27px;
+
+$gl-md-text-size: 16px;
+$gl-md-text-line-height: 24px;
+
+$gl-sm-text-size: 14px;
+$gl-sm-text-line-height: 21px;
+
+$gl-xs-text-size: 12px;
+$gl-xs-text-line-height: 18px;
+
+$gl-lb-lg-text-size: 26px;
+$gl-lb-lg-text-line-height: 36px;
+
+$gl-lb-md-text-size: 24px;
+$gl-lb-md-text-line-height: 33px;
+
+$gl-lb-sm-text-size: 22px;
+$gl-lb-sm-text-line-height: 31px;
+
+$gl-lb-xs-text-size: 20px;
+$gl-lb-xs-text-line-height: 28px;
+
+// TODO - apply to typography files
+@mixin gl-lg-text() {
+  font-size: $gl-lg-text-size;
+  line-height: $gl-lg-text-line-height;
+}
+
+@mixin gl-md-text() {
+  font-size: $gl-md-text-size;
+  line-height: $gl-md-text-line-height;
+}
+
+@mixin gl-sm-text() {
+  font-size: $gl-sm-text-size;
+  line-height: $gl-sm-text-line-height;
+}
+
+@mixin gl-xs-text() {
+  font-size: $gl-xs-text-size;
+  line-height: $gl-xs-text-line-height;
+}
+
+@mixin gl-lb-lg-text() {
+  font-size: $gl-lb-lg-text-size;
+  line-height: $gl-lb-lg-text-line-height;
+}
+
+@mixin gl-lb-md-text() {
+  font-size: $gl-lb-md-text-size;
+  line-height: $gl-lb-md-text-line-height;
+}
+
+@mixin gl-lb-sm-text() {
+  font-size: $gl-lb-sm-text-size;
+  line-height: $gl-lb-sm-text-line-height;
+}
+
+@mixin gl-lb-xs-text() {
+  font-size: $gl-lb-xs-text-size;
+  line-height: $gl-lb-xs-text-line-height;
+}

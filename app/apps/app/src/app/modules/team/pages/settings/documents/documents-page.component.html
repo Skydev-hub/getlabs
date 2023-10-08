@@ -1,0 +1,18 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+  <h1 class="h-dark-c-h4 h-mb-10">
+    Getlabs Documents
+  </h1>
+  <p class="h-medium-c-b1 h-mb-20">
+    Below is a list of your completed documents with Getlabs.
+  </p>
+</div>
+
+<div class="l-wrapper l-wrapper--sm l-wrapper--col">
+
+  <app-document-card label="HIPAA Compliance" [document]="user.getDocument(Type.HIPAA)" class="h-mb-15">
+    <ng-container ngProjectAs=".affirmative-status">
+      <span>Passed</span>
+    </ng-container>
+  </app-document-card>
+
+</div>

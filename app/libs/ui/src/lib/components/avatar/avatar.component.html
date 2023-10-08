@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="getAvatarType()">
+  <svg-icon-sprite *ngSwitchCase="AvatarType.Shadow" src="/assets/icons.svg#blank-avatar" class="c-medium-icon"></svg-icon-sprite>
+  <img *ngSwitchCase="AvatarType.Blank" src="/assets/img/blank-avatar.png" srcset="/assets/img/blank-avatar.png 1x, /assets/img/blank-avatar@2x.png 2x" alt="" />
+  <span *ngSwitchCase="AvatarType.Initials" class="initials">{{ user.name | initials }}</span>
+  <img *ngSwitchCase="AvatarType.Avatar" [src]="user.avatar.url" alt="" />
+</ng-container>

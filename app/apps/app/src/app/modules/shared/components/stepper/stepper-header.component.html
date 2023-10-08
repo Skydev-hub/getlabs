@@ -1,0 +1,10 @@
+<section class="c-flow-step">
+  <div class="c-flow-step-item" *ngFor="let step of getVisibleSteps(); index as i" [ngClass]="{ 'c-flow-step-item--complete': isPastStep(i), 'c-flow-step-item--active': isCurrentStep(i) }">
+    <span class="c-flow-step-item__number">
+      {{i + 1}}
+    </span>
+    <span class="c-flow-step-item__label">
+      {{step.title}}
+    </span>
+  </div>
+</section>

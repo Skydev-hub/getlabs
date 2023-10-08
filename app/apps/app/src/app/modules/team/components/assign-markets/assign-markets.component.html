@@ -1,0 +1,72 @@
+<ng-container *ngIf="!editing; else edit">
+  <section class="c-table-container c-table-container--bottom-margin">
+    <div class="c-table">
+      <div class="c-table__row">
+        <div class="c-table__heading">Name</div>
+        <div class="c-table__heading">Code</div>
+        <div class="c-table__heading">Status</div>
+      </div>
+
+      <a routerLink="/team/markets/{{ market.id }}" class="c-table__row" *ngFor="let market of entity.markets">
+        <div class="c-table__col h-bold-font-weight">
+          {{ market.name }}
+        </div>
+        <div class="c-table__col">
+          {{ market.code }}
+        </div>
+        <div class="c-table__col">
+          <app-active-status [active]="market.isActive"></app-active-status>
+        </div>
+      </a>
+
+      <ng-container *ngIf="entity.markets.length === 0">
+        <div class="c-table-empty-state">
+          <svg-icon-sprite src="large-circle-search-icon" class="h-mb-25" height="64" width="64"></svg-icon-sprite>
+          No markets assigned to user
+        </div>
+      </ng-container>
+    </div>
+  </section>
+  <button app-button (click)="toggleEditMode()" type="submit" class="h-margin-center h-mt-40">
+    Edit
+  </button>
+</ng-container>
+
+<ng-template #edit>
+  <form *ngIf="marketsForm.controls.length > 0; else loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <section class="c-table-container c-table-container--bottom-margin">
+      <div class="c-table">
+        <div class="c-table__row">
+          <div class="c-table__heading">Name</div>
+          <div class="c-table__heading">Code</div>
+          <div class="c-table__heading">Status</div>
+        </div>
+
+        <ng-container formArrayName="markets">
+          <div class="c-table__row" *ngFor="let market of marketsForm.controls; let index = index" [formGroupName]="index.toString()">
+            <div class="c-table__col h-bold-font-weight">
+              <app-checkbox-input formControlName="selected">
+                {{ market.get('model').value.name }}
+              </app-checkbox-input>
+            </div>
+            <div class="c-table__col">
+              {{ market.get('model').value.code }}
+            </div>
+            <div class="c-table__col">
+              <app-active-status [active]="market.get('model').value.isActive"></app-active-status>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </section>
+    <button app-button type="submit" class="h-margin-center h-mt-40" [loading]="req$">
+      Save
+    </button>
+  </form>
+</ng-template>
+
+<ng-template #loading>
+  <div class="h-flex h-flex-x-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

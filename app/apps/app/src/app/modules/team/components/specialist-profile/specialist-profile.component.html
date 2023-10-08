@@ -1,0 +1,91 @@
+<app-specialist-status-message [user]="user" (statusChange)="updateUser($event)" *ngIf="!user.isActive || isReactivated"></app-specialist-status-message>
+
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <div class="h-flex-col h-flex-y-center">
+    <app-avatar [user]="user" size="xlarge"></app-avatar>
+
+    <span class="h-mt-15 h-mb-50 h-bold-font-weight">
+      {{ user.name || 'Name N/A - Incomplete Profile' }}
+    </span>
+  </div>
+
+  <app-tabs>
+    <app-tabs-tab title="Personal Info">
+      <app-panel class="h-mb-40">
+        <dl>
+          <dt>Phone</dt>
+          <dd>
+            <a href="tel:{{ user.phoneNumber }}">{{ user.phoneNumber | phone }}</a>
+          </dd>
+
+          <dt>Email</dt>
+          <dd>
+            <a href="mailto:{{ user.email }}">{{ user.email || 'N/A' }}</a>
+          </dd>
+
+          <dt>Markets</dt>
+          <dd>{{ user.markets | mapAndJoin: 'code' || 'N/A' }}</dd>
+
+          <dt>Address</dt>
+          <dd>{{ user.address.composed || 'N/A' }}</dd>
+
+          <dt>Status</dt>
+          <dd>
+            <app-account-status [(user)]="user" [showAction]="true"></app-account-status>
+          </dd>
+
+          <ng-container *ngIf="!user.isActive">
+            <dt>Deactivation Date</dt>
+            <dd>{{ user.deactivationDate | date: 'medium' }}</dd>
+
+            <dt>Deactivation Reason</dt>
+            <dd>{{ (user.deactivationReason === 'other' ? user.deactivationNote : DeactivationReasonLabels[user.deactivationReason]) || 'N/A' }}</dd>
+          </ng-container>
+
+          <!--          <dt>HIPAA Compliance</dt>-->
+          <!--          <dd>-->
+          <!--            <app-compliance-status [user]="user"></app-compliance-status>-->
+          <!--          </dd>-->
+        </dl>
+      </app-panel>
+      <div class="h-dark-l-uil1 h-mb-10">
+        Documents
+      </div>
+      <app-panel class="h-mb-40">
+        <dl>
+          <dt>EE Agreement</dt>
+          <dd><app-documents-status [user]="user" [docType]="DocumentType.EEA"></app-documents-status></dd>
+
+          <dt>W4 Form</dt>
+          <dd><app-documents-status [user]="user" [docType]="DocumentType.W4"></app-documents-status></dd>
+
+          <dt>HIPAA Compliance</dt>
+          <dd><app-compliance-status [user]="user"></app-compliance-status></dd>
+
+          <!--          <dt>OSHA Comprehension</dt>-->
+          <!--          <dd><app-documents-status [user]="user" [docType]="DocumentType"></app-documents-status></dd>-->
+
+          <dt>Exposure Control Plan</dt>
+          <dd><app-documents-status [user]="user" [docType]="DocumentType.BBP"></app-documents-status></dd>
+        </dl>
+      </app-panel>
+
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/specialists/{{ user.id }}/edit">
+          Edit Profile
+        </a>
+      </div>
+    </app-tabs-tab>
+    <app-tabs-tab title="Schedule">
+      <app-team-specialist-schedule [user]="user" class="h-mb-40"></app-team-specialist-schedule>
+      <div class="h-flex-col h-flex-y-center">
+        <a app-button routerLink="/team/specialists/{{ user.id }}/schedule/edit">
+          Edit Schedule
+        </a>
+      </div>
+    </app-tabs-tab>
+    <app-tabs-tab title="Markets">
+      <app-specialist-markets [entity]="user"></app-specialist-markets>
+    </app-tabs-tab>
+  </app-tabs>
+</main>

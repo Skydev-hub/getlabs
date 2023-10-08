@@ -1,0 +1,28 @@
+<div class="l-wrapper l-wrapper--col l-wrapper--sm h-mb-40">
+  <h1 class="h-dark-c-h4 h-mb-10">
+    Getlabs Team
+  </h1>
+  <div class="h-medium-c-b1 h-mb-30">
+    Tap below to view Admin and Support personnel or create a new profile.
+  </div>
+</div>
+<div class="l-wrapper l-wrapper--col">
+
+
+  <section class="c-table__actions">
+    <div class="c-table__actions__left">
+
+      <app-form-element>
+        <input class="ui-input ui-input--search ui-input--narrow ui-input--small" type="text" placeholder="Search" [formControl]="search">
+      </app-form-element>
+
+    </div>
+
+    <div class="c-table__actions__right">
+      <a app-button size="small" routerLink="/team/team-members/create">Create Profile</a>
+    </div>
+  </section>
+
+  <app-team-team-member-list [search]="search.value"></app-team-team-member-list>
+
+</div>

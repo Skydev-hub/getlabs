@@ -1,0 +1,30 @@
+@import "GLSS/library/mixins";
+@import "variables";
+
+.c-option-tiles {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr;
+
+  &__tile {
+    border: 1px solid $gl-light-l1;
+    height: 200px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    cursor: pointer;
+
+    @include bp(xs) {
+      padding: 25px;
+      height: auto;
+    }
+  }
+
+  @include bp(xs) {
+    grid-template-columns: 1fr;
+    grid-gap: 15px;
+  }
+}

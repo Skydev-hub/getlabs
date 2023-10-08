@@ -1,0 +1,23 @@
+.git
+.gitignore
+.env
+
+
+# Node Files #
+node_modules
+npm-debug.log
+npm-debug.log.*
+
+# Dist #
+dist
+
+# IDE #
+.idea
+*.iml
+
+# Misc #
+/codeship*
+/aws*
+
+Dockerfile
+Dockerfile.*

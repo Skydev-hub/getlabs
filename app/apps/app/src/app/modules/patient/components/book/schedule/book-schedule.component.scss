@@ -1,0 +1,47 @@
+@import "variables";
+@import "mixins";
+@import "components/scheduler-message-box";
+
+:host {
+
+  .lab-order-status {
+    border: 1px solid $gl-very-light-border-color;
+
+    align-self: stretch;
+    padding: 20px;
+    cursor: pointer;
+
+    transition: border-color $transition-duration;
+
+    &:hover {
+      border-color: $gl-primary-border-color;
+    }
+
+    @include bp(xxs) {
+      padding: 15px;
+    }
+
+    ::ng-deep {
+      .form-element-container {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .label-container {
+          margin-top: 2px;
+        }
+
+        @include bp(xxs) {
+          flex-direction: column-reverse;
+
+          .label-container {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @include scheduler-message-box;
+}

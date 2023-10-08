@@ -1,0 +1,33 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <main class="l-wrapper l-wrapper--sm l-main-container">
+    <section class="h-mb-40">
+      <app-form-group label="Basic Information">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('zipCode')" label="Zip Code">
+            <input class="ui-input ui-input--large" type="text" placeholder="Zip Code" formControlName="zipCode">
+          </app-form-element>
+          <app-form-element [error]="getError('market')" label="Market">
+            <select class="ui-select ui-select--large" formControlName="market" [compareWith]="comparator">
+              <option [ngValue]="market" *ngFor="let market of (markets$ | async)">{{ market.name }}</option>
+            </select>
+          </app-form-element>
+        </div>
+      </app-form-group>
+    </section>
+    <section class="h-mb-40">
+      <app-form-group label="Details">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('active')" label="Active">
+            <select class="ui-select ui-select--large" formControlName="active">
+              <option [ngValue]="true" selected>Yes</option>
+              <option [ngValue]="false">No</option>
+            </select>
+          </app-form-element>
+        </div>
+      </app-form-group>
+    </section>
+    <button app-button type="submit" class="h-margin-center h-mt-40" [loading]="req$">
+      {{ serviceArea ? 'Save Changes' : 'Create Service Area' }}
+    </button>
+  </main>
+</form>

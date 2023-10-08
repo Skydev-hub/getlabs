@@ -1,0 +1,31 @@
+<ng-content></ng-content>
+<div appInlineTemplateManager>
+  <div class="opt-in">
+    <ng-container *ngTemplateOutlet="this.tplManager.getTemplate(getState())"></ng-container>
+    <ng-container *appDefaultContent="defaultAction">
+      <ng-content></ng-content>
+    </ng-container>
+    <ng-template #defaultAction>
+      <button app-button  *ngIf="getButtonText(getState())" (click)="invokeAction(getState())">
+        {{ getButtonText(getState()) }}
+      </button>
+    </ng-template>
+  </div>
+
+  <ng-template [name]="OptInComponentState.Authenticating">
+    <app-sign-in-confirm [userType]="PatientUser" [phoneNumber]="formControl.value" [showExtraButtons]="false"
+                               (authenticated)="onAuthenticated()"></app-sign-in-confirm>
+  </ng-template>
+
+  <ng-template [name]="OptInComponentState.Unauthenticated">
+    <app-phone-input [formControl]="formControl"></app-phone-input>
+  </ng-template>
+
+  <ng-template [name]="OptInComponentState.OptInProgress">
+    <span class="ui-button-loader inline-loader"></span>
+  </ng-template>
+
+  <ng-template [name]="OptInComponentState.Complete">
+    <!-- Deliberately Empty -->
+  </ng-template>
+</div>

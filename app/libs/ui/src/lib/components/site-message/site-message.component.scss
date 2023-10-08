@@ -1,0 +1,209 @@
+@import "variables";
+@import "mixins";
+@import "GLSS/typography/ui-labels";
+
+:host {
+  position: absolute;
+  z-index: $z-index-5;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  flex: 0 0 auto;
+  background-color: $gl-dark;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-column-gap: 10px;
+  padding: 10px;
+  justify-items: center;
+  align-items: center;
+
+  .message-container {
+    width: 100%;
+    padding: 0 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .close-message {
+    position: absolute;
+    right: 15px;
+  }
+
+  &.app-site-message__fixed {
+    position: static;
+    top: auto;
+  }
+
+  .message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  ::ng-deep {
+
+    .c-site-message__logo {
+      flex: 0 1 auto;
+      justify-self: flex-start;
+      max-height: 22px;
+      margin-left: 5px;
+    }
+
+    .c-site-message__link {
+      display: flex;
+      align-items: center;
+    }
+
+    .c-site-message__content {
+      @include shift(top, -2px);
+      margin-right: 5px;
+      color: $white;
+    }
+
+    &__chevron {
+      flex: 0 0 auto;
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+
+  } // ::ng-deep
+
+
+  //
+  // Responsive
+  //
+  @include bp(s) {
+    ::ng-deep {
+      .c-site-message__logo {
+        max-height: 20px;
+      }
+    }
+
+    .message-container {
+      padding-left: 0;
+      padding-right: 40px;
+    }
+  }
+
+  @include bp(xs) {
+    grid-column-gap: 5px;
+    justify-content: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: $mobile-site-message-height;
+
+    ::ng-deep {
+      .c-site-message__link {
+        width: 100%;
+      }
+
+      .c-site-message__content {
+        flex-grow: 1;
+      }
+
+    } // ::ng-deep
+
+  } // xs
+
+} // .c-site-message
+
+//
+// Alternate Version
+//
+:host.c-site-message--alt {
+  background-color: $black;
+
+  ::ng-deep {
+    .c-site-message__content {
+      color: $white;
+
+      a {
+        color: $white;
+        text-decoration: underline;
+      }
+    }
+  }
+
+} // .c-site-message--alt
+
+:host-context(.app-site-message__flow) {
+  position: relative;
+  z-index: auto;
+}
+
+:host-context(.app-site-message__secondary-theme) {
+  background-color: $gl-medium;
+
+  @extend .h-white-c-uil2;
+}
+
+:host-context(.app-site-message__success-theme) {
+  background-color: $gl-ui-success;
+
+  @extend .h-white-c-uil2;
+}
+
+:host-context(.app-site-message__labcorp-theme) {
+  background-color: $labcorp-brand-color;
+
+  ::ng-deep {
+    .c-site-message__content {
+      color: $gl-white-text-color;
+    }
+  }
+
+  @include bp(xxs) {
+    grid-template-columns: auto;
+
+    ::ng-deep {
+      .c-site-message__logo {
+        display: none;
+      }
+      .c-site-message__content {
+        font-size: $b2-fs;
+        line-height: $b2-lh;
+      }
+    }
+  }
+}
+
+:host-context(.app-site-message__logo-message) {
+
+  .message ::ng-deep {
+    width: calc(100% + 100px);
+    margin-left: -50px;
+    margin-right: -50px;
+
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    grid-column-gap: 10px;
+    align-items: center;
+
+    span { text-align: center; }
+
+    @include bp(s) {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    @include bp(xs) {
+      span {
+        text-align: left;
+      }
+    }
+
+    @include bp(xs) {
+      grid-template-columns: auto;
+
+      .c-site-message__logo {
+        display: none;
+      }
+    }
+  }
+}

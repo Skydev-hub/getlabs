@@ -1,0 +1,5 @@
+<app-section-header [heading]="user ? 'Edit Team Member Profile' : 'New Team Member Profile'"></app-section-header>
+<div class="l-wrapper l-wrapper--sm h-medium-c-b1">
+  Important: Before creating a profile for new team members, make sure a background check has been completed and passed.
+</div>
+<app-team-team-member-profile-form class="l-as-block h-mt-30" [user]="user" (save)="onSave($event)"></app-team-team-member-profile-form>

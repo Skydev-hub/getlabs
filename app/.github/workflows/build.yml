@@ -1,0 +1,109 @@
+name: Build and Push to GCR
+
+on:
+  push:
+    branches:
+      - master
+      - angular-11-nx-update
+
+# Enable this once we run automated tests on pull requests
+#  pull_request:
+#    branches:
+#      - master
+
+jobs:
+
+  # Generate a matrix of affected apps in this commit to build
+  matrix:
+    name: Generate matrix for build
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+
+      # Checkout source code
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - run: git fetch --no-tags --prune --depth=5 origin master
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - run: yarn install
+
+      # Generate the matrix
+      - name: Set matrix of affected apps
+        id: set-matrix
+        run: echo "::set-output name=matrix::{\"include\":$(node ./tools/scripts/affected.js)}"
+
+
+  # Build each affected app according to the generated matrix
+  build:
+    name: Build "${{ matrix.app }}"
+    needs: matrix
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.matrix.outputs.matrix) }}
+    steps:
+
+      # Checkout source code
+      - uses: actions/checkout@v2
+
+      # Setup gcloud CLI
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: 290.0.1
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      # Configure docker to use gcloud cli as credential helper
+      # - run: gcloud auth configure-docker
+      # This is temporary until docker/build-push-action@v2
+      - name: Generate Access Token
+        id: generate-access-token
+        run: echo "::set-output name=token::$(gcloud auth print-access-token)"
+
+      # Checkout private actions repo
+      - name: Checkout GitHub actions
+        uses: actions/checkout@v2
+        with:
+          repository: getlabs-app/actions
+          path: actions
+          token: ${{ secrets.GETLABS_BOT_PAT }}
+
+      # Create valid tag slugs
+      - name: Create Tag
+        id: create-tag
+        uses: ./actions/create-docker-tag
+
+      # Read build parameters
+      - name: Read Build Parameters
+        id: read-build-params
+        uses: ./actions/read-docker-build-params
+        with:
+          app: ${{ matrix.app }}
+
+      # Build and push the docker image
+      - name: Build
+        uses: docker/build-push-action@v1
+        with:
+          registry: gcr.io
+          repository: getlabs-admin/getlabs-${{ matrix.app }}
+          username: oauth2accesstoken
+          password: ${{ steps.generate-access-token.outputs.token }}
+          tags: ${{ steps.create-tag.outputs.tag }},${{ steps.create-tag.outputs.latest }}
+          target: ${{ steps.read-build-params.outputs.target }}
+          build_args: project=${{ matrix.app }},sentry_auth_token=${{ secrets.SENTRY_AUTH_TOKEN }},${{ steps.read-build-params.outputs.build-args }}
+        env:
+          DOCKER_BUILDKIT: 1

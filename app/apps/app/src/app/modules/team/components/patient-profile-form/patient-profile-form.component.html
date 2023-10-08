@@ -1,0 +1,122 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <main class="l-wrapper l-wrapper--sm l-main-container">
+    <section class="l-form-grid l-form-grid--single">
+      <app-form-group label="Basic Information" class="l-as-block app-form-group__heading-sm h-mb-40">
+        <div class="c-form-split-col">
+          <app-form-element [error]="getError('firstName')" label="First Name">
+            <input class="ui-input ui-input--large" type="text" placeholder="First Name" formControlName="firstName" />
+          </app-form-element>
+
+          <app-form-element [error]="getError('lastName')" label="Last Name">
+            <input class="ui-input ui-input--large" type="text" placeholder="Last Name" formControlName="lastName" />
+          </app-form-element>
+
+          <app-form-element [error]="getError('dob')" label="Date of Birth">
+            <app-dob-input formControlName="dob"></app-dob-input>
+          </app-form-element>
+
+          <app-form-element [error]="getError('gender')" label="Gender">
+            <select class="ui-select ui-select--large" formControlName="gender">
+              <option [value]="null" selected disabled>Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </app-form-element>
+
+          <ng-container *ngIf="this.isMinor()">
+            <app-form-element [error]="getError('guardianName')" label="Guardian Name">
+              <input class="ui-input ui-input--large" type="text" placeholder="Guardian Name" formControlName="guardianName" />
+            </app-form-element>
+
+            <app-form-element [error]="getError('guardianRelationship')" label="Guardian Relationship">
+              <input class="ui-input ui-input--large" type="text" placeholder="Guardian Relationship" formControlName="guardianRelationship" />
+            </app-form-element>
+
+            <app-form-element [error]="getError('guardianConfirmation')" class="c-form-split-col__full-row">
+              <app-checkbox-input formControlName="guardianConfirmation">
+                I attest that I have legal custody of this individual and am authorized to initiate and consent for treatment and/or legally authorized to
+                initiate and consent to treatment on behalf of this individual.
+              </app-checkbox-input>
+            </app-form-element>
+          </ng-container>
+
+          <app-form-element [error]="getError('phoneNumber')" label="Phone Number">
+            <app-phone-input formControlName="phoneNumber"></app-phone-input>
+          </app-form-element>
+
+          <app-form-element [error]="getError('email')" label="Email Address">
+            <input class="ui-input ui-input--large" type="email" placeholder="Email" formControlName="email" />
+          </app-form-element>
+        </div>
+      </app-form-group>
+
+      <app-form-group label="Address" formGroupName="address" class="l-as-block app-form-group__heading-sm h-mb-40">
+        <div class="c-form-split-col-3 h-mb-20">
+          <app-form-element [error]="getError('address.street')" label="Street Address" class="c-form-split-col-3__2-third-row">
+            <input class="ui-input ui-input--large" type="text" placeholder="Street Address" formControlName="street" />
+          </app-form-element>
+
+          <app-form-element [error]="getError('address.unit')" label="Unit" class="c-form-split-col-3__1-third-row">
+            <input class="ui-input ui-input--large" type="text" placeholder="Unit" formControlName="unit" />
+          </app-form-element>
+        </div>
+        <div class="c-form-split-col-3">
+          <app-form-element [error]="getError('address.city')" label="City" class="c-form-split-col-3__1-third-row">
+            <input class="ui-input ui-input--large" type="text" placeholder="City" formControlName="city" />
+          </app-form-element>
+
+          <app-form-element [error]="getError('address.state')" label="State" class="c-form-split-col-3__1-third-row">
+            <app-us-state-input formControlName="state"></app-us-state-input>
+          </app-form-element>
+
+          <app-form-element [error]="getError('address.zipCode')" label="ZIP Code" class="c-form-split-col-3__1-third-row">
+            <input class="ui-input ui-input--large" type="text" placeholder="Zip Code" formControlName="zipCode" />
+          </app-form-element>
+        </div>
+      </app-form-group>
+
+      <app-form-group label="Additional Notes" class="l-as-block app-form-group__heading-sm h-mb-40">
+        <div class="l-form-grid l-form-grid--single">
+          <app-form-element [error]="getError('notes')" label="Other Address Information" class="h-mb-30">
+            <textarea
+              class="ui-textarea ui-input--large"
+              placeholder="Leave parking & entry instructions, or any other notes you may have for us."
+              formControlName="notes"
+            ></textarea>
+          </app-form-element>
+          <app-form-element [error]="getError('priorIssues')" label="Prior Issues">
+            <textarea
+              class="ui-textarea ui-input--large"
+              placeholder="If you have had prior issues with getting lab draws, please let us know here."
+              formControlName="priorIssues"
+            ></textarea>
+          </app-form-element>
+        </div>
+      </app-form-group>
+
+      <app-form-group label="Insurance" formGroupName="insurance" class="app-form-group__heading-sm">
+        <div class="l-form-grid l-form-grid--single">
+          <app-insurance-card
+            class="h-flex-col"
+            label="Front of Insurance Card"
+            formControlName="front"
+            [purpose]="getFilePurpose('front')"
+            (fileChange)="onInsuranceCardChange($event)"
+          ></app-insurance-card>
+          <app-insurance-card
+            class="h-flex-col"
+            label="Rear of Insurance Card"
+            formControlName="rear"
+            [purpose]="getFilePurpose('rear')"
+            (fileChange)="onInsuranceCardChange($event)"
+          ></app-insurance-card>
+        </div>
+      </app-form-group>
+    </section>
+
+    <button app-button class="h-margin-center h-mt-40" type="submit">
+      {{ user ? 'Save Changes' : 'Create Profile' }}
+    </button>
+  </main>
+</form>

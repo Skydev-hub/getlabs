@@ -1,0 +1,17 @@
+@import "GLSS/library/mixins";
+
+:host {
+  ::ng-deep app-appointments-table .c-table-container .c-table__row {
+    grid-template-columns: 0.75fr 1.5fr 1fr 1.5fr 1fr;
+  }
+}
+
+app-cyclical-navigator {
+  @include bp(xs) {
+    margin-bottom: 20px;
+  }
+}
+
+app-appointments-table ::ng-deep {
+  app-list-filter, app-applied-filters { display: none; }
+}

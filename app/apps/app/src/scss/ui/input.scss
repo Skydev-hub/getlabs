@@ -1,0 +1,111 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs
+//  UI > Input
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.ui-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  // Base Icon Styles
+  &__chevron, &__error-icon {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+
+  &__chevron {
+    @include size(16px);
+    fill: $gl-dark-text-color;
+  }
+
+  &__error-icon {
+    display: none;
+    @include size(28px);
+  }
+
+  // Start Icon
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+
+    &--less-padding {
+      left: 10px;
+    }
+
+  } // __icon
+
+  &__label {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+    line-height: 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+
+  //
+  // Error State
+  //
+  &--error {
+    input, select, .StripeElement {
+      border-color: $gl-ui-danger !important;
+      background-color: $white !important;
+      color: $gl-ui-danger;
+
+      &:not(.ui-input--digit) {
+        padding-right: 70px !important;
+      }
+    }
+  }
+
+  &--error & {
+    &__error-icon, &__label {
+      display: block;
+    }
+
+    &__label {
+      color: $gl-ui-danger;
+    }
+
+  } // --error &
+
+
+  //
+  // Success State
+  //
+  &--success {
+    input, select {
+      border-color: $gl-ui-success !important;
+      //background-color: $ui-green-bg-color !important;
+      color: $gl-ui-success;
+    }
+  }
+
+  &--success & {
+    &__label {
+      display: block;
+      color: $gl-ui-success;
+    }
+  }
+
+} // ui-input-container

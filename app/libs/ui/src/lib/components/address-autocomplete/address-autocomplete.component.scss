@@ -1,0 +1,30 @@
+@import 'variables';
+
+.address-input-container {
+  position: relative;
+
+  $_padding: 2px;
+  $_icon-size: 18px;
+
+  .address-verified {
+    position: absolute;
+    top: calc((100%/2) - (#{$_icon-size}/2 + #{$_padding}));
+    right: 0;
+    margin-right: 10px;
+
+    background-color: $gl-ui-success;
+    border-radius: 50%;
+    padding: $_padding;
+
+    svg-icon-sprite {
+      height: $_icon-size;
+      width: $_icon-size;
+      color: $gl-white-text-color;
+    }
+  }
+
+  input {
+    padding-right: 35px;
+    margin-top: 0;
+  }
+}

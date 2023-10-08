@@ -1,0 +1,25 @@
+<div class="action">
+  <button (click)="previous.emit()">
+    <div class="action-icon">
+      <svg-icon-sprite src="left-chevron-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </div>
+    <span class="h-medium-l-uil3 h-ml-20 h-mobile-hide" *ngIf="previousLabel">
+    {{ previousLabel }}
+  </span>
+  </button>
+</div>
+
+<span class="action-title">
+  <ng-content></ng-content>
+</span>
+
+<div class="action">
+  <button (click)="next.emit()">
+    <span class="h-medium-r-uil3 h-mr-20 h-mobile-hide" *ngIf="nextLabel">
+      {{ nextLabel }}
+    </span>
+    <div class="action-icon">
+      <svg-icon-sprite src="right-chevron-icon" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+    </div>
+  </button>
+</div>

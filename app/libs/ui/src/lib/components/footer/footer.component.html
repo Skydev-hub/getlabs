@@ -1,0 +1,60 @@
+<div class="footer l-wrapper l-wrapper--col wrapper">
+  <div class="top">
+    <div class="phone">
+      <svg-icon-sprite src="getlabs-small-primary-icon" class="logo" width="27" height="27"></svg-icon-sprite>
+      <h4 class="h-dark-c-h6">
+        Need help? Call or text us at
+        <a href="tel:{{ globals.PHONE }}" class="h-no-wrap h-dark-underline-link">
+          {{ globals.PHONE }}
+        </a>
+      </h4>
+    </div>
+    <div class="h-dark-c-b3">
+      <ng-content select=".footer-info"></ng-content>
+    </div>
+    <nav>
+      <a [href]="'/about' | interAppUrl" class="h-dark-c-b3 h-dark-underline-link">
+        About
+      </a>
+      <a [href]="'/faq' | interAppUrl" class="h-dark-c-b3 h-dark-underline-link">
+        FAQ
+      </a>
+      <a [href]="'/providers' | interAppUrl" class="h-dark-c-b3 h-dark-underline-link">
+        Providers
+      </a>
+      <a [href]="'/cities' | interAppUrl" class="h-dark-c-b3 h-dark-underline-link">
+        Cities
+      </a>
+      <a [href]="'/labs' | interAppUrl" class="h-dark-c-b3 h-dark-underline-link" [appPartnerContentDirective]>
+        Labs
+      </a>
+      <a href="https://jobs.lever.co/getlabs" target="_blank" class="h-dark-c-b3 h-dark-underline-link">
+        Careers
+      </a>
+      <a [href]="'/contact' | interAppUrl" class="h-dark-c-b3 h-dark-underline-link">
+        Contact
+      </a>
+      <a *ngIf="showReferLink" [href]="'/refer' | interAppUrl:'app'" class="h-dark-c-b3 h-dark-underline-link">
+        Refer Friends
+      </a>
+    </nav>
+  </div>
+
+  <div class="bottom">
+    <div class="l-wrapper wrapper">
+      <span class="copyright h-dark-c-b4"> &copy; {{ date | date: 'y' }} Getlabs, Inc. </span>
+      <nav class="bottom-nav">
+        <a [href]="'/privacy' | interAppUrl" class="h-dark-c-b4">
+          Privacy
+        </a>
+        <a [href]="'/terms' | interAppUrl" class="h-dark-c-b4">
+          Terms
+        </a>
+        <a [href]="'/payments' | interAppUrl" class="h-dark-c-b4">
+          Payments
+        </a>
+      </nav>
+      <app-social-links class="social"></app-social-links>
+    </div>
+  </div>
+</div>

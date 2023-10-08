@@ -1,0 +1,196 @@
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+//
+//  Getlabs Website
+//  Pages > Home > Reviews Block
+//
+// ++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ++
+
+@import "variables";
+@import "mixins";
+
+.c-reviews-block {
+  position: relative;
+  flex: 0 0 auto;
+  margin-bottom: 55px;
+  overflow: hidden;
+
+  .tile {
+    box-shadow: none;
+  }
+
+  .wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // padding: 20px 0;
+    padding-bottom: 70px;
+    background-color: $gl-primary;
+    background-image: url('/assets/img/home-reviews.png');
+    background-position: -150px 250px;
+    background-repeat: no-repeat;
+    background-size: 330px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background-color: $white;
+    }
+  }
+
+  .bullets {
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    display: inline-flex;
+    flex-wrap: wrap;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    .bullet {
+      border-radius: 16px;
+      background: $black;
+      opacity: 0.35;
+      margin: 0 4px;
+      height: 8px;
+      width: 8px;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+      }
+
+      &.active {
+        background: $gl-primary-d1;
+        opacity: 1;
+      }
+    }
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &__title {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin: 0 auto 30px;
+    }
+
+    .quotes {
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      margin: 20px auto;
+      width: 980px;
+
+      .container {
+        transform: translate3d(0, 0, 1px);
+      }
+    }
+
+    .quote {
+      line-height: 1.5;
+      font-weight: 400;
+      white-space: normal;
+      font-size: 24px;
+      padding: 0 124px;
+      display: inline-block;
+      margin: 10px 0 50px 0;
+      width: 100%;
+
+      p {
+        display: inline-block;
+        position: relative;
+        margin: 0 0 24px 0;
+        width: 100%;
+      }
+
+      small {
+        display: inline-block;
+        position: relative;
+        font-size: 18px;
+        color: $gl-medium;
+        width: 100%;
+      }
+    }
+  }
+
+  .icon {
+    display: block;
+    @include size(128px);
+    margin-bottom: 40px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  //
+  // Responsive
+  //
+  @include bp(m) {
+    .wrapper {
+      background-position: -125px 300px;
+      background-size: 270px;
+    }
+
+    .content {
+      .quotes {
+        width: 100%;
+      }
+    }
+  }
+  @include bp(s) {
+    margin-bottom: $mobile-section-spacing;
+
+    .wrapper {
+      background-position: -130px 260px;
+      background-size: 270px;
+      padding-bottom: 50px;
+
+      &::before {
+        height: 50px;
+      }
+    }
+
+    .content {
+      .quotes {
+        width: 100%;
+      }
+
+      .quote {
+        font-size: 20px;
+        padding: 0 15px;
+
+        small {
+          font-size: 16px;
+        }
+      }
+    }
+  } // s
+  @include bp(xs) {
+    .icon {
+      transform: scale(.8);
+      transform-origin: top center;
+      margin-bottom: 0;
+    }
+  } // xs
+
+  @include bp(xxs) {
+    .wrapper {
+      background-position: -120px 310px;
+      background-size: 250px;
+    }
+  }
+
+} // .c-reviews-block

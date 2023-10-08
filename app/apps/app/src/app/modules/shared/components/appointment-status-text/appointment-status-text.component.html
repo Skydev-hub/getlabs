@@ -1,0 +1,13 @@
+<ng-container [ngSwitch]="appointment.status">
+  <ng-container *ngSwitchCase="Status.Cancelled">Cancelled<span
+    *ngIf="!isRebooked(appointment)">
+      <svg-icon-sprite src="/assets/icons.svg#warning-flag" class="l-as-inline-block c-xsmall-icon h-ml-10"></svg-icon-sprite>
+    </span>
+    <span *ngIf="isRebooked(appointment) && isStaffUser()"> (rebooked)</span></ng-container>
+  <ng-container *ngSwitchCase="Status.Pending">Pending<span *ngIf="hasUpdatedFiles(appointment)"> (updated)</span></ng-container>
+  <ng-container *ngSwitchCase="Status.Confirmed">Ready<span *ngIf="hasUpdatedFiles(appointment)"> (updated)</span></ng-container>
+  <ng-container *ngSwitchCase="Status.EnRoute">En Route<span *ngIf="hasUpdatedFiles(appointment)"> (updated)</span></ng-container>
+  <ng-container *ngSwitchCase="Status.InProgress">In Progress<span *ngIf="hasUpdatedFiles(appointment)"> (updated)</span></ng-container>
+  <ng-container *ngSwitchCase="Status.Collected">Collected<span *ngIf="hasUpdatedFiles(appointment)"> (updated)</span></ng-container>
+  <ng-container *ngSwitchCase="Status.Completed">Completed</ng-container>
+</ng-container>

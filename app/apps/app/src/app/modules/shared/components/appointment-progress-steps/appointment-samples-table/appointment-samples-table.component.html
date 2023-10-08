@@ -1,0 +1,142 @@
+<cdk-table [dataSource]="dataSource">
+
+  <ng-container [cdkColumnDef]="Columns.SupplyVerificationToggle">
+    <cdk-header-cell *cdkHeaderCellDef class="column--check"></cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--check">
+      <app-appointment-samples-property-checkbox
+        [readonly]="readonly"
+        [sample]="sample"
+        (sampleChange)="onSampleChanged($event)"
+        [property]="'suppliesVerified'">
+      </app-appointment-samples-property-checkbox>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.CollectedToggle">
+    <cdk-header-cell *cdkHeaderCellDef class="column--check"></cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--check">
+      <app-appointment-samples-property-checkbox
+        *ngIf="!sample.isUncollected(); else errorIcon"
+        [readonly]="readonly"
+        [sample]="sample"
+        (sampleChange)="onSampleChanged($event)"
+        [property]="'collected'">
+      </app-appointment-samples-property-checkbox>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.ProcessedToggle">
+    <cdk-header-cell *cdkHeaderCellDef class="column--check"></cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--check">
+      <app-appointment-samples-property-checkbox
+        *ngIf="!sample.isUncollected() && !sample.isUnprocessed(); else errorIcon"
+        [readonly]="readonly"
+        [sample]="sample"
+        (sampleChange)="onSampleChanged($event)"
+        [property]="'processed'">
+      </app-appointment-samples-property-checkbox>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.Quantity">
+    <cdk-header-cell *cdkHeaderCellDef class="column--qty">
+      Qty.
+    </cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--qty">
+      {{ sample.quantity }}
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.Type">
+    <cdk-header-cell *cdkHeaderCellDef class="column--type">
+      Stopper color (Additive)
+    </cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--type">
+      <div class="h-desktop-hide h-dark-l-uil2 h-mb-5">
+        Stopper color (Additive)
+      </div>
+      {{ TypeLabels[sample.type] }}
+
+      <ng-container *ngIf="showErrors">
+        <span class="h-mobile-hide">
+          <span class="h-xs-text h-danger-text-color" *ngIf="sample.isUncollected()">
+            <span class="h-medium-font-weight">Not Collected:</span> {{ sample.getUncollectedDescription() }}
+          </span>
+          <span class="h-xs-text h-danger-text-color" *ngIf="sample.isUnprocessed()">
+            <span class="h-medium-font-weight">Not Processed:</span> {{ sample.getUnprocessedDescription() }}
+          </span>
+        </span>
+      </ng-container>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.Temperature">
+    <cdk-header-cell *cdkHeaderCellDef class="column--extra column--temperature">
+      Temperature
+    </cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--extra column--temperature">
+      <div class="column__content">
+        <ng-container *ngIf="!sample.isUncollected(); else blank">
+          {{ TemperatureLabels[sample.temperature] }}
+        </ng-container>
+      </div>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.Processing">
+    <cdk-header-cell *cdkHeaderCellDef class="column--extra column--processing">
+      Processing
+    </cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--extra column--processing">
+      <div class="column__content">
+        <ng-container *ngIf="!sample.isUncollected(); else blank">
+          {{ ProcessingLabels[sample.processing] }}
+        </ng-container>
+      </div>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.CollectActions">
+    <cdk-header-cell *cdkHeaderCellDef class="column--menu"></cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--menu">
+      <ng-container *ngIf="!readonly">
+        <button class="ui-icon-button-inline" [matMenuTriggerFor]="menu">
+          <svg-icon-sprite src="navigation-menu-horizontal" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [disabled]="sample.isUncollected()" (click)="collectionError(sample, true)">Unable to collect</button>
+          <button mat-menu-item *ngIf="sample.isUncollected()" (click)="collectionError(sample, false)">Undo</button>
+        </mat-menu>
+      </ng-container>
+    </cdk-cell>
+  </ng-container>
+
+  <ng-container [cdkColumnDef]="Columns.ProcessActions">
+    <cdk-header-cell *cdkHeaderCellDef class="column--menu"></cdk-header-cell>
+    <cdk-cell *cdkCellDef="let sample" class="column--menu">
+      <ng-container *ngIf="!readonly">
+        <button class="ui-icon-button-inline" [matMenuTriggerFor]="menu" *ngIf="!sample.isUncollected()">
+          <svg-icon-sprite src="navigation-menu-horizontal" class="c-small-icon c-small-icon--dark"></svg-icon-sprite>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [disabled]="sample.isUnprocessed()" (click)="processingError(sample, true)">Unable to process</button>
+          <button mat-menu-item *ngIf="sample.isUnprocessed()" (click)="processingError(sample, false)">Undo</button>
+        </mat-menu>
+      </ng-container>
+    </cdk-cell>
+  </ng-container>
+
+  <cdk-header-row *cdkHeaderRowDef="columns"></cdk-header-row>
+  <cdk-row *cdkRowDef="let sample; columns: columns"></cdk-row>
+
+</cdk-table>
+
+<ng-template #errorIcon>
+  <span class="c-circle-error-icon">
+    <svg-icon-sprite src="small-exclamation-icon" class="c-small-icon c-small-icon--white"></svg-icon-sprite>
+  </span>
+</ng-template>
+
+<ng-template #blank>
+  --
+</ng-template>

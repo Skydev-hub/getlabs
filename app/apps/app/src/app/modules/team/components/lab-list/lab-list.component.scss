@@ -1,0 +1,7 @@
+@import 'components/person-list';
+
+:host {
+  .c-table__row {
+    grid-template-columns: 150px auto 200px 100px 100px;
+  }
+}

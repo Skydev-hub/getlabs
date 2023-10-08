@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "projects": {
+    "app": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/app",
+      "sourceRoot": "apps/app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "slug",
+              "md5",
+              "querystring",
+              "ng2-pdf-viewer",
+              "hellosign-embedded",
+              "url"
+            ],
+            "customWebpackConfig": {
+              "path": "custom-webpack.config.js"
+            },
+            "outputPath": "dist/apps/app",
+            "index": "apps/app/src/index.html",
+            "main": "apps/app/src/main.ts",
+            "polyfills": "apps/app/src/polyfills.ts",
+            "tsConfig": "apps/app/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/app/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/shared/assets/src",
+                "output": "./"
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/ui/src/lib/styles"
+              ]
+            },
+            "styles": [
+              "apps/app/src/styles.scss",
+              "libs/shared/styles/src/index.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/app/src/environments/environment.ts",
+                  "with": "apps/app/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": true
+              },
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "40kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "app:build",
+            "publicHost": "app.getlabs.io",
+            "port": 4202,
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "app:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/app/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/app/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/apps/app"
+          ]
+        }
+      }
+    },
+    "app-e2e": {
+      "root": "apps/app-e2e",
+      "sourceRoot": "apps/app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/app-e2e/cypress.json",
+            "tsConfig": "apps/app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/app-e2e/src/**/*.ts"
+            ]
+          }
+        }
+      }
+    },
+    "web": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/web",
+      "sourceRoot": "apps/web/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "slug",
+              "md5",
+              "querystring",
+              "ng2-pdf-viewer",
+              "url"
+            ],
+            "customWebpackConfig": {
+              "path": "custom-webpack.config.js"
+            },
+            "outputPath": "dist/apps/web/browser",
+            "index": "apps/web/src/index.html",
+            "main": "apps/web/src/main.browser.ts",
+            "polyfills": "apps/web/src/polyfills.ts",
+            "tsConfig": "apps/web/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/web/src/robots.txt",
+              "apps/web/src/sitemap.xml",
+              "apps/web/src/assets",
+              {
+                "glob": "**/*",
+                "input": "libs/shared/assets/src",
+                "output": "./"
+              }
+            ],
+            "styles": [
+              "apps/web/src/website.scss",
+              "libs/shared/styles/src/index.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/ui/src/lib/styles"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/web/src/environments/environment.ts",
+                  "with": "apps/web/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": true
+              },
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "40kb"
+                }
+              ]
+            }
+          }
+        },
+        "build-server-bundle": {
+          "builder": "@angular-builders/custom-webpack:server",
+          "options": {
+            "customWebpackConfig": {
+              "path": "custom-webpack.config.js"
+            },
+            "outputPath": "dist/apps/web/server",
+            "main": "apps/web/src/main.server.ts",
+            "tsConfig": "apps/web/tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/ui/src/lib/styles"
+              ]
+            }
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/web/src/environments/environment.ts",
+                  "with": "apps/web/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": true
+              },
+              "optimization": {
+                "scripts": false,
+                "styles": true
+              }
+            }
+          }
+        },
+        "build-server": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/web/ssr",
+            "main": "apps/web/server.ts",
+            "tsConfig": "apps/web/tsconfig.server.json",
+            "webpackConfig": "apps/web/server-webpack.config.js",
+            "buildLibsFromSource": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/web/src/environments/environment.ts",
+                  "with": "apps/web/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": true
+            }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
+        },
+        "serve-ssr": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "web:build-server"
+          }
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "web:build",
+            "publicHost": "getlabs.io",
+            "port": 4201,
+            "host": "0.0.0.0"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "web:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/web/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/web/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/apps/web"
+          ]
+        }
+      }
+    },
+    "web-e2e": {
+      "root": "apps/web-e2e",
+      "sourceRoot": "apps/web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/web-e2e/cypress.json",
+            "tsConfig": "apps/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/web-e2e/src/**/*.ts"
+            ]
+          }
+        }
+      }
+    },
+    "ui": {
+      "projectType": "library",
+      "root": "libs/ui",
+      "sourceRoot": "libs/ui/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/ui/src/lib/styles"
+              ]
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/libs/ui"
+          ]
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "idle": {
+      "projectType": "library",
+      "root": "libs/idle",
+      "sourceRoot": "libs/idle/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/idle/src/lib/styles"
+              ]
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/idle/src/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/idle/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/libs/idle"
+          ]
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-assets": {
+      "projectType": "library",
+      "root": "libs/shared/assets",
+      "sourceRoot": "libs/shared/assets/src",
+      "prefix": "app",
+      "architect": {},
+      "schematics": {}
+    },
+    "shared-styles": {
+      "projectType": "library",
+      "root": "libs/shared/styles",
+      "sourceRoot": "libs/shared/styles/src",
+      "prefix": "app",
+      "architect": {},
+      "schematics": {}
+    },
+    "shared-environments": {
+      "projectType": "library",
+      "root": "libs/shared/environments",
+      "sourceRoot": "libs/shared/environments/src",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/environments/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": [
+            "coverage/libs/shared/environments"
+          ]
+        }
+      },
+      "schematics": {}
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  }
+}

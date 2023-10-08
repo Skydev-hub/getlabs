@@ -1,0 +1,26 @@
+<main class="l-wrapper l-wrapper--sm h-flex-y-center l-main-container">
+  <ng-container *ngIf="(awardCampaign$ | async) as awardCampaign; else appLoading">
+    <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+      Get {{(awardCampaign.award / 100 | currency) | truncateNumbers}} for each friend or relative you refer
+    </h1>
+
+    <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-30">
+      When a friend signs up with your link and completes their first appointment, you'll automatically get
+      {{(awardCampaign.award / 100 | currency) | truncateNumbers}} in Getlabs credit.
+    </p>
+
+    <app-share-referral></app-share-referral>
+
+    <div class="c-horizontal-separator c-horizontal-separator--light c-horizontal-separator--xs h-mt-40 h-mb-20"></div>
+    <div class="h-dark-c-uil2 h-mb-20">
+      CREDITS AVAILABLE
+    </div>
+    <div class="h-dark-c-h4 h-primary-d1-text-color">
+      {{(user.credits / 100) | currency}}
+    </div>
+  </ng-container>
+</main>
+
+<ng-template #appLoading>
+    <span class="loader"></span>
+</ng-template>

@@ -1,0 +1,62 @@
+@import "variables";
+@import "GLSS/library/mixins";
+@import "GLSS/user-interface/sections/sections";
+
+h2 {
+  display: flex;
+  flex-direction: row;
+
+  span {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+}
+
+.profile-form-container {
+  &.new-user {
+    @extend .ui-section--gradient;
+    @extend .ui-section--lg;
+
+    box-shadow: inset 0 1px 0 0 $gl-light-l2;
+
+    @include bp(xs) {
+      padding-bottom: 0;
+    }
+  }
+
+  &:not(.new-user) {
+    ::ng-deep {
+      app-form-group .form-group-header {
+        display: none;
+      }
+    }
+  }
+
+  ::ng-deep {
+    app-form-group.profile-address, app-form-group.profile-contact {
+      margin-bottom: 20px;
+    }
+
+    app-form-group.profile-additional-notes, app-form-group.profile-address {
+      .form-group-header {
+        display: none;
+      }
+
+      margin-top: 0;
+    }
+  }
+}
+
+:host {
+  app-social-links {
+    ::ng-deep {
+      .social-link--linkedin {
+        display: none;
+      }
+
+      .social-link--twitter {
+        margin-right: 0;
+      }
+    }
+  }
+}

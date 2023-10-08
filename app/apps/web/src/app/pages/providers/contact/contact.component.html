@@ -1,0 +1,104 @@
+<section class="c-providers-contact">
+  <div class="l-wrapper c-providers-contact__wrapper">
+
+    <article class="c-providers-contact__content">
+      <h3 class="c-providers-contact__title h-dark-l-h3 h-dark-l-h3--responsive">
+        Offer your patients the convenience of Getlabs.
+      </h3>
+      <p class="h-dark-l-lb4 c-providers-contact__description">
+        Just fill out the form and we’ll onboard you and provide promotional materials for your office.
+      </p>
+      <div class="c-providers-contact__list-item">
+        <img class="c-providers-contact__icon" src="/assets/img/lab-non-compliance-circle-icon.svg" alt="" aria-hidden="true">
+        <p class="h-dark-l-lb4">
+          Reduce lab non-compliance
+        </p>
+      </div>
+      <div class="c-providers-contact__list-item">
+        <img class="c-providers-contact__icon" src="/assets/img/improve-outcomes-circle-icon.svg" alt="" aria-hidden="true">
+        <p class="h-dark-l-lb4">
+          Improve patient outcomes
+        </p>
+      </div>
+      <div class="c-providers-contact__list-item">
+        <img class="c-providers-contact__icon" src="/assets/img/improve-satisfaction-circle-icon.svg" alt="" aria-hidden="true">
+        <p class="h-dark-l-lb4">
+          Improve patient satisfaction
+        </p>
+      </div>
+      <div class="c-providers-contact__list-item">
+        <img class="c-providers-contact__icon" src="/assets/img/track-lab-status-cricle-icon.svg" alt="" aria-hidden="true">
+        <p class="h-dark-l-lb4">
+          Track lab order status
+        </p>
+      </div>
+      <p class="h-dark-l-lb4 c-providers-contact__description">
+        Alternatively, you can fax us your information at {{this.globals.FAX}}.
+      </p>
+    </article>
+
+    <div class="c-form c-providers-contact__form" [class.c-form--sent]="sent">
+      <div id="get-started" class="c-providers-contact-hook"></div>
+
+      <div class="c-form__sent-msg" aria-hidden="true">
+        <svg-icon-sprite src="large-circle-check-icon" class="h-mb-30" width="110" height="110"></svg-icon-sprite>
+        <h6 class="h-dark-c-h3 h-mb-25">
+          Confirmed
+        </h6>
+        <p class="h-medium-c-b1">
+          Thank you for getting in touch. We’ll reach out to you shortly.
+        </p>
+      </div>
+
+      <div class="c-form__container">
+        <h4 class="h-dark-c-h6 h-mb-30">
+          Ready to get your practice started with Getlabs?
+        </h4>
+        <form class="h-flex-col" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <div class="c-form-split-col h-mb-20">
+            <div class="c-form-split-col__col">
+              <app-form-element label="Full Name" [error]="getError('name')">
+                <input class="ui-input ui-input--medium" type="text" placeholder="First and last name" formControlName="name">
+              </app-form-element>
+            </div>
+            <div class="c-form-split-col__col">
+              <app-form-element label="Title" [error]="getError('title')">
+                <input class="ui-input ui-input--medium" type="text" placeholder="Title" formControlName="title">
+              </app-form-element>
+            </div>
+          </div>
+
+          <app-form-element label="Organization" [error]="getError('organization')" class="h-mb-20">
+            <input class="ui-input ui-input--medium" type="text" placeholder="Organization" formControlName="organization">
+          </app-form-element>
+
+          <app-form-element label="Specialty" [error]="getError('specialty')" class="h-mb-20">
+            <input class="ui-input ui-input--medium" type="text" placeholder="Specialty" formControlName="specialty">
+          </app-form-element>
+
+          <app-form-element label="Email Address" [error]="getError('email')" class="h-mb-20">
+            <input class="ui-input ui-input--medium" type="email" placeholder="Email address" formControlName="email">
+          </app-form-element>
+
+          <app-form-element label="Phone Number" [error]="getError('phoneNumber')" class="h-mb-20">
+            <input class="ui-input ui-input--medium" type="tel" placeholder="Phone number" formControlName="phoneNumber">
+          </app-form-element>
+
+          <app-form-element label="Address" [error]="getError('address')" class="h-mb-20">
+            <input class="ui-input ui-input--medium" type="text" placeholder="Work address" formControlName="address">
+          </app-form-element>
+
+          <div class="grecaptcha-message h-mb-20">
+            This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and
+            <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
+          </div>
+
+          <button app-button size="medium" type="submit" class="h-flex-x-self-center">Submit</button>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>

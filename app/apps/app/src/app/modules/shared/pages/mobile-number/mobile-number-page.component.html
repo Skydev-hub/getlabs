@@ -1,0 +1,48 @@
+<main class="l-wrapper l-wrapper--sm l-main-container">
+  <app-stepper>
+    <cdk-step>
+      <div class="h-flex-col h-flex-one">
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-10">
+          Phone Number
+        </h1>
+        <p class="h-medium-c-b1 h-medium-c-b1--responsive h-mb-20">
+          To change your phone number, edit the number below and we’ll text you a confirmation code.
+        </p>
+
+        <div class="l-wrapper l-wrapper--xs">
+          <app-mobile-number-form (ngSubmit)="requestCode()" class="h-full-width">
+            <button app-button type="submit" class="h-align-self-center h-mt-20" [loading]="reqSub">
+              Change Number
+            </button>
+          </app-mobile-number-form>
+        </div>
+
+      </div>
+
+    </cdk-step>
+    <cdk-step #step2>
+      <!-- *ngIf hack to allow autofocus directive to work -->
+      <div class="h-flex-col h-flex-one" *ngIf="stepper.selected === step2">
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+          Type in the security code we just texted you at
+          {{ phoneNumber | phone }}
+        </h1>
+        <app-sign-in-confirm [userType]="user.getUserType()" [phoneNumber]="phoneNumber" (authenticated)="stepper.next()" [isPhoneNumberChange]="true"></app-sign-in-confirm>
+      </div>
+    </cdk-step>
+    <cdk-step>
+      <div class="h-flex-col h-flex-one">
+        <svg-icon-sprite class="h-mb-20 h-margin-center c-large-icon" src="/assets/icons.svg#large-circle-check-icon"></svg-icon-sprite>
+
+        <h1 class="h-dark-c-h4 h-dark-c-h3--responsive h-mb-30">
+          Your phone number has been successfully changed to <span class="h-no-wrap">{{ phoneNumber | phone }}</span>
+        </h1>
+
+        <a app-button [routerLink]="['../']" class="h-margin-center">
+          Return to Account
+        </a>
+      </div>
+    </cdk-step>
+  </app-stepper>
+
+</main>

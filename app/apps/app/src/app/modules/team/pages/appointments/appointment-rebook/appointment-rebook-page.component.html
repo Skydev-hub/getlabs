@@ -1,0 +1,43 @@
+<div class="l-wrapper l-wrapper--sm l-wrapper--col h-flex-y-center" *ngIf="rebooked; else rebook">
+  <svg-icon-sprite src="large-circle-time-icon" class="h-mb-20" height="92" width="92"></svg-icon-sprite>
+  <h2 class="h-h3 h-text-center h-mb-60">
+    The appointment has been rebooked to
+    {{ rebooked.startAt | dateTz:'ha':rebooked.patient.timezone }}-{{ rebooked.endAt | dateTz:'ha':rebooked.patient.timezone }}
+    on
+    {{ rebooked.startAt | dateTz:'fullDate':rebooked.patient.timezone }}
+  </h2>
+  <a app-button routerLink="/team/appointments/{{ rebooked.id }}">
+    View Appointment
+  </a>
+</div>
+
+<ng-template #rebook>
+  <div class="l-wrapper l-wrapper--sm l-wrapper--col h-mb-15">
+    <h1 class="h-h4 h-text-center h-mb-15">
+      Select a time to rebook the appointment to.
+    </h1>
+
+    <p class="h-medium-text-color h-text-center h-mb-15">
+      This will transfer an appointment along with any incomplete samples to the selected time slot.
+    </p>
+  </div>
+
+  <div class="l-wrapper l-wrapper--sm h-flex-col h-full-width-children h-flex-y-center">
+    <app-form-element label="Choose a specialist" class="h-mb-30">
+      <app-basic-user-selector-input [type]="userType" [market]="appointment.market" (user)="setSpecialist($event)"></app-basic-user-selector-input>
+    </app-form-element>
+
+    <app-appointment-scheduler *ngIf="!isOutsideServiceArea; else notInServiceArea" [type]="AppointmentBookingTypes.PatientAppointment" [formControl]="formControl" [bufferSize]="10"
+                               [days]="5" [specialist]="specialist" [zipCode]="appointment.patient.address.zipCode"
+                               (outsideServiceArea)="setOutsideServiceArea($event)"
+                               class="app-scheduler-slots--button"></app-appointment-scheduler>
+
+    <button app-button class="h-align-self-center h-mt-30 h-mb-30" (click)="transfer()" [disabled]="!hasSelectedSlot()" [appLoading]="req$">
+      Rebook Appointment
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #notInServiceArea>
+  <p class="h-danger-c-uil1">Patient's zip code is not in a service area</p>
+</ng-template>
